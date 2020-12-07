@@ -1,0 +1,1 @@
+read the assignment and introduction, communciated with teammates
