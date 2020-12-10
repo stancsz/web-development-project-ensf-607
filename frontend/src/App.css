@@ -12,7 +12,26 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+#Assign{
+  background-color: rgb(97, 197, 97);
+  color:white
+}
+#Down_btn{
+  background-color: lightyellow;
+  color: grey;
+}
+#Up_btn {
+  float: initial;
+  background-color: lightblue;
+  color: darkblue
 
+}
+.text_field
+ h1{
+  
+  padding-left:20px; 
+  display: inline-block;
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
