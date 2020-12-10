@@ -5,8 +5,8 @@ function App() {
   return (
     <div className="App">
       <div className="text_field">
-
-      <input type="text" placeholder="Put a number"/>
+      
+      <input type="text"  placeholder="Put a number"/>
       <input type="button" id="Assign" value="Assign" />
       <h1 id="Counter" >Counter</h1>
       </div>
