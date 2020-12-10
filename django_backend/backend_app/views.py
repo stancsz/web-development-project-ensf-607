@@ -8,5 +8,5 @@ from .models import echos
 
 
 class EchoViewSet(viewsets.ModelViewSet):
-    queryset = echos.objects.all().order_by('name')
+    queryset = echos.objects.all().order_by('message')
     serializer_class = EchoSerializer

@@ -6,4 +6,4 @@ from .models import echos
 class EchoSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = echos
-        fields = ('id','name','alias')
+        fields = ('id','message')
