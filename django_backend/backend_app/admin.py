@@ -2,5 +2,5 @@ from django.contrib import admin
 
 # Register your models here.
 from django.contrib import admin
-from .models import echo
-admin.site.register(echo)
+from .models import echos
+admin.site.register(echos)

@@ -4,9 +4,9 @@ from django.shortcuts import render
 from rest_framework import viewsets
 
 from .serializers import EchoSerializer
-from .models import echo
+from .models import echos
 
 
 class EchoViewSet(viewsets.ModelViewSet):
-    queryset = echo.objects.all().order_by('message')
+    queryset = echos.objects.all().order_by('name')
     serializer_class = EchoSerializer
