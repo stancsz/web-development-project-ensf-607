@@ -1,1 +1,1 @@
-being busy with other courses
+django has lots of moving parts
