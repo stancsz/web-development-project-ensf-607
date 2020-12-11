@@ -32,7 +32,7 @@ def tutorial_list(request):
     
     elif request.method == 'DELETE':
         count = Echo.objects.all().delete()
-        return JsonResponse({'message': '{} Tutorials were deleted successfully!'.format(count[0])}, status=status.HTTP_204_NO_CONTENT)
+        return JsonResponse({'message': '{} echo were deleted successfully!'.format(count[0])}, status=status.HTTP_204_NO_CONTENT)
  
  
 @api_view(['GET', 'PUT', 'DELETE'])
@@ -40,7 +40,7 @@ def tutorial_detail(request, pk):
     try: 
         tutorial = Echo.objects.get(pk=pk)
     except Echo.DoesNotExist:
-        return JsonResponse({'message': 'The tutorial does not exist'}, status=status.HTTP_404_NOT_FOUND) 
+        return JsonResponse({'message': 'The echo does not exist'}, status=status.HTTP_404_NOT_FOUND)
  
     if request.method == 'GET': 
         tutorial_serializer = TutorialSerializer(tutorial) 
@@ -56,7 +56,7 @@ def tutorial_detail(request, pk):
  
     elif request.method == 'DELETE': 
         tutorial.delete() 
-        return JsonResponse({'message': 'Tutorial was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+        return JsonResponse({'message': 'echo was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
     
         
 @api_view(['GET'])

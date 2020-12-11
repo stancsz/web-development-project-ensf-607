@@ -1,5 +1,7 @@
 # Pre-Project Exercise on Django
-Create a REST API with the following end point:http://localhost:8000/api/echos/.
+Create a REST API with the following end point: 
+
+http://localhost:8000/api/echos/.
 
 `GET/api/echos`
 
@@ -19,96 +21,41 @@ Should change the content of an existing echo
 `DELETE/api/echos/number`
 Should delete the content of an existing echo
 
+[recommended reading](https://medium.com/swlh/build-your-first-rest-api-with-django-rest-framework-e394e39a482c)
 
-# to run server
+### Commands
+
 ```
+# To run server
 python manage.py runserver
 ```
 
-
-[recommended reading](https://medium.com/swlh/build-your-first-rest-api-with-django-rest-framework-e394e39a482c)
-
-
-### Worklog
-
 ```
-python manage.py migrate
->>
-Operations to perform:
-  Apply all migrations: admin, auth, contenttypes, sessions
-Running migrations:
-  Applying contenttypes.0001_initial... OK
-  Applying auth.0001_initial... OK
-  Applying admin.0001_initial... OK
-  Applying admin.0002_logentry_remove_auto_add... OK
-  Applying admin.0003_logentry_add_action_flag_choices... OK
-  Applying contenttypes.0002_remove_content_type_name... OK
-  Applying auth.0002_alter_permission_name_max_length... OK
-  Applying auth.0003_alter_user_email_max_length... OK
-  Applying auth.0004_alter_user_username_opts... OK
-  Applying auth.0005_alter_user_last_login_null... OK
-  Applying auth.0006_require_contenttypes_0002... OK
-  Applying auth.0007_alter_validators_add_error_messages... OK
-  Applying auth.0008_alter_user_username_max_length... OK
-  Applying auth.0009_alter_user_last_name_max_length... OK
-  Applying auth.0010_alter_group_name_max_length... OK
-  Applying auth.0011_update_proxy_permissions... OK
-  Applying auth.0012_alter_user_first_name_max_length... OK
-  Applying sessions.0001_initial... OK
-
-```
-
-```
+# create su
 python manage.py createsuperuser
->>
-Username (leave blank to use 'stan'): stan
-Email address: stanleychen587@gmail.com
-Password: ensf607
-Password (again): ensf607
-This password is too short. It must contain at least 8 characters.
-Bypass password validation and create user anyway? [y/N]: y
-Superuser created successfully.
 ```
 
 ```
+# migrate models
 python manage.py makemigrations
->>
-Migrations for 'backend_app':
-  backend_app/migrations/0001_initial.py
-    - Create model echo
-
-```
-
-
-```
 python manage.py migrate
->>
-Operations to perform:
-  Apply all migrations: admin, auth, backend_app, contenttypes, sessions
-Running migrations:
-  Applying backend_app.0001_initial... OK
 ```
 
+### Using Postman
+
+##### GET
+
+![image-20201211034013404](README.assets/image-20201211034013404.png)
 
 
-```
 
-```
+##### POST
 
-
-```
-
-```
+![image-20201211034058665](README.assets/image-20201211034058665.png)
 
 
-```
 
-```
+##### PUT
 
+![image-20201211034147195](README.assets/image-20201211034147195.png)
 
-```
-
-```
-
-
-http://ccbv.co.uk/projects/Django/3.0/django.views.generic.base/View/
