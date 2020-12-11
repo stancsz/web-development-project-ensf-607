@@ -109,3 +109,6 @@ Running migrations:
 ```
 
 ```
+
+
+http://ccbv.co.uk/projects/Django/3.0/django.views.generic.base/View/
