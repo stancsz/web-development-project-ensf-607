@@ -1,0 +1,1 @@
+Continue to learn about React and then begin studying Django.
