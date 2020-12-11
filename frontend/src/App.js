@@ -13,7 +13,7 @@ function App() {
     setCounter (0)
   }
   const increment=()=>{
-    if(counter<200)
+    if(counter<150)
     setCounter (counter+1)
     else
     setCounter (150)
