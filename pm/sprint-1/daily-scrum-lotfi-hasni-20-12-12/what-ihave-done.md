@@ -1,0 +1,1 @@
+Watched Django tutorial video. Read through React milestone requirements.

@@ -1,0 +1,1 @@
+Organized the pre-project folder, and read through the requirements for the milestone 2
