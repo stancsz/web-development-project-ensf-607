@@ -3,3 +3,4 @@
 *.sqlite3
 *.workspace.xml
 project/course_oultine_app/.idea/
+*.eslintcache
