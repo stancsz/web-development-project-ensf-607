@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MenuAppBar() {
   const classes = useStyles();
-  const [auth, setAuth] = React.useState(true);
+ 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
@@ -47,7 +47,7 @@ export default function MenuAppBar() {
           <Typography variant="h6" className={classes.title}>
             Course Outline App
           </Typography>
-          {auth && (
+           
             <div>
               <IconButton
                 aria-label="account of current user"
@@ -80,7 +80,7 @@ export default function MenuAppBar() {
                 <MenuItem onClick={handleClose}><Link to="/Search"> Search</Link></MenuItem>
               </Menu>
             </div>
-          )}
+          
         </Toolbar>
       </AppBar>
     </div>
