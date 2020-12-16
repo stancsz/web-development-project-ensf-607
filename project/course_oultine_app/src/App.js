@@ -8,10 +8,9 @@ function App() {
   return (
     <div className="App">
       
-    <div className="Info">FunInfo</div>
-    <div className="Outcome">FunOutcome</div>
-    <div className="FunGrade">FunGrade</div>
-   
+    <FunInfo/>
+    <FunOutcome/>
+    <FunGrade/>
 
     </div>
   );
