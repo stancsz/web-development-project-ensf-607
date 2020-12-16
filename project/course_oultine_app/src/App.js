@@ -1,5 +1,6 @@
 import logo from './logo.svg';
-import './App.css';
+import './App.sass';
+import 'bulma/bulma.sass'
 import FunInfo from './FunInfo.js'
 import FunGrade from './FunGrade.js'
 import FunOutcome from './FunOutcome.js'
