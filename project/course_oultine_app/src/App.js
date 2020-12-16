@@ -9,7 +9,7 @@ function App() {
     <div className="App">
       
     <div className="Info">FunInfo</div>
-    <div className="Outcome">FunOutcome</div>
+    <FunOutcome/>
     <div className="FunGrade">FunGrade</div>
    
 
