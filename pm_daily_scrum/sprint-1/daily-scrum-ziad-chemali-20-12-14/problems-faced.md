@@ -1,0 +1,1 @@
+Need to learn more about REACT, and Django

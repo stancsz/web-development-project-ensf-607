@@ -1,0 +1,1 @@
+Installed node js and started rewatching class video.

@@ -1,0 +1,1 @@
+Watched introductory video and began reading website.
