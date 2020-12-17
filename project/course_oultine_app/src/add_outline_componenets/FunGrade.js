@@ -74,7 +74,7 @@ const GradeTable=()=> {
                 <button type="button" onClick={()=>{
                     setCount(count+1)
                     update(document.getElementById(count.toString),document.getElementsByClassName(count.toString))
-                    console.log(rows)}}></button>
+                    console.log(rows)}}>Add row</button>
             </div>
         </div>
     )
@@ -135,7 +135,7 @@ const LetterGradeTable=()=> {
                 <button type="button" onClick={()=>{
                     setCount(count+1)
                     update(document.getElementById(count.toString),document.getElementsByClassName(count.toString))
-                    console.log(rows)}}></button>
+                    console.log(rows)}}>Add row</button>
             </div>
         </div>
     )
