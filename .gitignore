@@ -4,3 +4,5 @@
 *.eslintcache
 /idea/
 /project/course_oultine_app/.idea/
+*.workspace.xml
+*.eslintcache
