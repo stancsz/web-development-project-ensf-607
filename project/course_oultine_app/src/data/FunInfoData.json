@@ -1,3 +1,43 @@
 
+[{
+    "node1" : {
+        "cousrseNum" : ["ENSF 409","ENSF 607", "ENSF 619"]
+    }
+},
 
-{"cousrseNum":["end","SDSD"]}
+
+{
+    "node2" : [{
+        "ENSF 409" :{
+        "courseNum" : "ENSF 409",
+        "courseName" : "Principles of Software Development", 
+        "courseInfo" : "A survey of software design and development topics for Engineering students. Topics include: key features of an object-oriented programming language, especially inheritance and polymorphism; elements of object-oriented design; programming and application of common data structures; strategies and tools for testing and debugging.",
+        "courseHours" : "3 units; H (3-2)",
+        "academicCredit" : 3,
+        "calendarReference" : "http://www.ucalgary.ca/pubs/calendar/current/software-engineering-for-engineers.html#38252"
+        }
+    },
+
+    {
+        "ENSF 607" :{
+        "courseNum" : "ENSF 607",
+        "courseName" : "Software Design and Architecture I", 
+        "courseInfo" : "A study of software design topics including: abstraction, modularity, design patterns, software modeling, architectural patterns.",
+        "courseHours" : "3 units; H (3-2)",
+        "academicCredit" : 3,
+        "calendarReference" : "http://www.ucalgary.ca/pubs/calendar/current/engineering.htm"
+        }
+    },
+
+    {
+        "ENSF 619" :{
+        "courseNum" : "ENSF 619",
+        "courseName" : "Special Topics (Advanced Systems Analysis and Software Design)", 
+        "courseInfo" : "A study of problems of particular interest to students specializing in Software Engineering.",
+        "courseHours" : "3 units; H (3-2)",
+        "academicCredit" : 3,
+        "calendarReference" : "http://www.ucalgary.ca/pubs/calendar/current/software-engineering-for-engineers"
+        }
+    }]
+}]
+
