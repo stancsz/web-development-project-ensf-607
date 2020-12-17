@@ -5,13 +5,14 @@ import SearchCourse from './pages/SearchCourse'
 import AddCourse from './pages/AddCourse'
 import Navbar from './navigation/Navbar'
 import {BrowserRouter as Router ,Route,Switch} from 'react-router-dom'
-
-
+import {Provider} from 'react-redux'
 
 
 function App() {
   
   return (
+
+    //<Provider store = {store}>
     <div className="App">      
     
      <Router>
@@ -34,6 +35,7 @@ function App() {
  
       </div>
       
+    //</Provider>
     
   );
 }

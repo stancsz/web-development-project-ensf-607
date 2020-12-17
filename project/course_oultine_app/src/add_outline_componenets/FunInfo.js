@@ -1,52 +1,12 @@
 import "bulma/css/bulma.css";
-import Button from '@material-ui/core/Button';
+
 import { useState } from 'react';
-
-
-import { PDFDownloadLink, Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
-
-
-
-const styles = StyleSheet.create({
-  page: {
-    flexDirection: 'column',
-    backgroundColor: '#FFFFFF'
-  },
-  section: {
-    margin: 10,
-    padding: 10,
-    flexGrow: 1
-  }
-});
-
-const MyDoc = ({courseNumberInput}, {courseNameInput}) => (
-  <Document>
-    <Page size="A4" style={styles.page}>
-      <View>
-      <Text style = {{ color: 'black', fontSize: 22, textAlign: 'left'}}> </Text>
-      </View>
-    <View>
-        <Text style = {{ color: 'black', fontSize: 22, textAlign: 'left'}}>1. Calendar Information</Text>
-      </View>
-      <View>
-        <Text style = {{ color: 'white', backgroundColor : 'black', textAlign: 'left'}}>{courseNumberInput}</Text>
-      </View>
-      <View>
-        <Text style = {{ color: 'white', backgroundColor : 'black', textAlign: 'left'}}>{courseNameInput}</Text>
-      </View>
-
-    </Page>
-  </Document>
-);
-
 
 function FunInfo() {
 
 
     const [courseNumberInput, setCourseNumberInput] = useState();
     const [courseNameInput, setCourseNameInput] = useState();
-
-    const [buttonText, setButtonText] = useState("Export as PDF");
 
 
     var courseInfoPlaceholderText = "Enter Course Information Here. Example: A survey of software design"
@@ -117,18 +77,6 @@ function FunInfo() {
         </div>
 
     </div>
-
-
-    <Button variant="contained" onClick={() => 
-      
-      setButtonText(<PDFDownloadLink document={<MyDoc courseNumberInput = {courseNumberInput} 
-      courseNameInput = {courseNameInput}/>} fileName="courseoutline.pdf">
-
-      {({loading}) => (loading ? 'Loading document...' : 'Download Now')}
-      </PDFDownloadLink>)
-      
-    }>{buttonText}
-    </Button>
 
     </div>
 
