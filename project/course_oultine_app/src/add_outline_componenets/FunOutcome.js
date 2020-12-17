@@ -29,65 +29,57 @@ export default function BasicTable() {
   const [count, setCount] = useState(2);
   const classes = useStyles();
   const [rows, setRows] = useState([{ id: 1,  outcome: "" }]);
-  const [numbers,setNumbers]=useState([])
-  const [outcomes,setOutcomes]=useState([])
+  const [numbers,setNumbers]=useState([{id:1,num:1}])
+  const [outcomes,setOutcomes]=useState([{id:1,outcome:""}])
  
   const editNums=(id,num)=>{
-    let indx = numbers.indexOf((num)=>num.id===id)
+    let indx = numbers.findIndex((num)=>num.id===id)
     let newNums=numbers
+    //console.log(indx)
     if(indx>=0)
     newNums[indx]={id:id,num:num}
     else
-    newNums[0]={id:id,num:num}
+    newNums.push({id:id,num:num})
     
     setNumbers(newNums)
-    
+   // console.log(numbers)
   }
   const ediOutcomes=(id,outcome)=>{
-    let indx = outcomes.indexOf((row) => row.id === id)
+    let indx = outcomes.findIndex((row) => row.id === id)
     let newOutcomes=outcomes
     if(indx>=0)
     newOutcomes[indx]={id:id,outcome:outcome}
     else
-    newOutcomes[0]={id:id,outcome:outcome}
+    newOutcomes.push({id:id,outcome:outcome})
   
     setOutcomes(newOutcomes)
-    console.log(outcomes)
+    //console.log(outcomes)
   }
-  const editRowNum = (id, num) => {
-    let newRows = rows.filter((row) => row.id !== id)
-    let adjustedrow = { id: id, num: num }
-    newRows.push(adjustedrow)
-    newRows.sort((a, b) => {
-      return (a.num - b.num)
-    })
-    setRows(newRows)
-    console.log(rows)
-  };
+
 
     const saveRow= (id) => {
-      console.log(numbers)
-      let indx = outcomes.indexOf((row) => row.id === id)
       
-      //let num=numbers[numIndx].num
-      /*let outcomeIndx=outcomes.indexOf((outcome)=> outcome.id===id)
+      let numIndx = outcomes.findIndex((row) => row.id === id)
+      
+      let num=numbers[numIndx].num
+      let outcomeIndx=outcomes.findIndex((outcome)=> outcome.id===id)
       let outcome=outcomes[outcomeIndx].outcome
-      let rowIndx = rows.indexOf((row) => row.id === id)
+      let rowIndx = rows.findIndex((row) => row.id === id)
       let newRows=rows
       newRows[rowIndx]={ id: id,num:num,outcome: outcome }
-          */
-         if(id===numbers[0].id)
-      console.log("True")
-      console.log(indx)
+          
+      
  
-    //  setRows(newRows)
+     setRows(newRows)
+     console.log(rows)
+
       
   };
 
 
   const removeRow = (id) => {
     let newRows = rows.filter((row) => row.id !== id)
-    newRows()
+    
     setRows(newRows)
   }
   const addRow = (id) => {
