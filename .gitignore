@@ -1,3 +1,6 @@
 */.idea/*
 *.pyc
 *.sqlite3
+*.eslintcache
+/idea/
+/project/course_oultine_app/.idea/
