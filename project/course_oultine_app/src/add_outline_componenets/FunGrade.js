@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
 
 const FunGrade=()=> {
-
+    var defaultTexts = ["a) You must either achieve at least 50% on the final exam or achieve at least 50% on the weighted average of the midterm and final exam. You must also achieve an average of at least 50% on the lab section of the course. If you do not satisfy these caveats, you will not receive a passing grade.",
+        "b) Circumstances beyond one’s control (e.g. sickness, etc.), leading to missing lab session and/or delays in assignment submissions should be discussed with the course instructor as soon as possible. Proper documentation must be provided.",
+        "c) Conversion from a score out of 100 to a letter grade will be done using the conversion chart shown below. This grading scale can only be changed during the term if the grades will not be lowered."]
     return (
         <div className="FunGrade">
             {/*<h1> This is the Grade Section</h1>*/}
@@ -10,9 +12,23 @@ const FunGrade=()=> {
             <div align="center"><GradeTable/></div>
             <div class="content" align="left">
                 <h5 className="subtitle" > Notes: </h5>
-                <p> a) You must either achieve at least 50% on the final exam or achieve at least 50% on the weighted average of the midterm and final exam. You must also achieve an average of at least 50% on the lab section of the course. If you do not satisfy these caveats, you will not receive a passing grade. </p>
-                <p> b) Circumstances beyond one’s control (e.g. sickness, etc.), leading to missing lab session and/or delays in assignment submissions should be discussed with the course instructor as soon as possible. Proper documentation must be provided.</p>
-                <p> c) Conversion from a score out of 100 to a letter grade will be done using the conversion chart shown below. This grading scale can only be changed during the term if the grades will not be lowered.</p>
+
+                <div className = "control">
+            <textarea className="textarea is-info" placeholder = {defaultTexts[0]} rows="2">
+            </textarea>
+                </div>
+               <div className = "control">
+            <textarea className="textarea is-info" placeholder = {defaultTexts[1]} rows="2">
+            </textarea>
+                </div>
+               <div className = "control">
+            <textarea className="textarea is-info" placeholder = {defaultTexts[2]} rows="2">
+            </textarea>
+                </div>
+
+
+
+
             </div>
             <div align="center"><LetterGradeTable/></div>
         </div>
