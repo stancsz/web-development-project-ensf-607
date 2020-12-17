@@ -1,6 +1,8 @@
-*/.idea/
+*/.idea/*
 *.pyc
 *.sqlite3
+*.eslintcache
+/idea/
+/project/course_oultine_app/.idea/
 *.workspace.xml
-project/course_oultine_app/.idea/
 *.eslintcache
