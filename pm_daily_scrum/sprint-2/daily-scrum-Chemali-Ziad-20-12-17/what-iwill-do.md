@@ -1,0 +1,1 @@
+deconstruct the passed props from searchPanel to present the course outcome in a table 
