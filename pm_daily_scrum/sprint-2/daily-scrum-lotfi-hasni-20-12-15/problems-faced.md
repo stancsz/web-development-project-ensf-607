@@ -1,0 +1,1 @@
+Having difficulties with using git and with understanding what the project is asking for.

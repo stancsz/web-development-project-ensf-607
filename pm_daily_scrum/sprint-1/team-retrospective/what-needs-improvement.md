@@ -1,0 +1,1 @@
+We all need to understand both Front/Back end so that we contribute equally to both sides

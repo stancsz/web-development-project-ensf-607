@@ -1,0 +1,1 @@
+* Learned basics of ES6 (Arrow functions and classes)

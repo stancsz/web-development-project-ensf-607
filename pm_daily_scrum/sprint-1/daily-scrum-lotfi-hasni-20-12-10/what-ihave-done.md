@@ -1,0 +1,1 @@
+Implemented preproject React exercise that was shown in lab session.

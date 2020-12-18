@@ -1,0 +1,1 @@
+Lack of time has made it difficult to contribute fully. Subject matter is still a bit challenging due to lack of background knowledge.
