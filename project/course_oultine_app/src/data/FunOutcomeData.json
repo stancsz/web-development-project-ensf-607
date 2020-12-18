@@ -1,13 +1,13 @@
 
-[{
-    "node1" : {
+{
+    "CourseList" : {
         "cousrseNum" : ["ENSF 409","ENSF 607", "ENSF 619"]
     }
-},
+,
 
 
-{
-    "node2" : [{
+
+    "Outcome" : [{
         "ENSF 409" :{
             "1" : "Have a deep understanding, and practical knowledge of object oriented analysis, design, and development.",
             "2" : "Define the concepts of object-oriented design, such as inheritance and polymorphism.",
@@ -46,7 +46,7 @@
             "8" : "Understand the basic elements of non-functional software requirements"
         }
     }]
-}]
+}
 
 
 

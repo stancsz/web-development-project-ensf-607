@@ -1,13 +1,13 @@
 
-[{
-    "node1" : {
+{
+    "CourseList" : {
         "cousrseNum" : ["ENSF 409","ENSF 607", "ENSF 619"]
     }
-},
+,
 
 
-{
-    "node2" : [{
+
+    "Info" : [{
         "ENSF 409" :{
         "courseNum" : "ENSF 409",
         "courseName" : "Principles of Software Development", 
@@ -39,5 +39,5 @@
         "calendarReference" : "http://www.ucalgary.ca/pubs/calendar/current/software-engineering-for-engineers"
         }
     }]
-}]
+}
 

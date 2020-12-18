@@ -1,13 +1,13 @@
 
-[{
-    "node1" : {
+{
+    "CourseList" : {
         "cousrseNum" : ["ENSF 409","ENSF 607", "ENSF 619"]
     }
-},
+,
 
 
-{
-    "node2" : [{
+
+    "Grades" : [{
         "ENSF 409" :{
             "Component": ["Assignments", "Project", "Midterm Examination", "Final Examination"],
             "Learning Outcome(s) Evaluated": ["1-7", "1-7", "1-7", "1-7"],
@@ -30,7 +30,7 @@
             "Weight" : ["50%", "15%", "15%", "20%"]
         }
     }]
-}]
+}
 
 
 
