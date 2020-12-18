@@ -1,0 +1,49 @@
+{
+  "ENSF 409" :[
+    {
+      "NoteNum" : "A",
+      "Note Message" : "You must either achieve at least 50% on the final exam or achieve at least 50% on the weighted average of the midterm and final exam. You must also achieve an average of at least 50% on the lab section of the course. If you do not satisfy these caveats, you will not receive a passing grade."
+    },
+    {
+      "NoteNum" : "B",
+      "Note Message" : "You must either achieve at least 50% on the final exam or achieve at least 50% on the weighted average of the midterm and final exam. You must also achieve an average of at least 50% on the lab section of the course. If you do not satisfy these caveats, you will not receive a passing grade."
+    },
+    {
+      "NoteNum" : "C",
+      "Note Message" : "You must either achieve at least 50% on the final exam or achieve at least 50% on the weighted average of the midterm and final exam. You must also achieve an average of at least 50% on the lab section of the course. If you do not satisfy these caveats, you will not receive a passing grade."
+    }
+  ],
+
+  "ENSF 607" :[
+    {
+      "NoteNum" : "A",
+      "Note Message" : "You must either achieve at least 50% on the final exam or achieve at least 50% on the weighted average of the midterm and final exam. You must also achieve an average of at least 50% on the lab section of the course. If you do not satisfy these caveats, you will not receive a passing grade."
+    },
+    {
+      "NoteNum" : "B",
+      "Note Message" : "You must either achieve at least 50% on the final exam or achieve at least 50% on the weighted average of the midterm and final exam. You must also achieve an average of at least 50% on the lab section of the course. If you do not satisfy these caveats, you will not receive a passing grade."
+
+    },
+    {
+      "NoteNum" : "C",
+      "Note Message" : "You must either achieve at least 50% on the final exam or achieve at least 50% on the weighted average of the midterm and final exam. You must also achieve an average of at least 50% on the lab section of the course. If you do not satisfy these caveats, you will not receive a passing grade."
+    }
+  ],
+
+  "ENSF 619" :[
+    {
+      "NoteNum" : "A",
+      "Note Message" : "You must either achieve at least 50% on the final exam or achieve at least 50% on the weighted average of the midterm and final exam. You must also achieve an average of at least 50% on the lab section of the course. If you do not satisfy these caveats, you will not receive a passing grade."
+    },
+    {
+      "NoteNum" : "B",
+      "Note Message" : "You must either achieve at least 50% on the final exam or achieve at least 50% on the weighted average of the midterm and final exam. You must also achieve an average of at least 50% on the lab section of the course. If you do not satisfy these caveats, you will not receive a passing grade."
+
+    },
+    {
+      "NoteNum" : "C",
+      "Note Message" : "You must either achieve at least 50% on the final exam or achieve at least 50% on the weighted average of the midterm and final exam. You must also achieve an average of at least 50% on the lab section of the course. If you do not satisfy these caveats, you will not receive a passing grade."
+    }
+  ]
+}
+
