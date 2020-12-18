@@ -1,12 +1,21 @@
-import React from 'react';
-import InfoData from '../data/FunInfoData.json'
+import React, { useState } from 'react';
+import InfoData from '../data/DataInfo.json'
 const FunInfo=()=> {
-  const node1 = InfoData.CourseList.cousrseNum
-  const node2=InfoData.Info.find((n)=> n['ENSF 607'])
+  const info = InfoData["ENSF 409"].courseName
+  const courseList=Object.keys(InfoData)
+  //const node2=InfoData.Info.find((n)=> n['ENSF 607'])
+  const [selectedCourse,setSelection]=useState()
+  //const outcome
+ // const grade
     return (
       <div className="App">
-        {console.log(node2['ENSF 607'].courseNum)}
+        {courseList.map((n)=>{
+          return n
+        })}
+       // {/* {console.log(courseList.map((course)=>{course}))} */}
+        
         <h1> This is Info section</h1>
+       
       </div>
     );
   }
