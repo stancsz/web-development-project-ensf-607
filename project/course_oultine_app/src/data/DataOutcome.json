@@ -1,13 +1,4 @@
-
-[{
-    "node1" : {
-        "cousrseNum" : ["ENSF 409","ENSF 607", "ENSF 619"]
-    }
-},
-
-
 {
-    "node2" : [{
         "ENSF 409" :{
             "1" : "Have a deep understanding, and practical knowledge of object oriented analysis, design, and development.",
             "2" : "Define the concepts of object-oriented design, such as inheritance and polymorphism.",
@@ -16,10 +7,8 @@
             "5" : "Design and develop client-server applications.",
             "6" : "Use databases to store and retrieve information.",
             "7" : "Use different design and development utilities and tools."
-        }
-    },
+        },
 
-    {
         "ENSF 607" :{  
             "1" : "Understand some of the advanced low-level design concepts, such as abstraction, modularity, coupling and cohesion, and usage of concepts such as inheritance, aggregation/composition, polymorphism, delegation, etc in Java",
             "2" : "Applying miscellaneous programming concepts in Java such as generic types, and multithreading",
@@ -31,10 +20,7 @@
             "8" : "Be able to perform software reverse engineering by demonstrating it through their course project",
             "9" : "Know the concept of service-oriented and cloud-based architectures and will be able to demonstrate it by modifying architecture of a conventional software system to become cloud-based",
             "10" : "Have project management, and teamwork experience in working on a large-scale software project."
-        }
-    },
-
-    {
+        },
         "ENSF 619" :{
             "1" : "Understand typical software lifecycle, and major phases of software development",
             "2" : "Understand some of the key operations in software engineering",
@@ -45,8 +31,4 @@
             "7" : "Understand the concept of design patterns",
             "8" : "Understand the basic elements of non-functional software requirements"
         }
-    }]
-}]
-
-
-
+}
