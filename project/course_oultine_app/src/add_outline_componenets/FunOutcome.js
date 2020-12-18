@@ -111,10 +111,11 @@ export default function BasicTable() {
             </TableRow>
           </TableHead>
           <TableBody>
+            
             {rows.map((row) => (
               <TableRow key={row.id}>
                 <TableCell component="th" scope="row">
-                <TextField id="standard-basic" onChange={(e) => {
+                <TextField id="standard-basic"   onChange={(e) => {
         
         editNums(row.id,e.target.value)
       }} />
