@@ -25,33 +25,37 @@ export default function SearchGrade(props) {
     //     </>);
 
     return (
-        <TableContainer component={Paper}>
-            <Table className={classes.table} aria-label="simple table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Component</TableCell>
-                        <TableCell>Learning Outcome(s) Evaluated</TableCell>
-                        <TableCell>Weight</TableCell>
+        <>
+            <label className="label is-size-3 has-text-left pl-1">7. Final Grade Determination</label>
 
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {keys.map((key) => (
-                        <TableRow key={key}>
-                            <TableCell component="th" scope="row">
-                                {props.grade[key].Component}
-                            </TableCell>
-                            <TableCell align="right">
-                                {props.grade[key]["Learning Outcome(s) Evaluated"]}
-                            </TableCell>
-                            <TableCell align="right">
-                                {props.grade[key].Weight}
-                            </TableCell>
+            <TableContainer component={Paper}>
+                <Table className={classes.table} aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Component</TableCell>
+                            <TableCell>Learning Outcome(s) Evaluated</TableCell>
+                            <TableCell>Weight</TableCell>
 
                         </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+                    </TableHead>
+                    <TableBody>
+                        {keys.map((key) => (
+                            <TableRow key={key}>
+                                <TableCell component="th" scope="row">
+                                    {props.grade[key].Component}
+                                </TableCell>
+                                <TableCell align="right">
+                                    {props.grade[key]["Learning Outcome(s) Evaluated"]}
+                                </TableCell>
+                                <TableCell align="right">
+                                    {props.grade[key].Weight}
+                                </TableCell>
+
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        </>
     );
 }
