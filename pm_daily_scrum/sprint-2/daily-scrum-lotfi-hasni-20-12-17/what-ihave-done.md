@@ -1,0 +1,1 @@
+Slight changes to course info section, worked with json-server and react-admin.
