@@ -1,21 +1,67 @@
 {
-    "ENSF 409" :{
-        "Component": ["Assignments", "Project", "Midterm Examination", "Final Examination"],
-        "Learning Outcome(s) Evaluated": ["1-7", "1-7", "1-7", "1-7"],
-        "Weight" : ["25%", "10%", "25%", "40%"]
-    },
+    "ENSF 409" :[
+        {
+            "Component": "Assignments",
+            "Learning Outcome(s) Evaluated": "1-7",
+            "Weight" : "25%"
+        },
+        {
+            "Component": "Project",
+            "Learning Outcome(s) Evaluated": "1-7",
+            "Weight" : "10%"
+        },
+        {
+            "Component": "Midterm Examination",
+            "Learning Outcome(s) Evaluated": "1-7",
+            "Weight" : "25%"
+        },
+        {
+            "Component": "Final Examination",
+            "Learning Outcome(s) Evaluated": "1-7",
+            "Weight" : "40%"
+        }
+    ],
 
-    "ENSF 607" :{  
-        "Component": ["Assignments", "Project", "Midterm Examination"],
-        "Learning Outcome(s) Evaluated": ["1-10", "1-10", "1-9"],
-        "Weight" : ["50%", "25%", "25%"]
-    },
+    "ENSF 607" :[
+        {
+            "Component": "Assignments",
+            "Learning Outcome(s) Evaluated": "1-10",
+            "Weight" : "50%"
+        },
+        {
+            "Component": "Project",
+            "Learning Outcome(s) Evaluated": "1-10",
+            "Weight" : "25%"
+        },
+        {
+            "Component": "Midterm Examination",
+            "Learning Outcome(s) Evaluated":  "1-9",
+            "Weight" : "25%"
+        }
+    ],
 
-    "ENSF 619" :{
-        "Component": ["Assignments and Projects", "Quiz 1", "Quiz 2", "Quiz 3"],
-        "Learning Outcome(s) Evaluated": ["1-8", "1-4", "1-6", "1-8"],
-        "Weight" : ["50%", "15%", "15%", "20%"]
-    }
+    "ENSF 619" :[
+        {
+            "Component": "Assignments and Projects",
+            "Learning Outcome(s) Evaluated": "1-8",
+            "Weight" : "50%"
+        },
+        {
+            "Component": "Quiz 1",
+            "Learning Outcome(s) Evaluated": "1-4",
+            "Weight" : "15%"
+        },
+        {
+            "Component": "Quiz 2",
+            "Learning Outcome(s) Evaluated": "1-6",
+            "Weight" : "15%"
+        },
+        {
+            "Component": "Quiz 3",
+            "Learning Outcome(s) Evaluated": "1-8",
+            "Weight" : "20%"
+        }
+    ]
 }
 
 
