@@ -51,13 +51,9 @@ const useStyles = makeStyles({
         minWidth: 650,
     },
 });
-
 function createData(name, calories, fat, carbs, protein) {
     return { name, calories, fat, carbs, protein };
 }
-
-
-// export default
 function BasicTable() {
     const [count, setCount] = useState(2);
     const classes = useStyles();
@@ -88,24 +84,16 @@ function BasicTable() {
         //console.log(outcomes)
     }
 
-
     const saveRow= (id) => {
-
         let numIndx = outcomes.findIndex((row) => row.id === id)
-
         let num=numbers[numIndx].num
         let outcomeIndx=outcomes.findIndex((outcome)=> outcome.id===id)
         let outcome=outcomes[outcomeIndx].outcome
         let rowIndx = rows.findIndex((row) => row.id === id)
         let newRows=rows
         newRows[rowIndx]={ id: id,num:num,outcome: outcome }
-
-
-
         setRows(newRows)
         console.log(rows)
-
-
     };
 
     const removeRow = (id) => {
@@ -128,15 +116,16 @@ function BasicTable() {
             <TableContainer component={Paper}>
                 <Table className={classes.table} aria-label="simple table">
                     <colgroup>
-                        <col width="10%" />
-                        <col width="70%" />
+                        <col width="20%" />
+                        <col width="40%" />
+                        <col width="20%" />
 
                     </colgroup>
                     <TableHead>
                         <TableRow>
-                            <TableCell>Number</TableCell>
-                            <TableCell align="right">Learning Outcome</TableCell>
-
+                            <TableCell>Component</TableCell>
+                            <TableCell>Learning Outcome(s) Evaluated</TableCell>
+                            <TableCell>Weight</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -148,10 +137,18 @@ function BasicTable() {
                                         editNums(row.id,e.target.value)
                                     }} />
                                 </TableCell>
-                                <TableCell align="right"><TextField id="standard-basic" fullWidth={true} onChange={(e) => {
+                                <TableCell><TextField id="standard-basic" fullWidth={true} onChange={(e) => {
 
                                     ediOutcomes(row.id,e.target.value)
-                                }} /></TableCell>
+                                }} />
+                                </TableCell>
+
+                                <TableCell ><TextField id="standard-basic" onChange={(e) => {
+
+                                    ediOutcomes(row.id,e.target.value)
+                                }} />
+                                </TableCell>
+
 
                                 <div className={classes.root}>
                                     <Grid container spacing={3}>
@@ -198,14 +195,11 @@ function BasicTable() {
         </>
     );
 }
-
-
-
 // The second table
 
 
 
 
 
-
+// export default
 export default FunGrade;
