@@ -9,10 +9,14 @@ import Button from '@material-ui/core/Button';
 import OutcomeData from "../data/DataOutcome.json"
 import GradesData from "../data/DataGrades.json"
 import InfoData from '../data/DataInfo.json'
+import LetterData from '../data/DataLetterGrades.json'
+import NoteData from '../data/DataNotes.json'
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Outcome from '../search_componenets/SearchOutcome'
 import Grade from '../search_componenets/SearchGrade'
+import Letter from '../search_componenets/SearchLetterGrade'
+import Note from '../search_componenets/SearchNote'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -43,13 +47,19 @@ const SearchCourse =()=> {
     const [outcome,setOutcome]=useState({})
     const [grade,setGrade]=useState({})
     const [info,setInfo]=useState({})
+    const [letter,setLetter]=useState({})
+    const [note,setNote]=useState({})
     const handleSelect =()=>{
         let tempInfo = InfoData[course]
         let tempGrade=GradesData[course]
         let tempOutcome=OutcomeData[course]
+        let tempLetter=LetterData[course]
+        let tempNote=NoteData[course]
         setOutcome(tempOutcome)
         setInfo(tempInfo)
         setGrade(tempGrade)
+        setLetter(tempLetter)
+        setNote(tempNote)
         //console.log(tempOutcome)
     }
     return (
@@ -97,6 +107,8 @@ const SearchCourse =()=> {
             <Info info={info}/>
             <Outcome outcome={outcome}/>
             <Grade grade={grade}/>
+            <Note note={note}/>
+            <Letter letter={letter}/>
 
         </>
     )
