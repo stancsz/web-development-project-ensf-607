@@ -25,33 +25,41 @@ export default function SearchLetter(props) {
     //     </>);
 
     return (
-        <TableContainer component={Paper}>
-            <Table className={classes.table} aria-label="simple table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Component</TableCell>
-                        <TableCell>Learning Outcome(s) Evaluated</TableCell>
-                        <TableCell>Weight</TableCell>
-
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {keys.map((key) => (
-                        <TableRow key={key}>
-                            <TableCell component="th" scope="row">
-                                {props.letter[key]["Letter Grade"]}
-                            </TableCell>
-                            <TableCell align="right">
-                                {props.letter[key]["Lower Boundary"]}
-                            </TableCell>
-                            <TableCell align="right">
-                                {props.letter[key]["Upper Boundary"]}
-                            </TableCell>
+        <>
+            <label className="label is-size-5 has-text-left pl-1">Letter Grades</label>
+            <TableContainer component={Paper}>
+                <Table className={classes.table} aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Letter Grade</TableCell>
+                            <TableCell>Lower Boundary</TableCell>
+                            <TableCell>T</TableCell>
+                            <TableCell>Upper Boundary</TableCell>
 
                         </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+                    </TableHead>
+                    <TableBody>
+                        {keys.map((key) => (
+                            <TableRow key={key}>
+                                <TableCell component="th" scope="row">
+                                    {props.letter[key]["Letter Grade"]}
+                                </TableCell>
+                                <TableCell align="right">
+                                    {props.letter[key]["Lower Boundary"]}
+                                </TableCell>
+                                <TableCell align="right">
+                                    ≤ T &lt;
+                                </TableCell>
+                                <TableCell align="right">
+                                    {props.letter[key]["Upper Boundary"]}
+                                </TableCell>
+
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        </>
+
     );
 }

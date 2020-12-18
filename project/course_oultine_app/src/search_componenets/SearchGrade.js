@@ -27,6 +27,7 @@ export default function SearchGrade(props) {
     return (
         <>
             <label className="label is-size-3 has-text-left pl-1">7. Final Grade Determination</label>
+            <p>The final grade in this course will be based on the following components:</p>
 
             <TableContainer component={Paper}>
                 <Table className={classes.table} aria-label="simple table">

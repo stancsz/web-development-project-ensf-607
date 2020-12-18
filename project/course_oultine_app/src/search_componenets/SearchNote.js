@@ -25,11 +25,13 @@ export default function SearchNote(props) {
     //     </>);
 
     return (
-        <TableContainer component={Paper}>
+        <>
+            <label className="label is-size-5 has-text-left pl-1">Notes</label>
+            <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="simple table">
                 <TableHead>
                     <TableRow>
-                        <TableCell>Note #</TableCell>
+                        <TableCell>#</TableCell>
                         <TableCell>Note Content</TableCell>
 
                     </TableRow>
@@ -38,7 +40,7 @@ export default function SearchNote(props) {
                     {keys.map((key) => (
                         <TableRow key={key}>
                             <TableCell component="th" scope="row">
-                                {props.note[key].NoteNum}
+                                {props.note[key].NoteNum})
                             </TableCell>
                             <TableCell align="right">
                                 {props.note[key]["Note Message"]}
@@ -49,5 +51,6 @@ export default function SearchNote(props) {
                 </TableBody>
             </Table>
         </TableContainer>
+        </>
     );
 }
