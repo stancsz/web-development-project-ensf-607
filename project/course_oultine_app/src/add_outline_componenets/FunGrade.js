@@ -23,21 +23,10 @@ const FunGrade=()=> {
             <label className="label is-size-3 has-text-left pl-1">7. Final Grade Determination</label>
             <p align="left">The final grade in this course will be based on the following components:</p>
             <div align="center"><FinalGradeTable/></div>
-            <div class="content" align="left">
-                <h5 className="subtitle" > Notes: </h5>
+            <div class="content" align="center">
+                <h5 className="subtitle is-4" align="left"> Notes: </h5>
+                <Notes/>
 
-                <div className = "control">
-            <textarea className="textarea is-info" placeholder = {defaultTexts[0]} rows="2">
-            </textarea>
-                </div>
-               <div className = "control">
-            <textarea className="textarea is-info" placeholder = {defaultTexts[1]} rows="2">
-            </textarea>
-                </div>
-               <div className = "control">
-            <textarea className="textarea is-info" placeholder = {defaultTexts[2]} rows="2">
-            </textarea>
-                </div>
             </div>
             <div align="center"><LetterGradeTable/></div>
         </div>
@@ -345,6 +334,141 @@ function LetterGradeTable() {
     );
 }
 
+function Notes() {
+    const [count, setCount] = useState(2);
+    const classes = useStyles();
+    const [rows, setRows] = useState([{ id: 1,  outcome: "" }]);
+    const [numbers,setNumbers]=useState([{id:1,num:1}])
+    const [outcomes,setOutcomes]=useState([{id:1,outcome:""}])
+
+    const editNums=(id,num)=>{
+        let indx = numbers.findIndex((num)=>num.id===id)
+        let newNums=numbers
+        //console.log(indx)
+        if(indx>=0)
+            newNums[indx]={id:id,num:num}
+        else
+            newNums.push({id:id,num:num})
+
+        setNumbers(newNums)
+        // console.log(numbers)
+    }
+    const ediOutcomes=(id,outcome)=>{
+        let indx = outcomes.findIndex((row) => row.id === id)
+        let newOutcomes=outcomes
+        if(indx>=0)
+            newOutcomes[indx]={id:id,outcome:outcome}
+        else
+            newOutcomes.push({id:id,outcome:outcome})
+        setOutcomes(newOutcomes)
+        //console.log(outcomes)
+    }
+
+    const saveRow= (id) => {
+        let numIndx = outcomes.findIndex((row) => row.id === id)
+        let num=numbers[numIndx].num
+        let outcomeIndx=outcomes.findIndex((outcome)=> outcome.id===id)
+        let outcome=outcomes[outcomeIndx].outcome
+        let rowIndx = rows.findIndex((row) => row.id === id)
+        let newRows=rows
+        newRows[rowIndx]={ id: id,num:num,outcome: outcome }
+        setRows(newRows)
+        console.log(rows)
+    };
+
+    const removeRow = (id) => {
+        let newRows = rows.filter((row) => row.id !== id)
+
+        setRows(newRows)
+    }
+    const addRow = (id) => {
+        let newRows = rows
+        setCount(count+1)
+        let x=count
+        console.log("THIS IS "+x)
+        newRows.push({ id: x, outcome: "" })
+        setRows(newRows)
+        console.log(rows)
+    }
+    return (
+        <>
+            <br />
+            <TableContainer component={Paper}>
+                <Table className={classes.table} aria-label="simple table">
+                    <colgroup>
+                        <col width="5%" />
+                        <col width="5%" />
+                        <col width="70%" />
+
+                    </colgroup>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Note #</TableCell>
+                            <TableCell></TableCell>
+                            <TableCell>Note Message</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {rows.map((row) => (
+                            <TableRow key={row.id}>
+                                <TableCell align="right"><TextField id="standard-basic" onChange={(e) => {
+                                    ediOutcomes(row.id,e.target.value)
+                                }} /></TableCell>
+
+                                <TableCell align="right">
+                                    <p>)</p>
+                                </TableCell>
+
+                                <TableCell align="right"><TextField id="standard-basic" fullWidth={true}  onChange={(e) => {
+                                    ediOutcomes(row.id,e.target.value)
+                                }} /></TableCell>
+
+
+                                <div className={classes.root}>
+                                    <Grid container spacing={3}>
+                                        <Grid item xs>
+                                            <Paper className={classes.paper}><Button
+                                                variant="contained"
+                                                color="secondary"
+                                                className={classes.button}
+                                                size="small"
+                                                startIcon={<DeleteIcon />}
+                                                onClick={()=>
+                                                    removeRow(row.id)}
+                                            >
+                                                Delete
+                                            </Button></Paper>
+                                        </Grid>
+                                        <Grid item xs>
+                                            <Paper className={classes.paper}><Button
+                                                variant="contained"
+                                                color="primary"
+                                                size="small"
+                                                className={classes.button}
+                                                startIcon={<SaveIcon />}
+                                                onClick={()=>{
+                                                    saveRow(row.id)
+                                                }}
+                                            >
+                                                Save
+                                            </Button></Paper>
+                                        </Grid>
+
+                                    </Grid>
+                                </div>
+
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+                <br />
+                <Button variant="contained" color="primary" onClick={()=>{
+                    addRow()
+                }}> +</Button>
+            </TableContainer>
+        </>
+    );
+}
 
 
 
