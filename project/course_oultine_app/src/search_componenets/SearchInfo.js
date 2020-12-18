@@ -34,7 +34,7 @@ const FunInfo = (props) => {
       </div>
 
       <div className="columns"><div className="column is-one-quarter has-text-left pl-4 pt-4">Calendar Reference:</div>
-          <div className="column has-text-left"><div className="a">{props.info.calendarReference}</div></div>
+          <div className="column has-text-left"><a href = {props.info.calendarReference}>{props.info.calendarReference}</a></div>
       </div>
 
       </div>
