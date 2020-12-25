@@ -1,0 +1,191 @@
+{
+  "ENSF 409" :[
+    {
+      "Letter Grade" : "A+",
+      "Lower Boundary" : "95",
+      "Upper Boundary": ""
+    },
+    {
+      "Letter Grade" : "A",
+      "Lower Boundary" : "95",
+      "Upper Boundary": "90"
+    },
+    {
+      "Letter Grade" : "A-",
+      "Lower Boundary" : "90",
+      "Upper Boundary": "85"
+    },
+    {
+      "Letter Grade" : "B+",
+      "Lower Boundary" : "85",
+      "Upper Boundary": "80"
+    },
+    {
+      "Letter Grade" : "B",
+      "Lower Boundary" : "80",
+      "Upper Boundary": "75"
+    },
+    {
+      "Letter Grade" : "B-",
+      "Lower Boundary" : "75",
+      "Upper Boundary": "70"
+    },
+    {
+      "Letter Grade" : "C+",
+      "Lower Boundary" : "70",
+      "Upper Boundary": "65"
+    },
+    {
+      "Letter Grade" : "C",
+      "Lower Boundary" : "65",
+      "Upper Boundary": "60"
+    },
+    {
+      "Letter Grade" : "C-",
+      "Lower Boundary" : "56",
+      "Upper Boundary": "60"
+    },
+    {
+      "Letter Grade" : "D+",
+      "Lower Boundary" : "53",
+      "Upper Boundary": "56"
+    },
+    {
+      "Letter Grade" : "D",
+      "Lower Boundary" : "50",
+      "Upper Boundary": "53"
+    },
+    {
+      "Letter Grade" : "F",
+      "Lower Boundary" : "",
+      "Upper Boundary": "50"
+    }
+  ],
+
+  "ENSF 607" :[
+    {
+      "Letter Grade" : "A+",
+      "Lower Boundary" : "95",
+      "Upper Boundary": ""
+    },
+    {
+      "Letter Grade" : "A",
+      "Lower Boundary" : "95",
+      "Upper Boundary": "90"
+    },
+    {
+      "Letter Grade" : "A-",
+      "Lower Boundary" : "90",
+      "Upper Boundary": "85"
+    },
+    {
+      "Letter Grade" : "B+",
+      "Lower Boundary" : "85",
+      "Upper Boundary": "80"
+    },
+    {
+      "Letter Grade" : "B",
+      "Lower Boundary" : "80",
+      "Upper Boundary": "75"
+    },
+    {
+      "Letter Grade" : "B-",
+      "Lower Boundary" : "75",
+      "Upper Boundary": "70"
+    },
+    {
+      "Letter Grade" : "C+",
+      "Lower Boundary" : "70",
+      "Upper Boundary": "65"
+    },
+    {
+      "Letter Grade" : "C",
+      "Lower Boundary" : "65",
+      "Upper Boundary": "60"
+    },
+    {
+      "Letter Grade" : "C-",
+      "Lower Boundary" : "56",
+      "Upper Boundary": "60"
+    },
+    {
+      "Letter Grade" : "D+",
+      "Lower Boundary" : "53",
+      "Upper Boundary": "56"
+    },
+    {
+      "Letter Grade" : "D",
+      "Lower Boundary" : "50",
+      "Upper Boundary": "53"
+    },
+    {
+      "Letter Grade" : "F",
+      "Lower Boundary" : "",
+      "Upper Boundary": "50"
+    }
+  ],
+
+  "ENSF 619" :[
+    {
+      "Letter Grade" : "A+",
+      "Lower Boundary" : "95",
+      "Upper Boundary": ""
+    },
+    {
+      "Letter Grade" : "A",
+      "Lower Boundary" : "95",
+      "Upper Boundary": "90"
+    },
+    {
+      "Letter Grade" : "A-",
+      "Lower Boundary" : "90",
+      "Upper Boundary": "85"
+    },
+    {
+      "Letter Grade" : "B+",
+      "Lower Boundary" : "85",
+      "Upper Boundary": "80"
+    },
+    {
+      "Letter Grade" : "B",
+      "Lower Boundary" : "80",
+      "Upper Boundary": "75"
+    },
+    {
+      "Letter Grade" : "B-",
+      "Lower Boundary" : "75",
+      "Upper Boundary": "70"
+    },
+    {
+      "Letter Grade" : "C+",
+      "Lower Boundary" : "70",
+      "Upper Boundary": "65"
+    },
+    {
+      "Letter Grade" : "C",
+      "Lower Boundary" : "65",
+      "Upper Boundary": "60"
+    },
+    {
+      "Letter Grade" : "C-",
+      "Lower Boundary" : "56",
+      "Upper Boundary": "60"
+    },
+    {
+      "Letter Grade" : "D+",
+      "Lower Boundary" : "53",
+      "Upper Boundary": "56"
+    },
+    {
+      "Letter Grade" : "D",
+      "Lower Boundary" : "50",
+      "Upper Boundary": "53"
+    },
+    {
+      "Letter Grade" : "F",
+      "Lower Boundary" : "",
+      "Upper Boundary": "50"
+    }
+  ]
+}
+
