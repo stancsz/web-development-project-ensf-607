@@ -1,0 +1,1 @@
+deconstruct the passed props from searchPanel to present the grade elements in a table 

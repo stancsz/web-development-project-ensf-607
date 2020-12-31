@@ -1,0 +1,1 @@
+Challenging understanding state, json objects, props, how to connect different parts of application with dynamic behavior.

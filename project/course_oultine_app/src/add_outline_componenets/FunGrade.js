@@ -28,6 +28,7 @@ const FunGrade=()=> {
                 <Notes/>
 
             </div>
+            <label className="label is-size-5 has-text-left pl-1">Letter Grades</label>
             <div align="center"><LetterGradeTable/></div>
         </div>
     );
@@ -139,7 +140,7 @@ function FinalGradeTable() {
                                 </TableCell>
 
 
-                                <div className={classes.root}>
+                                <div className={classes.root} align="center">
                                     <Grid container spacing={3}>
                                         <Grid item xs>
                                             <Paper className={classes.paper}><Button
@@ -288,7 +289,7 @@ function LetterGradeTable() {
                                 </TableCell>
 
 
-                                <div className={classes.root}>
+                                <div className={classes.root} align="center">
                                     <Grid container spacing={3}>
                                         <Grid item xs>
                                             <Paper className={classes.paper}><Button
@@ -424,7 +425,7 @@ function Notes() {
                                 }} /></TableCell>
 
 
-                                <div className={classes.root}>
+                                <div className={classes.root} align="center">
                                     <Grid container spacing={3}>
                                         <Grid item xs>
                                             <Paper className={classes.paper}><Button

@@ -5,7 +5,7 @@ import FunOutcome from '../add_outline_componenets/FunOutcome.js'
 const AddCourse =()=>{
 return (
 <React.Fragment>
-<h1>This is Add new course outline page</h1>
+
 <FunInfo/>
 <FunOutcome/>
 <FunGrade/>
