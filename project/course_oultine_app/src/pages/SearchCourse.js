@@ -25,7 +25,16 @@ import Note from "../search_componenets/SearchNote";
 import Textbook from "../search_componenets/SearchTextbook";
 import Policies from "../search_componenets/SearchPolicies";
 import Container from "@material-ui/core/Container";
-import AppBar from '@material-ui/core/AppBar';
+import AppBar from "@material-ui/core/AppBar";
+
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import { DataGrid } from '@material-ui/data-grid';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -49,9 +58,11 @@ const SearchCourse = () => {
   const classes = useStyles();
 
   const [course, setCourse] = React.useState("");
+
   const handleChange = (event) => {
     setCourse(event.target.value);
   };
+
   const [outcome, setOutcome] = useState({});
   const [timetable, setTimetable] = useState({});
   const [instructors, setInstructors] = useState({});
@@ -59,11 +70,20 @@ const SearchCourse = () => {
   const [calculator, setCalculator] = useState({});
   const [textbook, setTextbook] = useState({});
   const [grade, setGrade] = useState({});
-  const [info, setInfo] = useState({});
+  const [info, setInfo] = useState();
   const [letter, setLetter] = useState({});
   const [note, setNote] = useState({});
 
   const [frame, setFrame] = useState();
+  const [searchInput, setSearchInput] = useState("");
+  const keys=Object.keys(InfoData)
+
+
+  const columns = [
+    { field: 'CourseNum', headerName: 'CourseNum', width: 70 }
+  ]
+
+
 
   const handleSelect = () => {
     let tempInfo = InfoData[course];
@@ -79,11 +99,11 @@ const SearchCourse = () => {
   };
 
   const handleUpdate = () => {
-    if (info != undefined) {
+    if (typeof info !== "undefined") {
       setFrame(
         <Container maxWidth="md">
           <Paper className={classes.paper}>
-            <Info info={info}/>
+            <Info info={info} />
           </Paper>
 
           <Paper className={classes.paper}>
@@ -91,25 +111,25 @@ const SearchCourse = () => {
           </Paper>
 
           <Paper className={classes.paper}>
-            <Timetable/>
+            <Timetable />
           </Paper>
 
           <Paper className={classes.paper}>
-            <Instructors/>
+            <Instructors />
           </Paper>
 
           <Paper className={classes.paper}>
-            <Examinations/>
+            <Examinations />
           </Paper>
 
           <Paper className={classes.paper}>
-            <Calculator/>
+            <Calculator />
           </Paper>
 
           <Paper className={classes.paper}>
             <Grade grade={grade} />
           </Paper>
-          
+
           <Paper className={classes.paper}>
             <Note note={note} />
           </Paper>
@@ -125,23 +145,69 @@ const SearchCourse = () => {
           <Paper className={classes.paper}>
             <Policies />
           </Paper>
-          
         </Container>
       );
+    } else {
+
+      setFrame(
+        <Container maxWidth="md">
+            <br/>
+          <Paper className={classes.paper}>
+            <TableContainer component={Paper}>
+              <label className="label is-size-3 has-text-Center">
+                Current Course Outlines
+              </label>
+              <Table className={classes.table} aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Course Number</TableCell>
+                    <TableCell>Actions</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                {keys.map((key) => (
+                <TableRow key={key}>
+                <TableCell component="th" scope="row">
+                 {key}
+                </TableCell> 
+               
+            </TableRow>
+          ))}
+            
+
+                </TableBody>
+              </Table>
+            </TableContainer>
+
+            
+            
+          </Paper>
+        </Container>
+      );
+
     }
   };
 
   useEffect(() => {
+    console.log(searchInput);
+    console.log(info);
+
     handleSelect();
-  });
+
+    if (searchInput !== "") {
+      setFrame("Search Results");
+    } else if (searchInput === "") {
+      handleUpdate();
+    }
+  }, [course, searchInput]);
+
 
   return (
     <>
-      <AppBar position="sticky" color = 'default'>
-      <Container maxWidth="md">
-        <Grid container spacing={2}>
-          <Grid item xs = {2}>
-            
+      <AppBar position="sticky" color="default">
+        <Container maxWidth="md">
+          <Grid container spacing={2}>
+            <Grid item xs={2}>
               <FormControl className={classes.formControl}>
                 <Select
                   labelId="demo-simple-select-label"
@@ -155,56 +221,59 @@ const SearchCourse = () => {
                   {courseList.map((i) => (
                     <MenuItem value={i}>{i}</MenuItem>
                   ))}
+                  <MenuItem value = "View All">View All</MenuItem>
                 </Select>
               </FormControl>
               <InputLabel id="demo-simple-select-label">
                 Select Course
               </InputLabel>
-      
-          </Grid>
-          
-          <Grid item xs>
-            <Paper className={classes.paper}>
-              <Button
-                variant="outlined"
-                color="secondary"
-                fullWidth={true}
-                onClick={() => {
-                  handleUpdate();
-                }}
-              >
-                Select
-              </Button>
-            </Paper>
-          </Grid>
+            </Grid>
 
-          <Grid item xs>
-            <div className = "pt-2">
-            <TextField id="outlined-basic" label="Search Courses" variant="filled" />
-            </div>
-          </Grid>
+            <Grid item xs>
+              <Paper className={classes.paper}>
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  fullWidth={true}
+                  onClick={() => {
+                    handleUpdate();
+                  }}
+                >
+                  Select
+                </Button>
+              </Paper>
+            </Grid>
 
-          <Grid item xs>
-            <Paper className={classes.paper}>
-              <Button
-                variant="outlined"
-                color="secondary"
-                fullWidth={true}
-                onClick={() => {
-                  handleUpdate();
-                }}
-              >
-                Save and Delete
-              </Button>
-            </Paper>
-          </Grid>
-          
-        </Grid>
-      </Container>
+            <Grid item xs>
+              <div className="pt-2">
+                <TextField
+                  id="outlined-basic"
+                  label="Search Courses"
+                  variant="filled"
+                  value={searchInput}
+                  onChange={(e) => setSearchInput(e.target.value)}
+                />
+              </div>
+            </Grid>
 
+            <Grid item xs>
+              <Paper className={classes.paper}>
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  fullWidth={true}
+                  onClick={() => {
+                    handleUpdate();
+                  }}
+                >
+                  Save and Delete
+                </Button>
+              </Paper>
+            </Grid>
+          </Grid>
+        </Container>
       </AppBar>
 
-     
       {frame}
     </>
   );
