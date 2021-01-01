@@ -4,8 +4,8 @@ CREATE schema COURSE_OUTLINE;
  DROP TABLE if Exists COURSE;
 CREATE TABLE COURSE (
   `CourseNum` VARCHAR(10) NOT NULL,
-  `CourseHours` INT NULL,
-  `CourseName` VARCHAR(45) NULL,
+  `CourseHours` VARCHAR(100) NULL,
+  `CourseName` VARCHAR(200) NULL,
   `CalenderRefrence` VARCHAR(45) NULL,
   `AcademicCredit` INT NULL,
   `DateCreated` DATETIME NULL,
@@ -25,10 +25,10 @@ CREATE TABLE `COURSE_OUTLINE`.`INFO` (
  DROP TABLE if Exists TEXTBOOK;
 CREATE TABLE `COURSE_OUTLINE`.`TEXTBOOK` (
   `CourseNum` VARCHAR(10) NOT NULL,
-  `TITLE` VARCHAR(45) NOT NULL,
-  `Publisher` VARCHAR(45) NULL,
-  `Author` VARCHAR(45) NULL,
-  `Edition` VARCHAR(45) NULL,
+  `TITLE` VARCHAR(200) NOT NULL,
+  `Publisher` VARCHAR(200) NULL,
+  `Author` VARCHAR(200) NULL,
+  `Edition` VARCHAR(200) NULL,
   PRIMARY KEY (`CourseNum`, `TITLE`),
   CONSTRAINT `TEXTBOOK_CourseNum`
     FOREIGN KEY (`CourseNum`)
