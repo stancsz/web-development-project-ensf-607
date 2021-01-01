@@ -1,0 +1,1 @@
+Created the EER/Relational model, built the DB and load it with dummy data
