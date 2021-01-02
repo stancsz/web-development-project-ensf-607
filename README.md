@@ -7,3 +7,10 @@ $ pip install -r requirements.txt
 Run the following command inside the directory: todoapi/
 
 python manage.py runserver
+
+# migrate models
+```
+python manage.py makemigrations courseoutline
+python manage.py migrate
+```
+
