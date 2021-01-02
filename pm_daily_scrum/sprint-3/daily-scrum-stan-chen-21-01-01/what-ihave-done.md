@@ -1,0 +1,1 @@
+created one single model to store django model. modeling django models based off the db tables provided by ziad. 

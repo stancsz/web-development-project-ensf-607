@@ -1,0 +1,1 @@
+finishs the rest of the modes, then write api serializers for it

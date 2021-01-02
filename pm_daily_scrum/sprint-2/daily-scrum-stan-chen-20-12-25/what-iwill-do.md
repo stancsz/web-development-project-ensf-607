@@ -1,0 +1,1 @@
+find a official and time efficient way to use django

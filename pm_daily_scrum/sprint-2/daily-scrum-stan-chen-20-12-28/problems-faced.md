@@ -1,0 +1,1 @@
+dealing with props and loading data into a table

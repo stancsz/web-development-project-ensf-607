@@ -1,0 +1,1 @@
+research ways to configure django code base
