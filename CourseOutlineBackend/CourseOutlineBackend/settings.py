@@ -25,7 +25,7 @@ SECRET_KEY = '=orod&wt@ox_36u$3df9-s7k3z$!26rjg1vky-p=cwjk#v&vl2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'courseoutline.apps.CourseoutlineConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -76,9 +77,18 @@ WSGI_APPLICATION = 'CourseOutlineBackend.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        # MySQL engine. Powered by the mysqlclient module.
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'CourseOutlineDB',
+        'USER': 'admin01',
+        'PASSWORD': 'ensf607',
+        'HOST': '34.220.149.181',
+        'PORT': '3306',
     }
 }
 
