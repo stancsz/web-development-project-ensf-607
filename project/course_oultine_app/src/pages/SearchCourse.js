@@ -80,9 +80,15 @@ const SearchCourse = () => {
 
 
   const columns = [
-    { field: 'CourseNum', headerName: 'CourseNum', width: 70 }
+    { field: 'id', headerName: 'Course Number', width: "50%"},
+    { field: 'courseName', headerName: 'Course Name', width: "100%"}
   ]
 
+  const rows = [
+    { id: "ENSF 409",  courseName : "Principles of Software Development"},
+    { id: "ENSF 607",  courseName : "Principles of Software Development"},
+    { id: "ENSF 619",  courseName : "Principles of Software Development"}
+  ]
 
 
   const handleSelect = () => {
@@ -179,7 +185,9 @@ const SearchCourse = () => {
               </Table>
             </TableContainer>
 
-            
+            <div style={{ height: 400, width: '100%'}}>
+            <DataGrid rows={rows} columns={columns} id = "courseNum" pageSize={5} justify = 'center' />
+            </div>
             
           </Paper>
         </Container>
@@ -189,9 +197,7 @@ const SearchCourse = () => {
   };
 
   useEffect(() => {
-    console.log(searchInput);
-    console.log(info);
-
+   
     handleSelect();
 
     if (searchInput !== "") {
