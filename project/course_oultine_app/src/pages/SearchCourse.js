@@ -77,18 +77,21 @@ const SearchCourse = () => {
   const [frame, setFrame] = useState();
   const [searchInput, setSearchInput] = useState("");
   const keys=Object.keys(InfoData)
+  const [tableSelection, setTableSelection] = useState("");
 
 
   const columns = [
-    { field: 'id', headerName: 'Course Number', width: "50%"},
-    { field: 'courseName', headerName: 'Course Name', width: "100%"}
+    { field: 'id', headerName: 'Course ID', width: 400, align: 'center'},
+    { field: 'datetime', headerName: 'Date Created', width: 400, align: 'center'}
   ]
 
-  const rows = [
-    { id: "ENSF 409",  courseName : "Principles of Software Development"},
-    { id: "ENSF 607",  courseName : "Principles of Software Development"},
-    { id: "ENSF 619",  courseName : "Principles of Software Development"}
-  ]
+
+  let rows = []
+
+  for(let i = 0; i < Object.values(InfoData).length; i++) {
+    var rowval = Object.values(InfoData)[i];
+    rows.push({id: rowval["courseID"], datetime: rowval["DateCreated"]})
+}
 
 
   const handleSelect = () => {
@@ -158,35 +161,15 @@ const SearchCourse = () => {
       setFrame(
         <Container maxWidth="md">
             <br/>
-          <Paper className={classes.paper}>
-            <TableContainer component={Paper}>
+            <br/>
+          <Paper className={classes.paper} elevation={3}>
               <label className="label is-size-3 has-text-Center">
                 Current Course Outlines
               </label>
-              <Table className={classes.table} aria-label="simple table">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Course Number</TableCell>
-                    <TableCell>Actions</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                {keys.map((key) => (
-                <TableRow key={key}>
-                <TableCell component="th" scope="row">
-                 {key}
-                </TableCell> 
-               
-            </TableRow>
-          ))}
-            
+              
 
-                </TableBody>
-              </Table>
-            </TableContainer>
-
-            <div style={{ height: 400, width: '100%'}}>
-            <DataGrid rows={rows} columns={columns} id = "courseNum" pageSize={5} justify = 'center' />
+            <div style={{height: 400}}>
+            <DataGrid rows={rows} columns={columns} pageSize={5} />
             </div>
             
           </Paper>
@@ -198,14 +181,13 @@ const SearchCourse = () => {
 
   useEffect(() => {
    
-    handleSelect();
 
     if (searchInput !== "") {
       setFrame("Search Results");
     } else if (searchInput === "") {
       handleUpdate();
     }
-  }, [course, searchInput]);
+  }, [info, searchInput]);
 
 
   return (
@@ -242,7 +224,8 @@ const SearchCourse = () => {
                   color="secondary"
                   fullWidth={true}
                   onClick={() => {
-                    handleUpdate();
+                    //handleUpdate();
+                    handleSelect();
                   }}
                 >
                   Select
