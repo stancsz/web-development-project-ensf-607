@@ -76,13 +76,12 @@ const SearchCourse = () => {
 
   const [frame, setFrame] = useState();
   const [searchInput, setSearchInput] = useState("");
-  const keys=Object.keys(InfoData)
   const [tableSelection, setTableSelection] = useState("");
 
 
   const columns = [
-    { field: 'id', headerName: 'Course ID', width: 400, align: 'center'},
-    { field: 'datetime', headerName: 'Date Created', width: 400, align: 'center'}
+    { field: 'id', headerName: 'Course ID', width: 400, align: 'center',  headerAlign: 'center'},
+    { field: 'datetime', headerName: 'Date Created', width: 400, align: 'center',  headerAlign: 'center'}
   ]
 
 
@@ -166,10 +165,16 @@ const SearchCourse = () => {
               <label className="label is-size-3 has-text-Center">
                 Current Course Outlines
               </label>
-              
+              <br/>
 
             <div style={{height: 400}}>
-            <DataGrid rows={rows} columns={columns} pageSize={5} />
+            <DataGrid rows={rows} columns={columns} pageSize={5} align="center" 
+            onSelectionChange = {(e) => {
+               setTableSelection(e.rowIds[0]);
+               
+              }}
+            
+            />
             </div>
             
           </Paper>
@@ -187,7 +192,7 @@ const SearchCourse = () => {
     } else if (searchInput === "") {
       handleUpdate();
     }
-  }, [info, searchInput]);
+  }, [info, searchInput, tableSelection]);
 
 
   return (
@@ -195,29 +200,21 @@ const SearchCourse = () => {
       <AppBar position="sticky" color="default">
         <Container maxWidth="md">
           <Grid container spacing={2}>
-            <Grid item xs={2}>
-              <FormControl className={classes.formControl}>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={course}
-                  onChange={(e) => {
-                    //console.log(e.target)
-                    handleChange(e);
-                  }}
-                >
-                  {courseList.map((i) => (
-                    <MenuItem value={i}>{i}</MenuItem>
-                  ))}
-                  <MenuItem value = "View All">View All</MenuItem>
-                </Select>
-              </FormControl>
-              <InputLabel id="demo-simple-select-label">
-                Select Course
-              </InputLabel>
+          <Grid item xs>
+              <div className="pt-2">
+                <TextField
+                  fullWidth
+                  id="outlined-basic"
+                  label="Search Courses"
+                  variant="filled"
+                  value={searchInput}
+                  onChange={(e) => setSearchInput(e.target.value)}
+                />
+              </div>
             </Grid>
 
-            <Grid item xs>
+
+            <Grid item xs ={0}>
               <Paper className={classes.paper}>
                 <Button
                   variant="outlined"
@@ -233,32 +230,27 @@ const SearchCourse = () => {
               </Paper>
             </Grid>
 
-            <Grid item xs>
-              <div className="pt-2">
-                <TextField
-                  id="outlined-basic"
-                  label="Search Courses"
-                  variant="filled"
-                  value={searchInput}
-                  onChange={(e) => setSearchInput(e.target.value)}
-                />
-              </div>
-            </Grid>
-
-            <Grid item xs>
-              <Paper className={classes.paper}>
-                <Button
-                  variant="outlined"
-                  color="secondary"
-                  fullWidth={true}
-                  onClick={() => {
-                    handleUpdate();
+            <Grid item xs={0}>
+              <FormControl className={classes.formControl}>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={course}
+                  onChange={(e) => {
+                    handleChange(e);
                   }}
                 >
-                  Save and Delete
-                </Button>
-              </Paper>
+                  {courseList.map((i) => (
+                    <MenuItem value={i}>{i}</MenuItem>
+                  ))}
+                  <MenuItem value = "View All">View All</MenuItem>
+                </Select>
+              </FormControl>
+              <InputLabel id="demo-simple-select-label">
+                Select Course
+              </InputLabel>
             </Grid>
+
           </Grid>
         </Container>
       </AppBar>
