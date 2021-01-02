@@ -15,7 +15,7 @@ const useStyles = makeStyles({
 });
 
 export default function SearchGrade(props) {
-    // console.log(props.grade)
+    console.log(props)
     const keys=Object.keys(props.grade)
     console.log(keys)
 

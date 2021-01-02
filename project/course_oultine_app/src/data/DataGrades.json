@@ -1,5 +1,5 @@
 {
-    "ENSF-409" :[
+    "ENSF 409" :[
         {
             "Component": "Assignments",
             "Learning Outcome(s) Evaluated": "1-7",
@@ -22,7 +22,7 @@
         }
     ],
 
-    "ENSF 607" :[
+    "ENSF-607-FALL-2020" :[
         {
             "Component": "Assignments",
             "Learning Outcome(s) Evaluated": "1-10",
@@ -40,7 +40,7 @@
         }
     ],
 
-    "ENSF 619" :[
+    "ENSF-619-FALL-2020" :[
         {
             "Component": "Assignments and Projects",
             "Learning Outcome(s) Evaluated": "1-8",

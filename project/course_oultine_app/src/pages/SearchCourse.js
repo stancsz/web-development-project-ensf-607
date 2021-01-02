@@ -27,14 +27,12 @@ import Policies from "../search_componenets/SearchPolicies";
 import Container from "@material-ui/core/Container";
 import AppBar from "@material-ui/core/AppBar";
 
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import VisibilityIcon from '@material-ui/icons/Visibility';
+
 import { DataGrid } from '@material-ui/data-grid';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import PageviewIcon from '@material-ui/icons/Pageview';
+import EditIcon from '@material-ui/icons/Edit';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -77,6 +75,8 @@ const SearchCourse = () => {
   const [frame, setFrame] = useState();
   const [searchInput, setSearchInput] = useState("");
   const [tableSelection, setTableSelection] = useState("");
+  const [displayIcons, setDisplayIcons] = useState();
+  const [callHandleSelect, setCallHandleSelect] = useState();
 
 
   const columns = [
@@ -155,6 +155,7 @@ const SearchCourse = () => {
           </Paper>
         </Container>
       );
+      setTableSelection("");
     } else {
 
       setFrame(
@@ -165,15 +166,14 @@ const SearchCourse = () => {
               <label className="label is-size-3 has-text-Center">
                 Current Course Outlines
               </label>
-              <br/>
-
+              {displayIcons}
             <div style={{height: 400}}>
-            <DataGrid rows={rows} columns={columns} pageSize={5} align="center" 
-            onSelectionChange = {(e) => {
+            <DataGrid rows={rows} columns={columns} pageSize={10} align="center" 
+              onSelectionChange = {(e) => {
+               setTableSelection("continue")
                setTableSelection(e.rowIds[0]);
-               
+               setTableSelection("next");
               }}
-            
             />
             </div>
             
@@ -184,15 +184,80 @@ const SearchCourse = () => {
     }
   };
 
+
+  const revealIcons = () => {
+    setDisplayIcons(
+      <Grid align="right">
+        <PageviewIcon fontSize = "large"
+        onClick={() => {
+          setCourse(tableSelection);
+          setCallHandleSelect(true);
+        }}/> 
+        
+        <EditIcon fontSize = "large"
+        onClick={() => {console.log("edit");}}/> 
+
+        <DeleteForeverIcon fontSize = "large"
+        onClick={() => {console.log("delete");}}/> 
+      </Grid> 
+      )
+  }
+
+  const displaySearchResults = () => {
+
+    let filteredRows = []
+
+    for(let i = 0; i < Object.values(InfoData).length; i++) {
+      var rowval = Object.values(InfoData)[i];
+      if(rowval["courseID"].toLowerCase().includes(searchInput.toLocaleLowerCase())){
+        filteredRows.push({id: rowval["courseID"], datetime: rowval["DateCreated"]});
+      }
+    }
+    
+
+    setFrame(
+    <Container maxWidth="md">
+            <br/>
+            <br/>
+          <Paper className={classes.paper} elevation={3}>
+              <label className="label is-size-3 has-text-Center">
+                Search Results:
+              </label>
+              {displayIcons}
+            <div style={{height: 400}}>
+            <DataGrid rows={filteredRows} columns={columns} pageSize={5} align="center" 
+              onSelectionChange = {(e) => {
+               setTableSelection("continue")
+               setTableSelection(e.rowIds[0]);
+               setTableSelection("next");
+              }}
+            />
+            </div>
+          </Paper>
+        </Container>
+    );
+  }
+
+
   useEffect(() => {
-   
 
     if (searchInput !== "") {
-      setFrame("Search Results");
+      displaySearchResults();
+      setTableSelection("");
     } else if (searchInput === "") {
+      setTableSelection("");
       handleUpdate();
     }
-  }, [info, searchInput, tableSelection]);
+
+    (tableSelection === "") ? setDisplayIcons()  
+    : revealIcons(); 
+
+    if(callHandleSelect === true){
+      handleSelect();
+      setCallHandleSelect(false);
+    }
+
+  }, [info, searchInput, tableSelection, callHandleSelect]);
 
 
   return (
@@ -214,14 +279,13 @@ const SearchCourse = () => {
             </Grid>
 
 
-            <Grid item xs ={0}>
+            <Grid item xs ={false}>
               <Paper className={classes.paper}>
                 <Button
                   variant="outlined"
                   color="secondary"
                   fullWidth={true}
                   onClick={() => {
-                    //handleUpdate();
                     handleSelect();
                   }}
                 >
@@ -230,7 +294,7 @@ const SearchCourse = () => {
               </Paper>
             </Grid>
 
-            <Grid item xs={0}>
+            <Grid item xs={false}>
               <FormControl className={classes.formControl}>
                 <Select
                   labelId="demo-simple-select-label"

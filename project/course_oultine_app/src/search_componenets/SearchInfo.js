@@ -20,7 +20,7 @@ function SearchInfo(props) {
         <div className="control">
             <h3 className="input is-size-4 has-text-left pl-1 mb-0 pb-0" 
             
-            placeholder = "Enter Course Number. Example: ENSF 409">{props.info.courseNum}</h3>
+            placeholder = "Enter Course Number. Example: ENSF 409">{props.info.courseID.split("-").slice(0,2).join(" ")}</h3>
         </div>
         <div className="column is-one-quarter has-text-left pl-4 pt-4">Course Name:</div>
         <div className="control">
