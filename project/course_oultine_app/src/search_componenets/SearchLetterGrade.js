@@ -14,9 +14,9 @@ const useStyles = makeStyles({
     },
 });
 
-export default function SearchGrade(props) {
+export default function SearchLetter(props) {
     // console.log(props.grade)
-    const keys=Object.keys(props.grade)
+    const keys=Object.keys(props.letter)
     console.log(keys)
 
     const classes = useStyles();
@@ -26,16 +26,15 @@ export default function SearchGrade(props) {
 
     return (
         <>
-            <label className="label is-size-3 has-text-left pl-1">7. Final Grade Determination</label>
-            <p>The final grade in this course will be based on the following components:</p>
-
+            <label className="label is-size-5 has-text-left pl-1">Letter Grades</label>
             <TableContainer component={Paper}>
                 <Table className={classes.table} aria-label="simple table">
                     <TableHead>
                         <TableRow>
-                            <TableCell>Component</TableCell>
-                            <TableCell>Learning Outcome(s) Evaluated</TableCell>
-                            <TableCell>Weight</TableCell>
+                            <TableCell>Letter Grade</TableCell>
+                            <TableCell>Lower Boundary</TableCell>
+                            <TableCell>T</TableCell>
+                            <TableCell>Upper Boundary</TableCell>
 
                         </TableRow>
                     </TableHead>
@@ -43,13 +42,16 @@ export default function SearchGrade(props) {
                         {keys.map((key) => (
                             <TableRow key={key}>
                                 <TableCell component="th" scope="row">
-                                    {props.grade[key].Component}
+                                    {props.letter[key]["Letter Grade"]}
                                 </TableCell>
                                 <TableCell align="right">
-                                    {props.grade[key]["Learning Outcome(s) Evaluated"]}
+                                    {props.letter[key]["Lower Boundary"]}
                                 </TableCell>
                                 <TableCell align="right">
-                                    {props.grade[key].Weight}
+                                    ≤ T &lt;
+                                </TableCell>
+                                <TableCell align="right">
+                                    {props.letter[key]["Upper Boundary"]}
                                 </TableCell>
 
                             </TableRow>
@@ -58,5 +60,6 @@ export default function SearchGrade(props) {
                 </Table>
             </TableContainer>
         </>
+
     );
 }

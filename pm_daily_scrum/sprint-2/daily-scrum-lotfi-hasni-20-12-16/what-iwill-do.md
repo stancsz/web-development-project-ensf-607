@@ -1,0 +1,1 @@
+Try to learn enough to help with project goals.

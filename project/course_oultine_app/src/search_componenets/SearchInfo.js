@@ -5,9 +5,6 @@ import { useState } from 'react';
 function SearchInfo(props) {
 
 
-
-  
-
   return (
     <div className="FunInfo">
 

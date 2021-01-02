@@ -1,0 +1,1 @@
+Trouble understanding redux, json syntax, working with hooks and dynamic ui.
