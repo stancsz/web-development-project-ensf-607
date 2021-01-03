@@ -38,6 +38,8 @@ import AccordionDetails from "@material-ui/core/AccordionDetails";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
+
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -135,15 +137,17 @@ const SearchCourse = () => {
           <br />
 
           <Accordion defaultExpanded = "true" elevation = {5}>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+            <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
               <Typography>
                <label className="label is-size-3 has-text-left pl-1">1. Calendar Information</label>
                </Typography>
             </AccordionSummary>
             <AccordionDetails>
+            <div style={{ width: '100%' }}>
               <Paper className={classes.paper} elevation={3}>
               <Info info={info} />
               </Paper>
+            </div>
             </AccordionDetails>
           </Accordion>
 
@@ -154,47 +158,129 @@ const SearchCourse = () => {
                </Typography>
             </AccordionSummary>
             <AccordionDetails>
+            <div style={{ width: '100%' }}>
               <Paper className={classes.paper} elevation={3}>
               <Outcome outcome={outcome} />
               </Paper>
+            </div>
             </AccordionDetails>
           </Accordion>
 
-          <Paper className={classes.paper} elevation={3}>
+          <Accordion defaultExpanded = "true" elevation = {5}  flexGrow={1}>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography>
+               <label className="label is-size-3 has-text-left pl-1">3. Timetable</label>
+               </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+            <div style={{ width: '100%' }}>
+            <Paper className={classes.paper} elevation={3}>
             <Timetable />
-          </Paper>
+            </Paper>
+            </div>
+            </AccordionDetails>
+          </Accordion>
 
-          <Paper className={classes.paper} elevation={3}>
+
+          <Accordion defaultExpanded = "true" elevation = {5}  flexGrow={1}>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography>
+               <label className="label is-size-3 has-text-left pl-1">4. Course Instructors</label>
+               </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+            <div style={{ width: '100%' }}>
+            <Paper className={classes.paper} elevation={3}>
             <Instructors />
-          </Paper>
+            </Paper>
+            </div>
+            </AccordionDetails>
+          </Accordion>
 
-          <Paper className={classes.paper} elevation={3}>
+          
+          <Accordion defaultExpanded = "true" elevation = {5}  flexGrow={1}>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography>
+               <label className="label is-size-3 has-text-left pl-1">5. Examinations</label>
+               </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+            <div style={{ width: '100%' }}>
+            <Paper className={classes.paper} elevation={3}>
             <Examinations />
-          </Paper>
+            </Paper>
+            </div>
+            </AccordionDetails>
+          </Accordion>
 
-          <Paper className={classes.paper} elevation={3}>
+          
+          <Accordion defaultExpanded = "true" elevation = {5}  flexGrow={1}>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography>
+               <label className="label is-size-3 has-text-left pl-1">6. Use of Calculators in Examinations</label>
+               </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+            <div style={{ width: '100%' }}>
+            <Paper className={classes.paper} elevation={3}>
             <Calculator />
-          </Paper>
+            </Paper>
+            </div>
+            </AccordionDetails>
+          </Accordion>
 
-          <Paper className={classes.paper} elevation={3}>
+          <Accordion defaultExpanded = "true" elevation = {5}  flexGrow={1}>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography>
+               <label className="label is-size-3 has-text-left pl-1">7. Final Grade Determination</label>
+               </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+            <div style={{ width: '100%' }}>
+            <Paper className={classes.paper} elevation={3}>
             <Grade grade={grade} />
-          </Paper>
-
-          <Paper className={classes.paper} elevation={3}>
+            </Paper>
+            <br/>
+            <Paper className={classes.paper} elevation={3}>
             <Note note={note} />
           </Paper>
-
+          <br/>
           <Paper className={classes.paper} elevation={3}>
             <Letter letter={letter} />
           </Paper>
+            </div>
+            </AccordionDetails>
+          </Accordion>
 
-          <Paper className={classes.paper} elevation={3}>
+          <Accordion defaultExpanded = "true" elevation = {5}  flexGrow={1}>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography>
+               <label className="label is-size-3 has-text-left pl-1">8. Textbook</label>
+               </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+            <div style={{ width: '100%' }}>
+            <Paper className={classes.paper} elevation={3}>
             <Textbook />
           </Paper>
-
-          <Paper className={classes.paper} elevation={3}>
+            </div>
+            </AccordionDetails>
+          </Accordion>
+          
+          <Accordion defaultExpanded = "true" elevation = {5}  flexGrow={1}>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography>
+               <label className="label is-size-3 has-text-left pl-1">9. Course Policies</label>
+               </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+            <div style={{ width: '100%' }}>
+            <Paper className={classes.paper} elevation={3}>
             <Policies />
           </Paper>
+            </div>
+            </AccordionDetails>
+          </Accordion>
         </Container>
       );
       setTableSelection("");
@@ -241,14 +327,14 @@ const SearchCourse = () => {
         <EditIcon
           fontSize="large"
           onClick={() => {
-            console.log("edit");
+          
           }}
         />
 
         <DeleteForeverIcon
           fontSize="large"
           onClick={() => {
-            console.log("delete");
+           
           }}
         />
       </Grid>

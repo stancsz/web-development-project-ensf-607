@@ -25,7 +25,6 @@ export default function SearchExaminations(props) {
 
   return (
     <>
-     <label className="label is-size-3 has-text-left pl-1">5. Examinations</label>
      <p>The following examinations will be held in this course:</p>
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">

@@ -23,7 +23,6 @@ export default function SearchTimetable(props) {
 
   return (
     <>
-     <label className="label is-size-3 has-text-left pl-1">3. Timetable</label>
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>

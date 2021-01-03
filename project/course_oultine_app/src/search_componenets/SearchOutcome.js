@@ -23,7 +23,7 @@ export default function SearchOutcome(props) {
 
   return (
     <>
-     <label className="label is-size-3 has-text-left pl-1">2. Learning Outcome</label>
+     <p align = "center">At the end of this course, you will be able to:</p>
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>

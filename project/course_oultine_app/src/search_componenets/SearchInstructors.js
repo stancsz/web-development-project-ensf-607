@@ -23,7 +23,6 @@ export default function SearchInstructors(props) {
 
   return (
     <>
-     <label className="label is-size-3 has-text-left pl-1">4. Course Instructors</label>
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
