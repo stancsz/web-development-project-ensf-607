@@ -27,12 +27,16 @@ import Policies from "../search_componenets/SearchPolicies";
 import Container from "@material-ui/core/Container";
 import AppBar from "@material-ui/core/AppBar";
 
-
-import { DataGrid } from '@material-ui/data-grid';
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-import PageviewIcon from '@material-ui/icons/Pageview';
-import EditIcon from '@material-ui/icons/Edit';
-
+import { DataGrid } from "@material-ui/data-grid";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import PageviewIcon from "@material-ui/icons/Pageview";
+import EditIcon from "@material-ui/icons/Edit";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import Accordion from "@material-ui/core/Accordion";
+import AccordionSummary from "@material-ui/core/AccordionSummary";
+import AccordionDetails from "@material-ui/core/AccordionDetails";
+import Typography from "@material-ui/core/Typography";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -78,20 +82,29 @@ const SearchCourse = () => {
   const [displayIcons, setDisplayIcons] = useState();
   const [callHandleSelect, setCallHandleSelect] = useState();
 
-
   const columns = [
-    { field: 'id', headerName: 'Course ID', width: 400, align: 'center',  headerAlign: 'center'},
-    { field: 'datetime', headerName: 'Date Created', width: 400, align: 'center',  headerAlign: 'center'}
-  ]
+    {
+      field: "id",
+      headerName: "Course ID",
+      width: 400,
+      align: "center",
+      headerAlign: "center",
+    },
+    {
+      field: "datetime",
+      headerName: "Date Created",
+      width: 400,
+      align: "center",
+      headerAlign: "center",
+    },
+  ];
 
+  let rows = [];
 
-  let rows = []
-
-  for(let i = 0; i < Object.values(InfoData).length; i++) {
+  for (let i = 0; i < Object.values(InfoData).length; i++) {
     var rowval = Object.values(InfoData)[i];
-    rows.push({id: rowval["courseID"], datetime: rowval["DateCreated"]})
-}
-
+    rows.push({ id: rowval["courseID"], datetime: rowval["DateCreated"] });
+  }
 
   const handleSelect = () => {
     let tempInfo = InfoData[course];
@@ -110,137 +123,188 @@ const SearchCourse = () => {
     if (typeof info !== "undefined") {
       setFrame(
         <Container maxWidth="md">
-          <Paper className={classes.paper}>
-            <Info info={info} />
-          </Paper>
+          <Grid align="left">
+            <br />
+            <ArrowBackIcon
+              onClick={() => {
+                setCourse("View All");
+                setCallHandleSelect(true);
+              }}
+            />
+          </Grid>
+          <br />
 
-          <Paper className={classes.paper}>
-            <Outcome outcome={outcome} />
-          </Paper>
+          <Accordion defaultExpanded = "true" elevation = {5}>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography>
+               <label className="label is-size-3 has-text-left pl-1">1. Calendar Information</label>
+               </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Paper className={classes.paper} elevation={3}>
+              <Info info={info} />
+              </Paper>
+            </AccordionDetails>
+          </Accordion>
 
-          <Paper className={classes.paper}>
+          <Accordion defaultExpanded = "true" elevation = {5}  flexGrow={1}>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography>
+               <label className="label is-size-3 has-text-left pl-1">2. Learning Outcomes</label>
+               </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Paper className={classes.paper} elevation={3}>
+              <Outcome outcome={outcome} />
+              </Paper>
+            </AccordionDetails>
+          </Accordion>
+
+          <Paper className={classes.paper} elevation={3}>
             <Timetable />
           </Paper>
 
-          <Paper className={classes.paper}>
+          <Paper className={classes.paper} elevation={3}>
             <Instructors />
           </Paper>
 
-          <Paper className={classes.paper}>
+          <Paper className={classes.paper} elevation={3}>
             <Examinations />
           </Paper>
 
-          <Paper className={classes.paper}>
+          <Paper className={classes.paper} elevation={3}>
             <Calculator />
           </Paper>
 
-          <Paper className={classes.paper}>
+          <Paper className={classes.paper} elevation={3}>
             <Grade grade={grade} />
           </Paper>
 
-          <Paper className={classes.paper}>
+          <Paper className={classes.paper} elevation={3}>
             <Note note={note} />
           </Paper>
 
-          <Paper className={classes.paper}>
+          <Paper className={classes.paper} elevation={3}>
             <Letter letter={letter} />
           </Paper>
 
-          <Paper className={classes.paper}>
+          <Paper className={classes.paper} elevation={3}>
             <Textbook />
           </Paper>
 
-          <Paper className={classes.paper}>
+          <Paper className={classes.paper} elevation={3}>
             <Policies />
           </Paper>
         </Container>
       );
       setTableSelection("");
     } else {
-
       setFrame(
         <Container maxWidth="md">
-            <br/>
-            <br/>
+          <br />
+          <br />
           <Paper className={classes.paper} elevation={3}>
-              <label className="label is-size-3 has-text-Center">
-                Current Course Outlines
-              </label>
-              {displayIcons}
-            <div style={{height: 400}}>
-            <DataGrid rows={rows} columns={columns} pageSize={10} align="center" 
-              onSelectionChange = {(e) => {
-               setTableSelection("continue")
-               setTableSelection(e.rowIds[0]);
-               setTableSelection("next");
-              }}
-            />
+            <label className="label is-size-3 has-text-Center">
+              Current Course Outlines
+            </label>
+            {displayIcons}
+            <div style={{ height: 400 }}>
+              <DataGrid
+                rows={rows}
+                columns={columns}
+                pageSize={10}
+                align="center"
+                onSelectionChange={(e) => {
+                  setTableSelection(e.rowIds[0]);
+                  setTableSelection("continue");
+                }}
+              />
             </div>
-            
           </Paper>
         </Container>
       );
-
     }
   };
-
 
   const revealIcons = () => {
     setDisplayIcons(
       <Grid align="right">
-        <PageviewIcon fontSize = "large"
-        onClick={() => {
-          setCourse(tableSelection);
-          setCallHandleSelect(true);
-        }}/> 
-        
-        <EditIcon fontSize = "large"
-        onClick={() => {console.log("edit");}}/> 
+        <PageviewIcon
+          fontSize="large"
+          onClick={() => {
+            setCourse(tableSelection);
+            setCallHandleSelect(true);
+            setSearchInput("");
+          }}
+        />
 
-        <DeleteForeverIcon fontSize = "large"
-        onClick={() => {console.log("delete");}}/> 
-      </Grid> 
-      )
-  }
+        <EditIcon
+          fontSize="large"
+          onClick={() => {
+            console.log("edit");
+          }}
+        />
+
+        <DeleteForeverIcon
+          fontSize="large"
+          onClick={() => {
+            console.log("delete");
+          }}
+        />
+      </Grid>
+    );
+  };
 
   const displaySearchResults = () => {
+    let filteredRows = [];
 
-    let filteredRows = []
-
-    for(let i = 0; i < Object.values(InfoData).length; i++) {
+    for (let i = 0; i < Object.values(InfoData).length; i++) {
       var rowval = Object.values(InfoData)[i];
-      if(rowval["courseID"].toLowerCase().includes(searchInput.toLocaleLowerCase())){
-        filteredRows.push({id: rowval["courseID"], datetime: rowval["DateCreated"]});
+      if (
+        rowval["courseID"]
+          .toLowerCase()
+          .includes(searchInput.toLocaleLowerCase())
+      ) {
+        filteredRows.push({
+          id: rowval["courseID"],
+          datetime: rowval["DateCreated"],
+        });
       }
     }
-    
-
     setFrame(
-    <Container maxWidth="md">
-            <br/>
-            <br/>
-          <Paper className={classes.paper} elevation={3}>
-              <label className="label is-size-3 has-text-Center">
-                Search Results:
-              </label>
-              {displayIcons}
-            <div style={{height: 400}}>
-            <DataGrid rows={filteredRows} columns={columns} pageSize={5} align="center" 
-              onSelectionChange = {(e) => {
-               setTableSelection("continue")
-               setTableSelection(e.rowIds[0]);
-               setTableSelection("next");
+      <Container maxWidth="md">
+        <br />
+        <br />
+        <Paper className={classes.paper} elevation={3}>
+          <Grid align="left">
+            <ArrowBackIcon
+              onClick={() => {
+                setSearchInput("");
               }}
             />
-            </div>
-          </Paper>
-        </Container>
+          </Grid>
+          <label className="label is-size-3 has-text-Center">
+            Search Results:
+          </label>
+          {displayIcons}
+          <div style={{ height: 400 }}>
+            <DataGrid
+              rows={filteredRows}
+              columns={columns}
+              pageSize={5}
+              align="center"
+              onSelectionChange={(e) => {
+                setTableSelection(e.rowIds[0]);
+                setTableSelection("continue");
+              }}
+            />
+          </div>
+        </Paper>
+      </Container>
     );
-  }
-
+  };
 
   useEffect(() => {
-
     if (searchInput !== "") {
       displaySearchResults();
       setTableSelection("");
@@ -249,23 +313,20 @@ const SearchCourse = () => {
       handleUpdate();
     }
 
-    (tableSelection === "") ? setDisplayIcons()  
-    : revealIcons(); 
+    tableSelection === "" ? setDisplayIcons() : revealIcons();
 
-    if(callHandleSelect === true){
+    if (callHandleSelect === true) {
       handleSelect();
       setCallHandleSelect(false);
     }
-
   }, [info, searchInput, tableSelection, callHandleSelect]);
-
 
   return (
     <>
       <AppBar position="sticky" color="default">
         <Container maxWidth="md">
           <Grid container spacing={2}>
-          <Grid item xs>
+            <Grid item xs>
               <div className="pt-2">
                 <TextField
                   fullWidth
@@ -278,8 +339,7 @@ const SearchCourse = () => {
               </div>
             </Grid>
 
-
-            <Grid item xs ={false}>
+            <Grid item xs={false}>
               <Paper className={classes.paper}>
                 <Button
                   variant="outlined"
@@ -307,14 +367,13 @@ const SearchCourse = () => {
                   {courseList.map((i) => (
                     <MenuItem value={i}>{i}</MenuItem>
                   ))}
-                  <MenuItem value = "View All">View All</MenuItem>
+                  <MenuItem value="View All">View All</MenuItem>
                 </Select>
               </FormControl>
               <InputLabel id="demo-simple-select-label">
                 Select Course
               </InputLabel>
             </Grid>
-
           </Grid>
         </Container>
       </AppBar>

@@ -8,18 +8,12 @@ function SearchInfo(props) {
   return (
     <div className="FunInfo">
 
-    <br/>
       
 
     <div className="field">
-
-        <br/>
-        
-        <label className="label is-size-3 has-text-left pl-1">1. Calendar Information</label>
         <div className="column is-one-quarter has-text-left pl-4 pt-4">Course Number:</div>
         <div className="control">
             <h3 className="input is-size-4 has-text-left pl-1 mb-0 pb-0" 
-            
             placeholder = "Enter Course Number. Example: ENSF 409">{props.info.courseID.split("-").slice(0,2).join(" ")}</h3>
         </div>
         <div className="column is-one-quarter has-text-left pl-4 pt-4">Course Name:</div>
@@ -31,7 +25,7 @@ function SearchInfo(props) {
     
         <div className = "control">
         <div className="column is-one-quarter has-text-left pl-4 pt-4">Course Info:</div>
-            <textarea className="textarea is-info"  rows="4" value={props.info.courseInfo}>
+            <textarea className="textarea is-info" rows="4" value={props.info.courseInfo}>
             </textarea>
         </div>
 
