@@ -8,6 +8,7 @@ from django.db import models
 # model for au_weight table
 class AuWeight(models.Model):
   CourseID = models.TextField(
+    primary_key=True,
     max_length=100,
     null=False,
     blank=False
@@ -18,7 +19,7 @@ class AuWeight(models.Model):
     null=False,
     blank=False
   )
-  AU = models.models.IntegerField(
+  AU = models.IntegerField(
     null=False,
     blank=False
   )
@@ -29,6 +30,7 @@ class AuWeight(models.Model):
 # model for content_category table
 class ContentCategory(models.Model):
   CourseID = models.TextField(
+    primary_key=True,
     max_length=100,
     null=False,
     blank=False
@@ -52,6 +54,7 @@ class ContentCategory(models.Model):
 # model for coordinator table
 class Coordinator(models.Model):
   CourseID = models.TextField(
+    primary_key=True,
     max_length=100,
     null=False,
     blank=False
@@ -93,6 +96,7 @@ class Coordinator(models.Model):
 # model for course table
 class Course(models.Model):
   CourseID = models.TextField(
+    primary_key=True,
     max_length=100,
     null=False,
     blank=False
@@ -132,6 +136,7 @@ class Course(models.Model):
 # model for grade determination table
 class GradeDetermination(models.Model):
   CourseID = models.TextField(
+    primary_key=True,
     max_length=100,
     null=False,
     blank=False
@@ -159,6 +164,7 @@ class GradeDetermination(models.Model):
 # model for grade distribution table
 class GradeDistribution(models.Model):
   CourseID = models.TextField(
+    primary_key=True,
     max_length=100,
     null=False,
     blank=False
@@ -186,6 +192,7 @@ class GradeDistribution(models.Model):
 # model for info table
 class Info(models.Model):
   CourseID = models.TextField(
+    primary_key=True,
     max_length=100,
     null=False,
     blank=False
@@ -221,6 +228,7 @@ class Info(models.Model):
 # model for lab table
 class Lab(models.Model):
   CourseID = models.TextField(
+    primary_key=True,
     max_length=100,
     null=False,
     blank=False
@@ -291,6 +299,7 @@ class Lab(models.Model):
 # model for lecture table
 class Lecture(models.Model):
   CourseID = models.TextField(
+    primary_key=True,
     max_length=100,
     null=False,
     blank=False
@@ -338,6 +347,7 @@ class Lecture(models.Model):
 # model for outcome table
 class Outcome(models.Model):
   CourseID = models.TextField(
+    primary_key=True,
     max_length=100,
     null=False,
     blank=False
@@ -372,6 +382,7 @@ class Outcome(models.Model):
 # model for section table
 class Section(models.Model):
   CourseID = models.TextField(
+    primary_key=True,
     max_length=100,
     null=False,
     blank=False
@@ -399,6 +410,7 @@ class Section(models.Model):
 # model for textbook table
 class Textbook(models.Model):
   CourseID = models.TextField(
+    primary_key=True,
     max_length=100,
     null=False,
     blank=False
@@ -431,10 +443,10 @@ class Textbook(models.Model):
   class Meta:
     db_table = 'TEXTBOOK'
 
-
 # model for timetable table
 class Timetable(models.Model):
   CourseID = models.TextField(
+    primary_key=True,
     max_length=100,
     null=False,
     blank=False
@@ -467,10 +479,10 @@ class Timetable(models.Model):
   class Meta:
     db_table = 'TIMETABLE'
 
-
 # model for tutorial table
 class Tutorial(models.Model):
   CourseID = models.TextField(
+    primary_key=True,
     max_length=100,
     null=False,
     blank=False
