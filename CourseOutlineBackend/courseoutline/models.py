@@ -335,3 +335,183 @@ class Lecture(models.Model):
   class Meta:
     db_table = 'LECTURE'
 
+# model for outcome table
+class Outcome(models.Model):
+  CourseID = models.TextField(
+    max_length=100,
+    null=False,
+    blank=False
+  )
+
+  OutcomeNum = models.IntegerField(
+    null=False,
+    blank=False
+  )
+
+  Description = models.TextField(
+    max_length=500,
+    null=False,
+    blank=False
+  )
+
+  GraduateAttribute = models.TextField(
+    max_length=500,
+    null=False,
+    blank=False
+  )
+
+  InstructionLvl = models.TextField(
+    max_length=100,
+    null=False,
+    blank=False
+  )
+
+  class Meta:
+    db_table = 'OUTCOME'
+
+# model for section table
+class Section(models.Model):
+  CourseID = models.TextField(
+    max_length=100,
+    null=False,
+    blank=False
+  )
+
+  SectionNumber = models.TextField(
+    max_length=100,
+    null=False,
+    blank=False
+  )
+
+  Students = models.IntegerField(
+    null=False,
+    blank=False
+  )
+
+  Hours = models.IntegerField(
+    null=False,
+    blank=False
+  )
+
+  class Meta:
+    db_table = 'SECTION'
+
+# model for textbook table
+class Textbook(models.Model):
+  CourseID = models.TextField(
+    max_length=100,
+    null=False,
+    blank=False
+  )
+
+  TITLE = models.TextField(
+    max_length=200,
+    null=False,
+    blank=False
+  )
+
+  Publisher = models.TextField(
+    max_length=200,
+    null=False,
+    blank=False
+  )
+
+  Author = models.TextField(
+    max_length=200,
+    null=False,
+    blank=False
+  )
+
+  Edition = models.TextField(
+    max_length=200,
+    null=False,
+    blank=False
+  )
+
+  class Meta:
+    db_table = 'TEXTBOOK'
+
+
+# model for timetable table
+class Timetable(models.Model):
+  CourseID = models.TextField(
+    max_length=100,
+    null=False,
+    blank=False
+  )
+
+  SectionNum = models.TextField(
+    max_length=100,
+    null=False,
+    blank=False
+  )
+
+  Days = models.TextField(
+    max_length=100,
+    null=False,
+    blank=False
+  )
+
+  Time = models.TextField(
+    max_length=100,
+    null=False,
+    blank=False
+  )
+
+  Location = models.TextField(
+    max_length=100,
+    null=False,
+    blank=False
+  )
+
+  class Meta:
+    db_table = 'TIMETABLE'
+
+
+# model for tutorial table
+class Tutorial(models.Model):
+  CourseID = models.TextField(
+    max_length=100,
+    null=False,
+    blank=False
+  )
+
+  TutorialNum = models.TextField(
+    max_length=100,
+    null=False,
+    blank=False
+  )
+
+  FName = models.TextField(
+    max_length=100,
+    null=False,
+    blank=False
+  )
+
+  LName = models.TextField(
+    max_length=100,
+    null=False,
+    blank=False
+  )
+
+  Phone = models.TextField(
+    max_length=100,
+    null=False,
+    blank=False
+  )
+
+  Office = models.TextField(
+    max_length=100,
+    null=False,
+    blank=False
+  )
+
+  Email = models.TextField(
+    max_length=100,
+    null=False,
+    blank=False
+  )
+
+  class Meta:
+    db_table = 'TUTORIAL'
+
