@@ -5,10 +5,34 @@ from django.db import models
 
 # Create your models here.
 
+# model for au_weight table
+class AuWeight(models.Model):
+  CourseID = models.TextField(
+    max_length=100,
+    null=False,
+    blank=False
+  )
+
+  Category = models.TextField(
+    max_length=100,
+    null=False,
+    blank=False
+  )
+  AU = models.models.IntegerField(
+    null=False,
+    blank=False
+  )
+
+  class Meta:
+    db_table = 'AU_WEIGHT'
+
+
 # model for course table
 class Course(models.Model):
-  CourseID = models.AutoField(
-    primary_key=True
+  CourseID = models.TextField(
+    max_length=100,
+    null=False,
+    blank=False
   )
 
   CourseHours = models.TextField(
@@ -33,13 +57,6 @@ class Course(models.Model):
     blank=False
   )
 
-  # Alternative mode for updating timestamp logics
-  # DateCreated = models.DateTimeField(
-  #   auto_now=True,
-  #   null=False,
-  #   blank=False
-  # )
-
   DateCreated = models.DateTimeField(
     auto_now_add=True,
     null=False,
@@ -48,5 +65,3 @@ class Course(models.Model):
 
   class Meta:
     db_table = 'COURSE'
-
-
