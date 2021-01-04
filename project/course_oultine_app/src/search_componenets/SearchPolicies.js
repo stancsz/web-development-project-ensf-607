@@ -1,13 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import TextField from '@material-ui/core/TextField';
+import Typography from "@material-ui/core/Typography";
 
 
 const useStyles = makeStyles({
@@ -25,8 +18,12 @@ export default function SearchPolicies() {
 
   return (
     <>
-     <label className="label is-size-3 has-text-left pl-1">9. Course Policies</label>
-     <u>Advising Syllabus:</u>
+
+    <Typography variant="h7">
+        <div dangerouslySetInnerHTML={ { __html: "" } }></div>    
+    </Typography>
+
+     '<u>Advising Syllabus:</u>
      <p align = "left">
      All Schulich School of Engineering students and instructors have a responsibility to familiarize themselves with the 
      policies described in the Schulich School of Engineering Advising Syllabus available at:
@@ -70,7 +67,7 @@ export default function SearchPolicies() {
     <a href = "https://www.ucalgary.ca/wellnesscentre/services/mental-health-services"> https://www.ucalgary.ca/wellnesscentre/services/mental-health-services</a>) 
     and the Campus Mental Health Strategy website 
      (<a href = "http://www.ucalgary.ca/mentalhealth/">http://www.ucalgary.ca/mentalhealth/</a>).
-     </p>
+     </p>'
 
 
 

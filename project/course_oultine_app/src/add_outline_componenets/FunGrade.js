@@ -20,7 +20,6 @@ const FunGrade=()=> {
     return (
         <div className="FunGrade">
             {/*<h1> This is the Grade Section</h1>*/}
-            <label className="label is-size-3 has-text-left pl-1">7. Final Grade Determination</label>
             <p align="left">The final grade in this course will be based on the following components:</p>
             <div align="center"><FinalGradeTable/></div>
             <div class="content" align="center">

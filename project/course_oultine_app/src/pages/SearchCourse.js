@@ -27,14 +27,20 @@ import Policies from "../search_componenets/SearchPolicies";
 import Container from "@material-ui/core/Container";
 import AppBar from "@material-ui/core/AppBar";
 
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import VisibilityIcon from '@material-ui/icons/Visibility';
-import { DataGrid } from '@material-ui/data-grid';
+import { DataGrid } from "@material-ui/data-grid";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import PageviewIcon from "@material-ui/icons/Pageview";
+import EditIcon from "@material-ui/icons/Edit";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import Accordion from "@material-ui/core/Accordion";
+import AccordionSummary from "@material-ui/core/AccordionSummary";
+import AccordionDetails from "@material-ui/core/AccordionDetails";
+import Typography from "@material-ui/core/Typography";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
+import { Link } from "react-router-dom";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -53,7 +59,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
+
+
 const SearchCourse = () => {
+
   const courseList = Object.keys(InfoData);
   const classes = useStyles();
 
@@ -76,20 +86,33 @@ const SearchCourse = () => {
 
   const [frame, setFrame] = useState();
   const [searchInput, setSearchInput] = useState("");
-  const keys=Object.keys(InfoData)
-
+  const [tableSelection, setTableSelection] = useState("");
+  const [displayIcons, setDisplayIcons] = useState();
+  const [callHandleSelect, setCallHandleSelect] = useState();
 
   const columns = [
-    { field: 'id', headerName: 'Course Number', width: "50%"},
-    { field: 'courseName', headerName: 'Course Name', width: "100%"}
-  ]
+    {
+      field: "id",
+      headerName: "Course ID",
+      width: 400,
+      align: "center",
+      headerAlign: "center",
+    },
+    {
+      field: "datetime",
+      headerName: "Date Created",
+      width: 400,
+      align: "center",
+      headerAlign: "center",
+    },
+  ];
 
-  const rows = [
-    { id: "ENSF 409",  courseName : "Principles of Software Development"},
-    { id: "ENSF 607",  courseName : "Principles of Software Development"},
-    { id: "ENSF 619",  courseName : "Principles of Software Development"}
-  ]
+  let rows = [];
 
+  for (let i = 0; i < Object.values(InfoData).length; i++) {
+    var rowval = Object.values(InfoData)[i];
+    rows.push({ id: rowval["courseID"], datetime: rowval["DateCreated"] });
+  }
 
   const handleSelect = () => {
     let tempInfo = InfoData[course];
@@ -108,151 +131,305 @@ const SearchCourse = () => {
     if (typeof info !== "undefined") {
       setFrame(
         <Container maxWidth="md">
-          <Paper className={classes.paper}>
-            <Info info={info} />
-          </Paper>
+          <Grid align="left">
+            <br />
+            <ArrowBackIcon
+              onClick={() => {
+                setCourse("View All");
+                setCallHandleSelect(true);
+              }}
+            />
+          </Grid>
+          <br />
 
-          <Paper className={classes.paper}>
-            <Outcome outcome={outcome} />
-          </Paper>
+          <Accordion defaultExpanded = {true} elevation = {5}>
+            <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
+              <Typography>
+               <label className="label is-size-3 has-text-left">1. Calendar Information</label>
+               </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+            <div style={{ width: '100%' }}>
+              <Paper className={classes.paper} elevation={3}>
+              <Info info={info} />
+              </Paper>
+            </div>
+            </AccordionDetails>
+          </Accordion>
 
-          <Paper className={classes.paper}>
+          <Accordion defaultExpanded = {true} elevation = {5} >
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography>
+               <label className="label is-size-3 has-text-left">2. Learning Outcomes</label>
+               </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+            <div style={{ width: '100%' }}>
+              <Paper className={classes.paper} elevation={3}>
+              <Outcome outcome={outcome} />
+              </Paper>
+            </div>
+            </AccordionDetails>
+          </Accordion>
+
+          <Accordion defaultExpanded = {true} elevation = {5} >
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography>
+               <label className="label is-size-3 has-text-left">3. Timetable</label>
+               </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+            <div style={{ width: '100%' }}>
+            <Paper className={classes.paper} elevation={3}>
             <Timetable />
-          </Paper>
+            </Paper>
+            </div>
+            </AccordionDetails>
+          </Accordion>
 
-          <Paper className={classes.paper}>
+
+          <Accordion defaultExpanded = {true} elevation = {5} >
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography>
+               <label className="label is-size-3 has-text-left">4. Course Instructors</label>
+               </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+            <div style={{ width: '100%' }}>
+            <Paper className={classes.paper} elevation={3}>
             <Instructors />
-          </Paper>
+            </Paper>
+            </div>
+            </AccordionDetails>
+          </Accordion>
 
-          <Paper className={classes.paper}>
+          
+          <Accordion defaultExpanded = {true} elevation = {5} >
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography>
+               <label className="label is-size-3 has-text-left">5. Examinations</label>
+               </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+            <div style={{ width: '100%' }}>
+            <Paper className={classes.paper} elevation={3}>
             <Examinations />
-          </Paper>
+            </Paper>
+            </div>
+            </AccordionDetails>
+          </Accordion>
 
-          <Paper className={classes.paper}>
+          
+          <Accordion defaultExpanded = {true} elevation = {5} >
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography>
+               <label className="label is-size-3 has-text-left">6. Use of Calculators in Examinations</label>
+               </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+            <div style={{ width: '100%' }}>
+            <Paper className={classes.paper} elevation={3}>
             <Calculator />
-          </Paper>
+            </Paper>
+            </div>
+            </AccordionDetails>
+          </Accordion>
 
-          <Paper className={classes.paper}>
+          <Accordion defaultExpanded = {true} elevation = {5} >
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography>
+               <label className="label is-size-3 has-text-left">7. Final Grade Determination</label>
+               </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+            <div style={{ width: '100%' }}>
+            <Paper className={classes.paper} elevation={3}>
             <Grade grade={grade} />
-          </Paper>
-
-          <Paper className={classes.paper}>
+            </Paper>
+            <br/>
+            <Paper className={classes.paper} elevation={3}>
             <Note note={note} />
           </Paper>
-
-          <Paper className={classes.paper}>
+          <br/>
+          <Paper className={classes.paper} elevation={3}>
             <Letter letter={letter} />
           </Paper>
+            </div>
+            </AccordionDetails>
+          </Accordion>
 
-          <Paper className={classes.paper}>
+          <Accordion defaultExpanded = {true} elevation = {5}>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography>
+               <label className="label is-size-3 has-text-left">8. Textbook</label>
+               </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+            <div style={{ width: '100%' }}>
+            <Paper className={classes.paper} elevation={3}>
             <Textbook />
           </Paper>
-
-          <Paper className={classes.paper}>
+            </div>
+            </AccordionDetails>
+          </Accordion>
+          
+          <Accordion defaultExpanded = {true} elevation = {5} >
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography>
+               <label className="label is-size-3 has-text-left">9. Course Policies</label>
+               </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+            <div style={{ width: '100%' }}>
+            <Paper className={classes.paper} elevation={3}>
             <Policies />
           </Paper>
+            </div>
+            </AccordionDetails>
+          </Accordion>
         </Container>
       );
+      setTableSelection("");
     } else {
-
       setFrame(
         <Container maxWidth="md">
-            <br/>
-          <Paper className={classes.paper}>
-            <TableContainer component={Paper}>
-              <label className="label is-size-3 has-text-Center">
-                Current Course Outlines
-              </label>
-              <Table className={classes.table} aria-label="simple table">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Course Number</TableCell>
-                    <TableCell>Actions</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                {keys.map((key) => (
-                <TableRow key={key}>
-                <TableCell component="th" scope="row">
-                 {key}
-                </TableCell> 
-               
-            </TableRow>
-          ))}
-            
-
-                </TableBody>
-              </Table>
-            </TableContainer>
-
-            <div style={{ height: 400, width: '100%'}}>
-            <DataGrid rows={rows} columns={columns} id = "courseNum" pageSize={5} justify = 'center' />
+          <br />
+          <br />
+          <Paper className={classes.paper} elevation={5}>
+            <label className="label is-size-3 has-text-Center">
+              Current Course Outlines
+            </label>
+            {displayIcons}
+            <div style={{ height: 400 }}>
+              <DataGrid
+                rows={rows}
+                columns={columns}
+                pageSize={10}
+                align="center"
+                onSelectionChange={(e) => {
+                  setTableSelection(e.rowIds[0]);
+                  setTableSelection("continue");
+                }}
+              />
             </div>
-            
           </Paper>
+
+            <div align="center">
+              <br/>
+          <Fab color="primary" size="medium" component={Link}to="/AddCourse">
+        <AddIcon />
+      </Fab>
+      </div>
+
         </Container>
       );
-
     }
   };
 
-  useEffect(() => {
-   
-    handleSelect();
+  const revealIcons = () => {
+    setDisplayIcons(
+      <Grid align="right">
+        <PageviewIcon
+          fontSize="large"
+          onClick={() => {
+            setCourse(tableSelection);
+            setCallHandleSelect(true);
+            setSearchInput("");
+          }}
+        />
 
+        <EditIcon
+          fontSize="large"
+          onClick={() => {
+          
+          }}
+        />
+
+        <DeleteForeverIcon
+          fontSize="large"
+          onClick={() => {
+           
+          }}
+        />
+      </Grid>
+    );
+  };
+
+  const displaySearchResults = () => {
+    let filteredRows = [];
+
+    for (let i = 0; i < Object.values(InfoData).length; i++) {
+      var rowval = Object.values(InfoData)[i];
+      if (
+        rowval["courseID"]
+          .toLowerCase()
+          .includes(searchInput.toLocaleLowerCase())
+      ) {
+        filteredRows.push({
+          id: rowval["courseID"],
+          datetime: rowval["DateCreated"],
+        });
+      }
+    }
+    setFrame(
+      <Container maxWidth="md">
+        <br />
+        <br />
+        <Paper className={classes.paper} elevation={5}>
+          <Grid align="left">
+            <ArrowBackIcon
+              onClick={() => {
+                setSearchInput("");
+              }}
+            />
+          </Grid>
+          <label className="label is-size-3 has-text-Center">
+            Search Results:
+          </label>
+          {displayIcons}
+          <div style={{ height: 400 }}>
+            <DataGrid
+              rows={filteredRows}
+              columns={columns}
+              pageSize={5}
+              align="center"
+              onSelectionChange={(e) => {
+                setTableSelection(e.rowIds[0]);
+                setTableSelection("continue");
+              }}
+            />
+          </div>
+        </Paper>
+      </Container>
+    );
+  };
+
+  useEffect(() => {
     if (searchInput !== "") {
-      setFrame("Search Results");
+      displaySearchResults();
+      setTableSelection("");
     } else if (searchInput === "") {
+      setTableSelection("");
       handleUpdate();
     }
-  }, [course, searchInput]);
 
+    tableSelection === "" ? setDisplayIcons() : revealIcons();
+
+    if (callHandleSelect === true) {
+      handleSelect();
+      setCallHandleSelect(false);
+    }
+  }, [info, searchInput, tableSelection, callHandleSelect]);
 
   return (
     <>
       <AppBar position="sticky" color="default">
         <Container maxWidth="md">
           <Grid container spacing={2}>
-            <Grid item xs={2}>
-              <FormControl className={classes.formControl}>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={course}
-                  onChange={(e) => {
-                    //console.log(e.target)
-                    handleChange(e);
-                  }}
-                >
-                  {courseList.map((i) => (
-                    <MenuItem value={i}>{i}</MenuItem>
-                  ))}
-                  <MenuItem value = "View All">View All</MenuItem>
-                </Select>
-              </FormControl>
-              <InputLabel id="demo-simple-select-label">
-                Select Course
-              </InputLabel>
-            </Grid>
-
-            <Grid item xs>
-              <Paper className={classes.paper}>
-                <Button
-                  variant="outlined"
-                  color="secondary"
-                  fullWidth={true}
-                  onClick={() => {
-                    handleUpdate();
-                  }}
-                >
-                  Select
-                </Button>
-              </Paper>
-            </Grid>
-
             <Grid item xs>
               <div className="pt-2">
                 <TextField
+                  fullWidth
                   id="outlined-basic"
                   label="Search Courses"
                   variant="filled"
@@ -262,25 +439,47 @@ const SearchCourse = () => {
               </div>
             </Grid>
 
-            <Grid item xs>
+            <Grid item xs={false}>
               <Paper className={classes.paper}>
                 <Button
                   variant="outlined"
                   color="secondary"
                   fullWidth={true}
                   onClick={() => {
-                    handleUpdate();
+                    handleSelect();
                   }}
                 >
-                  Save and Delete
+                  Select
                 </Button>
               </Paper>
+            </Grid>
+
+            <Grid item xs={false}>
+              <FormControl className={classes.formControl}>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={course}
+                  onChange={(e) => {
+                    handleChange(e);
+                  }}
+                >
+                  {courseList.map((i) => (
+                    <MenuItem key={i} value={i}>{i}</MenuItem>
+                  ))}
+                  <MenuItem value="View All">View All</MenuItem>
+                </Select>
+              </FormControl>
+              <InputLabel id="demo-simple-select-label">
+                Select Course
+              </InputLabel>
             </Grid>
           </Grid>
         </Container>
       </AppBar>
 
       {frame}
+
     </>
   );
 };

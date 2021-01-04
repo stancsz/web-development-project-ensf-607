@@ -25,7 +25,6 @@ export default function SearchTextbook(props) {
 
   return (
     <>
-     <label className="label is-size-3 has-text-left pl-1">8. Textbook</label>
      <p>The following textbook(s) is required for this course:</p>
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">

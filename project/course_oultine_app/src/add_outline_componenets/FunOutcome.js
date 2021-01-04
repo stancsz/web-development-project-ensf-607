@@ -94,8 +94,6 @@ export default function BasicTable() {
 
   return (
     <>
-      <br />
-      <label className="label is-size-3 has-text-left pl-1">2. Learning Outcomes</label>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <colgroup>
