@@ -29,7 +29,6 @@ function SearchInfo(props) {
         <div align="left">
         <Typography variant="h6">
         <div dangerouslySetInnerHTML={ { __html: props.info.courseInfo } }></div>
-         
         </Typography>
         </div>
 

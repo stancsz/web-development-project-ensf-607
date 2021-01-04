@@ -23,6 +23,8 @@ export default function SearchInstructors(props) {
 
   return (
     <>
+    <div align = "left"><u>Course Instructor</u></div>
+    <br/>
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
@@ -33,14 +35,50 @@ export default function SearchInstructors(props) {
             <TableCell align="right">Phone</TableCell>
             <TableCell align="right">Office</TableCell>
             <TableCell align="right">Email</TableCell>
-
           </TableRow>
         </TableHead>
-        <TableBody>
-          
-     
-        
-          
+        <TableBody>        
+        </TableBody>
+      </Table>
+    </TableContainer>
+
+    <br/>
+    <div align = "left"><u>Course Coordinator</u></div>
+    <br/>
+    <TableContainer component={Paper}>
+      <Table className={classes.table} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell>Section</TableCell>
+            <TableCell align="right">First Name</TableCell>
+            <TableCell align="right">Family Name</TableCell>
+            <TableCell align="right">Phone</TableCell>
+            <TableCell align="right">Office</TableCell>
+            <TableCell align="right">Email</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>        
+        </TableBody>
+      </Table>
+    </TableContainer>
+
+
+    <br/>
+    <div align = "left"><u>Teaching Assistants</u></div>
+    <br/>
+    <TableContainer component={Paper}>
+      <Table className={classes.table} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell>Section</TableCell>
+            <TableCell align="right">First Name</TableCell>
+            <TableCell align="right">Family Name</TableCell>
+            <TableCell align="right">Phone</TableCell>
+            <TableCell align="right">Office</TableCell>
+            <TableCell align="right">Email</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>        
         </TableBody>
       </Table>
     </TableContainer>

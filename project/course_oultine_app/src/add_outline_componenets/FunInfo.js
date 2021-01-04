@@ -1,4 +1,4 @@
-import "bulma/css/bulma.css";
+import TextField from '@material-ui/core/TextField';
 
 import { useState } from 'react';
 
@@ -7,13 +7,13 @@ function FunInfo() {
 
     const [courseNumberInput, setCourseNumberInput] = useState();
     const [courseNameInput, setCourseNameInput] = useState();
+    const [courseInfo, setCourseInfo] = useState();
+    const [courseHours, setCourseHours] = useState();
+    const [academicCredit, setAcademicCredit] = useState();
+    const [calendarReference, setCalendarReference] = useState();
 
 
-    var courseInfoPlaceholderText = "Enter Course Information Here. Example: A survey of software design"
-    + " and development topics for Engineering students. Topics include: key features of an object-oriented"
-    + " programming language, especially inheritance and polymorphism; elements of object-oriented design;"
-    + " programming and application of common data structures; strategies and tools for testing and debugging.";
-
+    var courseInfoPlaceholderText = "Enter Course Information. Example: A study of problems of particular interest to students specializing in Software Engineering."
   
 
   return (
@@ -22,51 +22,63 @@ function FunInfo() {
  
     <div className="field">
 
-        <div className="control">
-            <input className="input is-size-4 has-text-left pl-1 mb-0 pb-0" 
-            value={courseNumberInput} onInput={e => setCourseNumberInput(e.target.value)} 
-            placeholder = "Enter Course Number. Example: ENSF 409"/>
-        </div>
+        <TextField fullWidth placeholder = "Enter Course Number. Example: ENSF 409" 
+        value={courseNumberInput} onInput={e => setCourseNumberInput(e.target.value)} 
+        inputProps={{style: {fontSize: 20}}} 
+        InputLabelProps={{style: {fontSize: 20}}} >
+        </TextField>
+
+        <br/>
+        <br/>
+
+        <TextField fullWidth placeholder = "Enter Course Name. Example: Principles of Software Development" 
+        value={courseNameInput} onInput={e => setCourseNameInput(e.target.value)} 
+        inputProps={{style: {fontSize: 20}}} 
+        InputLabelProps={{style: {fontSize: 20}}} >
+        </TextField>
+
+        <br/>
+        <br/>
+
+        <TextField multiline fullWidth placeholder = {courseInfoPlaceholderText}
+        value={courseInfo} onInput={e => setCourseInfo(e.target.value)} 
+        inputProps={{style: {fontSize: 20}}} 
+        InputLabelProps={{style: {fontSize: 20}}} >
+        </TextField>
       
-        <div className="control">
-          <input className="input is-size-4 has-text-left pl-2 mt-0 pt-0" 
-          value={courseNameInput} onInput={e => setCourseNameInput(e.target.value)} 
-          placeholder = "Enter Course Name. Example: Principles of Software Development"></input>
-        </div>
-    
-        <div className = "control">
-            <textarea className="textarea is-info" placeholder = {courseInfoPlaceholderText} rows="4">
-            </textarea>
-        </div>
+        <br/>
+        <br/>
+      
+
 
         <div className="columns">
         <div className="column is-one-quarter has-text-left pl-4 pt-4">Course Hours:</div>
         <div className="column has-text-left">
-            <div className="control">
-                <input className="input" type="text" placeholder="Example: 3 units; H (3-2)"/>
-            </div>
+            <TextField fullWidth placeholder = "Example: 3 units; H (3-2)"
+            value={courseHours} onInput={e => setCourseHours(e.target.value)} 
+             >
+            </TextField>
         </div>
         </div>
         
+
+
         <div className="columns">
         <div className="column is-one-quarter has-text-left pl-4 pt-4">Academic Credit:</div>
         <div className="column has-text-left">
-            <div className="control">
-                <input className="input" type="text" placeholder="Example: 3"/>
-            </div>
+
+            <TextField fullWidth placeholder = "Example: 3"
+            value={academicCredit} onInput={e => setAcademicCredit(e.target.value)}>
+            </TextField>
         </div>
         </div>
 
         <div className="columns">
         <div className="column is-one-quarter has-text-left pl-4 pt-4">Calendar Reference:</div>
         <div className="column has-text-left">
-        
-            <div className="control">
-                <input className="input" type="text" 
-                placeholder="Example: http://www.ucalgary.ca/pubs/calendar/current/software-engineering-for-engineers.html#38252"/>
-            </div>
-
-
+            <TextField fullWidth placeholder = "Example: http://www.ucalgary.ca/pubs/calendar/current/software-engineering-for-engineers.html#38252"
+            value={calendarReference} onInput={e => setCalendarReference(e.target.value)}>
+            </TextField>
         </div>
         </div>
 

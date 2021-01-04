@@ -23,7 +23,8 @@ export default function SearchOutcome(props) {
 
   return (
     <>
-     <p align = "center">At the end of this course, you will be able to:</p>
+    <p align = "center">At the end of this course, you will be able to:</p>
+    <br/>
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>

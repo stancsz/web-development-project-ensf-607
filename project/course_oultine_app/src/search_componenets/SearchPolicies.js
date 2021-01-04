@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import Typography from "@material-ui/core/Typography";
 
 
 const useStyles = makeStyles({
@@ -17,7 +18,12 @@ export default function SearchPolicies() {
 
   return (
     <>
-     <u>Advising Syllabus:</u>
+
+    <Typography variant="h7">
+        <div dangerouslySetInnerHTML={ { __html: "Placeholder" } }></div>    
+    </Typography>
+
+     '<u>Advising Syllabus:</u>
      <p align = "left">
      All Schulich School of Engineering students and instructors have a responsibility to familiarize themselves with the 
      policies described in the Schulich School of Engineering Advising Syllabus available at:
@@ -61,7 +67,7 @@ export default function SearchPolicies() {
     <a href = "https://www.ucalgary.ca/wellnesscentre/services/mental-health-services"> https://www.ucalgary.ca/wellnesscentre/services/mental-health-services</a>) 
     and the Campus Mental Health Strategy website 
      (<a href = "http://www.ucalgary.ca/mentalhealth/">http://www.ucalgary.ca/mentalhealth/</a>).
-     </p>
+     </p>'
 
 
 

@@ -7,6 +7,7 @@ import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 import {makeStyles} from "@material-ui/core/styles";
+import { Container } from '@material-ui/core';
 
 const useStyles = makeStyles({
     table: {
@@ -56,6 +57,11 @@ export default function SearchGrade(props) {
                     </TableBody>
                 </Table>
             </TableContainer>
+            <Container maxWidth="md">
+            <div align="right">
+                <b>Total:</b> 100%
+            </div>
+            </Container>
         </>
     );
 }

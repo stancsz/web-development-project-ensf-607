@@ -8,7 +8,7 @@ export default function SearchCalculator(props) {
   return (
     <>
         <div align="left">
-        <Typography variant="h6">
+        <Typography variant="h7">
         Calculators are not allowed during examinations.
         </Typography>
         </div>

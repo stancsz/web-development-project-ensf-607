@@ -42,14 +42,6 @@ import AddIcon from '@material-ui/icons/Add';
 import { Link } from "react-router-dom";
 
 
-
-import ReactQuill from 'react-quill';
-import MUIRichTextEditor from "mui-rte";
-import {Editor, EditorState} from 'draft-js';
-import RichTextEditor from 'react-rte';
-
-
-
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -71,34 +63,6 @@ const useStyles = makeStyles((theme) => ({
 
 
 const SearchCourse = () => {
-
-
-  const [editorState, setEditorState] = useState(RichTextEditor.createEmptyValue())
-
-  const toolbarConfig = {
-    display: ['INLINE_STYLE_BUTTONS', 'BLOCK_TYPE_BUTTONS', 'HISTORY_BUTTONS'],
-    INLINE_STYLE_BUTTONS: [
-      {label: 'Bold', style: 'BOLD', className: 'custom-css-class'},
-      {label: 'Italic', style: 'ITALIC'},
-      {label: 'Underline', style: 'UNDERLINE'}
-    ],
-    BLOCK_TYPE_DROPDOWN: [
-      {label: 'Normal', style: 'unstyled'},
-      {label: 'Heading Large', style: 'header-one'},
-      {label: 'Heading Medium', style: 'header-two'},
-      {label: 'Heading Small', style: 'header-three'}
-    ],
-    BLOCK_TYPE_BUTTONS: [
-      {label: 'UL', style: 'unordered-list-item'},
-      {label: 'OL', style: 'ordered-list-item'}
-    ]
-  };
-
-  
-
-
-
-
 
   const courseList = Object.keys(InfoData);
   const classes = useStyles();
@@ -515,18 +479,6 @@ const SearchCourse = () => {
       </AppBar>
 
       {frame}
-
-
-      <br/>
-      <Container maxWidth="md">
-      <RichTextEditor
-       value={editorState}
-       onChange={value => setEditorState(value)}
-       onClick={console.log(editorState.toString('html'))}
-       toolbarConfig={toolbarConfig}
-    />
-    </Container>
-
 
     </>
   );
