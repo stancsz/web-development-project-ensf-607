@@ -13,6 +13,7 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import DeleteIcon from '@material-ui/icons/Delete';
 import SaveIcon from '@material-ui/icons/Save';
+
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
@@ -26,6 +27,7 @@ function createData(name, calories, fat, carbs, protein) {
 
 
 export default function BasicTable() {
+
   const [count, setCount] = useState(2);
   const classes = useStyles();
   const [rows, setRows] = useState([{ id: 1,  outcome: "" }]);
@@ -66,7 +68,7 @@ export default function BasicTable() {
       let outcome=outcomes[outcomeIndx].outcome
       let rowIndx = rows.findIndex((row) => row.id === id)
       let newRows=rows
-      newRows[rowIndx]={ id: id,num:num,outcome: outcome }
+      newRows[rowIndx]={ id: id, num:num, outcome: outcome }
           
       
  
@@ -80,14 +82,21 @@ export default function BasicTable() {
   const removeRow = (id) => {
     let newRows = rows.filter((row) => row.id !== id)
     
+    for(let i = 0; i < newRows.length; i++){
+      if(newRows[i].id > id){
+        newRows[i].id = newRows[i].id - 1;
+      }
+    }
     setRows(newRows)
   }
+
   const addRow = (id) => {
     let newRows = rows
     setCount(count+1)
     let x=count
     console.log("THIS IS "+x)
-    newRows.push({ id: x, outcome: "" })
+
+    newRows.push({ id: rows.length + 1, outcome: "" })
     setRows(newRows)
     console.log(rows)
   }
@@ -98,13 +107,15 @@ export default function BasicTable() {
         <Table className={classes.table} aria-label="simple table">
           <colgroup>
             <col width="10%" />
-            <col width="70%" />
+            <col width="80%" />
+            
 
           </colgroup>
           <TableHead>
             <TableRow>
               <TableCell>Number</TableCell>
               <TableCell align="right">Learning Outcome</TableCell>
+              <TableCell align="right"></TableCell>
 
             </TableRow>
           </TableHead>
@@ -113,10 +124,12 @@ export default function BasicTable() {
             {rows.map((row) => (
               <TableRow key={row.id}>
                 <TableCell component="th" scope="row">
-                <TextField id="standard-basic"   onChange={(e) => {
-        
-        editNums(row.id,e.target.value)
-      }} />
+
+                <TextField id="standard-basic"  
+                inputProps={{style: { textAlign: 'center' }}}
+                value = {row.id} readOnly={true}
+                 />
+
                 </TableCell>
                 <TableCell align="right"><TextField id="standard-basic" fullWidth={true} onChange={(e) => {
         
@@ -124,40 +137,11 @@ export default function BasicTable() {
                 }} /></TableCell>
 
                 <div className={classes.root}>
-                  <Grid container spacing={3}>
-                    <Grid item xs>
-                      <Paper className={classes.paper}><Button
-                        variant="contained"
-                        color="secondary"
-                        className={classes.button}
-                        size="small"
-                        startIcon={<DeleteIcon />}
-                        onClick={()=>
-                        removeRow(row.id)}
-                      >
-                        Delete
-      </Button></Paper>
-                    </Grid>
-                    <Grid item xs>
-                      <Paper className={classes.paper}><Button
-                        variant="contained"
-                        color="primary"
-                        size="small"
-                        className={classes.button}
-                        startIcon={<SaveIcon />}
-                        onClick={()=>{
-                          saveRow(row.id)
-                        }}
-                        
-                      >
-                        Save
-      </Button></Paper>
-                    </Grid>
+                    <br/>
+                    <DeleteIcon  onClick={()=> removeRow(row.id)} />
 
-                  </Grid>
+                    <SaveIcon onClick={()=>{ saveRow(row.id)}} />
                 </div>
-
-
 
               </TableRow>
             ))}
