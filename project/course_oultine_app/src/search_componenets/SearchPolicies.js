@@ -20,7 +20,7 @@ export default function SearchPolicies() {
     <>
 
     <Typography variant="h7">
-        <div dangerouslySetInnerHTML={ { __html: "Placeholder" } }></div>    
+        <div dangerouslySetInnerHTML={ { __html: "" } }></div>    
     </Typography>
 
      '<u>Advising Syllabus:</u>
