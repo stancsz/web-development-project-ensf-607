@@ -37,6 +37,16 @@ import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
+import { Link } from "react-router-dom";
+
+
+
+import ReactQuill from 'react-quill';
+import MUIRichTextEditor from "mui-rte";
+import {Editor, EditorState} from 'draft-js';
+import RichTextEditor from 'react-rte';
 
 
 
@@ -57,7 +67,39 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
+
+
 const SearchCourse = () => {
+
+
+  const [editorState, setEditorState] = useState(RichTextEditor.createEmptyValue())
+
+  const toolbarConfig = {
+    display: ['INLINE_STYLE_BUTTONS', 'BLOCK_TYPE_BUTTONS', 'HISTORY_BUTTONS'],
+    INLINE_STYLE_BUTTONS: [
+      {label: 'Bold', style: 'BOLD', className: 'custom-css-class'},
+      {label: 'Italic', style: 'ITALIC'},
+      {label: 'Underline', style: 'UNDERLINE'}
+    ],
+    BLOCK_TYPE_DROPDOWN: [
+      {label: 'Normal', style: 'unstyled'},
+      {label: 'Heading Large', style: 'header-one'},
+      {label: 'Heading Medium', style: 'header-two'},
+      {label: 'Heading Small', style: 'header-three'}
+    ],
+    BLOCK_TYPE_BUTTONS: [
+      {label: 'UL', style: 'unordered-list-item'},
+      {label: 'OL', style: 'ordered-list-item'}
+    ]
+  };
+
+  
+
+
+
+
+
   const courseList = Object.keys(InfoData);
   const classes = useStyles();
 
@@ -136,10 +178,10 @@ const SearchCourse = () => {
           </Grid>
           <br />
 
-          <Accordion defaultExpanded = "true" elevation = {5}>
+          <Accordion defaultExpanded = {true} elevation = {5}>
             <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
               <Typography>
-               <label className="label is-size-3 has-text-left pl-1">1. Calendar Information</label>
+               <label className="label is-size-3 has-text-left">1. Calendar Information</label>
                </Typography>
             </AccordionSummary>
             <AccordionDetails>
@@ -151,10 +193,10 @@ const SearchCourse = () => {
             </AccordionDetails>
           </Accordion>
 
-          <Accordion defaultExpanded = "true" elevation = {5}  flexGrow={1}>
+          <Accordion defaultExpanded = {true} elevation = {5} >
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
               <Typography>
-               <label className="label is-size-3 has-text-left pl-1">2. Learning Outcomes</label>
+               <label className="label is-size-3 has-text-left">2. Learning Outcomes</label>
                </Typography>
             </AccordionSummary>
             <AccordionDetails>
@@ -166,10 +208,10 @@ const SearchCourse = () => {
             </AccordionDetails>
           </Accordion>
 
-          <Accordion defaultExpanded = "true" elevation = {5}  flexGrow={1}>
+          <Accordion defaultExpanded = {true} elevation = {5} >
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
               <Typography>
-               <label className="label is-size-3 has-text-left pl-1">3. Timetable</label>
+               <label className="label is-size-3 has-text-left">3. Timetable</label>
                </Typography>
             </AccordionSummary>
             <AccordionDetails>
@@ -182,10 +224,10 @@ const SearchCourse = () => {
           </Accordion>
 
 
-          <Accordion defaultExpanded = "true" elevation = {5}  flexGrow={1}>
+          <Accordion defaultExpanded = {true} elevation = {5} >
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
               <Typography>
-               <label className="label is-size-3 has-text-left pl-1">4. Course Instructors</label>
+               <label className="label is-size-3 has-text-left">4. Course Instructors</label>
                </Typography>
             </AccordionSummary>
             <AccordionDetails>
@@ -198,10 +240,10 @@ const SearchCourse = () => {
           </Accordion>
 
           
-          <Accordion defaultExpanded = "true" elevation = {5}  flexGrow={1}>
+          <Accordion defaultExpanded = {true} elevation = {5} >
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
               <Typography>
-               <label className="label is-size-3 has-text-left pl-1">5. Examinations</label>
+               <label className="label is-size-3 has-text-left">5. Examinations</label>
                </Typography>
             </AccordionSummary>
             <AccordionDetails>
@@ -214,10 +256,10 @@ const SearchCourse = () => {
           </Accordion>
 
           
-          <Accordion defaultExpanded = "true" elevation = {5}  flexGrow={1}>
+          <Accordion defaultExpanded = {true} elevation = {5} >
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
               <Typography>
-               <label className="label is-size-3 has-text-left pl-1">6. Use of Calculators in Examinations</label>
+               <label className="label is-size-3 has-text-left">6. Use of Calculators in Examinations</label>
                </Typography>
             </AccordionSummary>
             <AccordionDetails>
@@ -229,10 +271,10 @@ const SearchCourse = () => {
             </AccordionDetails>
           </Accordion>
 
-          <Accordion defaultExpanded = "true" elevation = {5}  flexGrow={1}>
+          <Accordion defaultExpanded = {true} elevation = {5} >
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
               <Typography>
-               <label className="label is-size-3 has-text-left pl-1">7. Final Grade Determination</label>
+               <label className="label is-size-3 has-text-left">7. Final Grade Determination</label>
                </Typography>
             </AccordionSummary>
             <AccordionDetails>
@@ -252,10 +294,10 @@ const SearchCourse = () => {
             </AccordionDetails>
           </Accordion>
 
-          <Accordion defaultExpanded = "true" elevation = {5}  flexGrow={1}>
+          <Accordion defaultExpanded = {true} elevation = {5}>
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
               <Typography>
-               <label className="label is-size-3 has-text-left pl-1">8. Textbook</label>
+               <label className="label is-size-3 has-text-left">8. Textbook</label>
                </Typography>
             </AccordionSummary>
             <AccordionDetails>
@@ -267,10 +309,10 @@ const SearchCourse = () => {
             </AccordionDetails>
           </Accordion>
           
-          <Accordion defaultExpanded = "true" elevation = {5}  flexGrow={1}>
+          <Accordion defaultExpanded = {true} elevation = {5} >
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
               <Typography>
-               <label className="label is-size-3 has-text-left pl-1">9. Course Policies</label>
+               <label className="label is-size-3 has-text-left">9. Course Policies</label>
                </Typography>
             </AccordionSummary>
             <AccordionDetails>
@@ -289,7 +331,7 @@ const SearchCourse = () => {
         <Container maxWidth="md">
           <br />
           <br />
-          <Paper className={classes.paper} elevation={3}>
+          <Paper className={classes.paper} elevation={5}>
             <label className="label is-size-3 has-text-Center">
               Current Course Outlines
             </label>
@@ -307,6 +349,14 @@ const SearchCourse = () => {
               />
             </div>
           </Paper>
+
+            <div align="center">
+              <br/>
+          <Fab color="primary" size="medium" component={Link}to="/AddCourse">
+        <AddIcon />
+      </Fab>
+      </div>
+
         </Container>
       );
     }
@@ -361,7 +411,7 @@ const SearchCourse = () => {
       <Container maxWidth="md">
         <br />
         <br />
-        <Paper className={classes.paper} elevation={3}>
+        <Paper className={classes.paper} elevation={5}>
           <Grid align="left">
             <ArrowBackIcon
               onClick={() => {
@@ -451,7 +501,7 @@ const SearchCourse = () => {
                   }}
                 >
                   {courseList.map((i) => (
-                    <MenuItem value={i}>{i}</MenuItem>
+                    <MenuItem key={i} value={i}>{i}</MenuItem>
                   ))}
                   <MenuItem value="View All">View All</MenuItem>
                 </Select>
@@ -465,6 +515,19 @@ const SearchCourse = () => {
       </AppBar>
 
       {frame}
+
+
+      <br/>
+      <Container maxWidth="md">
+      <RichTextEditor
+       value={editorState}
+       onChange={value => setEditorState(value)}
+       onClick={console.log(editorState.toString('html'))}
+       toolbarConfig={toolbarConfig}
+    />
+    </Container>
+
+
     </>
   );
 };

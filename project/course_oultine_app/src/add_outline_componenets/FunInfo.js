@@ -19,14 +19,8 @@ function FunInfo() {
   return (
     <div className="FunInfo">
 
-    <br/>
-      
-
+ 
     <div className="field">
-
-        <br/>
-        
-        <label className="label is-size-3 has-text-left pl-1">1. Calendar Information</label>
 
         <div className="control">
             <input className="input is-size-4 has-text-left pl-1 mb-0 pb-0" 
