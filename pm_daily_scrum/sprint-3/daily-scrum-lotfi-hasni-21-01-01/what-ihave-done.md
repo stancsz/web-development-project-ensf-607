@@ -1,0 +1,1 @@
+Created necessary pages for search. Worked on search bar and buttons. Fixed errors with display of current outlines.

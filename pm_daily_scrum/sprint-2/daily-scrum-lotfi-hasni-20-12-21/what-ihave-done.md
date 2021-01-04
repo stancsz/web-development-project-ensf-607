@@ -1,0 +1,1 @@
+Discussed requirements for second milestone, continued studying of back end.

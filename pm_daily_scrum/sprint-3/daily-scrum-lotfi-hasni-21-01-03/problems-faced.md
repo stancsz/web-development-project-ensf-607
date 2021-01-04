@@ -1,0 +1,1 @@
+Problems understanding how to use props and how to update arrays in a way that can be harmonized with back end.

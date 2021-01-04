@@ -1,0 +1,1 @@
+Many components required two clicks to work or were otherwise unresponsive. The useEffect hook was difficult to understand in many ways.

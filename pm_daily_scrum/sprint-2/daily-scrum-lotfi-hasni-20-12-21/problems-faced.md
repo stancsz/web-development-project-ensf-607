@@ -1,0 +1,1 @@
+Challenges understanding requirements and level of variability needed to meet all possible course outline layouts/contents.

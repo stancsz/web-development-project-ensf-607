@@ -1,0 +1,1 @@
+Difficulties translating between diagrams and understanding which data needs to be stored and which doesn't.

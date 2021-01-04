@@ -1,0 +1,1 @@
+Worked on database schema design and search panel of front end. 

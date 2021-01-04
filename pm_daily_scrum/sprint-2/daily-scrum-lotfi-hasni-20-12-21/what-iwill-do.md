@@ -1,0 +1,1 @@
+Continue learning about back end, correct front end issues, work on connection and improvement.

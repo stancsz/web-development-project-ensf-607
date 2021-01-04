@@ -1,0 +1,1 @@
+Worked on navigation functionality with drawer and text entry with rich text editor. Attempted to solve issue to implement automatic numbering in outcomes section of add course outline page.
