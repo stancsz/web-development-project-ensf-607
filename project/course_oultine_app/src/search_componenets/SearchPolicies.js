@@ -23,7 +23,7 @@ export default function SearchPolicies() {
         <div dangerouslySetInnerHTML={ { __html: "" } }></div>    
     </Typography>
 
-     '<u>Advising Syllabus:</u>
+     <u>Advising Syllabus:</u>
      <p align = "left">
      All Schulich School of Engineering students and instructors have a responsibility to familiarize themselves with the 
      policies described in the Schulich School of Engineering Advising Syllabus available at:
