@@ -205,7 +205,7 @@ class Info(models.Model):
   )
 
   Examination = models.TextField(
-    max_length=500,
+    max_length=5000,
     null=False,
     blank=False
   )
