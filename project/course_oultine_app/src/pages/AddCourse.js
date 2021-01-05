@@ -3,6 +3,7 @@ import FunInfo from "../add_outline_componenets/FunInfo.js";
 import FunGrade from "../add_outline_componenets/FunGrade";
 import FunOutcome from "../add_outline_componenets/FunOutcome.js";
 import FunCalculator from "../add_outline_componenets/FunCalculator.js"
+import SearchPolicies from "../search_componenets/SearchPolicies"
 
 import Container from "@material-ui/core/Container";
 import Accordion from "@material-ui/core/Accordion";
@@ -36,9 +37,7 @@ const AddCourse = () => {
   const [examinationEditorState, setExaminationEditorState] = useState(
     RichTextEditor.createEmptyValue()
   );
-  const [policiesEditorState, setPoliciesEditorState] = useState(
-    RichTextEditor.createEmptyValue()
-  );
+
 
   const toolbarConfig = {
     display: ["INLINE_STYLE_BUTTONS", "BLOCK_TYPE_BUTTONS", "HISTORY_BUTTONS"],
@@ -223,15 +222,7 @@ const AddCourse = () => {
           <AccordionDetails>
             <div style={{ width: "100%" }}>
               <Paper className={classes.paper} elevation={3}>
-                <Container maxWidth="md">
-                  <RichTextEditor
-                    value={policiesEditorState}
-                    onChange={(value) => setPoliciesEditorState(value)}
-                    onClick={console.log(policiesEditorState.toString("html"))}
-                    toolbarConfig={toolbarConfig}
-                    placeholder="Course policies may be entered here..."
-                  />
-                </Container>
+                <SearchPolicies />
               </Paper>
             </div>
           </AccordionDetails>
