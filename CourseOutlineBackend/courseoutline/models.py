@@ -51,6 +51,7 @@ class ContentCategory(models.Model):
   class Meta:
     db_table = 'CONTENT_CATEGORY'
 
+# needed
 # model for coordinator table
 class Coordinator(models.Model):
   CourseID = models.CharField(
@@ -93,6 +94,7 @@ class Coordinator(models.Model):
   class Meta:
     db_table = 'COORDINATOR'
 
+# needed
 # model for course table
 class Course(models.Model):
   CourseID = models.CharField(
@@ -133,6 +135,7 @@ class Course(models.Model):
   class Meta:
     db_table = 'COURSE'
 
+# needed
 # model for grade determination table
 class GradeDetermination(models.Model):
   CourseID = models.CharField(
@@ -161,6 +164,7 @@ class GradeDetermination(models.Model):
   class Meta:
     db_table = 'GRADE_DETERMINATION'
 
+# needed
 # model for grade distribution table
 class GradeDistribution(models.Model):
   CourseID = models.CharField(
@@ -189,6 +193,7 @@ class GradeDistribution(models.Model):
   class Meta:
     db_table = 'GRADE_DISTRIBUTION'
 
+# needed
 # model for info table
 class Info(models.Model):
   CourseID = models.CharField(
@@ -225,6 +230,7 @@ class Info(models.Model):
   class Meta:
     db_table = 'INFO'
 
+# needed
 # model for lab table
 class Lab(models.Model):
   CourseID = models.CharField(
@@ -296,6 +302,7 @@ class Lab(models.Model):
   class Meta:
     db_table = 'LAB'
 
+# needed
 # model for lecture table
 class Lecture(models.Model):
   CourseID = models.CharField(
@@ -344,6 +351,7 @@ class Lecture(models.Model):
   class Meta:
     db_table = 'LECTURE'
 
+# needed
 # model for outcome table
 class Outcome(models.Model):
   CourseID = models.CharField(
@@ -379,6 +387,7 @@ class Outcome(models.Model):
   class Meta:
     db_table = 'OUTCOME'
 
+# needed
 # model for section table
 class Section(models.Model):
   CourseID = models.CharField(
@@ -407,6 +416,7 @@ class Section(models.Model):
   class Meta:
     db_table = 'SECTION'
 
+# needed
 # model for textbook table
 class Textbook(models.Model):
   CourseID = models.CharField(
@@ -443,6 +453,7 @@ class Textbook(models.Model):
   class Meta:
     db_table = 'TEXTBOOK'
 
+# needed
 # model for timetable table
 class Timetable(models.Model):
   CourseID = models.CharField(
@@ -479,6 +490,7 @@ class Timetable(models.Model):
   class Meta:
     db_table = 'TIMETABLE'
 
+# needed
 # model for tutorial table
 class Tutorial(models.Model):
   CourseID = models.CharField(
@@ -526,4 +538,3 @@ class Tutorial(models.Model):
 
   class Meta:
     db_table = 'TUTORIAL'
-
