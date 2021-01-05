@@ -329,28 +329,25 @@ const SearchCourse = () => {
   const revealIcons = () => {
     setDisplayIcons(
       <Grid align="right">
-        <PageviewIcon
-          fontSize="large"
-          onClick={() => {
+        <Button onClick={() => {
             setCourse(tableSelection);
             setCallHandleSelect(true);
             setSearchInput("");
-          }}
-        />
+          }}>
+          VIEW&nbsp;
+          <PageviewIcon fontSize="large"/>
+        </Button>
 
-        <EditIcon
-          fontSize="large"
-          onClick={() => {
-          
-          }}
-        />
+        <Button onClick={() => {}}>
+          EDIT&nbsp;
+          <EditIcon fontSize="large"/>
+        </Button>
 
-        <DeleteForeverIcon
-          fontSize="large"
-          onClick={() => {
-           
-          }}
-        />
+        <Button onClick={() => {}}>
+          DELETE&nbsp;
+          <DeleteForeverIcon fontSize="large"/>
+        </Button>
+        
       </Grid>
     );
   };
