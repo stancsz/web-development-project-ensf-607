@@ -9,7 +9,7 @@ from .models import Coordinator
 from .serializers import CoordinatorSerializer
 
 
-class CoordinatorView(
+class CoordinatorPostGetView(
   APIView, # Basic View class provided by the Django Rest Framework
   UpdateModelMixin, # Mixin that allows the basic APIView to handle PUT HTTP requests
   DestroyModelMixin, # Mixin that allows the basic APIView to handle DELETE HTTP requests
@@ -61,10 +61,18 @@ class CoordinatorView(
     return Response(create_serializer.errors, status=400)
 
 
-  def put(self, request, CourseID=None):
+
+
+class CoordinatorPutDelView(
+  APIView, # Basic View class provided by the Django Rest Framework
+  UpdateModelMixin, # Mixin that allows the basic APIView to handle PUT HTTP requests
+  DestroyModelMixin, # Mixin that allows the basic APIView to handle DELETE HTTP requests
+):
+
+  def put(self, request, ModelID=None):
     try:
       # Check if the todo item the user wants to update exists
-      todo_item = Coordinator.objects.get(CourseID=CourseID)
+      todo_item = Coordinator.objects.get(ModelID=ModelID)
     except Coordinator.DoesNotExist:
       # If the todo item does not exist, return an error response
       return Response({'errors': 'This todo item does not exist.'}, status=400)
@@ -88,10 +96,10 @@ class CoordinatorView(
     return Response(update_serializer.errors, status=400)
 
 
-  def delete(self, request, CourseID=None):
+  def delete(self, request, ModelID=None):
     try:
       # Check if the todo item the user wants to update exists
-      todo_item = Coordinator.objects.get(CourseID=CourseID)
+      todo_item = Coordinator.objects.get(ModelID=ModelID)
     except Coordinator.DoesNotExist:
       # If the todo item does not exist, return an error response
       return Response({'errors': 'This todo item does not exist.'}, status=400)

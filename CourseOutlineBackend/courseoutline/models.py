@@ -14,6 +14,13 @@ class AuWeight(models.Model):
     blank=False
   )
 
+  CourseID = models.CharField(
+    max_length=100,
+    null=False,
+    blank=False,
+    default=""
+  )
+
   Category = models.TextField(
     max_length=100,
     null=False,
@@ -34,6 +41,13 @@ class ContentCategory(models.Model):
     max_length=100,
     null=False,
     blank=False
+  )
+
+  CourseID = models.CharField(
+    max_length=100,
+    null=False,
+    blank=False,
+    default=""
   )
 
   CategoryType = models.TextField(
@@ -111,6 +125,13 @@ class Course(models.Model):
     blank=False
   )
 
+  CourseID = models.CharField(
+    max_length=100,
+    null=False,
+    blank=False,
+    default=""
+  )
+
   CourseHours = models.TextField(
     max_length=100,
     null=False,
@@ -152,6 +173,13 @@ class GradeDetermination(models.Model):
     blank=False
   )
 
+  CourseID = models.CharField(
+    max_length=100,
+    null=False,
+    blank=False,
+    default=""
+  )
+
   Component = models.TextField(
     max_length=100,
     null=False,
@@ -181,6 +209,13 @@ class GradeDistribution(models.Model):
     blank=False
   )
 
+  CourseID = models.CharField(
+    max_length=100,
+    null=False,
+    blank=False,
+    default=""
+  )
+
   LowerLimit = models.IntegerField(
     null=False,
     blank=False
@@ -208,6 +243,13 @@ class Info(models.Model):
     max_length=100,
     null=False,
     blank=False
+  )
+
+  CourseID = models.CharField(
+    max_length=100,
+    null=False,
+    blank=False,
+    default=""
   )
 
   GradeNotes = models.TextField(
@@ -245,6 +287,13 @@ class Lab(models.Model):
     max_length=100,
     null=False,
     blank=False
+  )
+
+  CourseID = models.CharField(
+    max_length=100,
+    null=False,
+    blank=False,
+    default=""
   )
 
   LabNum = models.TextField(
@@ -319,6 +368,13 @@ class Lecture(models.Model):
     blank=False
   )
 
+  CourseID = models.CharField(
+    max_length=100,
+    null=False,
+    blank=False,
+    default=""
+  )
+
   LectureNum = models.TextField(
     max_length=100,
     null=False,
@@ -368,6 +424,13 @@ class Outcome(models.Model):
     blank=False
   )
 
+  CourseID = models.CharField(
+    max_length=100,
+    null=False,
+    blank=False,
+    default=""
+  )
+
   OutcomeNum = models.IntegerField(
     null=False,
     blank=False
@@ -404,6 +467,13 @@ class Section(models.Model):
     blank=False
   )
 
+  CourseID = models.CharField(
+    max_length=100,
+    null=False,
+    blank=False,
+    default=""
+  )
+
   SectionNumber = models.TextField(
     max_length=100,
     null=False,
@@ -431,6 +501,13 @@ class Textbook(models.Model):
     max_length=100,
     null=False,
     blank=False
+  )
+
+  CourseID = models.CharField(
+    max_length=100,
+    null=False,
+    blank=False,
+    default=""
   )
 
   TITLE = models.TextField(
@@ -470,6 +547,13 @@ class Timetable(models.Model):
     blank=False
   )
 
+  CourseID = models.CharField(
+    max_length=100,
+    null=False,
+    blank=False,
+    default=""
+  )
+
   SectionNum = models.TextField(
     max_length=100,
     null=False,
@@ -505,6 +589,13 @@ class Tutorial(models.Model):
     max_length=100,
     null=False,
     blank=False
+  )
+
+  CourseID = models.CharField(
+    max_length=100,
+    null=False,
+    blank=False,
+    default=""
   )
 
   TutorialNum = models.TextField(
