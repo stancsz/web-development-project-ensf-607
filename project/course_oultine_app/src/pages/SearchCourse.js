@@ -42,6 +42,11 @@ import AddIcon from '@material-ui/icons/Add';
 import { Link } from "react-router-dom";
 
 
+import axios from "axios";
+
+
+
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -63,6 +68,10 @@ const useStyles = makeStyles((theme) => ({
 
 
 const SearchCourse = () => {
+
+  const [testValue, setTestValue] = useState("default");
+
+
 
   const courseList = Object.keys(InfoData);
   const classes = useStyles();
@@ -402,6 +411,13 @@ const SearchCourse = () => {
   };
 
   useEffect(() => {
+
+    axios.get("http://127.0.0.1:8000/coordinator/")
+    .then(res => setTestValue(res.data[0].CourseID))
+    .catch(setTestValue("error"))
+    
+    
+
     if (searchInput !== "") {
       displaySearchResults();
       setTableSelection("");
@@ -474,6 +490,10 @@ const SearchCourse = () => {
           </Grid>
         </Container>
       </AppBar>
+
+
+      <br/>
+      <div>{testValue}</div>
 
       {frame}
 
