@@ -65,7 +65,7 @@ class ContentCategory(models.Model):
   class Meta:
     db_table = 'CONTENT_CATEGORY'
 
-# needed
+# todo-done: coordinator
 # model for coordinator table
 class Coordinator(models.Model):
   ModelID = models.CharField(
@@ -163,7 +163,7 @@ class Course(models.Model):
   class Meta:
     db_table = 'COURSE'
 
-# needed
+# todo: grade determination
 # model for grade determination table
 class GradeDetermination(models.Model):
   ModelID = models.CharField(
@@ -199,7 +199,7 @@ class GradeDetermination(models.Model):
   class Meta:
     db_table = 'GRADE_DETERMINATION'
 
-# needed
+# todo: grade distribution
 # model for grade distribution table
 class GradeDistribution(models.Model):
   ModelID = models.CharField(
@@ -235,7 +235,7 @@ class GradeDistribution(models.Model):
   class Meta:
     db_table = 'GRADE_DISTRIBUTION'
 
-# needed
+# todo: info
 # model for info table
 class Info(models.Model):
   ModelID = models.CharField(
@@ -279,7 +279,7 @@ class Info(models.Model):
   class Meta:
     db_table = 'INFO'
 
-# needed
+# todo: lab
 # model for lab table
 class Lab(models.Model):
   ModelID = models.CharField(
@@ -358,7 +358,7 @@ class Lab(models.Model):
   class Meta:
     db_table = 'LAB'
 
-# needed
+# todo: lecture
 # model for lecture table
 class Lecture(models.Model):
   ModelID = models.CharField(
@@ -414,7 +414,7 @@ class Lecture(models.Model):
   class Meta:
     db_table = 'LECTURE'
 
-# needed
+# todo: outcome
 # model for outcome table
 class Outcome(models.Model):
   ModelID = models.CharField(
@@ -537,7 +537,7 @@ class Textbook(models.Model):
   class Meta:
     db_table = 'TEXTBOOK'
 
-# needed
+# todo: timetable
 # model for timetable table
 class Timetable(models.Model):
   ModelID = models.CharField(
@@ -581,7 +581,7 @@ class Timetable(models.Model):
   class Meta:
     db_table = 'TIMETABLE'
 
-# needed
+# todo: tutorial
 # model for tutorial table
 class Tutorial(models.Model):
   ModelID = models.CharField(

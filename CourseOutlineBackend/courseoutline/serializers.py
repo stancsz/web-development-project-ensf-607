@@ -47,3 +47,42 @@ class CoordinatorSerializer(serializers.ModelSerializer):
             'Office',
             'Email'
         )
+
+class InfoSerializer(serializers.ModelSerializer):
+    ModelID = serializers.CharField(max_length=100, required=True)
+    CourseID = serializers.CharField(max_length=100, required=True)
+    GradeNotes = serializers.CharField(max_length=500, required=False)
+    Examination = serializers.CharField(max_length=5000, required=False)
+    CourseDescription = serializers.CharField(max_length=500, required=False)
+    UseCalc = serializers.CharField(max_length=100, required=False)
+
+    def create(self, validated_data):
+        return Coordinator.objects.create(
+            ModelID=validated_data.get('ModelID'),
+            CourseID=validated_data.get('CourseID'),
+            GradeNotes=validated_data.get('GradeNotes'),
+            Examination=validated_data.get('Examination'),
+            CourseDescription=validated_data.get('CourseDescription'),
+            UseCalc=validated_data.get('UseCalc')
+        )
+
+    def update(self, instance, validated_data):
+        instance.ModelID = validated_data.get('ModelID', instance.ModelID)
+        instance.CourseID = validated_data.get('CourseID', instance.CourseID)
+        instance.GradeNotes = validated_data.get('GradeNotes', instance.GradeNotes)
+        instance.Examination = validated_data.get('Examination', instance.Examination)
+        instance.CourseDescription = validated_data.get('CourseDescription', instance.CourseDescription)
+        instance.UseCalc = validated_data.get('UseCalc', instance.UseCalc)
+        instance.save()
+        return instance
+
+    class Meta:
+        model = Coordinator
+        fields = (
+            'ModelID',
+            'CourseID',
+            'GradeNotes',
+            'Examination',
+            'CourseDescription',
+            'UseCalc'
+        )
