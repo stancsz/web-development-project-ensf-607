@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 from .models import Coordinator
 from .models import Info
+from .models import GradeDetermination
 
 
 class CoordinatorSerializer(serializers.ModelSerializer):
@@ -86,4 +87,37 @@ class InfoSerializer(serializers.ModelSerializer):
             'Examination',
             'CourseDescription',
             'UseCalc'
+        )
+
+class GradeDeterminationSerializer(serializers.ModelSerializer):
+    CourseID = serializers.CharField(max_length=100, required=True)
+    Component = serializers.CharField(max_length=100, required=False)
+    OutcomeEvaluated = serializers.CharField(max_length=100, required=False)
+    Weight = serializers.IntegerField(required=False)
+
+    def create(self, validated_data):
+        # Once the request data has been validated, we can create a todo item instance in the database
+        return GradeDetermination.objects.create(
+            CourseID=validated_data.get('CourseID'),
+            Component=validated_data.get('Component'),
+            OutcomeEvaluated=validated_data.get('OutcomeEvaluated'),
+            Weight=validated_data.get('Weight'),
+        )
+
+    def update(self, instance, validated_data):
+        # Once the request data has been validated, we can update the todo item instance in the database
+        instance.CourseID = validated_data.get('CourseID', instance.CourseID)
+        instance.Component = validated_data.get('Component', instance.Component)
+        instance.OutcomeEvaluated = validated_data.get('OutcomeEvaluated', instance.OutcomeEvaluated)
+        instance.Weight = validated_data.get('Weight', instance.Weight)
+        instance.save()
+        return instance
+
+    class Meta:
+        model = GradeDetermination
+        fields = (
+            'CourseID',
+            'Component',
+            'OutcomeEvaluated',
+            'Weight'
         )
