@@ -90,6 +90,7 @@ class InfoSerializer(serializers.ModelSerializer):
         )
 
 class GradeDeterminationSerializer(serializers.ModelSerializer):
+    ModelID = serializers.CharField(max_length=100, required=True)
     CourseID = serializers.CharField(max_length=100, required=True)
     Component = serializers.CharField(max_length=100, required=False)
     OutcomeEvaluated = serializers.CharField(max_length=100, required=False)
@@ -98,6 +99,7 @@ class GradeDeterminationSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         # Once the request data has been validated, we can create a todo item instance in the database
         return GradeDetermination.objects.create(
+            ModelID=validated_data.get('ModelID'),
             CourseID=validated_data.get('CourseID'),
             Component=validated_data.get('Component'),
             OutcomeEvaluated=validated_data.get('OutcomeEvaluated'),
@@ -106,6 +108,7 @@ class GradeDeterminationSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         # Once the request data has been validated, we can update the todo item instance in the database
+        instance.ModelID = validated_data.get('ModelID', instance.ModelID)
         instance.CourseID = validated_data.get('CourseID', instance.CourseID)
         instance.Component = validated_data.get('Component', instance.Component)
         instance.OutcomeEvaluated = validated_data.get('OutcomeEvaluated', instance.OutcomeEvaluated)
@@ -116,6 +119,7 @@ class GradeDeterminationSerializer(serializers.ModelSerializer):
     class Meta:
         model = GradeDetermination
         fields = (
+            'ModelID',
             'CourseID',
             'Component',
             'OutcomeEvaluated',

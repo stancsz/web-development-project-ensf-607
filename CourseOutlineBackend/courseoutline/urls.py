@@ -13,7 +13,9 @@ urlpatterns = [
   path('info/', views.InfoPostGetView.as_view()),
   path('info/<str:CourseID>/', views.InfoPostGetView.as_view()),
   path('info/v2/<str:ModelID>/', views.InfoPutDelView.as_view()),
+
   # grade determination
-  path('gradedetermination/', views.GradeDeterminationView.as_view()),
-  path('gradedetermination/<str:CourseID>/', views.GradeDeterminationView.as_view()),
+  path('gradedetermination/', views.GradeDeterminationPostGetView.as_view()),
+  path('gradedetermination/<str:CourseID>/', views.GradeDeterminationPostGetView.as_view()),
+  path('gradedetermination/v2/<str:ModelID>/', views.GradeDeterminationPostGetView.as_view()),
 ]
