@@ -28,7 +28,7 @@ export default function SearchCoordinators(props) {
       <TableContainer component={Paper}>
         <Table className={classes.table}>
           <TableHead>
-            <TableRow key ="stfu">
+            <TableRow>
               <TableCell>First Name</TableCell>
               <TableCell align="right">Family Name</TableCell>
               <TableCell align="right">Phone</TableCell>
@@ -36,24 +36,8 @@ export default function SearchCoordinators(props) {
               <TableCell align="right">Email</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody></TableBody>
-        </Table>
-      </TableContainer>
-
-
-
-      <TableContainer component={Paper}>
-                <Table className={classes.table}>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>FName</TableCell>
-                            <TableCell>LName</TableCell>
-                            <TableCell>Phone</TableCell>
-
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-      {props.coordinators.map((prop) => (
+          <TableBody>
+          {props.coordinators.map((prop) => (
         <TableRow key = {prop.key}>
           <TableCell component="th" scope="row">
             {prop.FName}
@@ -62,12 +46,13 @@ export default function SearchCoordinators(props) {
             {prop.LName}
           </TableCell>
           <TableCell align="right">{prop.Phone}</TableCell>
+          <TableCell align="right">{prop.Office}</TableCell>
+          <TableCell align="right">{prop.Email}</TableCell>
         </TableRow>
       ))}
-         </TableBody>
-                </Table>
-            </TableContainer>
-
+          </TableBody>
+        </Table>
+      </TableContainer>
       <br />
     </>
   );
