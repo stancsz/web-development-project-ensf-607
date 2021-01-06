@@ -17,6 +17,8 @@ import Grid from "@material-ui/core/Grid";
 import Outcome from "../search_componenets/SearchOutcome";
 import Timetable from "../search_componenets/SearchTimetable";
 import Instructors from "../search_componenets/SearchInstructors";
+import Coordinators from "../search_componenets/SearchCoordinators";
+import TA from "../search_componenets/SearchTA";
 import Examinations from "../search_componenets/SearchExaminations";
 import Calculator from "../search_componenets/SearchCalculator";
 import Grade from "../search_componenets/SearchGrade";
@@ -69,10 +71,6 @@ const useStyles = makeStyles((theme) => ({
 
 const SearchCourse = () => {
 
-  const [testValue, setTestValue] = useState("default");
-
-
-
   const courseList = Object.keys(InfoData);
   const classes = useStyles();
 
@@ -85,6 +83,7 @@ const SearchCourse = () => {
   const [outcome, setOutcome] = useState({});
   const [timetable, setTimetable] = useState({});
   const [instructors, setInstructors] = useState({});
+  const [coordinators, setCoordinators] = useState({});
   const [examinations, setExaminations] = useState({});
   const [calculator, setCalculator] = useState({});
   const [textbook, setTextbook] = useState({});
@@ -93,11 +92,28 @@ const SearchCourse = () => {
   const [letter, setLetter] = useState({});
   const [note, setNote] = useState({});
 
+  const [outcomeData, setOutcomeData] = useState({});
+  const [timetableData, setTimetableData] = useState({});
+  const [instructorsData, setInstructorsData] = useState({});
+  const [coordinatorsData, setCoordinatorsData] = useState({});
+  const [examinationsData, setExaminationsData] = useState({});
+  const [calculatorData, setCalculatorData] = useState({});
+  const [textbookData, setTextbookData] = useState({});
+  const [gradeData, setGradeData] = useState({});
+  const [infoData, setInfoData] = useState();
+  const [letterData, setLetterData] = useState({});
+  const [noteData, setNoteData] = useState({});
+
   const [frame, setFrame] = useState();
   const [searchInput, setSearchInput] = useState("");
   const [tableSelection, setTableSelection] = useState("");
   const [displayIcons, setDisplayIcons] = useState();
   const [callHandleSelect, setCallHandleSelect] = useState();
+  const [pageToggle, setPageToggle] = useState(true);
+
+
+
+
 
   const columns = [
     {
@@ -123,6 +139,22 @@ const SearchCourse = () => {
     rows.push({ id: rowval["courseID"], datetime: rowval["DateCreated"] });
   }
 
+  const [temp, setTemp] = useState();
+
+  const fillFields = () => {
+
+    
+    //setTestValue(retrievedInfo.data[1].CourseID)
+    //.then(res => setCoordinatorsData(res.data[0].CourseID))
+
+    axios.get("http://127.0.0.1:8000/coordinator/")
+    .then(res => setCoordinatorsData(res.data))
+    .catch((error) => {console.log(error)})
+
+   
+  };
+
+
   const handleSelect = () => {
     let tempInfo = InfoData[course];
     let tempGrade = GradesData[course];
@@ -134,9 +166,13 @@ const SearchCourse = () => {
     setGrade(tempGrade);
     setLetter(tempLetter);
     setNote(tempNote);
+
+
+    setCoordinators(coordinatorsData.filter(res => res.CourseID === "ENSF-609-FALL-2021"));
   };
 
-  const handleUpdate = () => {
+
+  const handleUpdate = () => {   console.log(coordinators)
     if (typeof info !== "undefined") {
       setFrame(
         <Container maxWidth="md">
@@ -207,6 +243,8 @@ const SearchCourse = () => {
             <div style={{ width: '100%' }}>
             <Paper className={classes.paper} elevation={3}>
             <Instructors />
+            <Coordinators coordinators = {coordinators}/>
+            <TA />
             </Paper>
             </div>
             </AccordionDetails>
@@ -410,12 +448,13 @@ const SearchCourse = () => {
     );
   };
 
-  useEffect(() => {
 
-    axios.get("http://127.0.0.1:8000/coordinator/")
-    .then(res => setTestValue(res.data[0].CourseID))
-    .catch(setTestValue("error"))
+  useEffect(() => {
     
+    if(pageToggle){
+      fillFields();
+      setPageToggle(false);
+    }
     
 
     if (searchInput !== "") {
@@ -443,7 +482,6 @@ const SearchCourse = () => {
               <div className="pt-2">
                 <TextField
                   fullWidth
-                  id="outlined-basic"
                   label="Search Courses"
                   variant="filled"
                   value={searchInput}
@@ -470,8 +508,6 @@ const SearchCourse = () => {
             <Grid item xs={false}>
               <FormControl className={classes.formControl}>
                 <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
                   value={course}
                   onChange={(e) => {
                     handleChange(e);
@@ -483,7 +519,7 @@ const SearchCourse = () => {
                   <MenuItem value="View All">View All</MenuItem>
                 </Select>
               </FormControl>
-              <InputLabel id="demo-simple-select-label">
+              <InputLabel>
                 Select Course
               </InputLabel>
             </Grid>
@@ -493,7 +529,6 @@ const SearchCourse = () => {
 
 
       <br/>
-      <div>{testValue}</div>
 
       {frame}
 

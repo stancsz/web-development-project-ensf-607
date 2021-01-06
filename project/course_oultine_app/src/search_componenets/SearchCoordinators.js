@@ -16,21 +16,21 @@ const useStyles = makeStyles({
 
 
 
-export default function SearchInstructors(props) {
+export default function SearchCoordinators(props) {
  
   
   const classes = useStyles();
 
   return (
     <>
-    <div align = "left"><u>Course Instructor</u></div>
+    
+    <div align = "left"><u>Course Coordinator</u></div>
     <br/>
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Section</TableCell>
-            <TableCell align="right">First Name</TableCell>
+            <TableCell>First Name</TableCell>
             <TableCell align="right">Family Name</TableCell>
             <TableCell align="right">Phone</TableCell>
             <TableCell align="right">Office</TableCell>

@@ -18,7 +18,7 @@ export default function SearchExaminations(props) {
 
   return (
     <>
-    <Typography variant="h7">
+    <Typography component={'span'}>
         <div dangerouslySetInnerHTML={ { __html: "Placeholder" } }></div>    
     </Typography>
     </>
