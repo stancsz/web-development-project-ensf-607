@@ -4,6 +4,7 @@ from .models import Coordinator
 
 
 class CoordinatorSerializer(serializers.ModelSerializer):
+    ModelID = serializers.CharField(max_length=100, required=True)
     CourseID = serializers.CharField(max_length=100, required=True)
     FName = serializers.CharField(max_length=100, required=False)
     LName = serializers.CharField(max_length=100, required=False)
@@ -14,6 +15,7 @@ class CoordinatorSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         # Once the request data has been validated, we can create a todo item instance in the database
         return Coordinator.objects.create(
+            ModelID=validated_data.get('ModelID'),
             CourseID=validated_data.get('CourseID'),
             FName=validated_data.get('FName'),
             LName=validated_data.get('LName'),
@@ -24,6 +26,7 @@ class CoordinatorSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         # Once the request data has been validated, we can update the todo item instance in the database
+        instance.ModelID = validated_data.get('ModelID', instance.ModelID)
         instance.CourseID = validated_data.get('CourseID', instance.CourseID)
         instance.FName = validated_data.get('FName', instance.FName)
         instance.LName = validated_data.get('LName', instance.LName)
@@ -36,6 +39,7 @@ class CoordinatorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Coordinator
         fields = (
+            'ModelID',
             'CourseID',
             'FName',
             'LName',

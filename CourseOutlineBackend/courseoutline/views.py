@@ -20,13 +20,15 @@ class CoordinatorView(
       # If an id is provided in the GET request, retrieve the Todo item by that id
       try:
         # Check if the todo item the user wants to update exists
-        queryset = Coordinator.objects.get(CourseID=CourseID)
+        # queryset = Coordinator.objects.get(CourseID=CourseID) # single record
+        queryset = Coordinator.objects.filter(CourseID=CourseID)
+
       except Coordinator.DoesNotExist:
         # If the todo item does not exist, return an error response
         return Response({'errors': 'This item does not exist.'}, status=400)
 
       # Serialize todo item from Django queryset object to JSON formatted data
-      read_serializer = CoordinatorSerializer(queryset)
+      read_serializer = CoordinatorSerializer(queryset, many=True)
 
     else:
       # Get all todo items from the database using Django's model ORM

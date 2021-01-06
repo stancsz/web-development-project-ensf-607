@@ -7,7 +7,7 @@ from django.db import models
 
 # model for au_weight table
 class AuWeight(models.Model):
-  CourseID = models.CharField(
+  ModelID = models.CharField(
     primary_key=True,
     max_length=100,
     null=False,
@@ -29,7 +29,7 @@ class AuWeight(models.Model):
 
 # model for content_category table
 class ContentCategory(models.Model):
-  CourseID = models.CharField(
+  ModelID = models.CharField(
     primary_key=True,
     max_length=100,
     null=False,
@@ -54,11 +54,18 @@ class ContentCategory(models.Model):
 # needed
 # model for coordinator table
 class Coordinator(models.Model):
-  CourseID = models.CharField(
+  ModelID = models.CharField(
     primary_key=True,
     max_length=100,
     null=False,
     blank=False
+  )
+
+  CourseID = models.CharField(
+    max_length=100,
+    null=False,
+    blank=False,
+    default=""
   )
 
   FName = models.TextField(
@@ -97,7 +104,7 @@ class Coordinator(models.Model):
 # needed
 # model for course table
 class Course(models.Model):
-  CourseID = models.CharField(
+  ModelID = models.CharField(
     primary_key=True,
     max_length=100,
     null=False,
@@ -138,7 +145,7 @@ class Course(models.Model):
 # needed
 # model for grade determination table
 class GradeDetermination(models.Model):
-  CourseID = models.CharField(
+  ModelID = models.CharField(
     primary_key=True,
     max_length=100,
     null=False,
@@ -167,7 +174,7 @@ class GradeDetermination(models.Model):
 # needed
 # model for grade distribution table
 class GradeDistribution(models.Model):
-  CourseID = models.CharField(
+  ModelID = models.CharField(
     primary_key=True,
     max_length=100,
     null=False,
@@ -196,7 +203,7 @@ class GradeDistribution(models.Model):
 # needed
 # model for info table
 class Info(models.Model):
-  CourseID = models.CharField(
+  ModelID = models.CharField(
     primary_key=True,
     max_length=100,
     null=False,
@@ -233,7 +240,7 @@ class Info(models.Model):
 # needed
 # model for lab table
 class Lab(models.Model):
-  CourseID = models.CharField(
+  ModelID = models.CharField(
     primary_key=True,
     max_length=100,
     null=False,
@@ -305,7 +312,7 @@ class Lab(models.Model):
 # needed
 # model for lecture table
 class Lecture(models.Model):
-  CourseID = models.CharField(
+  ModelID = models.CharField(
     primary_key=True,
     max_length=100,
     null=False,
@@ -354,7 +361,7 @@ class Lecture(models.Model):
 # needed
 # model for outcome table
 class Outcome(models.Model):
-  CourseID = models.CharField(
+  ModelID = models.CharField(
     primary_key=True,
     max_length=100,
     null=False,
@@ -390,7 +397,7 @@ class Outcome(models.Model):
 # needed
 # model for section table
 class Section(models.Model):
-  CourseID = models.CharField(
+  ModelID = models.CharField(
     primary_key=True,
     max_length=100,
     null=False,
@@ -419,7 +426,7 @@ class Section(models.Model):
 # needed
 # model for textbook table
 class Textbook(models.Model):
-  CourseID = models.CharField(
+  ModelID = models.CharField(
     primary_key=True,
     max_length=100,
     null=False,
@@ -456,7 +463,7 @@ class Textbook(models.Model):
 # needed
 # model for timetable table
 class Timetable(models.Model):
-  CourseID = models.CharField(
+  ModelID = models.CharField(
     primary_key=True,
     max_length=100,
     null=False,
@@ -493,7 +500,7 @@ class Timetable(models.Model):
 # needed
 # model for tutorial table
 class Tutorial(models.Model):
-  CourseID = models.CharField(
+  ModelID = models.CharField(
     primary_key=True,
     max_length=100,
     null=False,
