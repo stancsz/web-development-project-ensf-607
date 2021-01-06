@@ -7,6 +7,7 @@ import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 import {makeStyles} from "@material-ui/core/styles";
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
     table: {
@@ -16,17 +17,17 @@ const useStyles = makeStyles({
 
 export default function SearchNote(props) {
     // console.log(props.grade)
-    const keys=Object.keys(props.note)
-    console.log(keys)
+    //const keys=Object.keys(props.note)
+    //console.log(keys)
 
-    const classes = useStyles();
+    //const classes = useStyles();
 
     // return(<>
     //     </>);
 
     return (
         <>
-            <label className="label is-size-5 has-text-left pl-1">Notes</label>
+           {/*  <label className="label is-size-5 has-text-left pl-1">Notes</label>
             <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="simple table">
                 <TableHead>
@@ -50,7 +51,18 @@ export default function SearchNote(props) {
                     ))}
                 </TableBody>
             </Table>
-        </TableContainer>
+            </TableContainer> */}
+
+        <div align="left">
+        <b>
+        Notes:
+        </b>
+        
+        <Typography>
+        Placeholder: Examination notes.
+        </Typography>
+        </div>
+
         </>
     );
 }

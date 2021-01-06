@@ -172,7 +172,7 @@ const SearchCourse = () => {
   };
 
 
-  const handleUpdate = () => {   console.log(coordinators)
+  const handleUpdate = () => {  
     if (typeof info !== "undefined") {
       setFrame(
         <Container maxWidth="md">
