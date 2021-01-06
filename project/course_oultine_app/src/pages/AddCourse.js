@@ -61,9 +61,10 @@ const AddCourse = () => {
   const [save,setSave]=useState(false)
   const [info,setInfo]=useState({courseID:""})
   const [outcome,setOutcome]=useState("")
+  const[timeTable,setTimeTable]=useState("")
 useEffect(()=>{
-  if(outcome.courseID!=="")
-console.log(outcome)
+  if(timeTable.courseID!=="")
+console.log(timeTable)
 },[outcome])
   return (
     <React.Fragment>
@@ -131,7 +132,7 @@ console.log(outcome)
           </AccordionSummary>
           <AccordionDetails>
             <div style={{ width: "100%" }}>
-              <TimeTable/>
+              <TimeTable save={save} setSave={setSave} setTimeTable={setTimeTable} courseID={info.courseID}/>
               <Paper className={classes.paper} elevation={3}></Paper>
             </div>
           </AccordionDetails>

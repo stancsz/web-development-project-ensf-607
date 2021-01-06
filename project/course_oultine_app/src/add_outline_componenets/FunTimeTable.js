@@ -53,22 +53,23 @@ export default function BasicTable(props) {
   
     setSection(newSection)
     //setRows(newRows)
-    console.log(section)
+   
   }
-  /*
+  
 useEffect (()=>{
   if(props.save){
     let temp=[]
-    for (let i=0;i<outcomes.length;i++){
-      temp.push({courseID:props.courseID,OutcomeNum:outcomes[i].id,Description:outcomes[i].outcome,GraduateAttribute:attributeRows[i].attribute,InstructionLvl:attributeRows[i].InstructionLvl})
+    for (let i=0;i<section.length;i++){
+      temp.push({courseID:props.courseID,SectionNum:section[i].SectionNum,Days:section[i].Days,Time:section[i].Time,Location:section[i].Location})
     
   }
  
-  props.setOutcome(temp)
+  props.setTimeTable(temp)
+
   props.setSave(false)
   
 }
-},[props.save])*/
+},[props.save])
 
   
 
