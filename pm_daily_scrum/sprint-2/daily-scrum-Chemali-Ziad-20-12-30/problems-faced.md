@@ -1,0 +1,1 @@
+Trying to figure out primary keys for each table of the MYSQL

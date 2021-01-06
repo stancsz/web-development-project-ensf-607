@@ -1,0 +1,1 @@
+Create the tables in MYSQL server
