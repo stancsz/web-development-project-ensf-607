@@ -20,6 +20,7 @@ import ReactQuill from "react-quill";
 import MUIRichTextEditor from "mui-rte";
 import { Editor, EditorState } from "draft-js";
 import RichTextEditor from "react-rte";
+import TimeTable from "../add_outline_componenets/FunTimeTable"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -59,8 +60,11 @@ const AddCourse = () => {
   };
   const [save,setSave]=useState(false)
   const [info,setInfo]=useState({courseID:""})
-  
-
+  const [outcome,setOutcome]=useState("")
+useEffect(()=>{
+  if(outcome.courseID!=="")
+console.log(outcome)
+},[outcome])
   return (
     <React.Fragment>
       <AppBar position="sticky" color="default">
@@ -69,9 +73,9 @@ const AddCourse = () => {
             <Button variant="outlined" color="secondary" onClick={()=>{
               setSave(true)
               if(info.courseID==="")
-              alert("Please fill in course number,term, and year")
+             { alert("Please fill in course number,term, and year")
               
-                 
+            }   
                           
                }}>
               <SaveIcon />
@@ -94,7 +98,7 @@ const AddCourse = () => {
           <AccordionDetails>
             <div style={{ width: "100%" }}>
               <Paper className={classes.paper} elevation={3}>
-                <FunInfo save={save} setSave={setSave} setInfo={setInfo} info={info}/>
+                <FunInfo  setSave={setSave} setInfo={setInfo} info={info}/>
               </Paper>
             </div>
           </AccordionDetails>
@@ -111,7 +115,7 @@ const AddCourse = () => {
           <AccordionDetails>
             <div style={{ width: "100%" }}>
               <Paper className={classes.paper} elevation={3}>
-                <FunOutcome />
+                <FunOutcome save={save} setSave={setSave} setOutcome={setOutcome} courseID={info.courseID} />
               </Paper>
             </div>
           </AccordionDetails>
@@ -127,6 +131,7 @@ const AddCourse = () => {
           </AccordionSummary>
           <AccordionDetails>
             <div style={{ width: "100%" }}>
+              <TimeTable/>
               <Paper className={classes.paper} elevation={3}></Paper>
             </div>
           </AccordionDetails>

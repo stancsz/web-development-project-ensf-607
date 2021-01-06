@@ -35,10 +35,6 @@ export default function BasicTable(props) {
 
 
   const [attributeRows, setAttributeRows] = useState([{id: 1,   attribute: "", instructionLevel: "" }]);
-  const [attributes, setAttributes] = useState([{id: 1, outcomeNum: 1,  attribute: "", instructionLevel: "" }]);
-  const [chosenOutcome, setChosenOutcome] = useState([{id: 1, outcomeNum: 1,  attribute: "", instructionLevel: "" }]);
-  const [instructionLevel, setInstructionLevel] = useState([{id: 1, outcomeNum: 1,  attribute: "", instructionLevel: "" }]);
-
 
  const editAttribute =(id,attribute,instructionLvl)=>{
   let indx = attributeRows.findIndex((row) => row.id === id)
@@ -62,9 +58,21 @@ export default function BasicTable(props) {
   
     setOutcomes(newOutcomes)
     //setRows(newRows)
-    console.log(outcomes)
+   // console.log(outcomes)
   }
-
+useEffect (()=>{
+  if(props.save){
+    let temp=[]
+    for (let i=0;i<outcomes.length;i++){
+      temp.push({courseID:props.courseID,OutcomeNum:outcomes[i].id,Description:outcomes[i].outcome,GraduateAttribute:attributeRows[i].attribute,InstructionLvl:attributeRows[i].InstructionLvl})
+    
+  }
+ 
+  props.setOutcome(temp)
+  props.setSave(false)
+  
+}
+},[props.save])
 
   
 

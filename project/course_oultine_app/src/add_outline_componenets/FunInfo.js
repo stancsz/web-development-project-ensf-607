@@ -15,7 +15,7 @@ function FunInfo(props) {
     
 
     useEffect(()=>{
-        if(props.save && courseNumberInput!==""&&year!=="" && term!=="")
+        if( courseNumberInput!==""&&year!=="" && term!=="")
         {   var today = new Date();
             var dd = String(today.getDate()).padStart(2, '0');
             var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -29,7 +29,7 @@ function FunInfo(props) {
             props.setInfo({courseID : id,courseName : courseNameInput,courseInfo : courseInfo,courseHours : courseHours,academicCredit:academicCredit,calendarReference :calendarReference,DateCreated : today})
 
           
-
+            props.setSave(false)
         }
         else{
 
