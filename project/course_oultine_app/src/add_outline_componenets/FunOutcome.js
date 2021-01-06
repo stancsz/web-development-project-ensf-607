@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -22,106 +22,85 @@ const useStyles = makeStyles({
   },
 });
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
 
 
 
-export default function BasicTable() {
+
+export default function BasicTable(props) {
 
   const [count, setCount] = useState(2);
   const classes = useStyles();
-  const [rows, setRows] = useState([{ id: 1,  outcome: "" }]);
-  const [numbers,setNumbers]=useState([{id:1,num:1}])
+  
   const [outcomes,setOutcomes]=useState([{id:1,outcome:""}])
 
 
-  const [attributeRows, setAttributeRows] = useState([{id: 1, outcomeNum: 1,  attribute: "", instructionLevel: "" }]);
+  const [attributeRows, setAttributeRows] = useState([{id: 1,   attribute: "", instructionLevel: "" }]);
   const [attributes, setAttributes] = useState([{id: 1, outcomeNum: 1,  attribute: "", instructionLevel: "" }]);
   const [chosenOutcome, setChosenOutcome] = useState([{id: 1, outcomeNum: 1,  attribute: "", instructionLevel: "" }]);
   const [instructionLevel, setInstructionLevel] = useState([{id: 1, outcomeNum: 1,  attribute: "", instructionLevel: "" }]);
 
 
+ const editAttribute =(id,attribute,instructionLvl)=>{
+  let indx = attributeRows.findIndex((row) => row.id === id)
+  let newAttributes=attributeRows
+  if(attribute!=="")
+  newAttributes[indx].attribute=attribute
+  if(instructionLvl!=="")
+  newAttributes[indx].instructionLevel=instructionLvl
+  setAttributeRows(newAttributes)
+  console.log(attributeRows)
+ }
  
-  const editNums=(id,num)=>{
-    let indx = numbers.findIndex((num)=>num.id===id)
-    let newNums=numbers
-    //console.log(indx)
-    if(indx>=0)
-    newNums[indx]={id:id,num:num}
-    else
-    newNums.push({id:id,num:num})
-    
-    setNumbers(newNums)
-   // console.log(numbers)
-  }
 
   const editOutcomes=(id,outcome)=>{
     let indx = outcomes.findIndex((row) => row.id === id)
     let newOutcomes=outcomes
-    if(indx>=0)
-    newOutcomes[indx]={id:id,outcome:outcome}
-    else
-    newOutcomes.push({id:id,outcome:outcome})
+    
+    newOutcomes[indx].outcome=outcome
+    
+    
   
     setOutcomes(newOutcomes)
     //setRows(newRows)
-    //console.log(outcomes)
+    console.log(outcomes)
   }
 
 
-    const saveRow= (id) => {
-      
-      let numIndx = outcomes.findIndex((row) => row.id === id)
-      
-      let num=numbers[numIndx].num
-      let outcomeIndx=outcomes.findIndex((outcome)=> outcome.id===id)
-      let outcome=outcomes[outcomeIndx].outcome
-      let rowIndx = rows.findIndex((row) => row.id === id)
-      let newRows=rows
-      newRows[rowIndx]={ id: id, num:num, outcome: outcome }
-          
-     setRows(newRows)
-     console.log(rows)
-  };
+  
 
 
   const removeRow = (id) => {
-    let newRows = rows.filter((row) => row.id !== id)
-    
+    let newRows = outcomes.filter((row) => row.id !== id)
+    let newAttributeRows=attributeRows.filter((row)=> row.id!==id)
     for(let i = 0; i < newRows.length; i++){
       if(newRows[i].id > id){
         newRows[i].id = newRows[i].id - 1;
+        newAttributeRows[i].id=newAttributeRows[i].id-1;
       }
     }
-    setRows(newRows)
+    setAttributeRows(newAttributeRows)
+    setOutcomes(newRows)
   }
   
 
-  const addRow = (id) => {
+  const addRow = () => {
     // console.log(...rows)
 
-    let newRows = rows
+    let newRows = outcomes
     setCount(count+1)
-    let x=count
-    console.log("THIS IS "+x)
+    console.log(newRows)
+    let newAttributeRows=attributeRows
+newAttributeRows.push({id: attributeRows.length+1,   attribute: "", instructionLevel: "" })
+  setAttributeRows(newAttributeRows)
 
-    newRows.push({ id: rows.length + 1, outcome: "" })
-    setRows(newRows)
-    console.log(rows)
+    newRows.push({ id: outcomes.length + 1, outcome: "" })
+    setOutcomes(newRows)
+   // console.log(rows)
   }
 
 
-
-  const removeAttributeRow = (id) => {}
-  const saveAttributeRow = (id) => {}
   
-  const addAttributeRow = () => {
-    let newRows = attributeRows
-    newRows.push({id: 1, outcomeNum: 1,  attribute: "", instructionLevel: "" })
-    setAttributeRows(newRows)
-  }
+
 
 
 
@@ -146,7 +125,7 @@ export default function BasicTable() {
           </TableHead>
           <TableBody>
             
-            {rows.map((row) => (
+            {outcomes.map((row) => (
               <TableRow key={row.id}>
                 <TableCell component="th" scope="row">
 
@@ -165,7 +144,7 @@ export default function BasicTable() {
                     <br/>
                     <DeleteIcon  onClick={()=> removeRow(row.id)} />
 
-                    <SaveIcon onClick={()=>{ saveRow(row.id)}} />
+                    
                 </div>
 
               </TableRow>
@@ -210,17 +189,17 @@ export default function BasicTable() {
                 <TableCell component="th" scope="row">
 
 
-                <Select native>
-                  <option aria-label="None" value="" />
-                  {rows.map((x) => <option value={x.id}>{x.id}</option>)};
-                </Select>
+                <TextField id="standard-basic"  
+                inputProps={{style: { textAlign: 'center' }}}
+                value = {attributeRow.id} readOnly={true}
+                 />
 
 
 
                 </TableCell>
                 <TableCell align="right">
-                <Select native value> 
-                  <option aria-label="None" value="" />
+                <Select native  onChange={(e)=>editAttribute(attributeRow.id,e.target.value,"")}> 
+                  <option aria-label="None" value={attributeRow.attribute} />
                   <option value="A1. A knowledge base for engineering">
                   A1. A knowledge base for engineering
                   </option>
@@ -264,8 +243,8 @@ export default function BasicTable() {
 
                 <TableCell align="right">
 
-                <Select native>
-                  <option aria-label="None" value="" />
+                <Select native onChange={(e)=>editAttribute(attributeRow.id,"",e.target.value)}>
+                  <option aria-label="None" value={attributeRow.instructionLevel}/>
                   <option value="I (Introduced)">
                   I (Introduced)
                   </option>
@@ -279,21 +258,14 @@ export default function BasicTable() {
 
                 </TableCell>
 
-                <div className={classes.root}>
-                    <br/>
-                    <DeleteIcon  onClick={()=> removeAttributeRow()} />
-
-                    <SaveIcon onClick={()=>{ saveAttributeRow()}} />
-                </div>
+               
 
               </TableRow>
             ))}
           </TableBody>
         </Table>
         <br />
-        <Button variant="contained" color="primary" onClick={()=>{
-          addAttributeRow()
-        }}> +</Button>
+        
       </TableContainer>
 
 

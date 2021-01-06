@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FunInfo from "../add_outline_componenets/FunInfo.js";
 import FunGrade from "../add_outline_componenets/FunGrade";
 import FunOutcome from "../add_outline_componenets/FunOutcome.js";
@@ -57,13 +57,23 @@ const AddCourse = () => {
       { label: "OL", style: "ordered-list-item" },
     ],
   };
+  const [save,setSave]=useState(false)
+  const [info,setInfo]=useState({courseID:""})
+  
 
   return (
     <React.Fragment>
       <AppBar position="sticky" color="default">
         <Container maxWidth="md">
           <div className="pt-2 pb-2" align="center">
-            <Button variant="outlined" color="secondary">
+            <Button variant="outlined" color="secondary" onClick={()=>{
+              setSave(true)
+              if(info.courseID==="")
+              alert("Please fill in course number,term, and year")
+              
+                 
+                          
+               }}>
               <SaveIcon />
             </Button>
           </div>
@@ -84,7 +94,7 @@ const AddCourse = () => {
           <AccordionDetails>
             <div style={{ width: "100%" }}>
               <Paper className={classes.paper} elevation={3}>
-                <FunInfo />
+                <FunInfo save={save} setSave={setSave} setInfo={setInfo} info={info}/>
               </Paper>
             </div>
           </AccordionDetails>
