@@ -235,7 +235,7 @@ class GradeDistribution(models.Model):
   class Meta:
     db_table = 'GRADE_DISTRIBUTION'
 
-# todo: info
+# todo-done: info
 # model for info table
 class Info(models.Model):
   ModelID = models.CharField(

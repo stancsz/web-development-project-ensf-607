@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from .models import Coordinator
+from .models import Info
 
 
 class CoordinatorSerializer(serializers.ModelSerializer):
@@ -57,7 +58,7 @@ class InfoSerializer(serializers.ModelSerializer):
     UseCalc = serializers.CharField(max_length=100, required=False)
 
     def create(self, validated_data):
-        return Coordinator.objects.create(
+        return Info.objects.create(
             ModelID=validated_data.get('ModelID'),
             CourseID=validated_data.get('CourseID'),
             GradeNotes=validated_data.get('GradeNotes'),
@@ -77,7 +78,7 @@ class InfoSerializer(serializers.ModelSerializer):
         return instance
 
     class Meta:
-        model = Coordinator
+        model = Info
         fields = (
             'ModelID',
             'CourseID',
