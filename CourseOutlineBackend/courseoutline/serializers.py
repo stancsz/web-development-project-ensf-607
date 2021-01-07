@@ -3,6 +3,8 @@ from rest_framework import serializers
 from .models import Coordinator
 from .models import Info
 from .models import GradeDetermination
+from .models import Outcome
+from .models import Timetable
 
 
 class CoordinatorSerializer(serializers.ModelSerializer):
@@ -155,7 +157,7 @@ class OutcomeSerializer(serializers.ModelSerializer):
         return instance
 
     class Meta:
-        model = GradeDetermination
+        model = Outcome
         fields = (
             'ModelID',
             'CourseID',
@@ -163,4 +165,43 @@ class OutcomeSerializer(serializers.ModelSerializer):
             'Description',
             'GraduateAttribute',
             'InstructionLvl'
+        )
+
+class TimetableSerializer(serializers.ModelSerializer):
+    ModelID = serializers.CharField(max_length=100, required=True)
+    CourseID = serializers.CharField(max_length=100, required=True)
+    SectionNum = serializers.IntegerField(max_length=100, required=False)
+    Days = serializers.IntegerField(max_length=100, required=False)
+    Time = serializers.IntegerField(max_length=100, required=False)
+    Location = serializers.IntegerField(max_length=100, required=False)
+
+    def create(self, validated_data):
+        return GradeDetermination.objects.create(
+            ModelID=validated_data.get('ModelID'),
+            CourseID=validated_data.get('CourseID'),
+            SectionNum=validated_data.get('SectionNum'),
+            Days=validated_data.get('Days'),
+            Time=validated_data.get('Time'),
+            Location=validated_data.get('Location'),
+        )
+
+    def update(self, instance, validated_data):
+        instance.ModelID = validated_data.get('ModelID', instance.ModelID)
+        instance.CourseID = validated_data.get('CourseID', instance.CourseID)
+        instance.SectionNum = validated_data.get('SectionNum', instance.SectionNum)
+        instance.Days = validated_data.get('Days', instance.Days)
+        instance.Time = validated_data.get('Time', instance.Time)
+        instance.Location = validated_data.get('Location', instance.Location)
+        instance.save()
+        return instance
+
+    class Meta:
+        model = Timetable
+        fields = (
+            'ModelID',
+            'CourseID',
+            'SectionNum',
+            'Days',
+            'Time',
+            'Location'
         )
