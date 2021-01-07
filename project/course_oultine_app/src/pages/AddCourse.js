@@ -5,9 +5,11 @@ import FunOutcome from '../add_outline_componenets/FunOutcome.js'
 
 import Button from '@material-ui/core/Button';
 import { PDFDownloadLink, Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import {useSelector, useDispatch, Provider} from 'react-redux'
+import { Link } from 'react-router-dom';
+
 
 
 const styles = StyleSheet.create({
@@ -46,9 +48,25 @@ const MyDoc = ({courseNumberInput}, {courseNameInput}) => (
 );
 
 
+
+
+
+
 const AddCourse =()=>{    
 
     const [buttonText, setButtonText] = useState("Export as PDF");
+
+    const [pdfLink, setPdfLink] = useState("")
+
+
+
+    const [isReady, setIsReady] = useState(false);
+
+    useEffect(()=> {
+    setIsReady(true);
+    },[]);
+
+
     
 return (
   
@@ -58,16 +76,21 @@ return (
 <FunOutcome/>
 <FunGrade/>
 
-<Button variant="contained" onClick={() => 
-      
-      setButtonText(<PDFDownloadLink document={<MyDoc courseNumberInput = {FunInfo.courseNumberInput} 
-      courseNameInput = {FunInfo.courseNameInput}/>} fileName="courseoutline.pdf">
 
-      {({loading}) => (loading ? 'Loading document...' : 'Download Now')}
-      </PDFDownloadLink>)
-      
-    }>{buttonText}
-</Button>
+{isReady ? (
+<div>
+<Button variant="contained" color="default">
+<PDFDownloadLink document={<MyDoc courseNumberInput = {FunInfo.courseNumberInput} 
+        courseNameInput = {FunInfo.courseNameInput}/>} fileName="courseoutline.pdf">
+  
+        {({loading}) => (loading ? 'Loading document...' : 'Download Now')}
+        </PDFDownloadLink>
+        </Button>
+        </div>
+  
+
+) : ("") 
+}
 
 </React.Fragment>
 
