@@ -12,14 +12,14 @@ const useStyles = makeStyles({
 
 
 export default function SearchExaminations(props) {
- 
+ //console.log(props.examinations[0].Examination)
   
   const classes = useStyles();
 
   return (
     <>
     <Typography component={'span'}>
-        <div dangerouslySetInnerHTML={ { __html: "Placeholder" } }></div>    
+        <div align="left" dangerouslySetInnerHTML={ { __html: props.examinations[0].Examination} }></div>    
     </Typography>
     </>
   );

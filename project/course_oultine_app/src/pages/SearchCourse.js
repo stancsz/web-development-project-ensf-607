@@ -92,9 +92,10 @@ const SearchCourse = () => {
   const [note, setNote] = useState({});
   const [letter, setLetter] = useState({});
   const [textbook, setTextbook] = useState({});
+  const [description, setDescription] = useState({});
  
 
-  const [infoData, setInfoData] = useState();
+  const [infoData, setInfoData] = useState(); //COURSE
   const [outcomeData, setOutcomeData] = useState({});
   const [timetableData, setTimetableData] = useState({});
   const [instructorsData, setInstructorsData] = useState({});
@@ -103,7 +104,7 @@ const SearchCourse = () => {
   const [examinationsData, setExaminationsData] = useState({});
   const [calculatorData, setCalculatorData] = useState({});
   const [gradeDeterminationData, setGradeDeterminationData] = useState({});
-  const [noteData, setNoteData] = useState({});
+  const [noteExaminationDescriptionCalcData, setnoteExaminationDescriptionCalcData] = useState({});
   const [letterData, setLetterData] = useState({});
   const [textbookData, setTextbookData] = useState({});
   
@@ -158,7 +159,13 @@ const SearchCourse = () => {
     axios.get("http://127.0.0.1:8000/gradedetermination/")
     .then(res => setGradeDeterminationData(res.data))
     .catch((error) => {console.log(error)})
-   
+
+
+    axios.get("http://127.0.0.1:8000/info/")
+    .then(res => setnoteExaminationDescriptionCalcData(res.data))
+    .catch((error) => {console.log(error)})
+
+    
   };
 
 
@@ -172,11 +179,15 @@ const SearchCourse = () => {
     setInfo(tempInfo);
     
     setLetter(tempLetter);
-    setNote(tempNote);
+    
 
 
     setCoordinators(coordinatorsData.filter(res => res.CourseID === "ENSF-609-FALL-2021")); //REPLACE WITH COURSE
     setGradeDetermination(gradeDeterminationData.filter(res => res.CourseID === "ENSF-607-FALL-2020"));
+    setNote(noteExaminationDescriptionCalcData.filter(res => res.CourseID === "ENSF-607-FALL-2021"));
+    setExaminations(noteExaminationDescriptionCalcData.filter(res => res.CourseID === "ENSF-607-FALL-2021"));
+    setDescription(noteExaminationDescriptionCalcData.filter(res => res.CourseID === "ENSF-607-FALL-2021"));
+    setCalculator(noteExaminationDescriptionCalcData.filter(res => res.CourseID === "ENSF-607-FALL-2021"));
   };
 
 
@@ -204,7 +215,7 @@ const SearchCourse = () => {
             <AccordionDetails>
             <div style={{ width: '100%' }}>
               <Paper className={classes.paper} elevation={3}>
-              <Info info={info} />
+              <Info info={info} description={description} />
               </Paper>
             </div>
             </AccordionDetails>
@@ -268,7 +279,7 @@ const SearchCourse = () => {
             <AccordionDetails>
             <div style={{ width: '100%' }}>
             <Paper className={classes.paper} elevation={3}>
-            <Examinations />
+            <Examinations examinations = {examinations}/>
             </Paper>
             </div>
             </AccordionDetails>
@@ -284,7 +295,7 @@ const SearchCourse = () => {
             <AccordionDetails>
             <div style={{ width: '100%' }}>
             <Paper className={classes.paper} elevation={3}>
-            <Calculator />
+            <Calculator calculator = {calculator}/>
             </Paper>
             </div>
             </AccordionDetails>

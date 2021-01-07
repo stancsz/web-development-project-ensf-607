@@ -9,7 +9,7 @@ export default function SearchCalculator(props) {
     <>
         <div align="left">
         <Typography>
-        Placeholder: Calculators are not allowed during examinations.
+          {props.calculator[0].UseCalc}
         </Typography>
         </div>
 

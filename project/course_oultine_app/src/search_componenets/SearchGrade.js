@@ -16,9 +16,7 @@ const useStyles = makeStyles({
 });
 
 export default function SearchGrade(props) {
-    console.log(props)
     const keys=Object.keys(props.gradeDetermination)
-    console.log(keys)
 
     const classes = useStyles();
 
@@ -56,7 +54,7 @@ export default function SearchGrade(props) {
             </TableContainer>
             <Container maxWidth="md">
             <div align="right">
-                <b>Total:</b> 100%
+                <b>Total:</b> {Object.values(props.gradeDetermination).reduce((a,b) => a + b.Weight, 0)}%
             </div>
             </Container>
         </>

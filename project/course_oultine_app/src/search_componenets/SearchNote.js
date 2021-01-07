@@ -57,9 +57,8 @@ export default function SearchNote(props) {
         <b>
         Notes:
         </b>
-        
-        <Typography>
-        Placeholder: Examination notes.
+        <Typography component={'span'}>
+        <div align="left" dangerouslySetInnerHTML={ { __html: props.note[0].GradeNotes} }></div>    
         </Typography>
         </div>
 
