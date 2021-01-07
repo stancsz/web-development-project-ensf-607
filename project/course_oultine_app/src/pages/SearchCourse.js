@@ -155,6 +155,9 @@ const SearchCourse = () => {
     .then(res => setCoordinatorsData(res.data))
     .catch((error) => {console.log(error)})
 
+    axios.get("http://127.0.0.1:8000/gradedetermination/")
+    .then(res => setGradeDeterminationData(res.data))
+    .catch((error) => {console.log(error)})
    
   };
 
@@ -167,12 +170,13 @@ const SearchCourse = () => {
     let tempNote = NoteData[course];
     setOutcome(tempOutcome);
     setInfo(tempInfo);
-    setGradeDetermination(tempGrade);
+    
     setLetter(tempLetter);
     setNote(tempNote);
 
 
-    setCoordinators(coordinatorsData.filter(res => res.CourseID === "ENSF-609-FALL-2021"));
+    setCoordinators(coordinatorsData.filter(res => res.CourseID === "ENSF-609-FALL-2021")); //REPLACE WITH COURSE
+    setGradeDetermination(gradeDeterminationData.filter(res => res.CourseID === "ENSF-607-FALL-2020"));
   };
 
 

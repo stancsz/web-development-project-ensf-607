@@ -43,7 +43,7 @@ export default function SearchGrade(props) {
                                     {props.gradeDetermination[key].Component}
                                 </TableCell>
                                 <TableCell align="right">
-                                    {props.gradeDetermination[key]["Learning Outcome(s) Evaluated"]}
+                                    {props.gradeDetermination[key].OutcomeEvaluated}
                                 </TableCell>
                                 <TableCell align="right">
                                     {props.gradeDetermination[key].Weight}
