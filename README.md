@@ -1,3 +1,8 @@
+# Students:
+Ziad Chemali
+Lotfi Hasni
+Stanley Chen
+
 # Installation
 
 $ pip install -r requirements.txt
