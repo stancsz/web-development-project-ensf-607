@@ -1,7 +1,7 @@
 # Students:
-Ziad Chemali
-Lotfi Hasni
-Stanley Chen
+- Ziad Chemali
+- Lotfi Hasni
+- Stanley Chen
 
 # Installation
 
