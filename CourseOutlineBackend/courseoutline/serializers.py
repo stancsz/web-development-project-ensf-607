@@ -5,7 +5,7 @@ from .models import Info
 from .models import GradeDetermination
 from .models import Outcome
 from .models import Timetable
-
+from .models import GradeDistribution
 
 class CoordinatorSerializer(serializers.ModelSerializer):
     ModelID = serializers.CharField(max_length=100, required=True)
@@ -170,10 +170,10 @@ class OutcomeSerializer(serializers.ModelSerializer):
 class TimetableSerializer(serializers.ModelSerializer):
     ModelID = serializers.CharField(max_length=100, required=True)
     CourseID = serializers.CharField(max_length=100, required=True)
-    SectionNum = serializers.IntegerField(max_length=100, required=False)
-    Days = serializers.IntegerField(max_length=100, required=False)
-    Time = serializers.IntegerField(max_length=100, required=False)
-    Location = serializers.IntegerField(max_length=100, required=False)
+    SectionNum = serializers.CharField(max_length=100, required=False)
+    Days = serializers.CharField(max_length=100, required=False)
+    Time = serializers.CharField(max_length=100, required=False)
+    Location = serializers.CharField(max_length=100, required=False)
 
     def create(self, validated_data):
         return GradeDetermination.objects.create(
@@ -204,4 +204,39 @@ class TimetableSerializer(serializers.ModelSerializer):
             'Days',
             'Time',
             'Location'
+        )
+
+class GradeDistributionSerializer(serializers.ModelSerializer):
+    ModelID = serializers.CharField(max_length=100, required=True)
+    CourseID = serializers.CharField(max_length=100, required=True)
+    LowerLimit = serializers.IntegerField(max_length=100, required=False)
+    UpperLimit = serializers.IntegerField(max_length=100, required=False)
+    LetterGrade = serializers.CharField(max_length=100, required=False)
+
+    def create(self, validated_data):
+        return GradeDetermination.objects.create(
+            ModelID=validated_data.get('ModelID'),
+            CourseID=validated_data.get('CourseID'),
+            LowerLimit=validated_data.get('LowerLimit'),
+            UpperLimit=validated_data.get('UpperLimit'),
+            LetterGrade=validated_data.get('LetterGrade'),
+        )
+
+    def update(self, instance, validated_data):
+        instance.ModelID = validated_data.get('ModelID', instance.ModelID)
+        instance.CourseID = validated_data.get('CourseID', instance.CourseID)
+        instance.LowerLimit = validated_data.get('LowerLimit', instance.LowerLimit)
+        instance.UpperLimit = validated_data.get('UpperLimit', instance.UpperLimit)
+        instance.LetterGrade = validated_data.get('LetterGrade', instance.LetterGrade)
+        instance.save()
+        return instance
+
+    class Meta:
+        model = GradeDistribution
+        fields = (
+            'ModelID',
+            'CourseID',
+            'LowerLimit',
+            'UpperLimit',
+            'LetterGrade'
         )
