@@ -105,6 +105,14 @@ useEffect (()=>{
 
   return (
     <>
+
+    <div>
+    Update the timetable information below. In the "Day(s) of the Week" column, 
+    use M,T,W,R,F,S,U as the codes for Monday - Sunday (e.g., MWF). In the 
+    "Time" column, specify the time range in 24 hour MDT (Calgary time) format (e.g., 13:00-13:50).
+    </div><br/>
+
+
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <colgroup>
