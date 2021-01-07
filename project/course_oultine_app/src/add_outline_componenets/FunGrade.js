@@ -13,6 +13,8 @@ import Grid from '@material-ui/core/Grid';
 import DeleteIcon from '@material-ui/icons/Delete';
 import SaveIcon from '@material-ui/icons/Save';
 import { Container } from '@material-ui/core';
+import RichTextEditor from "react-rte";
+
 
 const FunGrade=()=> {
     var defaultTexts = ["a) You must either achieve at least 50% on the final exam or achieve at least 50% on the weighted average of the midterm and final exam. You must also achieve an average of at least 50% on the lab section of the course. If you do not satisfy these caveats, you will not receive a passing grade.",
@@ -139,8 +141,8 @@ function FinalGradeTable() {
     };
 
     const removeRow = (id) => {
-        let newRows = rows.filter((row) => row.id !== id)
 
+        let newRows = rows.filter((row) => row.id !== id)
         setRows(newRows)
     }
     const addRow = (id) => {
@@ -152,22 +154,37 @@ function FinalGradeTable() {
         setRows(newRows)
         console.log(rows)
     }
+
+    const executeDeleteDeterminationButton = (id) => {
+        let indx = enteredVals.findIndex((row) => row.id === id)
+        if (typeof enteredVals[indx] !== "undefined") {
+        setGradeTotal(gradeTotal - enteredVals[indx].val)
+        }
+
+        setEnteredVals(enteredVals.filter((row) => row.id !== id))
+        
+        removeRow(id)
+        
+    }
+    
+
     return (
         <>
             <br />
             <TableContainer component={Paper}>
                 <Table className={classes.table} aria-label="simple table">
                     <colgroup>
-                        <col width="20%" />
+                        <col width="40%" />
                         <col width="40%" />
                         <col width="20%" />
-
+                                              
                     </colgroup>
                     <TableHead>
                         <TableRow>
-                            <TableCell>Component</TableCell>
-                            <TableCell>Learning Outcome(s) Evaluated</TableCell>
-                            <TableCell>Weight</TableCell>
+                            <TableCell><div align="left">Component</div></TableCell>
+                            <TableCell><div align="left">Learning Outcome(s) Evaluated</div></TableCell>
+                            <TableCell><div align="center">Weight</div></TableCell>
+                            <TableCell></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -179,13 +196,13 @@ function FinalGradeTable() {
                                         editNums(row.id,e.target.value)
                                     }} />
                                 </TableCell>
-                                <TableCell><TextField id="standard-basic" fullWidth={true} onChange={(e) => {
+                                <TableCell><TextField id="standard-basic"  onChange={(e) => {
 
                                     ediOutcomes(row.id,e.target.value)
                                 }} />
                                 </TableCell>
 
-                                <TableCell >
+                                <TableCell>
                                 <TextField error={toggleError}  helperText={errorHelper} //added
                                 id="standard-basic" onChange={(e) => {
 
@@ -202,53 +219,26 @@ function FinalGradeTable() {
                                 </TableCell>
 
 
-                                <div className={classes.root} align="center">
-                                    <Grid container spacing={3}>
-                                        <Grid item xs>
-                                            <Paper className={classes.paper}><Button
-                                                variant="contained"
-                                                color="secondary"
-                                                className={classes.button}
-                                                size="small"
-                                                startIcon={<DeleteIcon />}
-                                                onClick={()=>
-                                                    removeRow(row.id)}
-                                            >
-                                                Delete
-                                            </Button></Paper>
-                                        </Grid>
-                                        <Grid item xs>
-                                            <Paper className={classes.paper}><Button
-                                                variant="contained"
-                                                color="primary"
-                                                size="small"
-                                                className={classes.button}
-                                                startIcon={<SaveIcon />}
-                                                onClick={()=>{
-                                                    saveRow(row.id)
-                                                }}
-                                            >
-                                                Save
-                                            </Button></Paper>
-                                        </Grid>
-
-                                    </Grid>
+                                <div className={classes.root}>
+                                  <br/>
+                                  <DeleteIcon onClick={()=>executeDeleteDeterminationButton(row.id)} />         
                                 </div>
 
                             </TableRow>
                         ))}
                     </TableBody>
+                    
                     <colgroup>
-                        <col width="20%" />
-                        <col width="40%" />
-                        <col width="20%" >    
-                        </col>
+                    <col width="40%" />
+                    <col width="40%" />
+                    <col width="20%" />
+                    
                     </colgroup>
                     <TableHead>
                         <TableRow>
                             <TableCell></TableCell>
                             <TableCell></TableCell>
-                            <TableCell><b>Total:</b> {gradeTotal}%</TableCell>
+                            <TableCell><div align="center"><b>Total:</b> {gradeTotal}%</div></TableCell>
                         </TableRow>
                     </TableHead>
                 </Table>
@@ -324,18 +314,19 @@ function LetterGradeTable() {
                 <Table className={classes.table} aria-label="simple table">
                     <colgroup>
                         <col width="20%" />
+                        <col width="30%" />
                         <col width="20%" />
-                        <col width="20%" />
-                        <col width="20%" />
-
+                        <col width="30%" />
+1
 
                     </colgroup>
                     <TableHead>
                         <TableRow>
-                            <TableCell>Letter Grade</TableCell>
-                            <TableCell>Lower Boundary</TableCell>
-                            <TableCell>Total Mark (T) </TableCell>
-                            <TableCell>Upper Boundary</TableCell>
+                            <TableCell><div align="center">Letter Grade</div></TableCell>
+                            <TableCell><div align="center">Lower Boundary</div></TableCell>
+                            <TableCell><div align="center">Total Mark (T) </div></TableCell>
+                            <TableCell><div align="center">Upper Boundary</div></TableCell>
+                            <TableCell align="right"></TableCell>
 
                         </TableRow>
                     </TableHead>
@@ -357,7 +348,7 @@ function LetterGradeTable() {
                                 }} />
                                 </TableCell>
 
-                                <TableCell ><th>≤  T  &lt;</th>
+                                <TableCell ><div align="center"><th>≤  T  &lt;</th></div>
                                 </TableCell>
 
                                 <TableCell ><TextField id="standard-basic" onChange={(e) => {
@@ -371,37 +362,9 @@ function LetterGradeTable() {
                                 </TableCell>
 
 
-                                <div className={classes.root} align="center">
-                                    <Grid container spacing={3}>
-                                        <Grid item xs>
-                                            <Paper className={classes.paper}><Button
-                                                variant="contained"
-                                                color="secondary"
-                                                className={classes.button}
-                                                size="small"
-                                                startIcon={<DeleteIcon />}
-                                                onClick={()=>
-                                                    removeRow(row.id)}
-                                            >
-                                                Delete
-                                            </Button></Paper>
-                                        </Grid>
-                                        <Grid item xs>
-                                            <Paper className={classes.paper}><Button
-                                                variant="contained"
-                                                color="primary"
-                                                size="small"
-                                                className={classes.button}
-                                                startIcon={<SaveIcon />}
-                                                onClick={()=>{
-                                                    saveRow(row.id)
-                                                }}
-                                            >
-                                                Save
-                                            </Button></Paper>
-                                        </Grid>
-
-                                    </Grid>
+                                <div className={classes.root}>
+                                   <br/>
+                                <DeleteIcon  onClick={()=> removeRow(row.id)}/>
                                 </div>
 
                             </TableRow>
@@ -418,6 +381,48 @@ function LetterGradeTable() {
 }
 
 function Notes() {
+
+    const toolbarConfig = {
+        display: ["INLINE_STYLE_BUTTONS", "BLOCK_TYPE_BUTTONS", "HISTORY_BUTTONS"],
+        INLINE_STYLE_BUTTONS: [
+          { label: "Bold", style: "BOLD", className: "custom-css-class" },
+          { label: "Italic", style: "ITALIC" },
+          { label: "Underline", style: "UNDERLINE" },
+        ],
+        BLOCK_TYPE_DROPDOWN: [
+          { label: "Normal", style: "unstyled" },
+          { label: "Heading Large", style: "header-one" },
+          { label: "Heading Medium", style: "header-two" },
+          { label: "Heading Small", style: "header-three" },
+        ],
+        BLOCK_TYPE_BUTTONS: [
+          { label: "UL", style: "unordered-list-item" },
+          { label: "OL", style: "ordered-list-item" },
+        ],
+      };
+
+    const [gradeNotesEditorState, setGradeNotesEditorState] = useState(
+        RichTextEditor.createEmptyValue()
+      );
+
+    return(
+        <>
+             <RichTextEditor
+                value={gradeNotesEditorState}
+                onChange={(value) => setGradeNotesEditorState(value)}
+                onClick={console.log(
+                    gradeNotesEditorState.toString("html")
+                )}
+                toolbarConfig={toolbarConfig}
+                placeholder="Write grade related notes here..."
+            />
+
+        </>
+
+    );
+
+
+    {/* 
     const [count, setCount] = useState(2);
     const classes = useStyles();
     const [rows, setRows] = useState([{ id: 1,  outcome: "" }]);
@@ -550,7 +555,7 @@ function Notes() {
                 }}> +</Button>
             </TableContainer>
         </>
-    );
+    );*/}
 }
 
 
