@@ -125,3 +125,42 @@ class GradeDeterminationSerializer(serializers.ModelSerializer):
             'OutcomeEvaluated',
             'Weight'
         )
+
+class OutcomeSerializer(serializers.ModelSerializer):
+    ModelID = serializers.CharField(max_length=100, required=True)
+    CourseID = serializers.CharField(max_length=100, required=True)
+    OutcomeNum = serializers.IntegerField(max_length=100, required=False)
+    Description = serializers.CharField(max_length=100, required=False)
+    GraduateAttribute = serializers.CharField(max_length=100, required=False)
+    InstructionLvl = serializers.CharField(max_length=100, required=False)
+
+    def create(self, validated_data):
+        return GradeDetermination.objects.create(
+            ModelID=validated_data.get('ModelID'),
+            CourseID=validated_data.get('CourseID'),
+            OutcomeNum=validated_data.get('OutcomeNum'),
+            Description=validated_data.get('Description'),
+            GraduateAttribute=validated_data.get('GraduateAttribute'),
+            InstructionLvl=validated_data.get('InstructionLvl'),
+        )
+
+    def update(self, instance, validated_data):
+        instance.ModelID = validated_data.get('ModelID', instance.ModelID)
+        instance.CourseID = validated_data.get('CourseID', instance.CourseID)
+        instance.OutcomeNum = validated_data.get('OutcomeNum', instance.OutcomeNum)
+        instance.Description = validated_data.get('Description', instance.Description)
+        instance.GraduateAttribute = validated_data.get('GraduateAttribute', instance.GraduateAttribute)
+        instance.InstructionLvl = validated_data.get('InstructionLvl', instance.InstructionLvl)
+        instance.save()
+        return instance
+
+    class Meta:
+        model = GradeDetermination
+        fields = (
+            'ModelID',
+            'CourseID',
+            'OutcomeNum',
+            'Description',
+            'GraduateAttribute',
+            'InstructionLvl'
+        )
