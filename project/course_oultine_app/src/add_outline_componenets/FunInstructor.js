@@ -31,31 +31,16 @@ export default function BasicTable(props) {
   const [count, setCount] = useState(2);
   const classes = useStyles();
   
-  const [section,setSection]=useState([{id:1,SectionNum:"",Days:"",Time:"",Location:""}])
-
+ 
+  const [coordinator,setCoordinator]=useState({FName:"",LName:"",Phone:"",Office:"",Email:""})
+  const [instructor,setInstructor]=useState([{id:1,SectionNum:"",FName:"",LName:"",Phone:"",Office:"",Email:""}])
+  const [ta,setTa]=useState([{id:1,SectionNum:"",FName:"",LName:"",Phone:"",Office:"",Email:""}])
 
  
 
 
-  const editSection=(id,SectionNum,Days,Time,Location)=>{
-    let indx = section.findIndex((row) => row.id === id)
-    let newSection=section
-    
-    if(SectionNum!=="")
-    newSection[indx].SectionNum=SectionNum
-    if(Days!=="")
-    newSection[indx].Days=Days
-    if(Time!=="")
-    newSection[indx].Time=Time
-    if(Location!=="")
-    newSection[indx].Location=Location
-    
-  
-    setSection(newSection)
-    //setRows(newRows)
-   
-  }
-  
+
+  /*
 useEffect (()=>{
   if(props.save){
     let temp=[]
@@ -69,30 +54,106 @@ useEffect (()=>{
   props.setSave(false)
   
 }
-},[props.save])
+},[props.save])*/
 
   
 
+const editCoordinator=(FName,LName,Phone,Office,Email)=>{
+    let temp=coordinator
+if(FName!=="")
+temp.FName=FName
+if(LName!=="")
+temp.LName=LName
+if (Phone!=="")
+temp.Phone=Phone
+if(Office!=="")
+temp.Office=Office
+if(Email!=="")
+temp.Email=Email
 
-  const removeRow = (id) => {
-    let newRows = section.filter((row) => row.id !== id)
+setCoordinator(temp)
+console.log(coordinator)
+
+}
+const editInstructor=(id,Section,FName,LName,Phone,Office,Email)=>{
+    let indx = instructor.findIndex((row) => row.id === id)
+    let temp=instructor
+    if(Section!=="")
+    temp[indx].SectionNum=Section
+    if(FName!=="")
+    temp[indx].FName=FName
+    if(LName!=="")
+    temp[indx].LName=LName
+    if (Phone!=="")
+    temp[indx].Phone=Phone
+    if(Office!=="")
+    temp[indx].Office=Office
+    if(Email!=="")
+    temp[indx].Email=Email
+    
+    setInstructor(temp)
+    //console.log(instructor)
+    
+}
+
+const editTa=(id,Section,FName,LName,Phone,Office,Email)=>{
+    let indx = ta.findIndex((row) => row.id === id)
+    let temp=ta
+    if(Section!=="")
+    temp[indx].SectionNum=Section
+    if(FName!=="")
+    temp[indx].FName=FName
+    if(LName!=="")
+    temp[indx].LName=LName
+    if (Phone!=="")
+    temp[indx].Phone=Phone
+    if(Office!=="")
+    temp[indx].Office=Office
+    if(Email!=="")
+    temp[indx].Email=Email
+    
+    setTa(temp)
+    console.log(ta)
+    
+}
+  const removeInstructor = (id) => {
+    let newRows = instructor.filter((row) => row.id !== id)
     
    
-    setSection(newRows)
+    setInstructor(newRows)
   }
   
+  const removeTa = (id) => {
+    let newRows = ta.filter((row) => row.id !== id)
+    
+   
+    setTa(newRows)
+  }
 
-  const addRow = () => {
+  const addInstructor = () => {
     // console.log(...rows)
 
-    let newRows = section
+    let newRows = instructor
     setCount(count+1)
     //console.log(newRows)
    
 
 
-    newRows.push({ id: count,SectionNum:"",Days:"",Time:"",Location:"" })
-    setSection(newRows)
+    newRows.push({ id: count,SectionNum:"",FName:"",LName:"",Phone:"",Office:"",Email:""})
+    setInstructor(newRows)
+   // console.log(rows)
+  }
+  const addTa = () => {
+    // console.log(...rows)
+
+    let newRows = ta
+    setCount(count+1)
+    //console.log(newRows)
+   
+
+
+    newRows.push({ id: count,SectionNum:"",FName:"",LName:"",Phone:"",Office:"",Email:""})
+    setTa(newRows)
    // console.log(rows)
   }
 
@@ -106,48 +167,104 @@ useEffect (()=>{
   return (
     <>
       <TableContainer component={Paper}>
+      <label className="label has-text-info is-size-5 has-text-left" color="Primary">
+                A. Course Coordinator
+              </label>
         <Table className={classes.table} aria-label="simple table">
           <colgroup>
-            <col width="10%" />
-            <col width="30%" />
-            <col width="30%" />
             <col width="20%" />
+            <col width="20%" />
+            <col width="30%" />
             <col width="10%" />
+            <col width="20%" />
             
 
           </colgroup>
           <TableHead>
             <TableRow>
-              <TableCell>Section</TableCell>
-              <TableCell align="right">Days</TableCell>
-              <TableCell align="right">Time</TableCell>
-              <TableCell align="right">Location</TableCell>
-              <TableCell align="right"></TableCell>
+            
+              <TableCell align="right">First Name</TableCell>
+              <TableCell align="right">Family Name</TableCell>
+              <TableCell align="right">Phone</TableCell>
+              <TableCell align="right">Office</TableCell>
+              <TableCell align="right">Email</TableCell>
+          
 
             </TableRow>
           </TableHead>
           <TableBody>
             
-            {section.map((row) => (
+            
+              <TableRow >
+              <TableCell align="right"><TextField id="standard-basic" fullWidth={true} onChange={(e)=>{ editCoordinator(e.target.value,"","","","")}
+                } /></TableCell>
+
+                <TableCell align="right"><TextField id="standard-basic" fullWidth={true} onChange={(e)=>{ editCoordinator("",e.target.value,"","","")}
+                } /></TableCell>
+                <TableCell align="right"><TextField id="standard-basic" fullWidth={true} onChange={(e)=>{ editCoordinator("","",e.target.value,"","")}
+                } /></TableCell>
+                <TableCell align="right"><TextField id="standard-basic" fullWidth={true} onChange={(e)=>{ editCoordinator("","","",e.target.value,"")}
+                }/></TableCell>
+                <TableCell align="right"><TextField id="standard-basic" fullWidth={true} onChange={(e)=>{ editCoordinator("","","","",e.target.value)}
+                } /></TableCell>
+
+           
+
+              </TableRow>
+            
+          </TableBody>
+        </Table>
+        <br />
+        
+      </TableContainer>
+      <TableContainer component={Paper}>
+      <label className="label has-text-info is-size-5 has-text-left" color="Primary">
+                B. Course Instructors
+              </label>
+        <Table className={classes.table} aria-label="simple table">
+          <colgroup>
+          <col width="10%" />
+            <col width="20%" />
+            <col width="20%" />
+            <col width="30%" />
+            <col width="5%" />
+            <col width="15%" />
+            
+          </colgroup>
+          <TableHead>
+            <TableRow>
+            <TableCell align="right">Section Number</TableCell>
+            <TableCell align="right">First Name</TableCell>
+              <TableCell align="right">Family Name</TableCell>
+              <TableCell align="right">Phone</TableCell>
+              <TableCell align="right">Office</TableCell>
+              <TableCell align="right">Email</TableCell>
+
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            
+            {instructor.map((row) => (
               <TableRow key={row.id}>
-                <TableCell component="th" scope="row">
+                   <TableCell align="right"><TextField id="standard-basic" fullWidth={true} onChange={(e)=>{ editInstructor(row.id,e.target.value,"","","","","")}
+                } /></TableCell>
+                   <TableCell align="right"><TextField id="standard-basic" fullWidth={true} onChange={(e)=>{ editInstructor(row.id,"",e.target.value,"","","","")}
+                } /></TableCell>
 
-                <TextField id="standard-basic"  
-                inputProps={{style: { textAlign: 'center' }}}
-                 onChange ={(e)=>{ editSection(row.id,e.target.value,"","","")}}
-                 />
+                <TableCell align="right"><TextField id="standard-basic" fullWidth={true} onChange={(e)=>{ editInstructor(row.id,"","",e.target.value,"","","")}
+                } /></TableCell>
+                <TableCell align="right"><TextField id="standard-basic" fullWidth={true} onChange={(e)=>{ editInstructor(row.id,"","","",e.target.value,"","")}
+                } /></TableCell>
+                <TableCell align="right"><TextField id="standard-basic" fullWidth={true} onChange={(e)=>{ editInstructor(row.id,"","","","",e.target.value,"")}
+                }/></TableCell>
+                <TableCell align="right"><TextField id="standard-basic" fullWidth={true} onChange={(e)=>{ editInstructor(row.id,"","","","","",e.target.value)}
+                } /></TableCell>
 
-                </TableCell>
-                <TableCell align="right"><TextField id="standard-basic" fullWidth={true} onChange={(e)=>{ editSection(row.id,"",e.target.value,"","")}
-                } /></TableCell>
-                <TableCell align="right"><TextField id="standard-basic" fullWidth={true} onChange={(e)=>{ editSection(row.id,"","",e.target.value,"")}
-                } /></TableCell>
-                <TableCell align="right"><TextField id="standard-basic" fullWidth={true} onChange={(e)=>{ editSection(row.id,"","","",e.target.value)}
-                } /></TableCell>
+           
 
                 <div className={classes.root}>
                     <br/>
-                    <DeleteIcon  onClick={()=> removeRow(row.id)} />
+                    <DeleteIcon  onClick={()=> removeInstructor(row.id)} />
 
                     
                 </div>
@@ -158,11 +275,70 @@ useEffect (()=>{
         </Table>
         <br />
         <Button variant="contained" color="primary" onClick={()=>{
-          addRow()
+          addInstructor()
         }}> +</Button>
       </TableContainer>
-      
+      <TableContainer component={Paper}>
+      <label className="label has-text-info is-size-5 has-text-left" color="Primary">
+                C. Course TAs
+              </label>
+        <Table className={classes.table} aria-label="simple table">
+          <colgroup>
+          <col width="10%" />
+            <col width="20%" />
+            <col width="20%" />
+            <col width="30%" />
+            <col width="5%" />
+            <col width="15%" />
+            
+          </colgroup>
+          <TableHead>
+            <TableRow>
+            <TableCell align="right">Section Number</TableCell>
+            <TableCell align="right">First Name</TableCell>
+              <TableCell align="right">Family Name</TableCell>
+              <TableCell align="right">Phone</TableCell>
+              <TableCell align="right">Office</TableCell>
+              <TableCell align="right">Email</TableCell>
 
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            
+            {ta.map((row) => (
+              <TableRow key={row.id}>
+                   <TableCell align="right"><TextField id="standard-basic" fullWidth={true} onChange={(e)=>{ editTa(row.id,e.target.value,"","","","","")}
+                } /></TableCell>
+                   <TableCell align="right"><TextField id="standard-basic" fullWidth={true} onChange={(e)=>{ editTa(row.id,"",e.target.value,"","","","")}
+                } /></TableCell>
+
+                <TableCell align="right"><TextField id="standard-basic" fullWidth={true} onChange={(e)=>{ editTa(row.id,"","",e.target.value,"","","")}
+                } /></TableCell>
+                <TableCell align="right"><TextField id="standard-basic" fullWidth={true} onChange={(e)=>{ editTa(row.id,"","","",e.target.value,"","")}
+                } /></TableCell>
+                <TableCell align="right"><TextField id="standard-basic" fullWidth={true} onChange={(e)=>{ editTa(row.id,"","","","",e.target.value,"")}
+                }/></TableCell>
+                <TableCell align="right"><TextField id="standard-basic" fullWidth={true} onChange={(e)=>{ editTa(row.id,"","","","","",e.target.value)}
+                } /></TableCell>
+
+           
+
+                <div className={classes.root}>
+                    <br/>
+                    <DeleteIcon  onClick={()=> removeTa(row.id)} />
+
+                    
+                </div>
+
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+        <br />
+        <Button variant="contained" color="primary" onClick={()=>{
+          addTa()
+        }}> +</Button>
+      </TableContainer>
      
     </>
   );

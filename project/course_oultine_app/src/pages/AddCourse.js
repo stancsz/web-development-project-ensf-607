@@ -21,7 +21,7 @@ import MUIRichTextEditor from "mui-rte";
 import { Editor, EditorState } from "draft-js";
 import RichTextEditor from "react-rte";
 import TimeTable from "../add_outline_componenets/FunTimeTable"
-
+import Instructor from "../add_outline_componenets/FunInstructor"
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -148,6 +148,7 @@ console.log(timeTable)
           </AccordionSummary>
           <AccordionDetails>
             <div style={{ width: "100%" }}>
+              <Instructor/>
               <Paper className={classes.paper} elevation={3}></Paper>
             </div>
           </AccordionDetails>
