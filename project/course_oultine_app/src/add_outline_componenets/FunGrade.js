@@ -46,12 +46,14 @@ const useStyles = makeStyles({
 
 function FinalGradeTable() {
 
+    //added
     const [gradeTotal, setGradeTotal] = useState(0)
     const [enteredVals, setEnteredVals] = useState([{id:1, val: 0}])
     const [gradeCheck, setGradeCheck] = useState(true);
     const [toggleError, setToggleError] = useState(false);
     const [errorHelper, setErrorHelper] = useState("")
 
+    //added
     const editGradeTotal=(id, enteredVal)=>{
         let indx = enteredVals.findIndex((row) => row.id === id)
         let newVal = enteredVals        
@@ -93,8 +95,6 @@ function FinalGradeTable() {
         }
             
     }
-
-
 
 
     const [count, setCount] = useState(2);
@@ -186,17 +186,17 @@ function FinalGradeTable() {
                                 </TableCell>
 
                                 <TableCell >
-                                <TextField error={toggleError}  helperText={errorHelper}
+                                <TextField error={toggleError}  helperText={errorHelper} //added
                                 id="standard-basic" onChange={(e) => {
 
-                                    if(e.target.value > 100)
+                                    if(e.target.value > 100) //added
                                         e.target.value = 100
                                     else if(e.target.value < 0)
                                         e.target.value = 0
                                 
 
                                     ediOutcomes(row.id,e.target.value)
-                                    editGradeTotal(row.id,e.target.value)
+                                    editGradeTotal(row.id,e.target.value) //added
 
                                 }} />
                                 </TableCell>
@@ -349,7 +349,10 @@ function LetterGradeTable() {
                                     }} />
                                 </TableCell>
                                 <TableCell><TextField id="standard-basic" fullWidth={true} onChange={(e) => {
-
+                                    if(e.target.value > 100)
+                                        e.target.value = 100
+                                    if(e.target.value < 0)
+                                        e.target.value = 0
                                     ediOutcomes(row.id,e.target.value)
                                 }} />
                                 </TableCell>
@@ -358,6 +361,10 @@ function LetterGradeTable() {
                                 </TableCell>
 
                                 <TableCell ><TextField id="standard-basic" onChange={(e) => {
+                                    if(e.target.value > 100)
+                                        e.target.value = 100
+                                    if(e.target.value < 0)
+                                        e.target.value = 0
 
                                     ediOutcomes(row.id,e.target.value)
                                 }} />
