@@ -130,7 +130,7 @@ export default function MenuAppBar() {
                     button
                     key={"View Latest Outline"}
                     component={Link}
-                    to="/"
+                    to="/LastAdded"
                   >
                     <ListItemIcon>
                       <NewReleasesIcon />

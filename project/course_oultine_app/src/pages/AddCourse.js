@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FunInfo from "../add_outline_componenets/FunInfo.js";
 import FunGrade from "../add_outline_componenets/FunGrade";
 import FunOutcome from "../add_outline_componenets/FunOutcome.js";
@@ -20,6 +20,7 @@ import ReactQuill from "react-quill";
 import MUIRichTextEditor from "mui-rte";
 import { Editor, EditorState } from "draft-js";
 import RichTextEditor from "react-rte";
+import TimeTable from "../add_outline_componenets/FunTimeTable"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -57,13 +58,27 @@ const AddCourse = () => {
       { label: "OL", style: "ordered-list-item" },
     ],
   };
-
+  const [save,setSave]=useState(false)
+  const [info,setInfo]=useState({courseID:""})
+  const [outcome,setOutcome]=useState("")
+  const[timeTable,setTimeTable]=useState("")
+useEffect(()=>{
+  if(timeTable.courseID!=="")
+console.log(timeTable)
+},[outcome])
   return (
     <React.Fragment>
       <AppBar position="sticky" color="default">
         <Container maxWidth="md">
           <div className="pt-2 pb-2" align="center">
-            <Button variant="outlined" color="secondary">
+            <Button variant="outlined" color="secondary" onClick={()=>{
+              setSave(true)
+              if(info.courseID==="")
+             { alert("Please fill in course number,term, and year")
+              
+            }   
+                          
+               }}>
               <SaveIcon />
             </Button>
           </div>
@@ -84,7 +99,7 @@ const AddCourse = () => {
           <AccordionDetails>
             <div style={{ width: "100%" }}>
               <Paper className={classes.paper} elevation={3}>
-                <FunInfo />
+                <FunInfo  setSave={setSave} setInfo={setInfo} info={info}/>
               </Paper>
             </div>
           </AccordionDetails>
@@ -101,7 +116,7 @@ const AddCourse = () => {
           <AccordionDetails>
             <div style={{ width: "100%" }}>
               <Paper className={classes.paper} elevation={3}>
-                <FunOutcome />
+                <FunOutcome save={save} setSave={setSave} setOutcome={setOutcome} courseID={info.courseID} />
               </Paper>
             </div>
           </AccordionDetails>
@@ -117,6 +132,7 @@ const AddCourse = () => {
           </AccordionSummary>
           <AccordionDetails>
             <div style={{ width: "100%" }}>
+              <TimeTable save={save} setSave={setSave} setTimeTable={setTimeTable} courseID={info.courseID}/>
               <Paper className={classes.paper} elevation={3}></Paper>
             </div>
           </AccordionDetails>
