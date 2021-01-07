@@ -17,13 +17,10 @@ const useStyles = makeStyles({
 
 export default function SearchGrade(props) {
     console.log(props)
-    const keys=Object.keys(props.grade)
+    const keys=Object.keys(props.gradeDetermination)
     console.log(keys)
 
     const classes = useStyles();
-
-    // return(<>
-    //     </>);
 
     return (
         <>
@@ -43,13 +40,13 @@ export default function SearchGrade(props) {
                         {keys.map((key) => (
                             <TableRow key={key}>
                                 <TableCell component="th" scope="row">
-                                    {props.grade[key].Component}
+                                    {props.gradeDetermination[key].Component}
                                 </TableCell>
                                 <TableCell align="right">
-                                    {props.grade[key]["Learning Outcome(s) Evaluated"]}
+                                    {props.gradeDetermination[key]["Learning Outcome(s) Evaluated"]}
                                 </TableCell>
                                 <TableCell align="right">
-                                    {props.grade[key].Weight}
+                                    {props.gradeDetermination[key].Weight}
                                 </TableCell>
 
                             </TableRow>

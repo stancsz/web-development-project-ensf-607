@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useReducer, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -12,6 +12,7 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import DeleteIcon from '@material-ui/icons/Delete';
 import SaveIcon from '@material-ui/icons/Save';
+import { Container } from '@material-ui/core';
 
 const FunGrade=()=> {
     var defaultTexts = ["a) You must either achieve at least 50% on the final exam or achieve at least 50% on the weighted average of the midterm and final exam. You must also achieve an average of at least 50% on the lab section of the course. If you do not satisfy these caveats, you will not receive a passing grade.",
@@ -30,6 +31,7 @@ const FunGrade=()=> {
             <label className="label is-size-5 has-text-left pl-1">Letter Grades</label>
             <div align="center"><LetterGradeTable/></div>
         </div>
+        
     );
 }
 
@@ -40,10 +42,61 @@ const useStyles = makeStyles({
         minWidth: 650,
     },
 });
-function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
-}
+
+
 function FinalGradeTable() {
+
+    const [gradeTotal, setGradeTotal] = useState(0)
+    const [enteredVals, setEnteredVals] = useState([{id:1, val: 0}])
+    const [gradeCheck, setGradeCheck] = useState(true);
+    const [toggleError, setToggleError] = useState(false);
+    const [errorHelper, setErrorHelper] = useState("")
+
+    const editGradeTotal=(id, enteredVal)=>{
+        let indx = enteredVals.findIndex((row) => row.id === id)
+        let newVal = enteredVals        
+        if(indx >= 0)
+            newVal[indx]={id:id, val:enteredVal}
+        else
+            newVal.push({id:id,  val:enteredVal})
+        setEnteredVals(newVal)
+        let gradeTotalTemp = newVal.reduce((x, y) => x = x + +y.val, 0)
+        if(gradeTotalTemp > 100){
+            setGradeTotal(100)
+            setToggleError(true)
+            setGradeCheck(false)
+            setErrorHelper("Enter ints totalling 100");
+        }
+        else if(gradeTotalTemp < 0){
+            setGradeTotal(0)
+            setToggleError(true)
+            setGradeCheck(false)
+            setErrorHelper("Enter ints totalling 100");
+        }
+        else if(isNaN(gradeTotalTemp)){
+            setGradeTotal(0)
+            setToggleError(true)
+            setGradeCheck(false)
+            setErrorHelper("Enter ints totalling 100");
+        }
+        else if(gradeTotalTemp !== parseInt(gradeTotalTemp)){
+            setGradeTotal(0)
+            setToggleError(true)
+            setGradeCheck(false)
+            setErrorHelper("Enter ints totalling 100");
+        }
+        else{
+            setGradeTotal(gradeTotalTemp)
+            setToggleError(false)
+            setGradeCheck(true)
+            setErrorHelper("");
+        }
+            
+    }
+
+
+
+
     const [count, setCount] = useState(2);
     const classes = useStyles();
     const [rows, setRows] = useState([{ id: 1,  outcome: "" }]);
@@ -132,9 +185,19 @@ function FinalGradeTable() {
                                 }} />
                                 </TableCell>
 
-                                <TableCell ><TextField id="standard-basic" onChange={(e) => {
+                                <TableCell >
+                                <TextField error={toggleError}  helperText={errorHelper}
+                                id="standard-basic" onChange={(e) => {
+
+                                    if(e.target.value > 100)
+                                        e.target.value = 100
+                                    else if(e.target.value < 0)
+                                        e.target.value = 0
+                                
 
                                     ediOutcomes(row.id,e.target.value)
+                                    editGradeTotal(row.id,e.target.value)
+
                                 }} />
                                 </TableCell>
 
@@ -175,6 +238,19 @@ function FinalGradeTable() {
                             </TableRow>
                         ))}
                     </TableBody>
+                    <colgroup>
+                        <col width="20%" />
+                        <col width="40%" />
+                        <col width="20%" >    
+                        </col>
+                    </colgroup>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell></TableCell>
+                            <TableCell></TableCell>
+                            <TableCell><b>Total:</b> {gradeTotal}%</TableCell>
+                        </TableRow>
+                    </TableHead>
                 </Table>
                 <br />
                 <Button variant="contained" color="primary" onClick={()=>{

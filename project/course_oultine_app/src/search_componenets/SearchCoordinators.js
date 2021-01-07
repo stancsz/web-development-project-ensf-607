@@ -15,7 +15,6 @@ const useStyles = makeStyles({
 });
 
 export default function SearchCoordinators(props) {
-  console.log(props.coordinators);
 
   const classes = useStyles();
 

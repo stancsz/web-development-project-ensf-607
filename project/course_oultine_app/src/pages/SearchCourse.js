@@ -80,29 +80,33 @@ const SearchCourse = () => {
     setCourse(event.target.value);
   };
 
+  const [info, setInfo] = useState();
   const [outcome, setOutcome] = useState({});
   const [timetable, setTimetable] = useState({});
   const [instructors, setInstructors] = useState({});
   const [coordinators, setCoordinators] = useState({});
+  const [assistants, setAssistants] = useState({});
   const [examinations, setExaminations] = useState({});
   const [calculator, setCalculator] = useState({});
-  const [textbook, setTextbook] = useState({});
-  const [grade, setGrade] = useState({});
-  const [info, setInfo] = useState();
-  const [letter, setLetter] = useState({});
+  const [gradeDetermination, setGradeDetermination] = useState({});
   const [note, setNote] = useState({});
+  const [letter, setLetter] = useState({});
+  const [textbook, setTextbook] = useState({});
+ 
 
+  const [infoData, setInfoData] = useState();
   const [outcomeData, setOutcomeData] = useState({});
   const [timetableData, setTimetableData] = useState({});
   const [instructorsData, setInstructorsData] = useState({});
   const [coordinatorsData, setCoordinatorsData] = useState({});
+  const [assistantsData, setAssistantsData] = useState({});
   const [examinationsData, setExaminationsData] = useState({});
   const [calculatorData, setCalculatorData] = useState({});
-  const [textbookData, setTextbookData] = useState({});
-  const [gradeData, setGradeData] = useState({});
-  const [infoData, setInfoData] = useState();
-  const [letterData, setLetterData] = useState({});
+  const [gradeDeterminationData, setGradeDeterminationData] = useState({});
   const [noteData, setNoteData] = useState({});
+  const [letterData, setLetterData] = useState({});
+  const [textbookData, setTextbookData] = useState({});
+  
 
   const [frame, setFrame] = useState();
   const [searchInput, setSearchInput] = useState("");
@@ -139,8 +143,8 @@ const SearchCourse = () => {
     rows.push({ id: rowval["courseID"], datetime: rowval["DateCreated"] });
   }
 
-  const [temp, setTemp] = useState();
 
+  
   const fillFields = () => {
 
     
@@ -163,7 +167,7 @@ const SearchCourse = () => {
     let tempNote = NoteData[course];
     setOutcome(tempOutcome);
     setInfo(tempInfo);
-    setGrade(tempGrade);
+    setGradeDetermination(tempGrade);
     setLetter(tempLetter);
     setNote(tempNote);
 
@@ -291,7 +295,7 @@ const SearchCourse = () => {
             <AccordionDetails>
             <div style={{ width: '100%' }}>
             <Paper className={classes.paper} elevation={3}>
-            <Grade grade={grade} />
+            <Grade gradeDetermination={gradeDetermination} />
             </Paper>
             <br/>
             <Paper className={classes.paper} elevation={3}>
