@@ -611,7 +611,7 @@ export default function BasicTable(props) {
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table 2">
           <colgroup>
-            <col width="50%" />
+            <col width="20%" />
             <col width="30%" />
             <col width="30%" />
           </colgroup>

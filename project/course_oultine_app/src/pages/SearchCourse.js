@@ -133,7 +133,7 @@ ScrollTop.propTypes = {
 
 
 
-
+//props
 const SearchCourse = (props) => {
 
   const courseList = Object.keys(InfoData);
