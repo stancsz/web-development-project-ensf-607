@@ -6,6 +6,10 @@ from .models import GradeDetermination
 from .models import Outcome
 from .models import Timetable
 from .models import GradeDistribution
+from .models import Lecture
+from .models import Tutorial
+from .models import Course
+
 
 class CoordinatorSerializer(serializers.ModelSerializer):
     ModelID = serializers.CharField(max_length=100, required=True)
@@ -52,6 +56,7 @@ class CoordinatorSerializer(serializers.ModelSerializer):
             'Email'
         )
 
+
 class InfoSerializer(serializers.ModelSerializer):
     ModelID = serializers.CharField(max_length=100, required=True)
     CourseID = serializers.CharField(max_length=100, required=True)
@@ -91,6 +96,7 @@ class InfoSerializer(serializers.ModelSerializer):
             'UseCalc'
         )
 
+
 class GradeDeterminationSerializer(serializers.ModelSerializer):
     ModelID = serializers.CharField(max_length=100, required=True)
     CourseID = serializers.CharField(max_length=100, required=True)
@@ -127,6 +133,7 @@ class GradeDeterminationSerializer(serializers.ModelSerializer):
             'OutcomeEvaluated',
             'Weight'
         )
+
 
 class OutcomeSerializer(serializers.ModelSerializer):
     ModelID = serializers.CharField(max_length=100, required=True)
@@ -167,6 +174,7 @@ class OutcomeSerializer(serializers.ModelSerializer):
             'InstructionLvl'
         )
 
+
 class TimetableSerializer(serializers.ModelSerializer):
     ModelID = serializers.CharField(max_length=100, required=True)
     CourseID = serializers.CharField(max_length=100, required=True)
@@ -206,6 +214,7 @@ class TimetableSerializer(serializers.ModelSerializer):
             'Location'
         )
 
+
 class GradeDistributionSerializer(serializers.ModelSerializer):
     ModelID = serializers.CharField(max_length=100, required=True)
     CourseID = serializers.CharField(max_length=100, required=True)
@@ -239,4 +248,144 @@ class GradeDistributionSerializer(serializers.ModelSerializer):
             'LowerLimit',
             'UpperLimit',
             'LetterGrade'
+        )
+
+
+class LectureSerializer(serializers.ModelSerializer):
+    ModelID = serializers.CharField(max_length=100, required=True)
+    CourseID = serializers.CharField(max_length=100, required=True)
+    LectureNum = serializers.CharField(max_length=100, required=False)
+    FName = serializers.CharField(max_length=100, required=False)
+    LName = serializers.CharField(max_length=100, required=False)
+    Phone = serializers.CharField(max_length=100, required=False)
+    Office = serializers.CharField(max_length=100, required=False)
+    Email = serializers.CharField(max_length=100, required=False)
+
+    def create(self, validated_data):
+        return GradeDetermination.objects.create(
+            ModelID=validated_data.get('ModelID'),
+            CourseID=validated_data.get('CourseID'),
+            LectureNum=validated_data.get('LectureNum'),
+            FName=validated_data.get('FName'),
+            LName=validated_data.get('LName'),
+            Phone=validated_data.get('Phone'),
+            Office=validated_data.get('Office'),
+            Email=validated_data.get('Email'),
+        )
+
+    def update(self, instance, validated_data):
+        instance.ModelID = validated_data.get('ModelID', instance.ModelID)
+        instance.CourseID = validated_data.get('CourseID', instance.CourseID)
+        instance.LectureNum = validated_data.get('LectureNum', instance.LectureNum)
+        instance.FName = validated_data.get('FName', instance.FName)
+        instance.LName = validated_data.get('LName', instance.LName)
+        instance.Phone = validated_data.get('Phone', instance.Phone)
+        instance.Office = validated_data.get('Office', instance.Office)
+        instance.Email = validated_data.get('Email', instance.Email)
+        instance.save()
+        return instance
+
+    class Meta:
+        model = Lecture
+        fields = (
+            'ModelID',
+            'CourseID',
+            'LectureNum',
+            'FName',
+            'LName',
+            'Phone',
+            'Office',
+            'Email'
+        )
+
+
+class TutorialSerializer(serializers.ModelSerializer):
+    ModelID = serializers.CharField(max_length=100, required=True)
+    CourseID = serializers.CharField(max_length=100, required=True)
+    TutorialNum = serializers.IntegerField(max_length=100, required=False)
+    FName = serializers.IntegerField(max_length=100, required=False)
+    LName = serializers.CharField(max_length=100, required=False)
+    Phone = serializers.CharField(max_length=100, required=False)
+    Office = serializers.CharField(max_length=100, required=False)
+    Email = serializers.CharField(max_length=100, required=False)
+
+    def create(self, validated_data):
+        return GradeDetermination.objects.create(
+            ModelID=validated_data.get('ModelID'),
+            CourseID=validated_data.get('CourseID'),
+            TutorialNum=validated_data.get('TutorialNum'),
+            FName=validated_data.get('FName'),
+            LName=validated_data.get('LName'),
+            Phone=validated_data.get('Phone'),
+            Office=validated_data.get('Office'),
+            Email=validated_data.get('Email'),
+        )
+
+    def update(self, instance, validated_data):
+        instance.ModelID = validated_data.get('ModelID', instance.ModelID)
+        instance.CourseID = validated_data.get('CourseID', instance.CourseID)
+        instance.TutorialNum = validated_data.get('TutorialNum', instance.TutorialNum)
+        instance.FName = validated_data.get('FName', instance.FName)
+        instance.LName = validated_data.get('LName', instance.LName)
+        instance.Phone = validated_data.get('Phone', instance.Phone)
+        instance.Office = validated_data.get('Office', instance.Office)
+        instance.Email = validated_data.get('Email', instance.Email)
+        instance.save()
+        return instance
+
+    class Meta:
+        model = Tutorial
+        fields = (
+            'ModelID',
+            'CourseID',
+            'TutorialNum',
+            'FName',
+            'LName',
+            'Phone',
+            'Office',
+            'Email'
+        )
+
+
+class CourseSerializer(serializers.ModelSerializer):
+    ModelID = serializers.CharField(max_length=100, required=True)
+    CourseID = serializers.CharField(max_length=100, required=True)
+    CourseHours = serializers.IntegerField(max_length=100, required=False)
+    CourseName = serializers.IntegerField(max_length=100, required=False)
+    CalenderRefrence = serializers.CharField(max_length=100, required=False)
+    AcademicCredit = serializers.CharField(max_length=100, required=False)
+    DateCreated = serializers.CharField(max_length=100, required=False)
+
+    def create(self, validated_data):
+        return GradeDetermination.objects.create(
+            ModelID=validated_data.get('ModelID'),
+            CourseID=validated_data.get('CourseID'),
+            CourseHours=validated_data.get('CourseHours'),
+            CourseName=validated_data.get('CourseName'),
+            CalenderRefrence=validated_data.get('CalenderRefrence'),
+            AcademicCredit=validated_data.get('AcademicCredit'),
+            DateCreated=validated_data.get('DateCreated'),
+        )
+
+    def update(self, instance, validated_data):
+        instance.ModelID = validated_data.get('ModelID', instance.ModelID)
+        instance.CourseID = validated_data.get('CourseID', instance.CourseID)
+        instance.CourseHours = validated_data.get('CourseHours', instance.CourseHours)
+        instance.CourseName = validated_data.get('CourseName', instance.CourseName)
+        instance.CalenderRefrence = validated_data.get('CalenderRefrence', instance.CalenderRefrence)
+        instance.AcademicCredit = validated_data.get('AcademicCredit', instance.AcademicCredit)
+        instance.DateCreated = validated_data.get('DateCreated', instance.DateCreated)
+        instance.save()
+        return instance
+
+    class Meta:
+        model = Course
+        fields = (
+            'ModelID',
+            'CourseID',
+            'CourseHours',
+            'CourseName',
+            'CalenderRefrence',
+            'AcademicCredit',
+            'DateCreated'
         )
