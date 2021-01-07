@@ -40,21 +40,30 @@ export default function BasicTable(props) {
 
 
 
-  /*
+  
 useEffect (()=>{
   if(props.save){
-    let temp=[]
-    for (let i=0;i<section.length;i++){
-      temp.push({courseID:props.courseID,SectionNum:section[i].SectionNum,Days:section[i].Days,Time:section[i].Time,Location:section[i].Location})
+      console.log("PASSED PROP"+ props.courseID)
+    let instructorList=[]
+    let taList=[]
+    for (let i=0;i<instructor.length;i++){
+      instructorList.push({CourseID:props.courseID,LectureNum:instructor[i].SectionNum,Fname:instructor[i].FName,LName:instructor[i].LName,Phone:instructor[i].Phone,Office:instructor[i].Office,Email:instructor[i].Email})
     
   }
+  for (let i=0;i<ta.length;i++){
+    taList.push({CourseID:props.courseID,LabNum:instructor[i].SectionNum,NumberofLabs:0,LabType:"",SafetyTaught:"",Fname:instructor[i].FName,LName:instructor[i].LName,Phone:instructor[i].Phone,Office:instructor[i].Office,Email:instructor[i].Email})
+  
+}
+let temp={CourseID:props.courseID, FName:coordinator.FName, LName:coordinator.LName, Phone:coordinator.Phone, Office:coordinator.Office, Email:coordinator.Email}
+ props.setCoordinator(temp)
+ props.setInstructor(instructorList)
+ props.setTa(taList)
  
-  props.setTimeTable(temp)
 
   props.setSave(false)
   
 }
-},[props.save])*/
+},[props.save])
 
   
 

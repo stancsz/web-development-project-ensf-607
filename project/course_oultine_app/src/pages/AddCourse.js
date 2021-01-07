@@ -62,10 +62,19 @@ const AddCourse = () => {
   const [info,setInfo]=useState({courseID:""})
   const [outcome,setOutcome]=useState("")
   const[timeTable,setTimeTable]=useState("")
+  const [coordinator,setcoordinator]=useState("")
+  const[instructor,setInstructor]=useState("")
+  const[ta,setTa]=useState("")
 useEffect(()=>{
-  if(timeTable.courseID!=="")
-console.log(timeTable)
-},[outcome])
+  if(instructor.CourseID!=="")
+{console.log("Instructor table: ")
+console.log(instructor)
+console.log("coordinator tabke: ")
+console.log(coordinator)
+console.log("ta table ")
+console.log(ta)
+}
+},[coordinator,instructor,ta])
   return (
     <React.Fragment>
       <AppBar position="sticky" color="default">
@@ -73,7 +82,7 @@ console.log(timeTable)
           <div className="pt-2 pb-2" align="center">
             <Button variant="outlined" color="secondary" onClick={()=>{
               setSave(true)
-              if(info.courseID==="")
+              if(info.CourseID==="")
              { alert("Please fill in course number,term, and year")
               
             }   
@@ -116,7 +125,7 @@ console.log(timeTable)
           <AccordionDetails>
             <div style={{ width: "100%" }}>
               <Paper className={classes.paper} elevation={3}>
-                <FunOutcome save={save} setSave={setSave} setOutcome={setOutcome} courseID={info.courseID} />
+                <FunOutcome save={save} setSave={setSave} setOutcome={setOutcome} courseID={info.CourseID} />
               </Paper>
             </div>
           </AccordionDetails>
@@ -132,7 +141,7 @@ console.log(timeTable)
           </AccordionSummary>
           <AccordionDetails>
             <div style={{ width: "100%" }}>
-              <TimeTable save={save} setSave={setSave} setTimeTable={setTimeTable} courseID={info.courseID}/>
+              <TimeTable save={save} setSave={setSave} setTimeTable={setTimeTable} courseID={info.CourseID}/>
               <Paper className={classes.paper} elevation={3}></Paper>
             </div>
           </AccordionDetails>
@@ -148,7 +157,7 @@ console.log(timeTable)
           </AccordionSummary>
           <AccordionDetails>
             <div style={{ width: "100%" }}>
-              <Instructor/>
+              <Instructor save={save} setSave={setSave} setCoordinator={setcoordinator} setInstructor={setInstructor} setTa={setTa} courseID={info.CourseID}/>
               <Paper className={classes.paper} elevation={3}></Paper>
             </div>
           </AccordionDetails>

@@ -26,14 +26,14 @@ function FunInfo(props) {
             
             today = yyyy+"-"+dd+"-"+mm+" "+hh+":"+min+":"+sec
             let id=courseNumberInput+"-"+term+"-"+year
-            props.setInfo({courseID : id,courseName : courseNameInput,courseInfo : courseInfo,courseHours : courseHours,academicCredit:academicCredit,calendarReference :calendarReference,DateCreated : today})
+            props.setInfo({CourseID : id,courseName : courseNameInput,courseInfo : courseInfo,courseHours : courseHours,academicCredit:academicCredit,calendarReference :calendarReference,DateCreated : today})
 
           
             props.setSave(false)
         }
         else{
 
-            props.setInfo({courseID : "",courseName : "",courseInfo : "",courseHours : "",academicCredit:"",calendarReference : "",DateCreated : ""})
+            props.setInfo({CourseID : "",courseName : "",courseInfo : "",courseHours : "",academicCredit:"",calendarReference : "",DateCreated : ""})
         props.setSave(false)}
     },[courseNumberInput,year,term]);
 
