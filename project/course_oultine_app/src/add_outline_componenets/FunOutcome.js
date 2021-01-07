@@ -14,6 +14,7 @@ import Grid from '@material-ui/core/Grid';
 import DeleteIcon from '@material-ui/icons/Delete';
 import SaveIcon from '@material-ui/icons/Save';
 import Select from '@material-ui/core/Select';
+import Typography from "@material-ui/core/Typography";
 
 
 const useStyles = makeStyles({
@@ -108,9 +109,86 @@ newAttributeRows.push({id: attributeRows.length+1,   attribute: "", instructionL
 
 
   
+  function mathContentElementOptions() {
+    return(
+    <Select native  onChange={(e)=>{}}> 
+    <option aria-label="None" value={""} />
+    <option value="DiffCalc">
+    DiffCalc
+    </option>
+    <option value="DiffEq">
+    DiffEq
+    </option>
+    <option value="Discrete">
+    Discrete
+    </option>
+    <option value="IntCalc">
+    IntCalc
+    </option>
+    <option value="LinAlg">
+    LinAlg
+    </option>
+    <option value="NMeths">
+    NMeths
+    </option>
+    <option value="Prob">
+    Prob
+    </option>
+    <option value="Stats">
+    Stats
+    </option>
+  </Select>
+    )
+  }
+
+
+  function naturalScienceElementOptions() {
+    return(
+    <Select native  onChange={(e)=>{}}> 
+    <option aria-label="None" value={""} />
+    <option value="Chem">
+    Chem
+    </option>
+    <option value="Earth">
+    Earth
+    </option>
+    <option value="Life">
+    Life
+    </option>
+    <option value="Phys">
+    Phys
+    </option>
+  </Select>
+    )
+  }
 
 
 
+  function complementaryOptions() {
+    return(
+    <Select native  onChange={(e)=>{}}> 
+    <option aria-label="None" value={""} />
+    <option value="EngEcon">
+    EngEcon
+    </option>
+    <option value="H&S">
+    H&S
+    </option>
+    <option value="HumSS">
+    HumSS
+    </option>
+    <option value="Impacts">
+    Impacts
+    </option>
+    <option value="OWComm">
+    OWComm
+    </option>
+    <option value="PEthics">
+    PEthics
+    </option>
+  </Select>
+    )
+  }
 
 
   return (
@@ -223,7 +301,7 @@ newAttributeRows.push({id: attributeRows.length+1,   attribute: "", instructionL
                   <option value="A5. Use of engineering tools">
                   A5. Use of engineering tools
                   </option>
-                  <option value=" A6. Individual and team work">
+                  <option value="A6. Individual and team work">
                   A6. Individual and team work
                   </option>
                   <option value="A7. Communication skills">
@@ -272,12 +350,203 @@ newAttributeRows.push({id: attributeRows.length+1,   attribute: "", instructionL
             ))}
           </TableBody>
         </Table>
-        <br />
-        
+        <br /> 
+      </TableContainer>
+
+      <br/>
+      <Typography variant = "h5">
+          Course Content Categories
+        </Typography>
+
+        <div align="center">
+        <br/>
+        The following table displays the course content categories and their AU (Accreditation Unit) percentages
+      </div>
+      <br/>
+
+
+
+      <TableContainer component={Paper}>
+        <Table className={classes.table} aria-label="simple table 2">
+          <colgroup>
+            <col width="30%" />
+            <col width="25%" />
+            <col width="25%" />
+            <col width="20%" />
+            
+
+          </colgroup>
+          <TableHead>
+            <TableRow>
+              <TableCell>Course Content Category</TableCell>
+              <TableCell>Content Element</TableCell>
+              <TableCell>Content Element</TableCell>
+              <TableCell>AU %</TableCell>
+
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            
+              <TableRow key={"Math"}>
+                <TableCell component="th" scope="row">
+                <TextField id="standard-basic"  
+                inputProps={{style: { textAlign: 'center' }}}
+                value = {"Math"} readOnly={true}
+                 />
+                </TableCell>
+                <TableCell align="right">
+               {mathContentElementOptions()}
+                </TableCell>
+                <TableCell align="right">
+               {mathContentElementOptions()}
+                </TableCell>
+                <TableCell component="th" scope="row">
+                <TextField id="standard-basic"  
+                 onChange={(e) => {
+                  if(e.target.value > 100)
+                    e.target.value = 100
+                  if(e.target.value < 0)
+                    e.target.value = 0
+                }}
+                inputProps={{style: { textAlign: 'center' }}}
+                 />
+                </TableCell>
+                </TableRow>
+               
+
+                <TableRow key={"Natural Science"}>
+                <TableCell component="th" scope="row">
+                <TextField id="standard-basic"  
+                inputProps={{style: { textAlign: 'center' }}}
+                value = {"Natural Science"} readOnly={true}
+                 />
+                </TableCell>
+                <TableCell align="right">
+               {naturalScienceElementOptions()}
+                </TableCell>
+                <TableCell align="right">
+               {naturalScienceElementOptions()}
+                </TableCell>
+                <TableCell component="th" scope="row">
+                <TextField id="standard-basic"  
+                onChange={(e) => {
+                  if(e.target.value > 100)
+                    e.target.value = 100
+                  if(e.target.value < 0)
+                    e.target.value = 0
+                }}
+                inputProps={{style: { textAlign: 'center' }}}
+                 />
+                </TableCell>
+                </TableRow>
+
+
+                <TableRow key={"Complementary Studies"}>
+                <TableCell component="th" scope="row">
+                <TextField id="standard-basic"  
+                inputProps={{style: { textAlign: 'center' }}}
+                value = {"Complementary Studies"} readOnly={true}
+                 />
+                </TableCell>
+                <TableCell align="right">
+               {complementaryOptions()}
+                </TableCell>
+                <TableCell align="right">
+                {complementaryOptions()}
+                            </TableCell>
+                <TableCell component="th" scope="row">
+                <TextField id="standard-basic"  
+                onChange={(e) => {
+                  if(e.target.value > 100)
+                    e.target.value = 100
+                  if(e.target.value < 0)
+                    e.target.value = 0
+                }}
+                inputProps={{style: { textAlign: 'center' }}}
+                 />
+                </TableCell>
+                </TableRow>
+               
+
+                <TableRow key={"Engineering Science"}>
+                <TableCell component="th" scope="row">
+                <TextField id="standard-basic"  
+                inputProps={{style: { textAlign: 'center' }}}
+                value = {"Engineering Science"} readOnly={true}
+                 />
+                </TableCell>
+                <TableCell align="right">
+                <TextField 
+                inputProps={{style: { textAlign: 'center' }}}
+                value = {"X"} readOnly={true} />
+                </TableCell>
+                <TableCell align="right">
+                <TextField 
+                inputProps={{style: { textAlign: 'center' }}}
+                value = {"X"} readOnly={true} />
+                            </TableCell>
+                <TableCell component="th" scope="row">
+                <TextField id="standard-basic"  
+                onChange={(e) => {
+                  if(e.target.value > 100)
+                    e.target.value = 100
+                  if(e.target.value < 0)
+                    e.target.value = 0
+                }}
+                inputProps={{style: { textAlign: 'center' }}}
+                 />
+                </TableCell>
+                </TableRow>
+
+
+                <TableRow key={"Engineering Design"}>
+                <TableCell component="th" scope="row">
+                <TextField id="standard-basic"  
+                inputProps={{style: { textAlign: 'center' }}}
+                value = {"Engineering Design"} readOnly={true}
+                 />
+                </TableCell>
+                <TableCell align="right">
+                <TextField 
+                inputProps={{style: { textAlign: 'center' }}}
+                value = {"X"} readOnly={true} />
+                </TableCell>
+                <TableCell align="right">
+                <TextField 
+                inputProps={{style: { textAlign: 'center' }}}
+                value = {"X"} readOnly={true} />
+                            </TableCell>
+                <TableCell component="th" scope="row">
+                <TextField id="standard-basic"  
+                onChange={(e) => {
+                  if(e.target.value > 100)
+                    e.target.value = 100
+                  if(e.target.value < 0)
+                    e.target.value = 0
+                }}
+                inputProps={{style: { textAlign: 'center' }}}
+                 />
+                </TableCell>
+                </TableRow>
+
+                
+           
+          </TableBody>
+        </Table>
+        <br /> 
       </TableContainer>
 
 
+
+      <div style={{ color: 'red' }}>
+      *At least one element must be selected for categories that identify AUs
+      </div>
+      
      
+     <div>
+     Ensure that the number of sections and hours per week are updated. 
+     You may leave the "Number of Students Per Supervisor" column for lecture blank.
+     </div>
     </>
   );
 }

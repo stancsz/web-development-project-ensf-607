@@ -4,6 +4,7 @@ import FunGrade from "../add_outline_componenets/FunGrade";
 import FunOutcome from "../add_outline_componenets/FunOutcome.js";
 import FunCalculator from "../add_outline_componenets/FunCalculator.js"
 import SearchPolicies from "../search_componenets/SearchPolicies"
+import FunTextbook from "../add_outline_componenets/FunTextbook.js"
 
 import Container from "@material-ui/core/Container";
 import Accordion from "@material-ui/core/Accordion";
@@ -222,7 +223,9 @@ console.log(timeTable)
           </AccordionSummary>
           <AccordionDetails>
             <div style={{ width: "100%" }}>
-              <Paper className={classes.paper} elevation={3}></Paper>
+              <Paper className={classes.paper} elevation={3}>
+              <FunTextbook/>
+              </Paper>
             </div>
           </AccordionDetails>
         </Accordion>
