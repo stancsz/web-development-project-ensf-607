@@ -6,12 +6,52 @@ import AddCourse from './pages/AddCourse'
 import Navbar from './navigation/Navbar'
 import LastAdded from './pages/LastAddedOutline'
 import {BrowserRouter as Router ,Route,Switch} from 'react-router-dom'
-function App() {
+
+
+import useScrollTrigger from '@material-ui/core/useScrollTrigger';
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import Zoom from '@material-ui/core/Zoom';
+import { makeStyles } from "@material-ui/core/styles";
+import Fab from '@material-ui/core/Fab';
+
+
+const useStyles = makeStyles((theme) => ({
+  scrollUp: {
+    position: 'fixed',
+    bottom: theme.spacing(2),
+    right: theme.spacing(2),
+  },
+
+}));
+
+
+function ScrollTop(props) {
+  
+  const {children} = props;
+  const classes = useStyles();
+  const trigger = useScrollTrigger({});
+  const handleClick = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  };
+
+  return (
+    <Zoom in={trigger}>
+      <div className={classes.scrollUp} onClick={handleClick}>
+        {children}
+      </div>
+    </Zoom>
+  );
+}
+
+
+function App(props) {
   
   return (
     <div className="App">
-      
-    
+
      <Router>
      <Navbar/>
        <Switch>
@@ -32,13 +72,15 @@ function App() {
        </Route>
        </Switch>
       </Router>
- 
-      </div>
-      
-    
-    
 
-    
+      
+       <ScrollTop {...props}>
+        <Fab color="secondary" size="small" aria-label="scroll back to top">
+          <KeyboardArrowUpIcon />
+        </Fab>
+      </ScrollTop>
+
+      </div>    
   );
 }
 
