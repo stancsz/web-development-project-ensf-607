@@ -270,7 +270,6 @@ class TimetablePutDelView(
         return Response(status=204)
 
 
-
 class GradeDistributionPostGetView(
     APIView,
     UpdateModelMixin,
@@ -322,3 +321,158 @@ class GradeDistributionPutDelView(
         item.delete()
         return Response(status=204)
 
+
+class LecturePostGetView(
+    APIView,
+    UpdateModelMixin,
+    DestroyModelMixin,
+):
+    def get(self, request, CourseID=None):
+        if CourseID:
+            try:
+                queryset = Lecture.objects.filter(CourseID=CourseID)
+            except Lecture.DoesNotExist:
+                return Response({'errors': 'This item does not exist.'}, status=400)
+            read_serializer = LectureSerializer(queryset, many=True)
+        else:
+            queryset = Lecture.objects.all()
+            read_serializer = LectureSerializer(queryset, many=True)
+        return Response(read_serializer.data)
+
+    def post(self, request):
+        create_serializer = LectureSerializer(data=request.data)
+        if create_serializer.is_valid():
+            item_object = create_serializer.save()
+            read_serializer = LectureSerializer(item_object)
+            return Response(read_serializer.data, status=201)
+        return Response(create_serializer.errors, status=400)
+
+
+class LecturePutDelView(
+    APIView,
+    UpdateModelMixin,
+    DestroyModelMixin,
+):
+    def put(self, request, ModelID=None):
+        try:
+            item = Lecture.objects.get(ModelID=ModelID)
+        except Lecture.DoesNotExist:
+            return Response({'errors': 'This item does not exist.'}, status=400)
+        update_serializer = LectureSerializer(item, data=request.data)
+        if update_serializer.is_valid():
+            item_object = update_serializer.save()
+            read_serializer = LectureSerializer(item_object)
+            return Response(read_serializer.data, status=200)
+        return Response(update_serializer.errors, status=400)
+
+    def delete(self, request, ModelID=None):
+        try:
+            item = Lecture.objects.get(ModelID=ModelID)
+        except Lecture.DoesNotExist:
+            return Response({'errors': 'This item does not exist.'}, status=400)
+        item.delete()
+        return Response(status=204)
+
+
+class TutorialPostGetView(
+    APIView,
+    UpdateModelMixin,
+    DestroyModelMixin,
+):
+    def get(self, request, CourseID=None):
+        if CourseID:
+            try:
+                queryset = Tutorial.objects.filter(CourseID=CourseID)
+            except Tutorial.DoesNotExist:
+                return Response({'errors': 'This item does not exist.'}, status=400)
+            read_serializer = TutorialSerializer(queryset, many=True)
+        else:
+            queryset = Tutorial.objects.all()
+            read_serializer = TutorialSerializer(queryset, many=True)
+        return Response(read_serializer.data)
+
+    def post(self, request):
+        create_serializer = TutorialSerializer(data=request.data)
+        if create_serializer.is_valid():
+            item_object = create_serializer.save()
+            read_serializer = TutorialSerializer(item_object)
+            return Response(read_serializer.data, status=201)
+        return Response(create_serializer.errors, status=400)
+
+
+class TutorialPutDelView(
+    APIView,
+    UpdateModelMixin,
+    DestroyModelMixin,
+):
+    def put(self, request, ModelID=None):
+        try:
+            item = Tutorial.objects.get(ModelID=ModelID)
+        except Tutorial.DoesNotExist:
+            return Response({'errors': 'This item does not exist.'}, status=400)
+        update_serializer = TutorialSerializer(item, data=request.data)
+        if update_serializer.is_valid():
+            item_object = update_serializer.save()
+            read_serializer = TutorialSerializer(item_object)
+            return Response(read_serializer.data, status=200)
+        return Response(update_serializer.errors, status=400)
+
+    def delete(self, request, ModelID=None):
+        try:
+            item = Tutorial.objects.get(ModelID=ModelID)
+        except Tutorial.DoesNotExist:
+            return Response({'errors': 'This item does not exist.'}, status=400)
+        item.delete()
+        return Response(status=204)
+
+
+class CoursePostGetView(
+    APIView,
+    UpdateModelMixin,
+    DestroyModelMixin,
+):
+    def get(self, request, CourseID=None):
+        if CourseID:
+            try:
+                queryset = Course.objects.filter(CourseID=CourseID)
+            except Course.DoesNotExist:
+                return Response({'errors': 'This item does not exist.'}, status=400)
+            read_serializer = CourseSerializer(queryset, many=True)
+        else:
+            queryset = Course.objects.all()
+            read_serializer = CourseSerializer(queryset, many=True)
+        return Response(read_serializer.data)
+
+    def post(self, request):
+        create_serializer = CourseSerializer(data=request.data)
+        if create_serializer.is_valid():
+            item_object = create_serializer.save()
+            read_serializer = CourseSerializer(item_object)
+            return Response(read_serializer.data, status=201)
+        return Response(create_serializer.errors, status=400)
+
+
+class CoursePutDelView(
+    APIView,
+    UpdateModelMixin,
+    DestroyModelMixin,
+):
+    def put(self, request, ModelID=None):
+        try:
+            item = Course.objects.get(ModelID=ModelID)
+        except Course.DoesNotExist:
+            return Response({'errors': 'This item does not exist.'}, status=400)
+        update_serializer = CourseSerializer(item, data=request.data)
+        if update_serializer.is_valid():
+            item_object = update_serializer.save()
+            read_serializer = CourseSerializer(item_object)
+            return Response(read_serializer.data, status=200)
+        return Response(update_serializer.errors, status=400)
+
+    def delete(self, request, ModelID=None):
+        try:
+            item = Course.objects.get(ModelID=ModelID)
+        except Course.DoesNotExist:
+            return Response({'errors': 'This item does not exist.'}, status=400)
+        item.delete()
+        return Response(status=204)
