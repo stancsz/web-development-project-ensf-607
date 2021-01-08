@@ -5,13 +5,9 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.mixins import UpdateModelMixin, DestroyModelMixin
 
-from .models import Coordinator
-from .models import Info
+from .models import *
 
-from .serializers import CoordinatorSerializer
-from .serializers import InfoSerializer
-from .models import GradeDetermination
-from .serializers import GradeDeterminationSerializer
+from .serializers import *
 
 
 class CoordinatorPostGetView(
@@ -30,6 +26,7 @@ class CoordinatorPostGetView(
             queryset = Coordinator.objects.all()
             read_serializer = CoordinatorSerializer(queryset, many=True)
         return Response(read_serializer.data)
+
     def post(self, request):
         create_serializer = CoordinatorSerializer(data=request.data)
         if create_serializer.is_valid():
@@ -37,6 +34,7 @@ class CoordinatorPostGetView(
             read_serializer = CoordinatorSerializer(item_object)
             return Response(read_serializer.data, status=201)
         return Response(create_serializer.errors, status=400)
+
 
 class CoordinatorPutDelView(
     APIView,
@@ -63,6 +61,7 @@ class CoordinatorPutDelView(
         item.delete()
         return Response(status=204)
 
+
 class InfoPostGetView(
     APIView,
     UpdateModelMixin,
@@ -79,6 +78,7 @@ class InfoPostGetView(
             queryset = Info.objects.all()
             read_serializer = InfoSerializer(queryset, many=True)
         return Response(read_serializer.data)
+
     def post(self, request):
         create_serializer = InfoSerializer(data=request.data)
         if create_serializer.is_valid():
@@ -86,6 +86,7 @@ class InfoPostGetView(
             read_serializer = InfoSerializer(item_object)
             return Response(read_serializer.data, status=201)
         return Response(create_serializer.errors, status=400)
+
 
 class InfoPutDelView(
     APIView,
@@ -113,7 +114,6 @@ class InfoPutDelView(
         return Response(status=204)
 
 
-
 class GradeDeterminationPostGetView(
     APIView,
     UpdateModelMixin,
@@ -130,6 +130,7 @@ class GradeDeterminationPostGetView(
             queryset = GradeDetermination.objects.all()
             read_serializer = GradeDeterminationSerializer(queryset, many=True)
         return Response(read_serializer.data)
+
     def post(self, request):
         create_serializer = GradeDeterminationSerializer(data=request.data)
         if create_serializer.is_valid():
@@ -137,6 +138,7 @@ class GradeDeterminationPostGetView(
             read_serializer = GradeDeterminationSerializer(item_object)
             return Response(read_serializer.data, status=201)
         return Response(create_serializer.errors, status=400)
+
 
 class GradeDeterminationPutDelView(
     APIView,
@@ -159,6 +161,58 @@ class GradeDeterminationPutDelView(
         try:
             item = GradeDetermination.objects.get(ModelID=ModelID)
         except GradeDetermination.DoesNotExist:
+            return Response({'errors': 'This item does not exist.'}, status=400)
+        item.delete()
+        return Response(status=204)
+
+
+class OutcomePostGetView(
+    APIView,
+    UpdateModelMixin,
+    DestroyModelMixin,
+):
+    def get(self, request, CourseID=None):
+        if CourseID:
+            try:
+                queryset = Outcome.objects.filter(CourseID=CourseID)
+            except Outcome.DoesNotExist:
+                return Response({'errors': 'This item does not exist.'}, status=400)
+            read_serializer = OutcomeSerializer(queryset, many=True)
+        else:
+            queryset = Outcome.objects.all()
+            read_serializer = OutcomeSerializer(queryset, many=True)
+        return Response(read_serializer.data)
+
+    def post(self, request):
+        create_serializer = OutcomeSerializer(data=request.data)
+        if create_serializer.is_valid():
+            item_object = create_serializer.save()
+            read_serializer = OutcomeSerializer(item_object)
+            return Response(read_serializer.data, status=201)
+        return Response(create_serializer.errors, status=400)
+
+
+class OutcomePutDelView(
+    APIView,
+    UpdateModelMixin,
+    DestroyModelMixin,
+):
+    def put(self, request, ModelID=None):
+        try:
+            item = Outcome.objects.get(ModelID=ModelID)
+        except Outcome.DoesNotExist:
+            return Response({'errors': 'This item does not exist.'}, status=400)
+        update_serializer = OutcomeSerializer(item, data=request.data)
+        if update_serializer.is_valid():
+            item_object = update_serializer.save()
+            read_serializer = OutcomeSerializer(item_object)
+            return Response(read_serializer.data, status=200)
+        return Response(update_serializer.errors, status=400)
+
+    def delete(self, request, ModelID=None):
+        try:
+            item = Outcome.objects.get(ModelID=ModelID)
+        except Outcome.DoesNotExist:
             return Response({'errors': 'This item does not exist.'}, status=400)
         item.delete()
         return Response(status=204)

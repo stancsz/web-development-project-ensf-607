@@ -138,7 +138,7 @@ class GradeDeterminationSerializer(serializers.ModelSerializer):
 class OutcomeSerializer(serializers.ModelSerializer):
     ModelID = serializers.CharField(max_length=100, required=True)
     CourseID = serializers.CharField(max_length=100, required=True)
-    OutcomeNum = serializers.IntegerField(required=False) # removed max_length=100
+    OutcomeNum = serializers.IntegerField(required=False)  # removed max_length=100
     Description = serializers.CharField(max_length=100, required=False)
     GraduateAttribute = serializers.CharField(max_length=100, required=False)
     InstructionLvl = serializers.CharField(max_length=100, required=False)
@@ -218,8 +218,8 @@ class TimetableSerializer(serializers.ModelSerializer):
 class GradeDistributionSerializer(serializers.ModelSerializer):
     ModelID = serializers.CharField(max_length=100, required=True)
     CourseID = serializers.CharField(max_length=100, required=True)
-    LowerLimit = serializers.IntegerField(required=False) # removed max_length = 100
-    UpperLimit = serializers.IntegerField(required=False) # removed max_length = 100
+    LowerLimit = serializers.IntegerField(required=False)  # removed max_length = 100
+    UpperLimit = serializers.IntegerField(required=False)  # removed max_length = 100
     LetterGrade = serializers.CharField(max_length=100, required=False)
 
     def create(self, validated_data):
@@ -302,8 +302,8 @@ class LectureSerializer(serializers.ModelSerializer):
 class TutorialSerializer(serializers.ModelSerializer):
     ModelID = serializers.CharField(max_length=100, required=True)
     CourseID = serializers.CharField(max_length=100, required=True)
-    TutorialNum = serializers.CharField(max_length=100, required=False) # Changed Tutorial Num to CharField
-    FName = serializers.CharField(max_length=100, required=False) # Changed FName to CharField
+    TutorialNum = serializers.CharField(max_length=100, required=False)  # Changed Tutorial Num to CharField
+    FName = serializers.CharField(max_length=100, required=False)  # Changed FName to CharField
     LName = serializers.CharField(max_length=100, required=False)
     Phone = serializers.CharField(max_length=100, required=False)
     Office = serializers.CharField(max_length=100, required=False)
@@ -350,10 +350,10 @@ class TutorialSerializer(serializers.ModelSerializer):
 class CourseSerializer(serializers.ModelSerializer):
     ModelID = serializers.CharField(max_length=100, required=True)
     CourseID = serializers.CharField(max_length=100, required=True)
-    CourseHours = serializers.CharField(max_length=100, required=False) # Changed CourseHours to CharField
-    CourseName = serializers.CharField(max_length=100, required=False) # Changed CourseName to CharField
+    CourseHours = serializers.CharField(max_length=100, required=False)  # Changed CourseHours to CharField
+    CourseName = serializers.CharField(max_length=100, required=False)  # Changed CourseName to CharField
     CalenderRefrence = serializers.CharField(max_length=100, required=False)
-    AcademicCredit = serializers.IntegerField(required=False) # Changed AcademicCredit to IntegerField
+    AcademicCredit = serializers.IntegerField(required=False)  # Changed AcademicCredit to IntegerField
     DateCreated = serializers.CharField(max_length=100, required=False)
 
     def create(self, validated_data):
