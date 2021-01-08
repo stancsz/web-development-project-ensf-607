@@ -216,3 +216,57 @@ class OutcomePutDelView(
             return Response({'errors': 'This item does not exist.'}, status=400)
         item.delete()
         return Response(status=204)
+
+
+class TimetablePostGetView(
+    APIView,
+    UpdateModelMixin,
+    DestroyModelMixin,
+):
+    def get(self, request, CourseID=None):
+        if CourseID:
+            try:
+                queryset = Timetable.objects.filter(CourseID=CourseID)
+            except Timetable.DoesNotExist:
+                return Response({'errors': 'This item does not exist.'}, status=400)
+            read_serializer = TimetableSerializer(queryset, many=True)
+        else:
+            queryset = Timetable.objects.all()
+            read_serializer = TimetableSerializer(queryset, many=True)
+        return Response(read_serializer.data)
+
+    def post(self, request):
+        create_serializer = TimetableSerializer(data=request.data)
+        if create_serializer.is_valid():
+            item_object = create_serializer.save()
+            read_serializer = TimetableSerializer(item_object)
+            return Response(read_serializer.data, status=201)
+        return Response(create_serializer.errors, status=400)
+
+
+class TimetablePutDelView(
+    APIView,
+    UpdateModelMixin,
+    DestroyModelMixin,
+):
+    def put(self, request, ModelID=None):
+        try:
+            item = Timetable.objects.get(ModelID=ModelID)
+        except Timetable.DoesNotExist:
+            return Response({'errors': 'This item does not exist.'}, status=400)
+        update_serializer = TimetableSerializer(item, data=request.data)
+        if update_serializer.is_valid():
+            item_object = update_serializer.save()
+            read_serializer = TimetableSerializer(item_object)
+            return Response(read_serializer.data, status=200)
+        return Response(update_serializer.errors, status=400)
+
+    def delete(self, request, ModelID=None):
+        try:
+            item = Timetable.objects.get(ModelID=ModelID)
+        except Timetable.DoesNotExist:
+            return Response({'errors': 'This item does not exist.'}, status=400)
+        item.delete()
+        return Response(status=204)
+
+
