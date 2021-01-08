@@ -171,7 +171,7 @@ if(save && parseInt(total)!==100)
 
                 }
                      else
-                    { alert("ERROR")
+                    { 
                     e.target.value=""
             }
                     }

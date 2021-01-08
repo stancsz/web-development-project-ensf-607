@@ -24,6 +24,8 @@ import TimeTable from "../add_outline_componenets/FunTimeTable"
 import Instructor from "../add_outline_componenets/FunInstructor"
 import Exam from "../add_outline_componenets/FunExam"
 import GradeDetermination from"../add_outline_componenets/FunGradeDetermination"
+import GradeNotes from "../add_outline_componenets/FunGradeNotes"
+import GradeDistribution from "../add_outline_componenets/FunGradeDistribution"
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -229,6 +231,11 @@ const editNotes=(courseID,gradeNotes,description,examination,calculator)=>{
             <div style={{ width: "100%" }}>
               <Paper className={classes.paper} elevation={3}>
                 <GradeDetermination/>
+                <br/>
+                
+                <GradeNotes/>
+                <br/>
+                <GradeDistribution/>
               </Paper>
             </div>
           </AccordionDetails>
