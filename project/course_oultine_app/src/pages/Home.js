@@ -4,11 +4,12 @@ const Home = () => {
 
   return (
     <React.Fragment>
-      <p>
-        Welcome to Course outline app
+      <br/>
+      <div style={{fontSize: 20}}>
+        Welcome to Course Outline App
         <br />
-        Select an option from menu icon
-      </p>
+        Select an Option from Menu Icon
+      </div>
     </React.Fragment>
   );
 };
