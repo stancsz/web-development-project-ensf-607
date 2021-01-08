@@ -26,6 +26,7 @@ import Exam from "../add_outline_componenets/FunExam"
 import GradeDetermination from"../add_outline_componenets/FunGradeDetermination"
 import GradeNotes from "../add_outline_componenets/FunGradeNotes"
 import GradeDistribution from "../add_outline_componenets/FunGradeDistribution"
+import TextBook from"../add_outline_componenets/FunTextbook"
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -212,8 +213,9 @@ const editNotes=(courseID,gradeNotes,description,examination,calculator)=>{
           </AccordionSummary>
           <AccordionDetails>
             <div style={{ width: "100%" }}>
-              <FunCalculator/>
+              
               <Paper className={classes.paper} elevation={3}>
+                <FunCalculator/>
                            </Paper>
             </div>
           </AccordionDetails>
@@ -251,7 +253,10 @@ const editNotes=(courseID,gradeNotes,description,examination,calculator)=>{
           </AccordionSummary>
           <AccordionDetails>
             <div style={{ width: "100%" }}>
-              <Paper className={classes.paper} elevation={3}></Paper>
+              <Paper className={classes.paper} elevation={3}>
+
+                <TextBook/>
+              </Paper>
             </div>
           </AccordionDetails>
         </Accordion>
