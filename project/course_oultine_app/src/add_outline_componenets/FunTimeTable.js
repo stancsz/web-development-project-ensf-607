@@ -69,7 +69,7 @@ useEffect (()=>{
   props.setSave(false)
   
 }
-},[props.save])
+})
 
   
 
@@ -105,6 +105,11 @@ useEffect (()=>{
 
   return (
     <>
+    <div className="pt-2 pb-2" align="right">
+            <Button variant="outlined" color="secondary">
+              <SaveIcon />
+            </Button>
+          </div>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <colgroup>

@@ -1,21 +1,22 @@
 import TextField from '@material-ui/core/TextField';
-
+import Button from "@material-ui/core/Button";
+import SaveIcon from "@material-ui/icons/Save";
 import { useEffect, useState } from 'react';
 
 function FunInfo(props) {
-
+    
     const[term,setTerm]=useState("")
     const[year,setYear]=useState("")
     const [courseNumberInput, setCourseNumberInput] = useState("");
-    const [courseNameInput, setCourseNameInput] = useState();
-    const [courseInfo, setCourseInfo] = useState();
-    const [courseHours, setCourseHours] = useState();
-    const [academicCredit, setAcademicCredit] = useState();
-    const [calendarReference, setCalendarReference] = useState();
+    const [courseNameInput, setCourseNameInput] = useState("");
+    const [courseInfo, setCourseInfo] = useState("");
+    const [courseHours, setCourseHours] = useState("");
+    const [academicCredit, setAcademicCredit] = useState("");
+    const [calendarReference, setCalendarReference] = useState("");
     
 
     useEffect(()=>{
-        if( courseNumberInput!==""&&year!=="" && term!=="")
+        if( props.save)
         {   var today = new Date();
             var dd = String(today.getDate()).padStart(2, '0');
             var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -26,16 +27,14 @@ function FunInfo(props) {
             
             today = yyyy+"-"+dd+"-"+mm+" "+hh+":"+min+":"+sec
             let id=courseNumberInput+"-"+term+"-"+year
-            props.setInfo({CourseID : id,courseName : courseNameInput,courseInfo : courseInfo,courseHours : courseHours,academicCredit:academicCredit,calendarReference :calendarReference,DateCreated : today})
+            props.setInfo({CourseID : id,courseName : courseNameInput,courseHours : courseHours,academicCredit:academicCredit,calendarReference :calendarReference,DateCreated : today})
 
-          
-            props.setSave(false)
+            props.setNotes({CourseID:id,GradeNotes:"",Examination:"",CourseDescription:courseInfo,UseCalc:""})
+            
+             props.setSave(false)
         }
-        else{
-
-            props.setInfo({CourseID : "",courseName : "",courseInfo : "",courseHours : "",academicCredit:"",calendarReference : "",DateCreated : ""})
-        props.setSave(false)}
-    },[courseNumberInput,year,term]);
+      
+    });
 
     var courseInfoPlaceholderText = "Enter Course Information. Example: A study of problems of particular interest to students specializing in Software Engineering."
   
@@ -43,7 +42,11 @@ function FunInfo(props) {
   return (
     <div className="FunInfo">
 
- 
+<div className="pt-2 pb-2" align="right">
+            <Button variant="outlined" color="secondary">
+              <SaveIcon />
+            </Button>
+          </div>
     <div className="field">
 
         <TextField fullWidth placeholder = "Enter Course Number. Example: ENSF 409" 
@@ -110,7 +113,7 @@ function FunInfo(props) {
         <div className="column is-one-quarter has-text-left pl-4 pt-4"> Term:</div>
         <div className="column has-text-left">
             <TextField fullWidth placeholder = "Example: FALL,WINTER,SPRING,SUMMER"
-            value={calendarReference} onChange={e => setTerm(e.target.value)}>
+            value={term} onChange={e => setTerm(e.target.value)}>
             </TextField>
         </div>
         </div>
@@ -118,7 +121,7 @@ function FunInfo(props) {
         <div className="column is-one-quarter has-text-left pl-4 pt-4"> Year:</div>
         <div className="column has-text-left">
             <TextField fullWidth placeholder = "Example: 2020"
-            value={calendarReference} onChange={e => setYear(e.target.value)}>
+            value={year} onChange={e => setYear(e.target.value)}>
             </TextField>
         </div>
         </div>

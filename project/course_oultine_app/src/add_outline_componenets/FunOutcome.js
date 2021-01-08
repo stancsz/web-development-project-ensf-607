@@ -44,7 +44,7 @@ export default function BasicTable(props) {
   if(instructionLvl!=="")
   newAttributes[indx].instructionLevel=instructionLvl
   setAttributeRows(newAttributes)
-  console.log(attributeRows)
+  
  }
  
 
@@ -62,17 +62,18 @@ export default function BasicTable(props) {
   }
 useEffect (()=>{
   if(props.save){
+   
     let temp=[]
     for (let i=0;i<outcomes.length;i++){
-      temp.push({courseID:props.courseID,OutcomeNum:outcomes[i].id,Description:outcomes[i].outcome,GraduateAttribute:attributeRows[i].attribute,InstructionLvl:attributeRows[i].InstructionLvl})
+      temp.push({CourseID:props.courseID,OutcomeNum:outcomes[i].id,Description:outcomes[i].outcome,GraduateAttribute:attributeRows[i].attribute,InstructionLvl:attributeRows[i].InstructionLvl})
     
   }
- 
+  setCount(1)
   props.setOutcome(temp)
-  props.setSave(false)
   
+  props.setSave(false)
 }
-},[props.save])
+})
 
   
 
@@ -115,6 +116,11 @@ newAttributeRows.push({id: attributeRows.length+1,   attribute: "", instructionL
 
   return (
     <>
+    <div className="pt-2 pb-2" align="right">
+            <Button variant="outlined" color="secondary">
+              <SaveIcon />
+            </Button>
+          </div>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <colgroup>

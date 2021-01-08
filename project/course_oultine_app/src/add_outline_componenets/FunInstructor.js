@@ -43,7 +43,7 @@ export default function BasicTable(props) {
   
 useEffect (()=>{
   if(props.save){
-      console.log("PASSED PROP"+ props.courseID)
+  
     let instructorList=[]
     let taList=[]
     for (let i=0;i<instructor.length;i++){
@@ -51,7 +51,7 @@ useEffect (()=>{
     
   }
   for (let i=0;i<ta.length;i++){
-    taList.push({CourseID:props.courseID,LabNum:instructor[i].SectionNum,NumberofLabs:0,LabType:"",SafetyTaught:"",Fname:instructor[i].FName,LName:instructor[i].LName,Phone:instructor[i].Phone,Office:instructor[i].Office,Email:instructor[i].Email})
+    taList.push({CourseID:props.courseID,LabNum:ta[i].SectionNum,NumberofLabs:0,LabType:"",SafetyTaught:"",Fname:ta[i].FName,LName:ta[i].LName,Phone:ta[i].Phone,Office:ta[i].Office,Email:ta[i].Email})
   
 }
 let temp={CourseID:props.courseID, FName:coordinator.FName, LName:coordinator.LName, Phone:coordinator.Phone, Office:coordinator.Office, Email:coordinator.Email}
@@ -59,13 +59,13 @@ let temp={CourseID:props.courseID, FName:coordinator.FName, LName:coordinator.LN
  props.setInstructor(instructorList)
  props.setTa(taList)
  
-
   props.setSave(false)
+ 
   
 }
-},[props.save])
+},[coordinator,instructor,ta])
 
-  
+
 
 const editCoordinator=(FName,LName,Phone,Office,Email)=>{
     let temp=coordinator
@@ -175,6 +175,11 @@ const editTa=(id,Section,FName,LName,Phone,Office,Email)=>{
 
   return (
     <>
+    <div className="pt-2 pb-2" align="right">
+            <Button variant="outlined" color="secondary">
+              <SaveIcon />
+            </Button>
+          </div>
       <TableContainer component={Paper}>
       <label className="label has-text-info is-size-5 has-text-left" color="Primary">
                 A. Course Coordinator

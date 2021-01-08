@@ -4,7 +4,7 @@ import FunGrade from "../add_outline_componenets/FunGrade";
 import FunOutcome from "../add_outline_componenets/FunOutcome.js";
 import FunCalculator from "../add_outline_componenets/FunCalculator.js"
 import SearchPolicies from "../search_componenets/SearchPolicies"
-
+import TextField from '@material-ui/core/TextField';
 import Container from "@material-ui/core/Container";
 import Accordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
@@ -22,6 +22,8 @@ import { Editor, EditorState } from "draft-js";
 import RichTextEditor from "react-rte";
 import TimeTable from "../add_outline_componenets/FunTimeTable"
 import Instructor from "../add_outline_componenets/FunInstructor"
+import Exam from "../add_outline_componenets/FunExam"
+import GradeDetermination from"../add_outline_componenets/FunGradeDetermination"
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -35,53 +37,67 @@ const useStyles = makeStyles((theme) => ({
 const AddCourse = () => {
   const classes = useStyles();
 
+  
+
+
+ 
+  //JSON tables and use states
+  const [count, setCount] = useState(1);
+  const[notes,setNotes]=useState({CourseID:"",})
+  const [save,setSave]=useState(false)
+  const [info,setInfo]=useState({CourseID:""})
   const [examinationEditorState, setExaminationEditorState] = useState(
     RichTextEditor.createEmptyValue()
   );
-
-
-  const toolbarConfig = {
-    display: ["INLINE_STYLE_BUTTONS", "BLOCK_TYPE_BUTTONS", "HISTORY_BUTTONS"],
-    INLINE_STYLE_BUTTONS: [
-      { label: "Bold", style: "BOLD", className: "custom-css-class" },
-      { label: "Italic", style: "ITALIC" },
-      { label: "Underline", style: "UNDERLINE" },
-    ],
-    BLOCK_TYPE_DROPDOWN: [
-      { label: "Normal", style: "unstyled" },
-      { label: "Heading Large", style: "header-one" },
-      { label: "Heading Medium", style: "header-two" },
-      { label: "Heading Small", style: "header-three" },
-    ],
-    BLOCK_TYPE_BUTTONS: [
-      { label: "UL", style: "unordered-list-item" },
-      { label: "OL", style: "ordered-list-item" },
-    ],
-  };
-  const [save,setSave]=useState(false)
-  const [info,setInfo]=useState({courseID:""})
-  const [outcome,setOutcome]=useState("")
-  const[timeTable,setTimeTable]=useState("")
-  const [coordinator,setcoordinator]=useState("")
-  const[instructor,setInstructor]=useState("")
+  const [calculatorInfo, setCalculatorInfo] = useState();
+  const[description,setDescription]=useState();
+  const [outcome,setOutcome]=useState({CourseID:""})
+  const[timeTable,setTimeTable]=useState({CourseID:""})
+  const [coordinator,setcoordinator]=useState({CourseID:""})
+  const[instructor,setInstructor]=useState({CourseID:""})
   const[ta,setTa]=useState("")
+  /*
 useEffect(()=>{
-  if(instructor.CourseID!=="")
-{console.log("Instructor table: ")
-console.log(instructor)
+  if(save)
+{
+  console.log("calenderInfo")
+  console.log(info)
+  console.log(description)
+  console.log("Outcome")
+  console.log(outcome)
+  console.log("Instructor table: ")
+  console.log(instructor)
 console.log("coordinator tabke: ")
 console.log(coordinator)
 console.log("ta table ")
 console.log(ta)
+setSave(false)
 }
-},[coordinator,instructor,ta])
+},[outcome,instructor,coordinator,ta,timeTable])*/
+const editNotes=(courseID,gradeNotes,description,examination,calculator)=>{
+  let temp=notes
+  if(courseID!=="")
+  temp.CourseID=courseID
+  if (gradeNotes!=="")
+  temp.GradeNotes=gradeNotes
+  if(examination.toString("html")!=="")
+  temp.Examination=examination
+  if (description!=="")
+  temp.CourseDescription=description
+    if(calculator!=="")
+  temp.UseCalc=calculator
+
+  setNotes(temp)
+}
+
   return (
     <React.Fragment>
       <AppBar position="sticky" color="default">
         <Container maxWidth="md">
-          <div className="pt-2 pb-2" align="center">
+          <div className="pt-2 pb-2" align="right">
             <Button variant="outlined" color="secondary" onClick={()=>{
               setSave(true)
+              console.log(outcome)
               if(info.CourseID==="")
              { alert("Please fill in course number,term, and year")
               
@@ -108,7 +124,8 @@ console.log(ta)
           <AccordionDetails>
             <div style={{ width: "100%" }}>
               <Paper className={classes.paper} elevation={3}>
-                <FunInfo  setSave={setSave} setInfo={setInfo} info={info}/>
+                <FunInfo save={save} setSave={setSave} setInfo={setInfo} setNotes={setNotes} />
+                
               </Paper>
             </div>
           </AccordionDetails>
@@ -125,7 +142,9 @@ console.log(ta)
           <AccordionDetails>
             <div style={{ width: "100%" }}>
               <Paper className={classes.paper} elevation={3}>
+               <h1> {info.CourseID}</h1>
                 <FunOutcome save={save} setSave={setSave} setOutcome={setOutcome} courseID={info.CourseID} />
+                
               </Paper>
             </div>
           </AccordionDetails>
@@ -173,18 +192,9 @@ console.log(ta)
           </AccordionSummary>
           <AccordionDetails>
             <div style={{ width: "100%" }}>
+              <Exam/>
               <Paper className={classes.paper} elevation={3}>
-                <Container maxWidth="md">
-                  <RichTextEditor
-                    value={examinationEditorState}
-                    onChange={(value) => setExaminationEditorState(value)}
-                    onClick={console.log(
-                      examinationEditorState.toString("html")
-                    )}
-                    toolbarConfig={toolbarConfig}
-                    placeholder="Provide a list of all course exams, authorized materials, and whenever possible, timetabling information..."
-                  />
-                </Container>
+                
               </Paper>
             </div>
           </AccordionDetails>
@@ -200,7 +210,9 @@ console.log(ta)
           </AccordionSummary>
           <AccordionDetails>
             <div style={{ width: "100%" }}>
-              <Paper className={classes.paper} elevation={3}><FunCalculator /></Paper>
+              <FunCalculator/>
+              <Paper className={classes.paper} elevation={3}>
+                           </Paper>
             </div>
           </AccordionDetails>
         </Accordion>
@@ -216,7 +228,7 @@ console.log(ta)
           <AccordionDetails>
             <div style={{ width: "100%" }}>
               <Paper className={classes.paper} elevation={3}>
-                <FunGrade />
+                <GradeDetermination/>
               </Paper>
             </div>
           </AccordionDetails>
@@ -254,6 +266,7 @@ console.log(ta)
           </AccordionDetails>
         </Accordion>
       </Container>
+      
     </React.Fragment>
   );
 };
