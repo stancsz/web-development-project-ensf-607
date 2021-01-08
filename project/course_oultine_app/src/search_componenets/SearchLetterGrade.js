@@ -15,14 +15,17 @@ const useStyles = makeStyles({
 });
 
 export default function SearchLetter(props) {
-    // console.log(props.grade)
     const keys=Object.keys(props.letter)
-    console.log(keys)
-
     const classes = useStyles();
 
-    // return(<>
-    //     </>);
+    const checkForHundred = (value) =>{
+        if(value === 100){
+            return ""
+        }
+        else{
+            return value
+        }
+    }
 
     return (
         <>
@@ -42,16 +45,16 @@ export default function SearchLetter(props) {
                         {keys.map((key) => (
                             <TableRow key={key}>
                                 <TableCell component="th" scope="row">
-                                    {props.letter[key]["Letter Grade"]}
+                                    {props.letter[key].LetterGrade}
                                 </TableCell>
                                 <TableCell align="right">
-                                    {props.letter[key]["Lower Boundary"]}
+                                    {props.letter[key].LowerLimit}
                                 </TableCell>
                                 <TableCell align="right">
                                     ≤ T &lt;
                                 </TableCell>
                                 <TableCell align="right">
-                                    {props.letter[key]["Upper Boundary"]}
+                                    {checkForHundred(props.letter[key].UpperLimit)}
                                 </TableCell>
 
                             </TableRow>

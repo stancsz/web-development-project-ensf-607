@@ -18,8 +18,8 @@ const useStyles = makeStyles({
 
 export default function SearchInstructors(props) {
  
-  
   const classes = useStyles();
+  const keys=Object.keys(props.instructors)
 
   return (
     <>
@@ -38,6 +38,16 @@ export default function SearchInstructors(props) {
           </TableRow>
         </TableHead>
         <TableBody>        
+        {keys.map((key) => (
+            <TableRow key={key}>
+              <TableCell component="th" scope="row">{props.instructors[key].LectureNum}</TableCell>
+              <TableCell align="right">{props.instructors[key].FName}</TableCell>
+              <TableCell align="right">{props.instructors[key].LName}</TableCell>
+              <TableCell align="right">{props.instructors[key].Phone}</TableCell>
+              <TableCell align="right">{props.instructors[key].Office}</TableCell>
+              <TableCell align="right">{props.instructors[key].Email}</TableCell>
+            </TableRow>
+          ))}
         </TableBody>
       </Table>
     </TableContainer>

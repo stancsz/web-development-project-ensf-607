@@ -7,11 +7,9 @@ import InputLabel from "@material-ui/core/InputLabel";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
-import OutcomeData from "../data/DataOutcome.json";
-import GradesData from "../data/DataGrades.json";
+
 import InfoData from "../data/DataInfo.json";
-import LetterData from "../data/DataLetterGrades.json";
-import NoteData from "../data/DataNotes.json";
+
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Outcome from "../search_componenets/SearchOutcome";
@@ -65,7 +63,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-
 const SearchCourse = () => {
 
   const courseList = Object.keys(InfoData);
@@ -98,8 +95,6 @@ const SearchCourse = () => {
   const [instructorsData, setInstructorsData] = useState({});
   const [coordinatorsData, setCoordinatorsData] = useState({});
   const [assistantsData, setAssistantsData] = useState({});
-  const [examinationsData, setExaminationsData] = useState({});
-  const [calculatorData, setCalculatorData] = useState({});
   const [gradeDeterminationData, setGradeDeterminationData] = useState({});
   const [noteExaminationDescriptionCalcData, setnoteExaminationDescriptionCalcData] = useState({});
   const [letterData, setLetterData] = useState({});
@@ -112,8 +107,6 @@ const SearchCourse = () => {
   const [displayIcons, setDisplayIcons] = useState();
   const [callHandleSelect, setCallHandleSelect] = useState();
   const [pageToggle, setPageToggle] = useState(true);
-
-
 
 
 
@@ -141,13 +134,8 @@ const SearchCourse = () => {
     rows.push({ id: rowval["courseID"], datetime: rowval["DateCreated"] });
   }
 
-
   
   const fillFields = () => {
-
-    
-    //setTestValue(retrievedInfo.data[1].CourseID)
-    //.then(res => setCoordinatorsData(res.data[0].CourseID))
 
     axios.get("http://127.0.0.1:8000/coordinator/")
     .then(res => setCoordinatorsData(res.data))
@@ -162,29 +150,46 @@ const SearchCourse = () => {
     .then(res => setnoteExaminationDescriptionCalcData(res.data))
     .catch((error) => {console.log(error)})
 
+    axios.get("http://127.0.0.1:8000/outcome/")
+    .then(res => setOutcomeData(res.data))
+    .catch((error) => {console.log(error)})
+
+    axios.get("http://127.0.0.1:8000/timetable/")
+    .then(res => setTimetableData(res.data))
+    .catch((error) => {console.log(error)})
+
+    axios.get("http://127.0.0.1:8000/gradedistribution/")
+    .then(res => setLetterData(res.data))
+    .catch((error) => {console.log(error)})
+
+    axios.get("http://127.0.0.1:8000/lecture/")
+    .then(res => setInstructorsData(res.data))
+    .catch((error) => {console.log(error)})
+
+    axios.get("http://127.0.0.1:8000/tutorial/")
+    .then(res => setAssistantsData(res.data))
+    .catch((error) => {console.log(error)})
+
+    axios.get("http://127.0.0.1:8000/course/")
+    .then(res => setInfoData(res.data))
+    .catch((error) => {console.log(error)})
     
   };
 
 
   const handleSelect = () => {
-    let tempInfo = InfoData[course];
-    let tempGrade = GradesData[course];
-    let tempOutcome = OutcomeData[course];
-    let tempLetter = LetterData[course];
-    let tempNote = NoteData[course];
-    setOutcome(tempOutcome);
-    setInfo(tempInfo);
-    
-    setLetter(tempLetter);
-    
-
-
     setCoordinators(coordinatorsData.filter(res => res.CourseID === "ENSF-609-FALL-2021")); //REPLACE WITH COURSE
     setGradeDetermination(gradeDeterminationData.filter(res => res.CourseID === "ENSF-607-FALL-2020"));
     setNote(noteExaminationDescriptionCalcData.filter(res => res.CourseID === "ENSF-607-FALL-2021"));
     setExaminations(noteExaminationDescriptionCalcData.filter(res => res.CourseID === "ENSF-607-FALL-2021"));
     setDescription(noteExaminationDescriptionCalcData.filter(res => res.CourseID === "ENSF-607-FALL-2021"));
     setCalculator(noteExaminationDescriptionCalcData.filter(res => res.CourseID === "ENSF-607-FALL-2021"));
+    setOutcome(outcomeData.filter(res => res.CourseID === course));
+    setTimetable(timetableData.filter(res => res.CourseID === course));
+    setLetter(letterData.filter(res => res.CourseID === course));
+    setInstructors(instructorsData.filter(res => res.CourseID === course));
+    setAssistants(assistantsData.filter(res => res.CourseID === course));
+    setInfo(infoData.filter(res => res.CourseID === course));
   };
 
 
@@ -242,7 +247,7 @@ const SearchCourse = () => {
             <AccordionDetails>
             <div style={{ width: '100%' }}>
             <Paper className={classes.paper} elevation={3}>
-            <Timetable />
+            <Timetable timetable = {timetable}/>
             </Paper>
             </div>
             </AccordionDetails>
@@ -258,9 +263,9 @@ const SearchCourse = () => {
             <AccordionDetails>
             <div style={{ width: '100%' }}>
             <Paper className={classes.paper} elevation={3}>
-            <Instructors />
+            <Instructors instructors={instructors}/>
             <Coordinators coordinators = {coordinators}/>
-            <TA />
+            <TA assistants={assistants}/>
             </Paper>
             </div>
             </AccordionDetails>

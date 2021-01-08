@@ -38,9 +38,9 @@ export default function SearchOutcome(props) {
           {keys.map((key) => (
             <TableRow key={key}>
               <TableCell component="th" scope="row">
-                {key}
+                {props.outcome[key].OutcomeNum}
               </TableCell>
-              <TableCell align="right">{props.outcome[key]}</TableCell>
+              <TableCell align="right">{props.outcome[key].Description}</TableCell>
               
             </TableRow>
           ))}

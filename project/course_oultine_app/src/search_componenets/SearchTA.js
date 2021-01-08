@@ -20,6 +20,8 @@ export default function SearchTA(props) {
  
   
   const classes = useStyles();
+  const keys=Object.keys(props.assistants)
+  console.log(props)
 
   return (
     <>
@@ -37,7 +39,17 @@ export default function SearchTA(props) {
             <TableCell align="right">Email</TableCell>
           </TableRow>
         </TableHead>
-        <TableBody>        
+        <TableBody> 
+        {keys.map((key) => (
+            <TableRow key={key}>
+              <TableCell component="th" scope="row">{props.assistants[key].TutorialNum}</TableCell>
+              <TableCell align="right">{props.assistants[key].FName}</TableCell>
+              <TableCell align="right">{props.assistants[key].LName}</TableCell>
+              <TableCell align="right">{props.assistants[key].Phone}</TableCell>
+              <TableCell align="right">{props.assistants[key].Office}</TableCell>
+              <TableCell align="right">{props.assistants[key].Email}</TableCell>
+            </TableRow>
+          ))}       
         </TableBody>
       </Table>
     </TableContainer>
