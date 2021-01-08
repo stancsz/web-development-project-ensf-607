@@ -1,0 +1,1 @@
+Difficult time understanding how to translate project requirements to data storage.

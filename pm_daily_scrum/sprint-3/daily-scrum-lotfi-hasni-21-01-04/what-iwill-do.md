@@ -1,0 +1,1 @@
+Continue working on search page and Django part of project.

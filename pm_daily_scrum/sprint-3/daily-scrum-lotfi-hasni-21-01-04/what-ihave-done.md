@@ -1,0 +1,1 @@
+Learned about Django and how to connect front end to backend data. 

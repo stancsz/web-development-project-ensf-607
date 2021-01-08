@@ -1,0 +1,1 @@
+Made modifications to page appearances. Continued to connect frontend and backend.

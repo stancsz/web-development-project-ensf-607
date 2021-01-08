@@ -1,0 +1,1 @@
+Added panels to the add course outline page.
