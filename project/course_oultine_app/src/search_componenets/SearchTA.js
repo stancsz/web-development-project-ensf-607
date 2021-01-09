@@ -21,7 +21,6 @@ export default function SearchTA(props) {
   
   const classes = useStyles();
   const keys=Object.keys(props.assistants)
-  console.log(props)
 
   return (
     <>

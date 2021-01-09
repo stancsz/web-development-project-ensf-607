@@ -2,6 +2,7 @@ import Typography from '@material-ui/core/Typography';
 
 
 function SearchInfo(props) {
+  console.log(props.info.CourseID)
 
   return (
     <div className="FunInfo">
@@ -12,7 +13,7 @@ function SearchInfo(props) {
         <div align = "left">Course Number:</div>
         <div align="left">
         <Typography variant="h6">
-        <span>&nbsp;&nbsp;</span>{props.info.courseID.split("-").slice(0,2).join(" ")} 
+        <span>&nbsp;&nbsp;</span>{props.info[0].CourseID.split("-").slice(0,2).join(" ")} 
         </Typography>
         </div>
 

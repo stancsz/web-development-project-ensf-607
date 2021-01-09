@@ -7,9 +7,6 @@ import InputLabel from "@material-ui/core/InputLabel";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
-
-import InfoData from "../data/DataInfo.json";
-
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Outcome from "../search_componenets/SearchOutcome";
@@ -39,6 +36,7 @@ import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { Link } from "react-router-dom";
 
 
@@ -65,9 +63,9 @@ const useStyles = makeStyles((theme) => ({
 
 const SearchCourse = () => {
 
-  const courseList = Object.keys(InfoData);
   const classes = useStyles();
 
+  const [courseList, setCourseList] = useState([]);
   const [course, setCourse] = React.useState("");
 
   const handleChange = (event) => {
@@ -89,7 +87,7 @@ const SearchCourse = () => {
   const [description, setDescription] = useState({});
  
 
-  const [infoData, setInfoData] = useState(); //COURSE
+  const [InfoData, setInfoData] = useState({}); //COURSE
   const [outcomeData, setOutcomeData] = useState({});
   const [timetableData, setTimetableData] = useState({});
   const [instructorsData, setInstructorsData] = useState({});
@@ -131,7 +129,7 @@ const SearchCourse = () => {
 
   for (let i = 0; i < Object.values(InfoData).length; i++) {
     var rowval = Object.values(InfoData)[i];
-    rows.push({ id: rowval["courseID"], datetime: rowval["DateCreated"] });
+    rows.push({ id: rowval["CourseID"], datetime: rowval["DateCreated"] });
   }
 
   
@@ -173,7 +171,11 @@ const SearchCourse = () => {
     axios.get("http://127.0.0.1:8000/course/")
     .then(res => setInfoData(res.data))
     .catch((error) => {console.log(error)})
-    
+
+    axios.get("http://127.0.0.1:8000/course/")
+    .then(res => setCourseList(res.data.map(course => course.CourseID)))
+    .catch((error) => {console.log(error)})
+
   };
 
 
@@ -189,7 +191,7 @@ const SearchCourse = () => {
     setLetter(letterData.filter(res => res.CourseID === course));
     setInstructors(instructorsData.filter(res => res.CourseID === course));
     setAssistants(assistantsData.filter(res => res.CourseID === course));
-    setInfo(infoData.filter(res => res.CourseID === course));
+    setInfo(InfoData.filter(res => res.CourseID === course));
   };
 
 
@@ -426,12 +428,12 @@ const SearchCourse = () => {
     for (let i = 0; i < Object.values(InfoData).length; i++) {
       var rowval = Object.values(InfoData)[i];
       if (
-        rowval["courseID"]
+        rowval["CourseID"]
           .toLowerCase()
           .includes(searchInput.toLocaleLowerCase())
       ) {
         filteredRows.push({
-          id: rowval["courseID"],
+          id: rowval["CourseID"],
           datetime: rowval["DateCreated"],
         });
       }
@@ -471,12 +473,29 @@ const SearchCourse = () => {
 
 
   useEffect(() => {
-    
+
     if(pageToggle){
       fillFields();
       setPageToggle(false);
     }
-    
+
+    if(courseList.length === 0){
+      setFrame(
+        <div>
+          <br/>
+          <br/>
+          <br/>
+          <div style={{fontSize : 20}}>
+          
+          LOADING COURSES...
+          <br/>
+          <CircularProgress />
+          </div>
+        </div>
+
+      )
+    }
+    else{
 
     if (searchInput !== "") {
       displaySearchResults();
@@ -492,7 +511,11 @@ const SearchCourse = () => {
       handleSelect();
       setCallHandleSelect(false);
     }
-  }, [info, searchInput, tableSelection, callHandleSelect]);
+
+    }
+
+  }, [info, searchInput, tableSelection, callHandleSelect, courseList]);
+
 
   return (
     <>
@@ -534,9 +557,9 @@ const SearchCourse = () => {
                     handleChange(e);
                   }}
                 >
-                  {courseList.map((i) => (
+                 {courseList.map((i) => (
                     <MenuItem key={i} value={i}>{i}</MenuItem>
-                  ))}
+                  ))}  
                   <MenuItem value="View All">View All</MenuItem>
                 </Select>
               </FormControl>
