@@ -131,7 +131,7 @@ class OutcomeSerializer(serializers.ModelSerializer):
     ModelID = serializers.CharField(max_length=100, required=True)
     CourseID = serializers.CharField(max_length=100, required=True)
     OutcomeNum = serializers.IntegerField(required=False)  # removed max_length=100
-    Description = serializers.CharField(max_length=100, required=False)
+    Description = serializers.CharField(max_length=500, required=False) # Changed max_length to 500
     GraduateAttribute = serializers.CharField(max_length=100, required=False)
     InstructionLvl = serializers.CharField(max_length=100, required=False)
 
