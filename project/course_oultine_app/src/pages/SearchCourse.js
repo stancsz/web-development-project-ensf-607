@@ -129,7 +129,7 @@ const SearchCourse = () => {
 
   for (let i = 0; i < Object.values(InfoData).length; i++) {
     var rowval = Object.values(InfoData)[i];
-    rows.push({ id: rowval["CourseID"], datetime: rowval["DateCreated"] });
+    rows.push({ id: rowval["CourseID"], datetime: rowval["DateCreated"].split(".")[0] + " UTC"});
   }
 
   
@@ -434,7 +434,7 @@ const SearchCourse = () => {
       ) {
         filteredRows.push({
           id: rowval["CourseID"],
-          datetime: rowval["DateCreated"],
+          datetime: rowval["DateCreated"].split(".")[0] + " UTC",
         });
       }
     }
