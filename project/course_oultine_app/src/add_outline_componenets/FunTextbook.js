@@ -31,7 +31,7 @@ export default function BasicTable(props) {
   const [count, setCount] = useState(2);
   const classes = useStyles();
   
-  const [textbook,setTextbook]=useState([{id:1,Title:"",Author:"",Edition:"",Publisher:""}])
+  const [textbook,setTextbook]=useState([{id:1,Title:"",Author:"",Edition:"",Publisher:"",Type:"Required"}])
 
 
  
@@ -52,6 +52,7 @@ export default function BasicTable(props) {
     
   
     setTextbook(newBook)
+    
     //setRows(newRows)
    
   }
@@ -68,7 +69,7 @@ export default function BasicTable(props) {
   }
   
 
-  const addRow = () => {
+  const addRecommendedRow = () => {
     // console.log(...rows)
 
     let newRows = textbook
@@ -77,11 +78,23 @@ export default function BasicTable(props) {
    
 
 
-    newRows.push({ id: count,Title:"",Author:"",Edition:"",Publisher:"" })
+    newRows.push({ id: count,Title:"",Author:"",Edition:"",Publisher:"" ,Type:"Recommended"})
     setTextbook(newRows)
    // console.log(rows)
   }
+  const addRequiredRow = () => {
+    // console.log(...rows)
 
+    let newRows = textbook
+    setCount(count+1)
+    //console.log(newRows)
+   
+
+
+    newRows.push({ id: count,Title:"",Author:"",Edition:"",Publisher:"" ,Type:"Required"})
+    setTextbook(newRows)
+   // console.log(rows)
+  }
 
   
 
@@ -96,6 +109,9 @@ export default function BasicTable(props) {
               <SaveIcon />
             </Button>
           </div>
+          <label className="label has-text-info is-size-5 has-text-left" color="Primary">
+                The following textbook(s) is required for this course:
+              </label>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <colgroup>
@@ -105,10 +121,88 @@ export default function BasicTable(props) {
             
 
           </colgroup>
-         
+          
           <TableBody>
             
-            {textbook.map((row) => (
+            {textbook.map((row) => {
+                
+                if(row.Type==="Required")
+                return(
+                
+                <>
+                
+                <br/>
+                
+              <TableRow key={row.id}>
+                
+                <TableCell align="right"><TextField id="standard-basic" fullWidth={true} value="TextBook" readOnly={true}
+                 /></TableCell>
+                <TableCell align="right"><TextField id="standard-basic" fullWidth={true} onChange={(e)=>{ editTextbook(row.id,e.target.value,"","","")}
+                } /></TableCell>
+                
+                </TableRow>
+                
+                <TableRow key={row.id}>
+                
+                <TableCell align="right"><TextField id="standard-basic" fullWidth={true} value="Author" readOnly={true}
+                 /></TableCell>
+                <TableCell align="right"><TextField id="standard-basic" fullWidth={true} onChange={(e)=>{ editTextbook(row.id,"",e.target.value,"","")}
+                } /></TableCell>
+                
+                </TableRow>
+
+                <TableRow key={row.id}>
+                
+                <TableCell align="right"><TextField id="standard-basic" fullWidth={true} value="Edition" readOnly={true}
+                 /></TableCell>
+                <TableCell align="right"><TextField id="standard-basic" fullWidth={true} onChange={(e)=>{ editTextbook(row.id,"","",e.target.value,"")}
+                } /></TableCell>
+                
+                </TableRow>
+                
+                <TableRow key={row.id}>
+                
+                <TableCell align="right"><TextField id="standard-basic" fullWidth={true} value="Publisher" readOnly={true}
+                 /></TableCell>
+                <TableCell align="right"><TextField id="standard-basic" fullWidth={true} onChange={(e)=>{ editTextbook(row.id,"","","",e.target.value)}
+                } /></TableCell>
+                
+                </TableRow>
+                <div className={classes.root}>
+                    <br/>
+                    <DeleteIcon  onClick={()=> removeRow(row.id)} />
+
+                    
+                </div>
+                </>
+              
+            );})}
+          </TableBody>
+        </Table>
+        <br />
+        <Button variant="contained" color="primary" onClick={()=>{
+          addRequiredRow()
+        }}> +</Button>
+      </TableContainer>
+      <br/>
+      <label className="label has-text-info is-size-5 has-text-left" color="Primary">
+      The following textbook(s) is recommended for this course:
+              </label>
+      <TableContainer component={Paper}>
+        <Table className={classes.table} aria-label="simple table">
+          <colgroup>
+            <col width="30%" />
+            <col width="70%" />
+            
+            
+
+          </colgroup>
+          
+          <TableBody>
+            
+            {textbook.map((row) =>{ 
+                if (row.Type==="Recommended")
+                return (
                 <>
                 <br/>
                 
@@ -155,16 +249,14 @@ export default function BasicTable(props) {
                 </div>
                 </>
               
-            ))}
+            );})}
           </TableBody>
         </Table>
         <br />
         <Button variant="contained" color="primary" onClick={()=>{
-          addRow()
+          addRecommendedRow()
         }}> +</Button>
       </TableContainer>
-      
-
      
     </>
   );
