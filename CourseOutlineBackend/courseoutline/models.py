@@ -8,12 +8,7 @@ from django.db import models
 
 # model for au_weight table
 class AuWeight(models.Model):
-    ModelID = models.CharField(
-        primary_key=True,
-        max_length=100,
-        null=False,
-        blank=False
-    )
+    ModelID = models.AutoField(primary_key=True)
 
     CourseID = models.CharField(
         max_length=100,
@@ -38,12 +33,7 @@ class AuWeight(models.Model):
 
 # model for content_category table
 class ContentCategory(models.Model):
-    ModelID = models.CharField(
-        primary_key=True,
-        max_length=100,
-        null=False,
-        blank=False
-    )
+    ModelID = models.AutoField(primary_key=True)
 
     CourseID = models.CharField(
         max_length=100,
@@ -71,12 +61,7 @@ class ContentCategory(models.Model):
 # todo-done: coordinator
 # model for coordinator table
 class Coordinator(models.Model):
-    ModelID = models.CharField(
-        primary_key=True,
-        max_length=100,
-        null=False,
-        blank=False
-    )
+    ModelID = models.AutoField(primary_key=True)
 
     CourseID = models.CharField(
         max_length=100,
@@ -122,12 +107,7 @@ class Coordinator(models.Model):
 # needed
 # model for course table
 class Course(models.Model):
-    ModelID = models.CharField(
-        primary_key=True,
-        max_length=100,
-        null=False,
-        blank=False
-    )
+    ModelID = models.AutoField(primary_key=True)
 
     CourseID = models.CharField(
         max_length=100,
@@ -171,12 +151,7 @@ class Course(models.Model):
 # todo: grade determination
 # model for grade determination table
 class GradeDetermination(models.Model):
-    ModelID = models.CharField(
-        primary_key=True,
-        max_length=100,
-        null=False,
-        blank=False
-    )
+    ModelID = models.AutoField(primary_key=True)
 
     CourseID = models.CharField(
         max_length=100,
@@ -208,12 +183,7 @@ class GradeDetermination(models.Model):
 # todo: grade distribution
 # model for grade distribution table
 class GradeDistribution(models.Model):
-    ModelID = models.CharField(
-        primary_key=True,
-        max_length=100,
-        null=False,
-        blank=False
-    )
+    ModelID = models.AutoField(primary_key=True)
 
     CourseID = models.CharField(
         max_length=100,
@@ -245,12 +215,7 @@ class GradeDistribution(models.Model):
 # todo-done: info
 # model for info table
 class Info(models.Model):
-    ModelID = models.CharField(
-        primary_key=True,
-        max_length=100,
-        null=False,
-        blank=False
-    )
+    ModelID = models.AutoField(primary_key=True)
 
     CourseID = models.CharField(
         max_length=100,
@@ -290,12 +255,7 @@ class Info(models.Model):
 # todo: lab
 # model for lab table
 class Lab(models.Model):
-    ModelID = models.CharField(
-        primary_key=True,
-        max_length=100,
-        null=False,
-        blank=False
-    )
+    ModelID = models.AutoField(primary_key=True)
 
     CourseID = models.CharField(
         max_length=100,
@@ -370,12 +330,7 @@ class Lab(models.Model):
 # todo: lecture
 # model for lecture table
 class Lecture(models.Model):
-    ModelID = models.CharField(
-        primary_key=True,
-        max_length=100,
-        null=False,
-        blank=False
-    )
+    ModelID = models.AutoField(primary_key=True)
 
     CourseID = models.CharField(
         max_length=100,
@@ -427,12 +382,7 @@ class Lecture(models.Model):
 # todo: outcome
 # model for outcome table
 class Outcome(models.Model):
-    ModelID = models.CharField(
-        primary_key=True,
-        max_length=100,
-        null=False,
-        blank=False
-    )
+    ModelID = models.AutoField(primary_key=True)
 
     CourseID = models.CharField(
         max_length=100,
@@ -471,12 +421,7 @@ class Outcome(models.Model):
 # needed
 # model for section table
 class Section(models.Model):
-    ModelID = models.CharField(
-        primary_key=True,
-        max_length=100,
-        null=False,
-        blank=False
-    )
+    ModelID = models.AutoField(primary_key=True)
 
     CourseID = models.CharField(
         max_length=100,
@@ -508,12 +453,7 @@ class Section(models.Model):
 # needed
 # model for textbook table
 class Textbook(models.Model):
-    ModelID = models.CharField(
-        primary_key=True,
-        max_length=100,
-        null=False,
-        blank=False
-    )
+    ModelID = models.AutoField(primary_key=True)
 
     CourseID = models.CharField(
         max_length=100,
@@ -553,12 +493,7 @@ class Textbook(models.Model):
 # todo: timetable
 # model for timetable table
 class Timetable(models.Model):
-    ModelID = models.CharField(
-        primary_key=True,
-        max_length=100,
-        null=False,
-        blank=False
-    )
+    ModelID = models.AutoField(primary_key=True)
 
     CourseID = models.CharField(
         max_length=100,
@@ -598,12 +533,7 @@ class Timetable(models.Model):
 # todo: tutorial
 # model for tutorial table
 class Tutorial(models.Model):
-    ModelID = models.CharField(
-        primary_key=True,
-        max_length=100,
-        null=False,
-        blank=False
-    )
+    ModelID = models.AutoField(primary_key=True)
 
     CourseID = models.CharField(
         max_length=100,
