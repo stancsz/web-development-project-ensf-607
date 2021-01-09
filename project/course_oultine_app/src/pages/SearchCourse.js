@@ -149,7 +149,6 @@ const SearchCourse = () => {
     .then(res => setGradeDeterminationData(res.data))
     .catch((error) => {console.log(error)})
 
-
     axios.get("http://127.0.0.1:8000/info/")
     .then(res => setnoteExaminationDescriptionCalcData(res.data))
     .catch((error) => {console.log(error)})
@@ -457,6 +456,10 @@ const SearchCourse = () => {
           axios.get("http://127.0.0.1:8000/coordinator/" +  tableSelection + "/")
           .then(res => res.data.map(course => 
           axios.delete("http://127.0.0.1:8000/coordinator/v2/" +  course.ModelID + "/")))
+
+          axios.get("http://127.0.0.1:8000/textbook/" +  tableSelection + "/")
+          .then(res => res.data.map(course => 
+          axios.delete("http://127.0.0.1:8000/textbook/v2/" +  course.ModelID + "/")))
           
           setSnackbarOpen(true);
           rows = rows.filter(row => row.id !== tableSelection)
