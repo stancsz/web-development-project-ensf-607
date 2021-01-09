@@ -58,12 +58,14 @@ export default function MenuAppBar() {
         <Toolbar>
           <Box flexGrow={1}>
             {" "}
+            <a href="https://schulich.ucalgary.ca/">
             <img
               src={schulichlogo}
               width="115px"
               height="50px"
               alt="Schulich Logo"
             />
+            </a>
           </Box>
 
           <Box flexGrow={20} justifyContent="center" alignItems="center">

@@ -17,9 +17,12 @@ const useStyles = makeStyles({
 
 
 export default function SearchTimetable(props) {
- 
   
   const classes = useStyles();
+
+  let keys = []
+  props.timetable === undefined ? keys = undefined : keys=Object.keys(props.timetable)
+
 
   return (
     <>
@@ -35,8 +38,17 @@ export default function SearchTimetable(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          
-     
+        {keys === undefined ? "Data Missing" : keys.map((key) => (
+            <TableRow key={key}>
+              <TableCell component="th" scope="row">
+                {props.timetable[key].SectionNum}
+              </TableCell>
+              <TableCell align="right">{props.timetable[key].Days}</TableCell>
+              <TableCell align="right">{props.timetable[key].Time}</TableCell>
+              <TableCell align="right">{props.timetable[key].Location}</TableCell>
+              
+            </TableRow>
+          ))}
         
           
         </TableBody>

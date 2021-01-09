@@ -7,16 +7,13 @@ import InputLabel from "@material-ui/core/InputLabel";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
-import OutcomeData from "../data/DataOutcome.json";
-import GradesData from "../data/DataGrades.json";
-import InfoData from "../data/DataInfo.json";
-import LetterData from "../data/DataLetterGrades.json";
-import NoteData from "../data/DataNotes.json";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Outcome from "../search_componenets/SearchOutcome";
 import Timetable from "../search_componenets/SearchTimetable";
 import Instructors from "../search_componenets/SearchInstructors";
+import Coordinators from "../search_componenets/SearchCoordinators";
+import TA from "../search_componenets/SearchTA";
 import Examinations from "../search_componenets/SearchExaminations";
 import Calculator from "../search_componenets/SearchCalculator";
 import Grade from "../search_componenets/SearchGrade";
@@ -39,7 +36,16 @@ import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { Link } from "react-router-dom";
+
+
+import axios from "axios";
+
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -60,35 +66,53 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-
-
 const SearchCourse = () => {
 
-  const courseList = Object.keys(InfoData);
   const classes = useStyles();
 
+  const [courseList, setCourseList] = useState([]);
   const [course, setCourse] = React.useState("");
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   const handleChange = (event) => {
     setCourse(event.target.value);
   };
 
+  const [info, setInfo] = useState();
   const [outcome, setOutcome] = useState({});
   const [timetable, setTimetable] = useState({});
   const [instructors, setInstructors] = useState({});
+  const [coordinators, setCoordinators] = useState({});
+  const [assistants, setAssistants] = useState({});
   const [examinations, setExaminations] = useState({});
   const [calculator, setCalculator] = useState({});
-  const [textbook, setTextbook] = useState({});
-  const [grade, setGrade] = useState({});
-  const [info, setInfo] = useState();
-  const [letter, setLetter] = useState({});
+  const [gradeDetermination, setGradeDetermination] = useState({});
   const [note, setNote] = useState({});
+  const [letter, setLetter] = useState({});
+  const [textbook, setTextbook] = useState({});
+  const [description, setDescription] = useState({});
+ 
+
+  const [InfoData, setInfoData] = useState({}); //COURSE
+  const [outcomeData, setOutcomeData] = useState({});
+  const [timetableData, setTimetableData] = useState({});
+  const [instructorsData, setInstructorsData] = useState({});
+  const [coordinatorsData, setCoordinatorsData] = useState({});
+  const [assistantsData, setAssistantsData] = useState({});
+  const [gradeDeterminationData, setGradeDeterminationData] = useState({});
+  const [noteExaminationDescriptionCalcData, setnoteExaminationDescriptionCalcData] = useState({});
+  const [letterData, setLetterData] = useState({});
+  const [textbookData, setTextbookData] = useState({});
+  
 
   const [frame, setFrame] = useState();
   const [searchInput, setSearchInput] = useState("");
   const [tableSelection, setTableSelection] = useState("");
   const [displayIcons, setDisplayIcons] = useState();
   const [callHandleSelect, setCallHandleSelect] = useState();
+  const [pageToggle, setPageToggle] = useState(true);
+
+
 
   const columns = [
     {
@@ -111,24 +135,74 @@ const SearchCourse = () => {
 
   for (let i = 0; i < Object.values(InfoData).length; i++) {
     var rowval = Object.values(InfoData)[i];
-    rows.push({ id: rowval["courseID"], datetime: rowval["DateCreated"] });
+    rows.push({ id: rowval["CourseID"], datetime: rowval["DateCreated"].split(".")[0] + " UTC"});
   }
 
-  const handleSelect = () => {
-    let tempInfo = InfoData[course];
-    let tempGrade = GradesData[course];
-    let tempOutcome = OutcomeData[course];
-    let tempLetter = LetterData[course];
-    let tempNote = NoteData[course];
-    setOutcome(tempOutcome);
-    setInfo(tempInfo);
-    setGrade(tempGrade);
-    setLetter(tempLetter);
-    setNote(tempNote);
+  
+  const fillFields = () => {
+
+    axios.get("http://127.0.0.1:8000/coordinator/")
+    .then(res => setCoordinatorsData(res.data))
+    .catch((error) => {console.log(error)})
+
+    axios.get("http://127.0.0.1:8000/gradedetermination/")
+    .then(res => setGradeDeterminationData(res.data))
+    .catch((error) => {console.log(error)})
+
+
+    axios.get("http://127.0.0.1:8000/info/")
+    .then(res => setnoteExaminationDescriptionCalcData(res.data))
+    .catch((error) => {console.log(error)})
+
+    axios.get("http://127.0.0.1:8000/outcome/")
+    .then(res => setOutcomeData(res.data))
+    .catch((error) => {console.log(error)})
+
+    axios.get("http://127.0.0.1:8000/timetable/")
+    .then(res => setTimetableData(res.data))
+    .catch((error) => {console.log(error)})
+
+    axios.get("http://127.0.0.1:8000/gradedistribution/")
+    .then(res => setLetterData(res.data))
+    .catch((error) => {console.log(error)})
+
+    axios.get("http://127.0.0.1:8000/lecture/")
+    .then(res => setInstructorsData(res.data))
+    .catch((error) => {console.log(error)})
+
+    axios.get("http://127.0.0.1:8000/tutorial/")
+    .then(res => setAssistantsData(res.data))
+    .catch((error) => {console.log(error)})
+
+    axios.get("http://127.0.0.1:8000/course/")
+    .then(res => setInfoData(res.data))
+    .catch((error) => {console.log(error)})
+
+    axios.get("http://127.0.0.1:8000/course/")
+    .then(res => setCourseList(res.data.map(course => course.CourseID)))
+    .catch((error) => {console.log(error)})
+
   };
 
-  const handleUpdate = () => {
-    if (typeof info !== "undefined") {
+
+  const handleSelect = () => {
+    setCoordinators(coordinatorsData.filter(res => res.CourseID === course)); 
+    setGradeDetermination(gradeDeterminationData.filter(res => res.CourseID === course));
+    setNote(noteExaminationDescriptionCalcData.filter(res => res.CourseID === course));
+    setExaminations(noteExaminationDescriptionCalcData.filter(res => res.CourseID === course));
+    setDescription(noteExaminationDescriptionCalcData.filter(res => res.CourseID === course));
+    setCalculator(noteExaminationDescriptionCalcData.filter(res => res.CourseID === course));
+    setOutcome(outcomeData.filter(res => res.CourseID === course));
+    setTimetable(timetableData.filter(res => res.CourseID === course));
+    setLetter(letterData.filter(res => res.CourseID === course));
+    setInstructors(instructorsData.filter(res => res.CourseID === course));
+    setAssistants(assistantsData.filter(res => res.CourseID === course));
+    setInfo(InfoData.filter(res => res.CourseID === course));
+  };
+
+
+  const handleUpdate = () => {  
+    if (typeof info !== "undefined" && course != "View All") {
       setFrame(
         <Container maxWidth="md">
           <Grid align="left">
@@ -151,7 +225,7 @@ const SearchCourse = () => {
             <AccordionDetails>
             <div style={{ width: '100%' }}>
               <Paper className={classes.paper} elevation={3}>
-              <Info info={info} />
+              <Info info={info} description={description} />
               </Paper>
             </div>
             </AccordionDetails>
@@ -181,7 +255,7 @@ const SearchCourse = () => {
             <AccordionDetails>
             <div style={{ width: '100%' }}>
             <Paper className={classes.paper} elevation={3}>
-            <Timetable />
+            <Timetable timetable = {timetable}/>
             </Paper>
             </div>
             </AccordionDetails>
@@ -197,7 +271,9 @@ const SearchCourse = () => {
             <AccordionDetails>
             <div style={{ width: '100%' }}>
             <Paper className={classes.paper} elevation={3}>
-            <Instructors />
+            <Instructors instructors={instructors}/>
+            <Coordinators coordinators = {coordinators}/>
+            <TA assistants={assistants}/>
             </Paper>
             </div>
             </AccordionDetails>
@@ -213,7 +289,7 @@ const SearchCourse = () => {
             <AccordionDetails>
             <div style={{ width: '100%' }}>
             <Paper className={classes.paper} elevation={3}>
-            <Examinations />
+            <Examinations examinations = {examinations}/>
             </Paper>
             </div>
             </AccordionDetails>
@@ -229,7 +305,7 @@ const SearchCourse = () => {
             <AccordionDetails>
             <div style={{ width: '100%' }}>
             <Paper className={classes.paper} elevation={3}>
-            <Calculator />
+            <Calculator calculator = {calculator}/>
             </Paper>
             </div>
             </AccordionDetails>
@@ -244,7 +320,7 @@ const SearchCourse = () => {
             <AccordionDetails>
             <div style={{ width: '100%' }}>
             <Paper className={classes.paper} elevation={3}>
-            <Grade grade={grade} />
+            <Grade gradeDetermination={gradeDetermination} />
             </Paper>
             <br/>
             <Paper className={classes.paper} elevation={3}>
@@ -322,6 +398,7 @@ const SearchCourse = () => {
       </div>
 
         </Container>
+        
       );
     }
   };
@@ -343,12 +420,57 @@ const SearchCourse = () => {
           <EditIcon fontSize="large"/>
         </Button>
 
-        <Button onClick={() => {}}>
+        <Button onClick={() => {
+
+          axios.get("http://127.0.0.1:8000/course/" +  tableSelection + "/")
+          .then(res => res.data.map(course => 
+          axios.delete("http://127.0.0.1:8000/course/v2/" +  course.ModelID + "/")))
+
+          axios.get("http://127.0.0.1:8000/tutorial/" +  tableSelection + "/")
+          .then(res => res.data.map(course => 
+          axios.delete("http://127.0.0.1:8000/tutorial/v2/" +  course.ModelID + "/")))
+
+          axios.get("http://127.0.0.1:8000/lecture/" +  tableSelection + "/")
+          .then(res => res.data.map(course => 
+          axios.delete("http://127.0.0.1:8000/lecture/v2/" +  course.ModelID + "/")))
+
+          axios.get("http://127.0.0.1:8000/gradedistribution/" +  tableSelection + "/")
+          .then(res => res.data.map(course => 
+          axios.delete("http://127.0.0.1:8000/gradedistribution/v2/" +  course.ModelID + "/")))
+
+          axios.get("http://127.0.0.1:8000/timetable/" +  tableSelection + "/")
+          .then(res => res.data.map(course => 
+          axios.delete("http://127.0.0.1:8000/timetable/v2/" +  course.ModelID + "/")))
+
+          axios.get("http://127.0.0.1:8000/outcome/" +  tableSelection + "/")
+          .then(res => res.data.map(course => 
+          axios.delete("http://127.0.0.1:8000/outcome/v2/" +  course.ModelID + "/")))
+
+          axios.get("http://127.0.0.1:8000/gradedetermination/" +  tableSelection + "/")
+          .then(res => res.data.map(course => 
+          axios.delete("http://127.0.0.1:8000/gradedetermination/v2/" +  course.ModelID + "/")))
+
+          axios.get("http://127.0.0.1:8000/info/" +  tableSelection + "/")
+          .then(res => res.data.map(course => 
+          axios.delete("http://127.0.0.1:8000/info/v2/" +  course.ModelID + "/")))
+          
+          axios.get("http://127.0.0.1:8000/coordinator/" +  tableSelection + "/")
+          .then(res => res.data.map(course => 
+          axios.delete("http://127.0.0.1:8000/coordinator/v2/" +  course.ModelID + "/")))
+          
+          setSnackbarOpen(true);
+          rows = rows.filter(row => row.id !== tableSelection)
+          handleUpdate();
+
+        }}>
           DELETE&nbsp;
           <DeleteForeverIcon fontSize="large"/>
         </Button>
         
       </Grid>
+
+
+        
     );
   };
 
@@ -358,13 +480,13 @@ const SearchCourse = () => {
     for (let i = 0; i < Object.values(InfoData).length; i++) {
       var rowval = Object.values(InfoData)[i];
       if (
-        rowval["courseID"]
+        rowval["CourseID"]
           .toLowerCase()
           .includes(searchInput.toLocaleLowerCase())
       ) {
         filteredRows.push({
-          id: rowval["courseID"],
-          datetime: rowval["DateCreated"],
+          id: rowval["CourseID"],
+          datetime: rowval["DateCreated"].split(".")[0] + " UTC",
         });
       }
     }
@@ -401,7 +523,32 @@ const SearchCourse = () => {
     );
   };
 
+
   useEffect(() => {
+
+    if(pageToggle){
+      fillFields();
+      setPageToggle(false);
+    }
+
+    if(courseList.length === 0){
+      setFrame(
+        <div>
+          <br/>
+          <br/>
+          <br/>
+          <div style={{fontSize : 20}}>
+          
+          LOADING COURSES...
+          <br/>
+          <CircularProgress />
+          </div>
+        </div>
+
+      )
+    }
+    else{
+
     if (searchInput !== "") {
       displaySearchResults();
       setTableSelection("");
@@ -416,7 +563,15 @@ const SearchCourse = () => {
       handleSelect();
       setCallHandleSelect(false);
     }
-  }, [info, searchInput, tableSelection, callHandleSelect]);
+
+    }
+
+  }, [info, searchInput, tableSelection, callHandleSelect, courseList]);
+
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === 'clickaway') {return;}
+    setSnackbarOpen(false);
+  };
 
   return (
     <>
@@ -427,7 +582,6 @@ const SearchCourse = () => {
               <div className="pt-2">
                 <TextField
                   fullWidth
-                  id="outlined-basic"
                   label="Search Courses"
                   variant="filled"
                   value={searchInput}
@@ -454,20 +608,18 @@ const SearchCourse = () => {
             <Grid item xs={false}>
               <FormControl className={classes.formControl}>
                 <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
                   value={course}
                   onChange={(e) => {
                     handleChange(e);
                   }}
                 >
-                  {courseList.map((i) => (
+                 {courseList.map((i) => (
                     <MenuItem key={i} value={i}>{i}</MenuItem>
-                  ))}
+                  ))}  
                   <MenuItem value="View All">View All</MenuItem>
                 </Select>
               </FormControl>
-              <InputLabel id="demo-simple-select-label">
+              <InputLabel>
                 Select Course
               </InputLabel>
             </Grid>
@@ -475,7 +627,28 @@ const SearchCourse = () => {
         </Container>
       </AppBar>
 
+
+      <br/>
+
       {frame}
+
+
+      
+      <Snackbar
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+        open={snackbarOpen}
+        autoHideDuration={8000}
+        onClose={handleSnackbarClose}
+        message="Course Deleted"
+        action={
+          <>
+            <IconButton size="small" aria-label="close" color="inherit" onClick={handleSnackbarClose}>
+              <CloseIcon fontSize="small" />
+            </IconButton>
+          </>}/>
 
     </>
   );

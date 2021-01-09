@@ -16,14 +16,11 @@ const useStyles = makeStyles({
 });
 
 export default function SearchGrade(props) {
-    console.log(props)
-    const keys=Object.keys(props.grade)
-    console.log(keys)
+
+    let keys = []
+    props.gradeDetermination === undefined ? keys = undefined : keys=Object.keys(props.gradeDetermination)
 
     const classes = useStyles();
-
-    // return(<>
-    //     </>);
 
     return (
         <>
@@ -40,16 +37,16 @@ export default function SearchGrade(props) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {keys.map((key) => (
+                        {keys === undefined ? "Data Missing" : keys.map((key) => (
                             <TableRow key={key}>
                                 <TableCell component="th" scope="row">
-                                    {props.grade[key].Component}
+                                    {props.gradeDetermination[key].Component}
                                 </TableCell>
                                 <TableCell align="right">
-                                    {props.grade[key]["Learning Outcome(s) Evaluated"]}
+                                    {props.gradeDetermination[key].OutcomeEvaluated}
                                 </TableCell>
                                 <TableCell align="right">
-                                    {props.grade[key].Weight}
+                                    {props.gradeDetermination[key].Weight}
                                 </TableCell>
 
                             </TableRow>
@@ -59,7 +56,7 @@ export default function SearchGrade(props) {
             </TableContainer>
             <Container maxWidth="md">
             <div align="right">
-                <b>Total:</b> 100%
+                <b>Total:</b> {Object.values(props.gradeDetermination).reduce((a,b) => a + b.Weight, 0)}%
             </div>
             </Container>
         </>

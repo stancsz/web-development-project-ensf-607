@@ -8,8 +8,8 @@ export default function SearchCalculator(props) {
   return (
     <>
         <div align="left">
-        <Typography variant="h7">
-        Calculators are not allowed during examinations.
+        <Typography>
+          {props.calculator[0] === undefined ? "Data Missing" : props.calculator[0].UseCalc}
         </Typography>
         </div>
 

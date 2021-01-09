@@ -16,17 +16,17 @@ const useStyles = makeStyles({
 
 
 
-export default function SearchInstructors(props) {
+export default function SearchTA(props) {
  
-  const classes = useStyles();
-
-  let keys = []
-  props.instructors === undefined ? keys = undefined : keys=Object.keys(props.instructors)
-
   
+  const classes = useStyles();
+  
+  let keys = []
+  props.assistants === undefined ? keys = undefined : keys=Object.keys(props.assistants)
+
   return (
     <>
-    <div align = "left"><u>Course Instructor</u></div>
+    <div align = "left"><u>Teaching Assistants</u></div>
     <br/>
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
@@ -40,21 +40,20 @@ export default function SearchInstructors(props) {
             <TableCell align="right">Email</TableCell>
           </TableRow>
         </TableHead>
-        <TableBody>        
+        <TableBody> 
         {keys === undefined ? "Data Missing" : keys.map((key) => (
             <TableRow key={key}>
-              <TableCell component="th" scope="row">{props.instructors[key].LectureNum}</TableCell>
-              <TableCell align="right">{props.instructors[key].FName}</TableCell>
-              <TableCell align="right">{props.instructors[key].LName}</TableCell>
-              <TableCell align="right">{props.instructors[key].Phone}</TableCell>
-              <TableCell align="right">{props.instructors[key].Office}</TableCell>
-              <TableCell align="right">{props.instructors[key].Email}</TableCell>
+              <TableCell component="th" scope="row">{props.assistants[key].TutorialNum}</TableCell>
+              <TableCell align="right">{props.assistants[key].FName}</TableCell>
+              <TableCell align="right">{props.assistants[key].LName}</TableCell>
+              <TableCell align="right">{props.assistants[key].Phone}</TableCell>
+              <TableCell align="right">{props.assistants[key].Office}</TableCell>
+              <TableCell align="right">{props.assistants[key].Email}</TableCell>
             </TableRow>
-          ))}
+          ))}       
         </TableBody>
       </Table>
     </TableContainer>
-    <br/>
     </>
   );
 }
