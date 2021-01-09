@@ -430,10 +430,35 @@ const SearchCourse = () => {
           .then(res => res.data.map(course => 
           axios.delete("http://127.0.0.1:8000/tutorial/v2/" +  course.ModelID + "/")))
 
+          axios.get("http://127.0.0.1:8000/lecture/" +  tableSelection + "/")
+          .then(res => res.data.map(course => 
+          axios.delete("http://127.0.0.1:8000/lecture/v2/" +  course.ModelID + "/")))
+
+          axios.get("http://127.0.0.1:8000/gradedistribution/" +  tableSelection + "/")
+          .then(res => res.data.map(course => 
+          axios.delete("http://127.0.0.1:8000/gradedistribution/v2/" +  course.ModelID + "/")))
+
+          axios.get("http://127.0.0.1:8000/timetable/" +  tableSelection + "/")
+          .then(res => res.data.map(course => 
+          axios.delete("http://127.0.0.1:8000/timetable/v2/" +  course.ModelID + "/")))
+
+          axios.get("http://127.0.0.1:8000/outcome/" +  tableSelection + "/")
+          .then(res => res.data.map(course => 
+          axios.delete("http://127.0.0.1:8000/outcome/v2/" +  course.ModelID + "/")))
+
+          axios.get("http://127.0.0.1:8000/gradedetermination/" +  tableSelection + "/")
+          .then(res => res.data.map(course => 
+          axios.delete("http://127.0.0.1:8000/gradedetermination/v2/" +  course.ModelID + "/")))
+
+          axios.get("http://127.0.0.1:8000/info/" +  tableSelection + "/")
+          .then(res => res.data.map(course => 
+          axios.delete("http://127.0.0.1:8000/info/v2/" +  course.ModelID + "/")))
           
+          axios.get("http://127.0.0.1:8000/coordinator/" +  tableSelection + "/")
+          .then(res => res.data.map(course => 
+          axios.delete("http://127.0.0.1:8000/coordinator/v2/" +  course.ModelID + "/")))
           
           setSnackbarOpen(true);
-          
           rows = rows.filter(row => row.id !== tableSelection)
           handleUpdate();
 
