@@ -30,7 +30,7 @@ function FunInfo(props) {
 
         
         setInfo(temp)
-        console.log(info)
+        
 
     }
 const save=()=>{

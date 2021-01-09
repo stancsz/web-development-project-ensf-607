@@ -52,15 +52,18 @@ const AddCourse = () => {
   const[notes,setNotes]=useState({CourseID:"",})
   const [save,setSave]=useState(false)
   const [info,setInfo]=useState({CourseID:""})
-  const [examinationEditorState, setExaminationEditorState] = useState(
-    RichTextEditor.createEmptyValue()
-  );
-  const [calculatorInfo, setCalculatorInfo] = useState();
-  const[description,setDescription]=useState();
+   const[contentCategory,setContentCategory]=useState("")
+  const[section,setSectio]=useState("")
+  const[lab,setLab]=useState("")
+  const[AuWeight,setAuWeight]=useState("")
   const [outcome,setOutcome]=useState({CourseID:""})
   const[timeTable,setTimeTable]=useState({CourseID:""})
   const [coordinator,setcoordinator]=useState({CourseID:""})
   const[instructor,setInstructor]=useState({CourseID:""})
+  const[gradeDetermination,setGradeDetermination]=useState("")
+  const[gradeDistribution,setGradeDistribution]=useState("")
+  const[testbook,setTextbook]=useState("")
+
   const[ta,setTa]=useState("")
   
 useEffect(()=>{
@@ -70,10 +73,10 @@ useEffect(()=>{
   console.log(info)
   console.log("Notes")
   console.log(notes)
-  /*console.log(description)
+  
   console.log("Outcome")
   console.log(outcome)
-  console.log("Instructor table: ")
+  /*console.log("Instructor table: ")
   console.log(instructor)
 console.log("coordinator tabke: ")
 console.log(coordinator)

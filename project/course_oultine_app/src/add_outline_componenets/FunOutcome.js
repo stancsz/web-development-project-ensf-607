@@ -25,7 +25,7 @@ const useStyles = makeStyles({
 export default function BasicTable(props) {
   const [count, setCount] = useState(2);
   const classes = useStyles();
-
+const[outcomeJSON,setOutcomeJSON]=useState([{}])
   const [outcomes, setOutcomes] = useState([{ id: 1, outcome: "" }]);
 
   const [attributeRows, setAttributeRows] = useState([
@@ -54,21 +54,7 @@ export default function BasicTable(props) {
     //setRows(newRows)
    // console.log(outcomes)
   }
-  /*
-useEffect (()=>{
-  if(props.save){
-   
-    let temp=[]
-    for (let i=0;i<outcomes.length;i++){
-      temp.push({CourseID:props.courseID,OutcomeNum:outcomes[i].id,Description:outcomes[i].outcome,GraduateAttribute:attributeRows[i].attribute,InstructionLvl:attributeRows[i].InstructionLvl})
-    
-  }
-  setCount(1)
-  props.setOutcome(temp)
-  
-  props.setSave(false)
-}
-})*/
+
 
      
 
@@ -90,7 +76,7 @@ useEffect (()=>{
 
     let newRows = outcomes;
     setCount(count + 1);
-    console.log(newRows);
+    
     let newAttributeRows = attributeRows;
     newAttributeRows.push({
       id: attributeRows.length + 1,
@@ -104,52 +90,21 @@ useEffect (()=>{
     // console.log(rows)
   };
 
-  function mathContentElementOptions() {
-    return (
-      <Select native onChange={(e) => {}}>
-        <option aria-label="None" value={""} />
-        <option value="DiffCalc">DiffCalc</option>
-        <option value="DiffEq">DiffEq</option>
-        <option value="Discrete">Discrete</option>
-        <option value="IntCalc">IntCalc</option>
-        <option value="LinAlg">LinAlg</option>
-        <option value="NMeths">NMeths</option>
-        <option value="Prob">Prob</option>
-        <option value="Stats">Stats</option>
-      </Select>
-    );
-  }
-
-  function naturalScienceElementOptions() {
-    return (
-      <Select native onChange={(e) => {}}>
-        <option aria-label="None" value={""} />
-        <option value="Chem">Chem</option>
-        <option value="Earth">Earth</option>
-        <option value="Life">Life</option>
-        <option value="Phys">Phys</option>
-      </Select>
-    );
-  }
-
-  function complementaryOptions() {
-    return (
-      <Select native onChange={(e) => {}}>
-        <option aria-label="None" value={""} />
-        <option value="EngEcon">EngEcon</option>
-        <option value="H&S">H&S</option>
-        <option value="HumSS">HumSS</option>
-        <option value="Impacts">Impacts</option>
-        <option value="OWComm">OWComm</option>
-        <option value="PEthics">PEthics</option>
-      </Select>
-    );
-  }
+ const save=()=>{
+   let tempOutcome=outcomes
+   let tempAttributes=attributeRows
+   let newJSON=[{}]
+   for (let i = 0; i < tempOutcome.length; i++){
+    
+newJSON[i]={OutcomeNum:tempOutcome[i].id,Description:tempOutcome[i].outcome, GraduateAttribute:tempAttributes[i].attribute,InstructionLvl:tempAttributes[i].instructionLevel,CourseID:props.courseID}
+   }
+   props.setOutcome(newJSON)
+ }
 
   return (
     <>
     <div className="pt-2 pb-2" align="right">
-            <Button variant="outlined" color="secondary">
+            <Button variant="outlined" color="secondary" onClick={()=>save()}>
               <SaveIcon />
             </Button>
           </div>
