@@ -528,3 +528,211 @@ class TextbookPutDelView(
             return Response({'errors': 'This item does not exist.'}, status=400)
         item.delete()
         return Response(status=204)
+
+
+class AuWeightPostGetView(
+    APIView,
+    UpdateModelMixin,
+    DestroyModelMixin,
+):
+    def get(self, request, CourseID=None):
+        if CourseID:
+            try:
+                queryset = AuWeight.objects.filter(CourseID=CourseID)
+            except AuWeight.DoesNotExist:
+                return Response({'errors': 'This item does not exist.'}, status=400)
+            read_serializer = AuWeightSerializer(queryset, many=True)
+        else:
+            queryset = AuWeight.objects.all()
+            read_serializer = AuWeightSerializer(queryset, many=True)
+        return Response(read_serializer.data)
+
+    def post(self, request):
+        create_serializer = AuWeightSerializer(data=request.data)
+        if create_serializer.is_valid():
+            item_object = create_serializer.save()
+            read_serializer = AuWeightSerializer(item_object)
+            return Response(read_serializer.data, status=201)
+        return Response(create_serializer.errors, status=400)
+
+
+class AuWeightPutDelView(
+    APIView,
+    UpdateModelMixin,
+    DestroyModelMixin,
+):
+    def put(self, request, ModelID=None):
+        try:
+            item = AuWeight.objects.get(ModelID=ModelID)
+        except AuWeight.DoesNotExist:
+            return Response({'errors': 'This item does not exist.'}, status=400)
+        update_serializer = AuWeightSerializer(item, data=request.data)
+        if update_serializer.is_valid():
+            item_object = update_serializer.save()
+            read_serializer = AuWeightSerializer(item_object)
+            return Response(read_serializer.data, status=200)
+        return Response(update_serializer.errors, status=400)
+
+    def delete(self, request, ModelID=None):
+        try:
+            item = AuWeight.objects.get(ModelID=ModelID)
+        except AuWeight.DoesNotExist:
+            return Response({'errors': 'This item does not exist.'}, status=400)
+        item.delete()
+        return Response(status=204)
+
+
+class ContentCategoryPostGetView(
+    APIView,
+    UpdateModelMixin,
+    DestroyModelMixin,
+):
+    def get(self, request, CourseID=None):
+        if CourseID:
+            try:
+                queryset = ContentCategory.objects.filter(CourseID=CourseID)
+            except ContentCategory.DoesNotExist:
+                return Response({'errors': 'This item does not exist.'}, status=400)
+            read_serializer = ContentCategorySerializer(queryset, many=True)
+        else:
+            queryset = ContentCategory.objects.all()
+            read_serializer = ContentCategorySerializer(queryset, many=True)
+        return Response(read_serializer.data)
+
+    def post(self, request):
+        create_serializer = ContentCategorySerializer(data=request.data)
+        if create_serializer.is_valid():
+            item_object = create_serializer.save()
+            read_serializer = ContentCategorySerializer(item_object)
+            return Response(read_serializer.data, status=201)
+        return Response(create_serializer.errors, status=400)
+
+
+class ContentCategoryPutDelView(
+    APIView,
+    UpdateModelMixin,
+    DestroyModelMixin,
+):
+    def put(self, request, ModelID=None):
+        try:
+            item = ContentCategory.objects.get(ModelID=ModelID)
+        except ContentCategory.DoesNotExist:
+            return Response({'errors': 'This item does not exist.'}, status=400)
+        update_serializer = ContentCategorySerializer(item, data=request.data)
+        if update_serializer.is_valid():
+            item_object = update_serializer.save()
+            read_serializer = ContentCategorySerializer(item_object)
+            return Response(read_serializer.data, status=200)
+        return Response(update_serializer.errors, status=400)
+
+    def delete(self, request, ModelID=None):
+        try:
+            item = ContentCategory.objects.get(ModelID=ModelID)
+        except ContentCategory.DoesNotExist:
+            return Response({'errors': 'This item does not exist.'}, status=400)
+        item.delete()
+        return Response(status=204)
+
+
+class LabPostGetView(
+    APIView,
+    UpdateModelMixin,
+    DestroyModelMixin,
+):
+    def get(self, request, CourseID=None):
+        if CourseID:
+            try:
+                queryset = Lab.objects.filter(CourseID=CourseID)
+            except Lab.DoesNotExist:
+                return Response({'errors': 'This item does not exist.'}, status=400)
+            read_serializer = LabSerializer(queryset, many=True)
+        else:
+            queryset = Lab.objects.all()
+            read_serializer = LabSerializer(queryset, many=True)
+        return Response(read_serializer.data)
+
+    def post(self, request):
+        create_serializer = LabSerializer(data=request.data)
+        if create_serializer.is_valid():
+            item_object = create_serializer.save()
+            read_serializer = LabSerializer(item_object)
+            return Response(read_serializer.data, status=201)
+        return Response(create_serializer.errors, status=400)
+
+
+class LabPutDelView(
+    APIView,
+    UpdateModelMixin,
+    DestroyModelMixin,
+):
+    def put(self, request, ModelID=None):
+        try:
+            item = Lab.objects.get(ModelID=ModelID)
+        except Lab.DoesNotExist:
+            return Response({'errors': 'This item does not exist.'}, status=400)
+        update_serializer = LabSerializer(item, data=request.data)
+        if update_serializer.is_valid():
+            item_object = update_serializer.save()
+            read_serializer = LabSerializer(item_object)
+            return Response(read_serializer.data, status=200)
+        return Response(update_serializer.errors, status=400)
+
+    def delete(self, request, ModelID=None):
+        try:
+            item = Lab.objects.get(ModelID=ModelID)
+        except Lab.DoesNotExist:
+            return Response({'errors': 'This item does not exist.'}, status=400)
+        item.delete()
+        return Response(status=204)
+
+
+class SectionPostGetView(
+    APIView,
+    UpdateModelMixin,
+    DestroyModelMixin,
+):
+    def get(self, request, CourseID=None):
+        if CourseID:
+            try:
+                queryset = Section.objects.filter(CourseID=CourseID)
+            except Section.DoesNotExist:
+                return Response({'errors': 'This item does not exist.'}, status=400)
+            read_serializer = SectionSerializer(queryset, many=True)
+        else:
+            queryset = Section.objects.all()
+            read_serializer = SectionSerializer(queryset, many=True)
+        return Response(read_serializer.data)
+
+    def post(self, request):
+        create_serializer = SectionSerializer(data=request.data)
+        if create_serializer.is_valid():
+            item_object = create_serializer.save()
+            read_serializer = SectionSerializer(item_object)
+            return Response(read_serializer.data, status=201)
+        return Response(create_serializer.errors, status=400)
+
+
+class SectionPutDelView(
+    APIView,
+    UpdateModelMixin,
+    DestroyModelMixin,
+):
+    def put(self, request, ModelID=None):
+        try:
+            item = Section.objects.get(ModelID=ModelID)
+        except Section.DoesNotExist:
+            return Response({'errors': 'This item does not exist.'}, status=400)
+        update_serializer = SectionSerializer(item, data=request.data)
+        if update_serializer.is_valid():
+            item_object = update_serializer.save()
+            read_serializer = SectionSerializer(item_object)
+            return Response(read_serializer.data, status=200)
+        return Response(update_serializer.errors, status=400)
+
+    def delete(self, request, ModelID=None):
+        try:
+            item = Section.objects.get(ModelID=ModelID)
+        except Section.DoesNotExist:
+            return Response({'errors': 'This item does not exist.'}, status=400)
+        item.delete()
+        return Response(status=204)
