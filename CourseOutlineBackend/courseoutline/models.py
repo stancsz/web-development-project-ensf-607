@@ -446,6 +446,12 @@ class Section(models.Model):
         blank=False
     )
 
+    type = models.TextField(
+        max_length=200,
+        null=False,
+        blank=False
+    )
+
     class Meta:
         db_table = 'SECTION'
 
@@ -481,6 +487,12 @@ class Textbook(models.Model):
     )
 
     Edition = models.TextField(
+        max_length=200,
+        null=False,
+        blank=False
+    )
+
+    type = models.TextField(
         max_length=200,
         null=False,
         blank=False

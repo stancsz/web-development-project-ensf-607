@@ -131,7 +131,7 @@ class OutcomeSerializer(serializers.ModelSerializer):
     # ModelID = serializers.CharField(max_length=100, required=True)
     CourseID = serializers.CharField(max_length=100, required=True)
     OutcomeNum = serializers.IntegerField(required=False)  # removed max_length=100
-    Description = serializers.CharField(max_length=500, required=False) # Changed max_length to 500
+    Description = serializers.CharField(max_length=500, required=False)  # Changed max_length to 500
     GraduateAttribute = serializers.CharField(max_length=100, required=False)
     InstructionLvl = serializers.CharField(max_length=100, required=False)
 
@@ -390,6 +390,7 @@ class TextbookSerializer(serializers.ModelSerializer):
     Publisher = serializers.CharField(max_length=100, required=False)
     Author = serializers.CharField(max_length=100, required=False)
     Edition = serializers.CharField(max_length=100, required=False)
+    type = serializers.CharField(max_length=100, required=False)
 
     def create(self, validated_data):
         return Course.objects.create(
@@ -399,6 +400,7 @@ class TextbookSerializer(serializers.ModelSerializer):
             Publisher=validated_data.get('Publisher'),
             Author=validated_data.get('Author'),
             Edition=validated_data.get('Edition'),
+            type=validated_data.get('type'),
         )
 
     def update(self, instance, validated_data):
@@ -408,6 +410,7 @@ class TextbookSerializer(serializers.ModelSerializer):
         instance.Publisher = validated_data.get('Publisher', instance.Publisher)
         instance.Author = validated_data.get('Author', instance.Author)
         instance.Edition = validated_data.get('Edition', instance.Edition)
+        instance.type = validated_data.get('type', instance.type)
         instance.save()
         return instance
 
@@ -419,5 +422,6 @@ class TextbookSerializer(serializers.ModelSerializer):
             'TITLE',
             'Publisher',
             'Author',
-            'Edition'
+            'Edition',
+            'type'
         )
