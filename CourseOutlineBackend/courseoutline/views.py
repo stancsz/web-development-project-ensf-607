@@ -483,10 +483,10 @@ class TextbookPostGetView(
     UpdateModelMixin,
     DestroyModelMixin,
 ):
-    def get(self, request, TextbookID=None):
-        if TextbookID:
+    def get(self, request, CourseID=None):
+        if CourseID:
             try:
-                queryset = Textbook.objects.filter(TextbookID=TextbookID)
+                queryset = Textbook.objects.filter(CourseID=CourseID)
             except Textbook.DoesNotExist:
                 return Response({'errors': 'This item does not exist.'}, status=400)
             read_serializer = TextbookSerializer(queryset, many=True)
