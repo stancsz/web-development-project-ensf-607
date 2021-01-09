@@ -102,7 +102,6 @@ const LastAdded = () => {
   );
   const [course, setCourse] = useState(0);
 
-  const [toggle, setToggle] = useState(0);
 
     const classes = useStyles();
     //const course=recent()
@@ -198,10 +197,7 @@ const fillFields = () => {
       axios.get("http://127.0.0.1:8000/course/")
       .then(res => setInfoData(res.data))
       .catch((error) => {console.log(error)})
-      
-      axios.get("http://127.0.0.1:8000/course/")
-      .then(setToggle(1))
-      .catch((error) => {console.log(error)})
+
 }
 
     useEffect(() => {
@@ -233,23 +229,20 @@ const fillFields = () => {
 
       if(pageToggle === 1 && InfoData !== 0 && outcomeData !== 0 && timetableData !== 0 
         && instructorsData !== 0 && coordinatorsData !== 0 && assistantsData !== 0 && gradeDeterminationData !== 0 
-        && noteExaminationDescriptionCalcData !== 0 && letterData !== 0){
-          console.log(course)
-          console.log(InfoData)
-          
+        && noteExaminationDescriptionCalcData !== 0 && letterData !== 0){         
          
-          setCoordinators(coordinatorsData.filter(res => res.CourseID === course)); 
-          setGradeDetermination(gradeDeterminationData.filter(res => res.CourseID === course));
-          setNote(noteExaminationDescriptionCalcData.filter(res => res.CourseID === course));
-          setExaminations(noteExaminationDescriptionCalcData.filter(res => res.CourseID === course));
-          setDescription(noteExaminationDescriptionCalcData.filter(res => res.CourseID === course));
-          setCalculator(noteExaminationDescriptionCalcData.filter(res => res.CourseID === course));
-          setOutcome(outcomeData.filter(res => res.CourseID === course));
-          setTimetable(timetableData.filter(res => res.CourseID === course));
-          setLetter(letterData.filter(res => res.CourseID === course));
-          setInstructors(instructorsData.filter(res => res.CourseID === course));
-          setAssistants(assistantsData.filter(res => res.CourseID === course));
-          setInfo(InfoData.filter(res => res.CourseID === course));
+          setCoordinators(coordinatorsData.filter(res => res.CourseID === course.CourseID)); 
+          setGradeDetermination(gradeDeterminationData.filter(res => res.CourseID === course.CourseID));
+          setNote(noteExaminationDescriptionCalcData.filter(res => res.CourseID === course.CourseID));
+          setExaminations(noteExaminationDescriptionCalcData.filter(res => res.CourseID === course.CourseID));
+          setDescription(noteExaminationDescriptionCalcData.filter(res => res.CourseID === course.CourseID));
+          setCalculator(noteExaminationDescriptionCalcData.filter(res => res.CourseID === course.CourseID));
+          setOutcome(outcomeData.filter(res => res.CourseID === course.CourseID));
+          setTimetable(timetableData.filter(res => res.CourseID === course.CourseID));
+          setLetter(letterData.filter(res => res.CourseID === course.CourseID));
+          setInstructors(instructorsData.filter(res => res.CourseID === course.CourseID));
+          setAssistants(assistantsData.filter(res => res.CourseID === course.CourseID));
+          setInfo(InfoData.filter(res => res.CourseID === course.CourseID));
 
           setPageToggle(2)
       }
@@ -259,7 +252,6 @@ const fillFields = () => {
         && assistants !== 0 && examinations !== 0 && calculator !== 0 && gradeDetermination !== 0
         && note !== 0 && letter !==0 && description !== 0){
 
-          //console.log(info)
       setFrame(
         <Container maxWidth="md">
             <Accordion defaultExpanded={true} elevation={5}>
@@ -402,12 +394,12 @@ const fillFields = () => {
     )
         setPageToggle(3)
         } 
-  
-
     })
 
     return (
       <>
+      <br/>
+      <div style={{fontSize: 20}}>Latest Course Outline</div>
       <br/>
       {frame}
       </>
