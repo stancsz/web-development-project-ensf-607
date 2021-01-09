@@ -431,7 +431,7 @@ class AuWeightSerializer(serializers.ModelSerializer):
     # ModelID = serializers.CharField(max_length=100, required=True)
     CourseID = serializers.CharField(max_length=100, required=True)
     Category = serializers.CharField(max_length=100, required=True)
-    AU = serializers.serializers.IntegerField(required=False)
+    AU = serializers.IntegerField(required=False)
 
     def create(self, validated_data):
         return Course.objects.create(
@@ -495,7 +495,7 @@ class LabSerializer(serializers.ModelSerializer):
     # ModelID = serializers.CharField(max_length=100, required=True)
     CourseID = serializers.CharField(max_length=100, required=True)
     LabNum = serializers.CharField(max_length=100, required=True)
-    NumberOfLabs = serializers.serializers.IntegerField(required=False)
+    NumberOfLabs = serializers.IntegerField(required=False)
     LabType = serializers.CharField(max_length=100, required=True)
     SafetyExamined = serializers.CharField(max_length=100, required=True)
     SafetyTaught = serializers.CharField(max_length=100, required=True)
@@ -559,8 +559,8 @@ class SectionSerializer(serializers.ModelSerializer):
     # ModelID = serializers.CharField(max_length=100, required=True)
     CourseID = serializers.CharField(max_length=100, required=True)
     SectionNumber = serializers.CharField(max_length=100, required=False)
-    Students = serializers.serializers.IntegerField(required=False)
-    Hours = serializers.serializers.IntegerField(required=False)
+    Students = serializers.IntegerField(required=False)
+    Hours = serializers.IntegerField(required=False)
     type = serializers.CharField(max_length=100, required=True)
 
     def create(self, validated_data):
