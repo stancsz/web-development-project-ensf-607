@@ -55,4 +55,23 @@ urlpatterns = [
     path('textbook/<str:CourseID>/', views.TextbookPostGetView.as_view()),
     path('textbook/v2/<str:ModelID>/', views.TextbookPutDelView.as_view()),
 
+    # auweight
+    path('auweight/', views.AuWeightPostGetView.as_view()),
+    path('auweight/<str:CourseID>/', views.AuWeightPostGetView.as_view()),
+    path('auweight/v2/<str:ModelID>/', views.AuWeightPutDelView.as_view()),
+
+    # contentcategory
+    path('contentcategory/', views.ContentCategoryPostGetView.as_view()),
+    path('contentcategory/<str:CourseID>/', views.ContentCategoryPostGetView.as_view()),
+    path('contentcategory/v2/<str:ModelID>/', views.ContentCategoryPutDelView.as_view()),
+
+    # lab
+    path('lab/', views.LabPostGetView.as_view()),
+    path('lab/<str:CourseID>/', views.LabPostGetView.as_view()),
+    path('lab/v2/<str:ModelID>/', views.LabPutDelView.as_view()),
+
+    # section
+    path('section/', views.SectionPostGetView.as_view()),
+    path('section/<str:CourseID>/', views.SectionPostGetView.as_view()),
+    path('section/v2/<str:ModelID>/', views.SectionPutDelView.as_view()),
 ]
