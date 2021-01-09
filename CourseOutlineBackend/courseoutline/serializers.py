@@ -425,3 +425,67 @@ class TextbookSerializer(serializers.ModelSerializer):
             'Edition',
             'type'
         )
+
+
+class AuWeightSerializer(serializers.ModelSerializer):
+    # ModelID = serializers.CharField(max_length=100, required=True)
+    CourseID = serializers.CharField(max_length=100, required=True)
+    Category = serializers.CharField(max_length=100, required=True)
+    AU = serializers.serializers.IntegerField(required=False)
+
+    def create(self, validated_data):
+        return Course.objects.create(
+            ModelID=validated_data.get('ModelID'),
+            CourseID=validated_data.get('CourseID'),
+            Category=validated_data.get('Category'),
+            AU=validated_data.get('AU'),
+        )
+
+    def update(self, instance, validated_data):
+        instance.ModelID = validated_data.get('ModelID', instance.ModelID)
+        instance.CourseID = validated_data.get('CourseID', instance.CourseID)
+        instance.Category = validated_data.get('Category', instance.Category)
+        instance.AU = validated_data.get('AU', instance.AU)
+        instance.save()
+        return instance
+
+    class Meta:
+        model = AuWeight
+        fields = (
+            'ModelID',
+            'CourseID',
+            'Category',
+            'AU'
+        )
+
+
+class ContentCategorySerializer(serializers.ModelSerializer):
+    # ModelID = serializers.CharField(max_length=100, required=True)
+    CourseID = serializers.CharField(max_length=100, required=True)
+    CategoryType = serializers.CharField(max_length=100, required=True)
+    Element = serializers.CharField(max_length=100, required=True)
+
+    def create(self, validated_data):
+        return Course.objects.create(
+            ModelID=validated_data.get('ModelID'),
+            CourseID=validated_data.get('CourseID'),
+            CategoryType=validated_data.get('CategoryType'),
+            Element=validated_data.get('Element'),
+        )
+
+    def update(self, instance, validated_data):
+        instance.ModelID = validated_data.get('ModelID', instance.ModelID)
+        instance.CourseID = validated_data.get('CourseID', instance.CourseID)
+        instance.CategoryType = validated_data.get('CategoryType', instance.CategoryType)
+        instance.Element = validated_data.get('Element', instance.Element)
+        instance.save()
+        return instance
+
+    class Meta:
+        model = ContentCategory
+        fields = (
+            'ModelID',
+            'CourseID',
+            'CategoryType',
+            'Element'
+        )
