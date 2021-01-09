@@ -553,3 +553,43 @@ class LabSerializer(serializers.ModelSerializer):
             'Office',
             'Email'
         )
+
+
+class SectionSerializer(serializers.ModelSerializer):
+    # ModelID = serializers.CharField(max_length=100, required=True)
+    CourseID = serializers.CharField(max_length=100, required=True)
+    SectionNumber = serializers.CharField(max_length=100, required=False)
+    Students = serializers.serializers.IntegerField(required=False)
+    Hours = serializers.serializers.IntegerField(required=False)
+    type = serializers.CharField(max_length=100, required=True)
+
+    def create(self, validated_data):
+        return Course.objects.create(
+            ModelID=validated_data.get('ModelID'),
+            CourseID=validated_data.get('CourseID'),
+            SectionNumber=validated_data.get('SectionNumber'),
+            Students=validated_data.get('Students'),
+            Hours=validated_data.get('Hours'),
+            type=validated_data.get('type'),
+        )
+
+    def update(self, instance, validated_data):
+        instance.ModelID = validated_data.get('ModelID', instance.ModelID)
+        instance.CourseID = validated_data.get('CourseID', instance.CourseID)
+        instance.SectionNumber = validated_data.get('SectionNumber', instance.SectionNumber)
+        instance.Students = validated_data.get('Students', instance.Students)
+        instance.Hours = validated_data.get('Hours', instance.Hours)
+        instance.type = validated_data.get('type', instance.type)
+        instance.save()
+        return instance
+
+    class Meta:
+        model = Section
+        fields = (
+            'ModelID',
+            'CourseID',
+            'SectionNumber',
+            'Students',
+            'Hours',
+            'type'
+        )
