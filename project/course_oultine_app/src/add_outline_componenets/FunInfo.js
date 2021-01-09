@@ -13,28 +13,55 @@ function FunInfo(props) {
     const [courseHours, setCourseHours] = useState("");
     const [academicCredit, setAcademicCredit] = useState("");
     const [calendarReference, setCalendarReference] = useState("");
+    const [info,setInfo]=useState({CourseID : "",courseName : "",courseHours : "",academicCredit:"",calendarReference :"",DateCreated : ""});
     
+    const editInfo=(id,name,description,hours,credit,calender,term,year)=>{
+        let temp=info
+       
+       
+        if(name!=="")
+        temp.courseName=name
+        
+        
+        if(hours!=="")
+        temp.courseHours=hours
+        if(credit!=="")
+        temp.academicCredit=credit
+        if(calender!=="")
+        temp.calendarReference=calender
 
-    useEffect(()=>{
-        if( props.save)
-        {   var today = new Date();
-            var dd = String(today.getDate()).padStart(2, '0');
-            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-            var yyyy = today.getFullYear();
-            var hh=today.getHours()
-            var min=today.getMinutes()
-            var sec=today.getSeconds()
-            
-            today = yyyy+"-"+dd+"-"+mm+" "+hh+":"+min+":"+sec
-            let id=courseNumberInput+"-"+term+"-"+year
-            props.setInfo({CourseID : id,courseName : courseNameInput,courseHours : courseHours,academicCredit:academicCredit,calendarReference :calendarReference,DateCreated : today})
+        
+        setInfo(temp)
+        console.log(info)
 
-            props.setNotes({CourseID:id,GradeNotes:"",Examination:"",CourseDescription:courseInfo,UseCalc:""})
-            
-             props.setSave(false)
-        }
-      
-    });
+    }
+const save=()=>{
+    if(courseNumberInput==="" || term ==="" ){
+    alert("Fill in Course Id,term and year")
+
+}
+    else
+    {let temp=info
+        let id=courseNumberInput+"-"+term+"-"+year
+        temp.CourseID=id
+         setInfo(temp)
+         props.setNotes({CourseID:temp.CourseID,GradeNotes:"",Examination:"",CourseDescription:courseInfo,UseCalc:""})
+         var today = new Date();
+         var dd = String(today.getDate()).padStart(2, '0');
+         var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+         var yyyy = today.getFullYear();
+         var hh=today.getHours()
+         var min=today.getMinutes()
+         var sec=today.getSeconds()
+         
+         today = yyyy+"-"+dd+"-"+mm+" "+hh+":"+min+":"+sec
+         
+         temp.DateCreated=today
+         props.setInfo(temp)
+    }
+    
+}
+   
 
     var courseInfoPlaceholderText = "Enter Course Information. Example: A study of problems of particular interest to students specializing in Software Engineering."
   
@@ -43,15 +70,16 @@ function FunInfo(props) {
     <div className="FunInfo">
 
 <div className="pt-2 pb-2" align="right">
-            <Button variant="outlined" color="secondary">
+            <Button variant="outlined" color="secondary" onClick={()=>save()}>
               <SaveIcon />
             </Button>
           </div>
     <div className="field">
 
         <TextField fullWidth placeholder = "Enter Course Number. Example: ENSF 409" 
-        value={courseNumberInput} onChange={e => {
-                           setCourseNumberInput(e.target.value)}} 
+         onChange={e => {
+                        setCourseNumberInput(e.target.value)
+                           }} 
         inputProps={{style: {fontSize: 20}}} 
         InputLabelProps={{style: {fontSize: 20}}} >
         </TextField>
@@ -60,7 +88,7 @@ function FunInfo(props) {
         <br/>
 
         <TextField fullWidth placeholder = "Enter Course Name. Example: Principles of Software Development" 
-        value={courseNameInput} onChange={e => setCourseNameInput(e.target.value)} 
+         onChange={e => editInfo("",e.target.value,"","","","","","")} 
         inputProps={{style: {fontSize: 20}}} 
         InputLabelProps={{style: {fontSize: 20}}} >
         </TextField>
@@ -69,7 +97,7 @@ function FunInfo(props) {
         <br/>
 
         <TextField multiline fullWidth placeholder = {courseInfoPlaceholderText}
-        value={courseInfo} onChange={e => setCourseInfo(e.target.value)} 
+         onChange={e => setCourseInfo(e.target.value)} 
         inputProps={{style: {fontSize: 20}}} 
         InputLabelProps={{style: {fontSize: 20}}} >
         </TextField>
@@ -83,7 +111,7 @@ function FunInfo(props) {
         <div className="column is-one-quarter has-text-left pl-4 pt-4">Course Hours:</div>
         <div className="column has-text-left">
             <TextField fullWidth placeholder = "Example: 3 units; H (3-2)"
-            value={courseHours} onChange={e => setCourseHours(e.target.value)} 
+             onChange={e => editInfo("","","",e.target.value,"","","","")} 
              >
             </TextField>
         </div>
@@ -96,7 +124,7 @@ function FunInfo(props) {
         <div className="column has-text-left">
 
             <TextField fullWidth placeholder = "Example: 3"
-            value={academicCredit} onChange={e => setAcademicCredit(e.target.value)}>
+             onChange={e => {editInfo("","","","",e.target.value,"","","")}}>
             </TextField>
         </div>
         </div>
@@ -105,7 +133,7 @@ function FunInfo(props) {
         <div className="column is-one-quarter has-text-left pl-4 pt-4">Calendar Reference:</div>
         <div className="column has-text-left">
             <TextField fullWidth placeholder = "Example: http://www.ucalgary.ca/pubs/calendar/current/software-engineering-for-engineers.html#38252"
-            value={calendarReference} onChange={e => setCalendarReference(e.target.value)}>
+             onChange={e => editInfo("","","","","",e.target.value,"","")}>
             </TextField>
         </div>
         </div>
@@ -113,7 +141,7 @@ function FunInfo(props) {
         <div className="column is-one-quarter has-text-left pl-4 pt-4"> Term:</div>
         <div className="column has-text-left">
             <TextField fullWidth placeholder = "Example: FALL,WINTER,SPRING,SUMMER"
-            value={term} onChange={e => setTerm(e.target.value)}>
+             onChange={e => setTerm(e.target.value)}>
             </TextField>
         </div>
         </div>
@@ -121,7 +149,8 @@ function FunInfo(props) {
         <div className="column is-one-quarter has-text-left pl-4 pt-4"> Year:</div>
         <div className="column has-text-left">
             <TextField fullWidth placeholder = "Example: 2020"
-            value={year} onChange={e => setYear(e.target.value)}>
+             onChange={e => {setYear(e.target.value)}
+             }>
             </TextField>
         </div>
         </div>

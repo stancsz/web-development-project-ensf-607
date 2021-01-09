@@ -59,13 +59,15 @@ const AddCourse = () => {
   const [coordinator,setcoordinator]=useState({CourseID:""})
   const[instructor,setInstructor]=useState({CourseID:""})
   const[ta,setTa]=useState("")
-  /*
+  
 useEffect(()=>{
   if(save)
 {
   console.log("calenderInfo")
   console.log(info)
-  console.log(description)
+  console.log("Notes")
+  console.log(notes)
+  /*console.log(description)
   console.log("Outcome")
   console.log(outcome)
   console.log("Instructor table: ")
@@ -73,10 +75,10 @@ useEffect(()=>{
 console.log("coordinator tabke: ")
 console.log(coordinator)
 console.log("ta table ")
-console.log(ta)
+console.log(ta)*/
 setSave(false)
 }
-},[outcome,instructor,coordinator,ta,timeTable])*/
+},[save])
 const editNotes=(courseID,gradeNotes,description,examination,calculator)=>{
   let temp=notes
   if(courseID!=="")
@@ -100,7 +102,7 @@ const editNotes=(courseID,gradeNotes,description,examination,calculator)=>{
           <div className="pt-2 pb-2" align="right">
             <Button variant="outlined" color="secondary" onClick={()=>{
               setSave(true)
-              console.log(outcome)
+              
               if(info.CourseID==="")
              { alert("Please fill in course number,term, and year")
               
@@ -127,7 +129,7 @@ const editNotes=(courseID,gradeNotes,description,examination,calculator)=>{
           <AccordionDetails>
             <div style={{ width: "100%" }}>
               <Paper className={classes.paper} elevation={3}>
-                <FunInfo save={save} setSave={setSave} setInfo={setInfo} setNotes={setNotes} />
+                <FunInfo  setInfo={setInfo} setNotes={setNotes} />
                 
               </Paper>
             </div>
@@ -146,7 +148,7 @@ const editNotes=(courseID,gradeNotes,description,examination,calculator)=>{
             <div style={{ width: "100%" }}>
               <Paper className={classes.paper} elevation={3}>
                <h1> {info.CourseID}</h1>
-                <FunOutcome save={save} setSave={setSave} setOutcome={setOutcome} courseID={info.CourseID} />
+                <FunOutcome  setOutcome={setOutcome} courseID={info.CourseID} />
                 
               </Paper>
             </div>

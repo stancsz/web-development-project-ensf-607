@@ -60,6 +60,7 @@ export default function BasicTable(props) {
     //setRows(newRows)
    // console.log(outcomes)
   }
+  /*
 useEffect (()=>{
   if(props.save){
    
@@ -73,7 +74,7 @@ useEffect (()=>{
   
   props.setSave(false)
 }
-})
+})*/
 
   
 
