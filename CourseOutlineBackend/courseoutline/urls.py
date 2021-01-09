@@ -50,4 +50,9 @@ urlpatterns = [
     path('course/<str:CourseID>/', views.CoursePostGetView.as_view()),
     path('course/v2/<str:ModelID>/', views.CoursePutDelView.as_view()),
 
+    # textbook
+    path('textbook/', views.TextbookPostGetView.as_view()),
+    path('textbook/<str:CourseID>/', views.TextbookPostGetView.as_view()),
+    path('textbook/v2/<str:ModelID>/', views.TextbookPutDelView.as_view()),
+
 ]

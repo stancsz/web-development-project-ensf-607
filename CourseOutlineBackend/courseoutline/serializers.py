@@ -1,14 +1,6 @@
 from rest_framework import serializers
 
-from .models import Coordinator
-from .models import Info
-from .models import GradeDetermination
-from .models import Outcome
-from .models import Timetable
-from .models import GradeDistribution
-from .models import Lecture
-from .models import Tutorial
-from .models import Course
+from .models import *
 
 
 class CoordinatorSerializer(serializers.ModelSerializer):
@@ -388,4 +380,44 @@ class CourseSerializer(serializers.ModelSerializer):
             'CalenderRefrence',
             'AcademicCredit',
             'DateCreated'
+        )
+
+
+class TextbookSerializer(serializers.ModelSerializer):
+    ModelID = serializers.CharField(max_length=100, required=True)
+    CourseID = serializers.CharField(max_length=100, required=True)
+    TITLE = serializers.CharField(max_length=100, required=False)
+    Publisher = serializers.CharField(max_length=100, required=False)
+    Author = serializers.CharField(max_length=100, required=False)
+    Edition = serializers.CharField(max_length=100, required=False)
+
+    def create(self, validated_data):
+        return Course.objects.create(
+            ModelID=validated_data.get('ModelID'),
+            CourseID=validated_data.get('CourseID'),
+            TITLE=validated_data.get('TITLE'),
+            Publisher=validated_data.get('Publisher'),
+            Author=validated_data.get('Author'),
+            Edition=validated_data.get('Edition'),
+        )
+
+    def update(self, instance, validated_data):
+        instance.ModelID = validated_data.get('ModelID', instance.ModelID)
+        instance.CourseID = validated_data.get('CourseID', instance.CourseID)
+        instance.TITLE = validated_data.get('TITLE', instance.TITLE)
+        instance.Publisher = validated_data.get('Publisher', instance.Publisher)
+        instance.Author = validated_data.get('Author', instance.Author)
+        instance.Edition = validated_data.get('Edition', instance.Edition)
+        instance.save()
+        return instance
+
+    class Meta:
+        model = Textbook
+        fields = (
+            'ModelID',
+            'CourseID',
+            'TITLE',
+            'Publisher',
+            'Author',
+            'Edition'
         )

@@ -476,3 +476,55 @@ class CoursePutDelView(
             return Response({'errors': 'This item does not exist.'}, status=400)
         item.delete()
         return Response(status=204)
+
+
+class TextbookPostGetView(
+    APIView,
+    UpdateModelMixin,
+    DestroyModelMixin,
+):
+    def get(self, request, TextbookID=None):
+        if TextbookID:
+            try:
+                queryset = Textbook.objects.filter(TextbookID=TextbookID)
+            except Textbook.DoesNotExist:
+                return Response({'errors': 'This item does not exist.'}, status=400)
+            read_serializer = TextbookSerializer(queryset, many=True)
+        else:
+            queryset = Textbook.objects.all()
+            read_serializer = TextbookSerializer(queryset, many=True)
+        return Response(read_serializer.data)
+
+    def post(self, request):
+        create_serializer = TextbookSerializer(data=request.data)
+        if create_serializer.is_valid():
+            item_object = create_serializer.save()
+            read_serializer = TextbookSerializer(item_object)
+            return Response(read_serializer.data, status=201)
+        return Response(create_serializer.errors, status=400)
+
+
+class TextbookPutDelView(
+    APIView,
+    UpdateModelMixin,
+    DestroyModelMixin,
+):
+    def put(self, request, ModelID=None):
+        try:
+            item = Textbook.objects.get(ModelID=ModelID)
+        except Textbook.DoesNotExist:
+            return Response({'errors': 'This item does not exist.'}, status=400)
+        update_serializer = TextbookSerializer(item, data=request.data)
+        if update_serializer.is_valid():
+            item_object = update_serializer.save()
+            read_serializer = TextbookSerializer(item_object)
+            return Response(read_serializer.data, status=200)
+        return Response(update_serializer.errors, status=400)
+
+    def delete(self, request, ModelID=None):
+        try:
+            item = Textbook.objects.get(ModelID=ModelID)
+        except Textbook.DoesNotExist:
+            return Response({'errors': 'This item does not exist.'}, status=400)
+        item.delete()
+        return Response(status=204)
