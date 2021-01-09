@@ -42,6 +42,11 @@ import { Link } from "react-router-dom";
 
 import axios from "axios";
 
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -67,6 +72,7 @@ const SearchCourse = () => {
 
   const [courseList, setCourseList] = useState([]);
   const [course, setCourse] = React.useState("");
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   const handleChange = (event) => {
     setCourse(event.target.value);
@@ -392,6 +398,7 @@ const SearchCourse = () => {
       </div>
 
         </Container>
+        
       );
     }
   };
@@ -415,17 +422,20 @@ const SearchCourse = () => {
 
         <Button onClick={() => {
 
-          let courseMoodelIDsForDeletion = []
           axios.get("http://127.0.0.1:8000/course/" +  tableSelection + "/")
-          .then(res => res.data.map(course => axios.delete("http://127.0.0.1:8000/course/v2/" +  course.ModelID + "/")))
+          .then(res => res.data.map(course => 
+          axios.delete("http://127.0.0.1:8000/course/v2/" +  course.ModelID + "/")))
 
-         // for(let i = 0; i < courseMoodelIDsForDeletion.length; i++){
-         //   console.log(courseMoodelIDsForDeletion[i]) 
-         // }
+          axios.get("http://127.0.0.1:8000/tutorial/" +  tableSelection + "/")
+          .then(res => res.data.map(course => 
+          axios.delete("http://127.0.0.1:8000/tutorial/v2/" +  course.ModelID + "/")))
+
           
-        
-         
-          //axios.delete("http://127.0.0.1:8000/course/" +  tableSelection + "/")
+          
+          setSnackbarOpen(true);
+          
+          rows = rows.filter(row => row.id !== tableSelection)
+          handleUpdate();
 
         }}>
           DELETE&nbsp;
@@ -433,6 +443,9 @@ const SearchCourse = () => {
         </Button>
         
       </Grid>
+
+
+        
     );
   };
 
@@ -530,6 +543,10 @@ const SearchCourse = () => {
 
   }, [info, searchInput, tableSelection, callHandleSelect, courseList]);
 
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === 'clickaway') {return;}
+    setSnackbarOpen(false);
+  };
 
   return (
     <>
@@ -589,6 +606,24 @@ const SearchCourse = () => {
       <br/>
 
       {frame}
+
+
+      
+      <Snackbar
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+        open={snackbarOpen}
+        autoHideDuration={8000}
+        onClose={handleSnackbarClose}
+        message="Course Deleted"
+        action={
+          <>
+            <IconButton size="small" aria-label="close" color="inherit" onClick={handleSnackbarClose}>
+              <CloseIcon fontSize="small" />
+            </IconButton>
+          </>}/>
 
     </>
   );
