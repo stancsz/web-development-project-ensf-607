@@ -8,11 +8,9 @@ function FunInfo(props) {
     const[term,setTerm]=useState("")
     const[year,setYear]=useState("")
     const [courseNumberInput, setCourseNumberInput] = useState("");
-    const [courseNameInput, setCourseNameInput] = useState("");
+    
     const [courseInfo, setCourseInfo] = useState("");
-    const [courseHours, setCourseHours] = useState("");
-    const [academicCredit, setAcademicCredit] = useState("");
-    const [calendarReference, setCalendarReference] = useState("");
+ 
     const [info,setInfo]=useState({CourseID : "",courseName : "",courseHours : "",academicCredit:"",calendarReference :"",DateCreated : ""});
     
     const editInfo=(id,name,description,hours,credit,calender,term,year)=>{

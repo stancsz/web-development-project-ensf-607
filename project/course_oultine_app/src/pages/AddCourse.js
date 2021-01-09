@@ -27,6 +27,9 @@ import GradeDetermination from"../add_outline_componenets/FunGradeDetermination"
 import GradeNotes from "../add_outline_componenets/FunGradeNotes"
 import GradeDistribution from "../add_outline_componenets/FunGradeDistribution"
 import TextBook from"../add_outline_componenets/FunTextbook"
+import ContentCategory from"../add_outline_componenets/FunContentCategory"
+import Section from "../add_outline_componenets/FunSection"
+import Lab from "../add_outline_componenets/FunLab"
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -149,6 +152,9 @@ const editNotes=(courseID,gradeNotes,description,examination,calculator)=>{
               <Paper className={classes.paper} elevation={3}>
                <h1> {info.CourseID}</h1>
                 <FunOutcome  setOutcome={setOutcome} courseID={info.CourseID} />
+                <ContentCategory/>
+                <Section/>
+                <Lab/>
                 
               </Paper>
             </div>
