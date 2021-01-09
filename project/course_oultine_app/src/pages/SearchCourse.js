@@ -413,7 +413,21 @@ const SearchCourse = () => {
           <EditIcon fontSize="large"/>
         </Button>
 
-        <Button onClick={() => {}}>
+        <Button onClick={() => {
+
+          let courseMoodelIDsForDeletion = []
+          axios.get("http://127.0.0.1:8000/course/" +  tableSelection + "/")
+          .then(res => res.data.map(course => axios.delete("http://127.0.0.1:8000/course/v2/" +  course.ModelID + "/")))
+
+         // for(let i = 0; i < courseMoodelIDsForDeletion.length; i++){
+         //   console.log(courseMoodelIDsForDeletion[i]) 
+         // }
+          
+        
+         
+          //axios.delete("http://127.0.0.1:8000/course/" +  tableSelection + "/")
+
+        }}>
           DELETE&nbsp;
           <DeleteForeverIcon fontSize="large"/>
         </Button>
