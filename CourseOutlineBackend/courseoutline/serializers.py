@@ -489,3 +489,67 @@ class ContentCategorySerializer(serializers.ModelSerializer):
             'CategoryType',
             'Element'
         )
+
+
+class LabSerializer(serializers.ModelSerializer):
+    # ModelID = serializers.CharField(max_length=100, required=True)
+    CourseID = serializers.CharField(max_length=100, required=True)
+    LabNum = serializers.CharField(max_length=100, required=True)
+    NumberOfLabs = serializers.serializers.IntegerField(required=False)
+    LabType = serializers.CharField(max_length=100, required=True)
+    SafetyExamined = serializers.CharField(max_length=100, required=True)
+    SafetyTaught = serializers.CharField(max_length=100, required=True)
+    FName = serializers.CharField(max_length=100, required=True)
+    LName = serializers.CharField(max_length=100, required=True)
+    Phone = serializers.CharField(max_length=100, required=True)
+    Office = serializers.CharField(max_length=100, required=True)
+    Email = serializers.CharField(max_length=100, required=True)
+
+    def create(self, validated_data):
+        return Course.objects.create(
+            ModelID=validated_data.get('ModelID'),
+            CourseID=validated_data.get('CourseID'),
+            LabNum=validated_data.get('LabNum'),
+            NumberOfLabs=validated_data.get('NumberOfLabs'),
+            LabType=validated_data.get('LabType'),
+            SafetyExamined=validated_data.get('SafetyExamined'),
+            SafetyTaught=validated_data.get('SafetyTaught'),
+            FName=validated_data.get('FName'),
+            LName=validated_data.get('LName'),
+            Phone=validated_data.get('Phone'),
+            Office=validated_data.get('Office'),
+            Email=validated_data.get('Email'),
+        )
+
+    def update(self, instance, validated_data):
+        instance.ModelID = validated_data.get('ModelID', instance.ModelID)
+        instance.CourseID = validated_data.get('CourseID', instance.CourseID)
+        instance.LabNum = validated_data.get('LabNum', instance.LabNum)
+        instance.NumberOfLabs = validated_data.get('NumberOfLabs', instance.NumberOfLabs)
+        instance.LabType = validated_data.get('LabType', instance.LabType)
+        instance.SafetyExamined = validated_data.get('SafetyExamined', instance.SafetyExamined)
+        instance.SafetyTaught = validated_data.get('SafetyTaught', instance.SafetyTaught)
+        instance.FName = validated_data.get('FName', instance.FName)
+        instance.LName = validated_data.get('LName', instance.LName)
+        instance.Phone = validated_data.get('Phone', instance.Phone)
+        instance.Office = validated_data.get('Office', instance.Office)
+        instance.Email = validated_data.get('Email', instance.Email)
+        instance.save()
+        return instance
+
+    class Meta:
+        model = Lab
+        fields = (
+            'ModelID',
+            'CourseID',
+            'LabNum',
+            'NumberOfLabs',
+            'LabType',
+            'SafetyExamined',
+            'SafetyTaught',
+            'FName',
+            'LName',
+            'Phone',
+            'Office',
+            'Email'
+        )
