@@ -19,8 +19,11 @@ const useStyles = makeStyles({
 export default function SearchInstructors(props) {
  
   const classes = useStyles();
-  const keys=Object.keys(props.instructors)
 
+  let keys = []
+  props.instructors === undefined ? keys = undefined : keys=Object.keys(props.instructors)
+
+  
   return (
     <>
     <div align = "left"><u>Course Instructor</u></div>
@@ -38,7 +41,7 @@ export default function SearchInstructors(props) {
           </TableRow>
         </TableHead>
         <TableBody>        
-        {keys.map((key) => (
+        {keys === undefined ? "Data Missing" : keys.map((key) => (
             <TableRow key={key}>
               <TableCell component="th" scope="row">{props.instructors[key].LectureNum}</TableCell>
               <TableCell align="right">{props.instructors[key].FName}</TableCell>

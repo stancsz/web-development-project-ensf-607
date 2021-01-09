@@ -20,7 +20,9 @@ export default function SearchTA(props) {
  
   
   const classes = useStyles();
-  const keys=Object.keys(props.assistants)
+  
+  let keys = []
+  props.assistants === undefined ? keys = undefined : keys=Object.keys(props.assistants)
 
   return (
     <>
@@ -39,7 +41,7 @@ export default function SearchTA(props) {
           </TableRow>
         </TableHead>
         <TableBody> 
-        {keys.map((key) => (
+        {keys === undefined ? "Data Missing" : keys.map((key) => (
             <TableRow key={key}>
               <TableCell component="th" scope="row">{props.assistants[key].TutorialNum}</TableCell>
               <TableCell align="right">{props.assistants[key].FName}</TableCell>

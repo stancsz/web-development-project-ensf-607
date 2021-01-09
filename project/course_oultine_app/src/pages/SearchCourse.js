@@ -180,12 +180,12 @@ const SearchCourse = () => {
 
 
   const handleSelect = () => {
-    setCoordinators(coordinatorsData.filter(res => res.CourseID === "ENSF-609-FALL-2021")); //REPLACE WITH COURSE
-    setGradeDetermination(gradeDeterminationData.filter(res => res.CourseID === "ENSF-607-FALL-2020"));
-    setNote(noteExaminationDescriptionCalcData.filter(res => res.CourseID === "ENSF-607-FALL-2021"));
-    setExaminations(noteExaminationDescriptionCalcData.filter(res => res.CourseID === "ENSF-607-FALL-2021"));
-    setDescription(noteExaminationDescriptionCalcData.filter(res => res.CourseID === "ENSF-607-FALL-2021"));
-    setCalculator(noteExaminationDescriptionCalcData.filter(res => res.CourseID === "ENSF-607-FALL-2021"));
+    setCoordinators(coordinatorsData.filter(res => res.CourseID === course)); 
+    setGradeDetermination(gradeDeterminationData.filter(res => res.CourseID === course));
+    setNote(noteExaminationDescriptionCalcData.filter(res => res.CourseID === course));
+    setExaminations(noteExaminationDescriptionCalcData.filter(res => res.CourseID === course));
+    setDescription(noteExaminationDescriptionCalcData.filter(res => res.CourseID === course));
+    setCalculator(noteExaminationDescriptionCalcData.filter(res => res.CourseID === course));
     setOutcome(outcomeData.filter(res => res.CourseID === course));
     setTimetable(timetableData.filter(res => res.CourseID === course));
     setLetter(letterData.filter(res => res.CourseID === course));
@@ -196,7 +196,7 @@ const SearchCourse = () => {
 
 
   const handleUpdate = () => {  
-    if (typeof info !== "undefined") {
+    if (typeof info !== "undefined" && course != "View All") {
       setFrame(
         <Container maxWidth="md">
           <Grid align="left">

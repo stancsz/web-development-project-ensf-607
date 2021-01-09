@@ -15,7 +15,10 @@ const useStyles = makeStyles({
 });
 
 export default function SearchLetter(props) {
-    const keys=Object.keys(props.letter)
+
+    let keys = []
+    props.letter === undefined ? keys = undefined : keys=Object.keys(props.letter)
+    
     const classes = useStyles();
 
     const checkForHundred = (value) =>{
@@ -42,7 +45,7 @@ export default function SearchLetter(props) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {keys.map((key) => (
+                        {keys === undefined ? "Data Missing" : keys.map((key) => (
                             <TableRow key={key}>
                                 <TableCell component="th" scope="row">
                                     {props.letter[key].LetterGrade}

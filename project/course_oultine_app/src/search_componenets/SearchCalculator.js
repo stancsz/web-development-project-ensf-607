@@ -9,7 +9,7 @@ export default function SearchCalculator(props) {
     <>
         <div align="left">
         <Typography>
-          {props.calculator[0].UseCalc}
+          {props.calculator[0] === undefined ? "Data Missing" : props.calculator[0].UseCalc}
         </Typography>
         </div>
 

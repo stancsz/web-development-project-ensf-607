@@ -16,7 +16,9 @@ const useStyles = makeStyles({
 });
 
 export default function SearchGrade(props) {
-    const keys=Object.keys(props.gradeDetermination)
+
+    let keys = []
+    props.gradeDetermination === undefined ? keys = undefined : keys=Object.keys(props.gradeDetermination)
 
     const classes = useStyles();
 
@@ -35,7 +37,7 @@ export default function SearchGrade(props) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {keys.map((key) => (
+                        {keys === undefined ? "Data Missing" : keys.map((key) => (
                             <TableRow key={key}>
                                 <TableCell component="th" scope="row">
                                     {props.gradeDetermination[key].Component}

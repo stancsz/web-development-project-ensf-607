@@ -36,7 +36,7 @@ export default function SearchCoordinators(props) {
             </TableRow>
           </TableHead>
           <TableBody>
-          {props.coordinators.map((prop) => (
+          {props.coordinators === undefined ? "Data Missing" : props.coordinators.map((prop) => (
         <TableRow key = {prop.key}>
           <TableCell component="th" scope="row">
             {prop.FName}
