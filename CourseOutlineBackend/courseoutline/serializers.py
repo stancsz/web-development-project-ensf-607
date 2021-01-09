@@ -4,7 +4,7 @@ from .models import *
 
 
 class CoordinatorSerializer(serializers.ModelSerializer):
-    ModelID = serializers.CharField(max_length=100, required=True)
+    # ModelID = serializers.CharField(max_length=100, required=True)
     CourseID = serializers.CharField(max_length=100, required=True)
     FName = serializers.CharField(max_length=100, required=False)
     LName = serializers.CharField(max_length=100, required=False)
@@ -50,7 +50,7 @@ class CoordinatorSerializer(serializers.ModelSerializer):
 
 
 class InfoSerializer(serializers.ModelSerializer):
-    ModelID = serializers.CharField(max_length=100, required=True)
+    # ModelID = serializers.CharField(max_length=100, required=True)
     CourseID = serializers.CharField(max_length=100, required=True)
     GradeNotes = serializers.CharField(max_length=500, required=False)
     Examination = serializers.CharField(max_length=5000, required=False)
@@ -90,7 +90,7 @@ class InfoSerializer(serializers.ModelSerializer):
 
 
 class GradeDeterminationSerializer(serializers.ModelSerializer):
-    ModelID = serializers.CharField(max_length=100, required=True)
+    # ModelID = serializers.CharField(max_length=100, required=True)
     CourseID = serializers.CharField(max_length=100, required=True)
     Component = serializers.CharField(max_length=100, required=False)
     OutcomeEvaluated = serializers.CharField(max_length=100, required=False)
@@ -128,7 +128,7 @@ class GradeDeterminationSerializer(serializers.ModelSerializer):
 
 
 class OutcomeSerializer(serializers.ModelSerializer):
-    ModelID = serializers.CharField(max_length=100, required=True)
+    # ModelID = serializers.CharField(max_length=100, required=True)
     CourseID = serializers.CharField(max_length=100, required=True)
     OutcomeNum = serializers.IntegerField(required=False)  # removed max_length=100
     Description = serializers.CharField(max_length=500, required=False) # Changed max_length to 500
@@ -168,7 +168,7 @@ class OutcomeSerializer(serializers.ModelSerializer):
 
 
 class TimetableSerializer(serializers.ModelSerializer):
-    ModelID = serializers.CharField(max_length=100, required=True)
+    # ModelID = serializers.CharField(max_length=100, required=True)
     CourseID = serializers.CharField(max_length=100, required=True)
     SectionNum = serializers.CharField(max_length=100, required=False)
     Days = serializers.CharField(max_length=100, required=False)
@@ -208,7 +208,7 @@ class TimetableSerializer(serializers.ModelSerializer):
 
 
 class GradeDistributionSerializer(serializers.ModelSerializer):
-    ModelID = serializers.CharField(max_length=100, required=True)
+    # ModelID = serializers.CharField(max_length=100, required=True)
     CourseID = serializers.CharField(max_length=100, required=True)
     LowerLimit = serializers.IntegerField(required=False)  # removed max_length = 100
     UpperLimit = serializers.IntegerField(required=False)  # removed max_length = 100
@@ -244,7 +244,7 @@ class GradeDistributionSerializer(serializers.ModelSerializer):
 
 
 class LectureSerializer(serializers.ModelSerializer):
-    ModelID = serializers.CharField(max_length=100, required=True)
+    # ModelID = serializers.CharField(max_length=100, required=True)
     CourseID = serializers.CharField(max_length=100, required=True)
     LectureNum = serializers.CharField(max_length=100, required=False)
     FName = serializers.CharField(max_length=100, required=False)
@@ -292,7 +292,7 @@ class LectureSerializer(serializers.ModelSerializer):
 
 
 class TutorialSerializer(serializers.ModelSerializer):
-    ModelID = serializers.CharField(max_length=100, required=True)
+    # ModelID = serializers.CharField(max_length=100, required=True)
     CourseID = serializers.CharField(max_length=100, required=True)
     TutorialNum = serializers.CharField(max_length=100, required=False)  # Changed Tutorial Num to CharField
     FName = serializers.CharField(max_length=100, required=False)  # Changed FName to CharField
@@ -340,7 +340,7 @@ class TutorialSerializer(serializers.ModelSerializer):
 
 
 class CourseSerializer(serializers.ModelSerializer):
-    ModelID = serializers.CharField(max_length=100, required=True)
+    # ModelID = serializers.CharField(max_length=100, required=True)
     CourseID = serializers.CharField(max_length=100, required=True)
     CourseHours = serializers.CharField(max_length=100, required=False)  # Changed CourseHours to CharField
     CourseName = serializers.CharField(max_length=100, required=False)  # Changed CourseName to CharField
@@ -384,7 +384,7 @@ class CourseSerializer(serializers.ModelSerializer):
 
 
 class TextbookSerializer(serializers.ModelSerializer):
-    ModelID = serializers.CharField(max_length=100, required=True)
+    # ModelID = serializers.CharField(max_length=100, required=True)
     CourseID = serializers.CharField(max_length=100, required=True)
     TITLE = serializers.CharField(max_length=100, required=False)
     Publisher = serializers.CharField(max_length=100, required=False)
