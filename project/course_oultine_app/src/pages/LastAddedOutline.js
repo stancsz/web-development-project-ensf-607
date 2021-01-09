@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-  {/*
+  /*
   //Finds recent added course from dummy data
   const recent=()=>{
     
@@ -80,7 +80,7 @@ temp.push(i.date)
 
    return course
   }
-*/}
+*/
 
 
   //calls all of the search compnenets

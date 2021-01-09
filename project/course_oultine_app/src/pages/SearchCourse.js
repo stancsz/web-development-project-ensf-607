@@ -201,7 +201,7 @@ const SearchCourse = () => {
 
 
   const handleUpdate = () => {  
-    if (typeof info !== "undefined" && course != "View All") {
+    if (typeof info !== "undefined" && course !== "View All") {
       setFrame(
         <Container maxWidth="md">
           <Grid align="left">
@@ -570,6 +570,7 @@ const SearchCourse = () => {
     }
 
   }, [info, searchInput, tableSelection, callHandleSelect, courseList]);
+  
 
   const handleSnackbarClose = (event, reason) => {
     if (reason === 'clickaway') {return;}
