@@ -1,0 +1,1 @@
+calender info/outcome section can generate JSON now

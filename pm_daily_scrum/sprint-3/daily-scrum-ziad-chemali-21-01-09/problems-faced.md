@@ -1,0 +1,1 @@
+Panel is made up of lot of components, trying to figure out how to generate JSON with save btn

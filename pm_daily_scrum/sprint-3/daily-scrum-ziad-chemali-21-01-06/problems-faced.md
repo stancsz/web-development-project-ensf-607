@@ -1,0 +1,1 @@
+Adding all tables from the excel sheet takes alot of time
