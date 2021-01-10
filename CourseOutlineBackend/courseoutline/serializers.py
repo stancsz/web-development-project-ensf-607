@@ -393,7 +393,7 @@ class TextbookSerializer(serializers.ModelSerializer):
     type = serializers.CharField(max_length=100, required=False)
 
     def create(self, validated_data):
-        return Course.objects.create(
+        return Textbook.objects.create(
             ModelID=validated_data.get('ModelID'),
             CourseID=validated_data.get('CourseID'),
             TITLE=validated_data.get('TITLE'),
@@ -434,7 +434,7 @@ class AuWeightSerializer(serializers.ModelSerializer):
     AU = serializers.IntegerField(required=False)
 
     def create(self, validated_data):
-        return Course.objects.create(
+        return AuWeight.objects.create(
             ModelID=validated_data.get('ModelID'),
             CourseID=validated_data.get('CourseID'),
             Category=validated_data.get('Category'),
@@ -466,7 +466,7 @@ class ContentCategorySerializer(serializers.ModelSerializer):
     Element = serializers.CharField(max_length=100, required=True)
 
     def create(self, validated_data):
-        return Course.objects.create(
+        return ContentCategory.objects.create(
             ModelID=validated_data.get('ModelID'),
             CourseID=validated_data.get('CourseID'),
             CategoryType=validated_data.get('CategoryType'),
@@ -506,7 +506,7 @@ class LabSerializer(serializers.ModelSerializer):
     Email = serializers.CharField(max_length=100, required=True)
 
     def create(self, validated_data):
-        return Course.objects.create(
+        return Lab.objects.create(
             ModelID=validated_data.get('ModelID'),
             CourseID=validated_data.get('CourseID'),
             LabNum=validated_data.get('LabNum'),
@@ -564,7 +564,7 @@ class SectionSerializer(serializers.ModelSerializer):
     type = serializers.CharField(max_length=100, required=True)
 
     def create(self, validated_data):
-        return Course.objects.create(
+        return Section.objects.create(
             ModelID=validated_data.get('ModelID'),
             CourseID=validated_data.get('CourseID'),
             SectionNumber=validated_data.get('SectionNumber'),
