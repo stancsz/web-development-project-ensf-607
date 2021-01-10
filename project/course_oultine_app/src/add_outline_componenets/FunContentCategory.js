@@ -26,87 +26,106 @@ export default function BasicTable(props) {
   const [count, setCount] = useState(2);
   const classes = useStyles();
 
-  const [outcomes, setOutcomes] = useState([{ id: 1, outcome: "" }]);
-
-  const [attributeRows, setAttributeRows] = useState([
-    { id: 1, attribute: "", instructionLevel: "" },
-  ]);
-
- const editAttribute =(id,attribute,instructionLvl)=>{
-  let indx = attributeRows.findIndex((row) => row.id === id)
-  let newAttributes=attributeRows
-  if(attribute!=="")
-  newAttributes[indx].attribute=attribute
-  if(instructionLvl!=="")
-  newAttributes[indx].instructionLevel=instructionLvl
-  setAttributeRows(newAttributes)
   
+const [category,setCategory]=useState([])
+ const [au,setAu]=useState([])
+ const [total,setTotal]=useState("")
+ 
+ const editAu =(id,type,weight)=>{
+    let indx = au.findIndex((row) => row.id === id);
+    
+    let newAu=au
+    if(indx>=0)
+   {
+    
+     
+     
+    newAu[indx].CourseID=""
+    newAu[indx].Category=type
+    newAu[indx].Au=weight
+     
+     setAu(newAu)
+
+ }
+ else{
+
+    let temp={}
+    temp.id=id
+    temp.CourseID=""
+    temp.Category=type
+    temp.Au=weight
+    newAu.push(temp)
+    setAu(newAu)
+
+ }
+ 
+ let temp=0
+ for (let i=0;i<au.length;i++){
+     if(au[i].Au!=="")
+     temp+=parseFloat(au[i].Au)
+    
+ }
+
+ setTotal(temp)
+ console.log(au)
  }
  
 
-  const editOutcomes = (id, outcome) => {
-    let indx = outcomes.findIndex((row) => row.id === id);
-    let newOutcomes = outcomes;
-
-    newOutcomes[indx].outcome = outcome;
-
-    setOutcomes(newOutcomes);
-    //setRows(newRows)
-   // console.log(outcomes)
-  }
-  /*
-useEffect (()=>{
-  if(props.save){
-   
-    let temp=[]
-    for (let i=0;i<outcomes.length;i++){
-      temp.push({CourseID:props.courseID,OutcomeNum:outcomes[i].id,Description:outcomes[i].outcome,GraduateAttribute:attributeRows[i].attribute,InstructionLvl:attributeRows[i].InstructionLvl})
-    
-  }
-  setCount(1)
-  props.setOutcome(temp)
   
-  props.setSave(false)
-}
-})*/
-
+ 
+const editCategory = (id,type,element)=>{
+    let indx = category.findIndex((row) => row.id === id);
+    
+    let newCategory=category
+    if(indx>=0)
+   {
+    
      
+     
+    newCategory[indx].CourseID=""
+    newCategory[indx].CategoryType=type
+    newCategory[indx].Element=element
+     
+     setCategory(newCategory)
+     
+}
+else{
+    let temp={}
+    temp.id=id
+    temp.CourseID=""
+    temp.CategoryType=type
+    temp.Element=element
+    newCategory.push(temp)
+    setCategory(newCategory)
+}
+//console.log(category)
+}
+const save=()=>{
+    if(total!==100 )
+    alert("Cant save make sure Au total is 100"+ total)
+    else{
+    let tempContent=category
+    for( let i=0;i<category.length;i++){
 
-  const removeRow = (id) => {
-    let newRows = outcomes.filter((row) => row.id !== id);
-    let newAttributeRows = attributeRows.filter((row) => row.id !== id);
-    for (let i = 0; i < newRows.length; i++) {
-      if (newRows[i].id > id) {
-        newRows[i].id = newRows[i].id - 1;
-        newAttributeRows[i].id = newAttributeRows[i].id - 1;
-      }
+        delete tempContent[i].id
+        
     }
-    setAttributeRows(newAttributeRows);
-    setOutcomes(newRows);
-  };
+    let tempAu=au
+    for( let i=0;i<au.length;i++){
+        delete tempAu[i].id
+        
+    }
 
-  const addRow = () => {
-    // console.log(...rows)
+    
+    props.setContent(tempContent)
+    props.setAu(tempAu)
+}}
 
-    let newRows = outcomes;
-    setCount(count + 1);
-    console.log(newRows);
-    let newAttributeRows = attributeRows;
-    newAttributeRows.push({
-      id: attributeRows.length + 1,
-      attribute: "",
-      instructionLevel: "",
-    });
-    setAttributeRows(newAttributeRows);
+  
 
-    newRows.push({ id: outcomes.length + 1, outcome: "" });
-    setOutcomes(newRows);
-    // console.log(rows)
-  };
-
-  function mathContentElementOptions() {
+  function mathContentElementOptions(id) {
     return (
-      <Select native onChange={(e) => {}}>
+      <Select native onChange={(e) => {editCategory(id,"Math",e.target.value)}}>
         <option aria-label="None" value={""} />
         <option value="DiffCalc">DiffCalc</option>
         <option value="DiffEq">DiffEq</option>
@@ -120,9 +139,9 @@ useEffect (()=>{
     );
   }
 
-  function naturalScienceElementOptions() {
+  function naturalScienceElementOptions(id) {
     return (
-      <Select native onChange={(e) => {}}>
+      <Select native onChange={(e) => {editCategory(id,"Natural Science",e.target.value)}}>
         <option aria-label="None" value={""} />
         <option value="Chem">Chem</option>
         <option value="Earth">Earth</option>
@@ -131,10 +150,10 @@ useEffect (()=>{
       </Select>
     );
   }
-
-  function complementaryOptions() {
+ 
+  function complementaryOptions(id) {
     return (
-      <Select native onChange={(e) => {}}>
+      <Select native onChange={(e) => {editCategory(id,"Complementary Studies",e.target.value)}}>
         <option aria-label="None" value={""} />
         <option value="EngEcon">EngEcon</option>
         <option value="H&S">H&S</option>
@@ -149,7 +168,7 @@ useEffect (()=>{
   return (
     <>
     <div className="pt-2 pb-2" align="right">
-            <Button variant="outlined" color="secondary">
+            <Button variant="outlined" color="secondary" onClick={()=>save()}>
               <SaveIcon />
             </Button>
           </div>
@@ -190,15 +209,23 @@ useEffect (()=>{
                   readOnly={true}
                 />
               </TableCell>
-              <TableCell align="right">{mathContentElementOptions()}</TableCell>
-              <TableCell align="right">{mathContentElementOptions()}</TableCell>
+              <TableCell align="right">{mathContentElementOptions(1)}</TableCell>
+              <TableCell align="right">{mathContentElementOptions(2)}</TableCell>
               <TableCell component="th" scope="row">
                 <TextField
                   id="standard-basic"
                   onChange={(e) => {
-                    if (e.target.value > 100) e.target.value = 100;
-                    if (e.target.value < 0) e.target.value = 0;
-                  }}
+                    if( e.target.value >=0 && e.target.value<=100){
+                  
+                 editAu(1,"Math",e.target.value)
+                 }
+                 else {e.target.value=""
+                }
+                
+                }
+                
+                
+                }
                   inputProps={{ style: { textAlign: "center" } }}
                 />
               </TableCell>
@@ -214,18 +241,21 @@ useEffect (()=>{
                 />
               </TableCell>
               <TableCell align="right">
-                {naturalScienceElementOptions()}
+                {naturalScienceElementOptions(3)}
               </TableCell>
               <TableCell align="right">
-                {naturalScienceElementOptions()}
+                {naturalScienceElementOptions(4)}
               </TableCell>
               <TableCell component="th" scope="row">
                 <TextField
                   id="standard-basic"
                   onChange={(e) => {
-                    if (e.target.value > 100) e.target.value = 100;
-                    if (e.target.value < 0) e.target.value = 0;
-                  }}
+                    if( e.target.value >=0 && e.target.value<=100){
+                  
+                 editAu(2,"Natural Science",e.target.value)
+                 }
+                 else {e.target.value=""
+                 }}}
                   inputProps={{ style: { textAlign: "center" } }}
                 />
               </TableCell>
@@ -240,15 +270,18 @@ useEffect (()=>{
                   readOnly={true}
                 />
               </TableCell>
-              <TableCell align="right">{complementaryOptions()}</TableCell>
-              <TableCell align="right">{complementaryOptions()}</TableCell>
+              <TableCell align="right">{complementaryOptions(5)}</TableCell>
+              <TableCell align="right">{complementaryOptions(6)}</TableCell>
               <TableCell component="th" scope="row">
                 <TextField
                   id="standard-basic"
                   onChange={(e) => {
-                    if (e.target.value > 100) e.target.value = 100;
-                    if (e.target.value < 0) e.target.value = 0;
-                  }}
+                    if( e.target.value >=0 && e.target.value<=100){
+                    
+                   editAu(3,"Complementary Studies",e.target.value)
+                   }
+                   else {e.target.value=""
+                   }}}
                   inputProps={{ style: { textAlign: "center" } }}
                 />
               </TableCell>
@@ -281,9 +314,13 @@ useEffect (()=>{
                 <TextField
                   id="standard-basic"
                   onChange={(e) => {
-                    if (e.target.value > 100) e.target.value = 100;
-                    if (e.target.value < 0) e.target.value = 0;
-                  }}
+                    if( e.target.value >=0 && e.target.value<=100){
+                  
+                 editAu(4,"Engineering Science",e.target.value)
+                 }
+                 else {e.target.value=""
+                 }
+                }}
                   inputProps={{ style: { textAlign: "center" } }}
                 />
               </TableCell>
@@ -316,16 +353,28 @@ useEffect (()=>{
                 <TextField
                   id="standard-basic"
                   onChange={(e) => {
-                    if (e.target.value > 100) e.target.value = 100;
-                    if (e.target.value < 0) e.target.value = 0;
-                  }}
+                    if( e.target.value >=0 && e.target.value<=100){
+                  
+                 editAu(5,"Engineering Design",e.target.value)
+                 }
+              else {e.target.value=""
+            }
+            }
+                }
                   inputProps={{ style: { textAlign: "center" } }}
                 />
               </TableCell>
             </TableRow>
+            <TableRow >
+        <TableCell></TableCell>
+        <TableCell></TableCell>
+        <TableCell>Total:</TableCell>
+        <TableCell>{total}%</TableCell>
+        </TableRow>
           </TableBody>
         </Table>
         <br />
+        
       </TableContainer>
 
       <div style={{ color: "red" }}>

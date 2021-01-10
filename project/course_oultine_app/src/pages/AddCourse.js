@@ -53,10 +53,10 @@ const AddCourse = () => {
   const [save,setSave]=useState(false)
   const [info,setInfo]=useState({CourseID:""})
    const[contentCategory,setContentCategory]=useState("")
-  const[section,setSectio]=useState("")
+  const[section,setSection]=useState("")
   const[lab,setLab]=useState("")
   const[AuWeight,setAuWeight]=useState("")
-  const [outcome,setOutcome]=useState({CourseID:""})
+  const [outcome,setOutcome]=useState([])
   const[timeTable,setTimeTable]=useState({CourseID:""})
   const [coordinator,setcoordinator]=useState({CourseID:""})
   const[instructor,setInstructor]=useState({CourseID:""})
@@ -65,7 +65,27 @@ const AddCourse = () => {
   const[testbook,setTextbook]=useState("")
 
   const[ta,setTa]=useState("")
-  
+  const createJSON=()=>{
+    
+    if(info.CourseID!==""){
+      //creating outcome
+      for(let i=0;i<outcome.length;i++){
+        outcome[i].CourseID=info.CourseID
+      }
+      //creating content category
+      for(let i=0;i<contentCategory.length;i++){
+        contentCategory[i].CourseID=info.CourseID
+      }
+      //creating au
+      for(let i=0;i<AuWeight.length;i++){
+        AuWeight[i].CourseID=info.CourseID
+      }
+      //creating Lab
+      for(let i=0;i<section.length;i++){
+        section[i].CourseID=info.CourseID
+      }
+    }
+  }
 useEffect(()=>{
   if(save)
 {
@@ -76,6 +96,13 @@ useEffect(()=>{
   
   console.log("Outcome")
   console.log(outcome)
+
+  console.log("Content Category")
+  console.log(contentCategory)
+  console.log("Au weight")
+  console.log(AuWeight)
+  console.log("Section")
+  console.log(section)
   /*console.log("Instructor table: ")
   console.log(instructor)
 console.log("coordinator tabke: ")
@@ -107,6 +134,7 @@ const editNotes=(courseID,gradeNotes,description,examination,calculator)=>{
         <Container maxWidth="md">
           <div className="pt-2 pb-2" align="right">
             <Button variant="outlined" color="secondary" onClick={()=>{
+              createJSON()
               setSave(true)
               
               if(info.CourseID==="")
@@ -154,9 +182,9 @@ const editNotes=(courseID,gradeNotes,description,examination,calculator)=>{
             <div style={{ width: "100%" }}>
               <Paper className={classes.paper} elevation={3}>
                <h1> {info.CourseID}</h1>
-                <FunOutcome  setOutcome={setOutcome} courseID={info.CourseID} />
-                <ContentCategory/>
-                <Section/>
+                <FunOutcome  setOutcome={setOutcome}  />
+                <ContentCategory setContent={setContentCategory} setAu={setAuWeight}/>
+                <Section setSection={setSection}/>
                 <Lab/>
                 
               </Paper>

@@ -26,130 +26,67 @@ export default function BasicTable(props) {
   const [count, setCount] = useState(2);
   const classes = useStyles();
 
-  const [outcomes, setOutcomes] = useState([{ id: 1, outcome: "" }]);
-
-  const [attributeRows, setAttributeRows] = useState([
-    { id: 1, attribute: "", instructionLevel: "" },
-  ]);
-
- const editAttribute =(id,attribute,instructionLvl)=>{
-  let indx = attributeRows.findIndex((row) => row.id === id)
-  let newAttributes=attributeRows
-  if(attribute!=="")
-  newAttributes[indx].attribute=attribute
-  if(instructionLvl!=="")
-  newAttributes[indx].instructionLevel=instructionLvl
-  setAttributeRows(newAttributes)
-  
- }
+const [section,setSection]=useState([])
  
-
-  const editOutcomes = (id, outcome) => {
-    let indx = outcomes.findIndex((row) => row.id === id);
-    let newOutcomes = outcomes;
-
-    newOutcomes[indx].outcome = outcome;
-
-    setOutcomes(newOutcomes);
-    //setRows(newRows)
-   // console.log(outcomes)
-  }
-  /*
-useEffect (()=>{
-  if(props.save){
-   
-    let temp=[]
-    for (let i=0;i<outcomes.length;i++){
-      temp.push({CourseID:props.courseID,OutcomeNum:outcomes[i].id,Description:outcomes[i].outcome,GraduateAttribute:attributeRows[i].attribute,InstructionLvl:attributeRows[i].InstructionLvl})
+ const editSection=(id,SectionNum,Student,hours,type)=>{
+    let indx = section.findIndex((row) => row.id === id);
     
-  }
-  setCount(1)
-  props.setOutcome(temp)
-  
-  props.setSave(false)
+    let newSection=section
+    if(indx>=0)
+   {
+    
+     
+     
+    newSection[indx].CourseID=""
+    if(SectionNum!=="")
+    newSection[indx].SectionNum=SectionNum
+    if(Student!=="")
+    newSection[indx].Student=Student
+    if(hours!=="")
+    newSection[indx].hours=hours
+
+   
+     setSection(newSection)
+     
 }
-})*/
+else{
+    let temp={}
+    temp.id=id
+    temp.CourseID=""
+    temp.SectionNum=SectionNum
+    temp.Student=Student
+    temp.hours=hours
+    temp.type=type
+    newSection.push(temp)
+    setSection(newSection)
+}
+
+ }
+
+  
+ const save=()=>{
+     let temp=section
+     for (let i=0;i<temp.length;i++)
+     delete temp[i].id
+     props.setSection(temp)
+ }
+  
 
      
 
-  const removeRow = (id) => {
-    let newRows = outcomes.filter((row) => row.id !== id);
-    let newAttributeRows = attributeRows.filter((row) => row.id !== id);
-    for (let i = 0; i < newRows.length; i++) {
-      if (newRows[i].id > id) {
-        newRows[i].id = newRows[i].id - 1;
-        newAttributeRows[i].id = newAttributeRows[i].id - 1;
-      }
-    }
-    setAttributeRows(newAttributeRows);
-    setOutcomes(newRows);
-  };
+  
 
-  const addRow = () => {
-    // console.log(...rows)
+ 
 
-    let newRows = outcomes;
-    setCount(count + 1);
-    console.log(newRows);
-    let newAttributeRows = attributeRows;
-    newAttributeRows.push({
-      id: attributeRows.length + 1,
-      attribute: "",
-      instructionLevel: "",
-    });
-    setAttributeRows(newAttributeRows);
 
-    newRows.push({ id: outcomes.length + 1, outcome: "" });
-    setOutcomes(newRows);
-    // console.log(rows)
-  };
+  
 
-  function mathContentElementOptions() {
-    return (
-      <Select native onChange={(e) => {}}>
-        <option aria-label="None" value={""} />
-        <option value="DiffCalc">DiffCalc</option>
-        <option value="DiffEq">DiffEq</option>
-        <option value="Discrete">Discrete</option>
-        <option value="IntCalc">IntCalc</option>
-        <option value="LinAlg">LinAlg</option>
-        <option value="NMeths">NMeths</option>
-        <option value="Prob">Prob</option>
-        <option value="Stats">Stats</option>
-      </Select>
-    );
-  }
-
-  function naturalScienceElementOptions() {
-    return (
-      <Select native onChange={(e) => {}}>
-        <option aria-label="None" value={""} />
-        <option value="Chem">Chem</option>
-        <option value="Earth">Earth</option>
-        <option value="Life">Life</option>
-        <option value="Phys">Phys</option>
-      </Select>
-    );
-  }
-
-  function complementaryOptions() {
-    return (
-      <Select native onChange={(e) => {}}>
-        <option aria-label="None" value={""} />
-        <option value="EngEcon">EngEcon</option>
-        <option value="H&S">H&S</option>
-        <option value="HumSS">HumSS</option>
-        <option value="Impacts">Impacts</option>
-        <option value="OWComm">OWComm</option>
-        <option value="PEthics">PEthics</option>
-      </Select>
-    );
-  }
+  
 
   return (
     <>
     <div className="pt-2 pb-2" align="right">
-            <Button variant="outlined" color="secondary">
+            <Button variant="outlined" color="secondary" onClick={()=>save()}>
               <SaveIcon />
             </Button>
           </div>
@@ -193,18 +130,24 @@ useEffect (()=>{
               </TableCell>
               <TableCell align="right">
                 <TextField
-                  inputProps={{ style: { textAlign: "center" } }}
+                  inputProps={{ style: { textAlign: "center" } }} onChange={(e)=>{
+                      editSection(1,e.target.value,"","","Lecture")
+                  }}
                 />
               </TableCell>
               <TableCell align="right">
                 <TextField
-                  inputProps={{ style: { textAlign: "center" } }}
+                  inputProps={{ style: { textAlign: "center" } }} onChange={(e)=>{
+                    editSection(1,"",e.target.value,"","Lecture")
+                }}
                 />
               </TableCell>
               <TableCell component="th" scope="row">
                 <TextField
                   id="standard-basic"
-                  inputProps={{ style: { textAlign: "center" } }}
+                  inputProps={{ style: { textAlign: "center" } }}onChange={(e)=>{
+                    editSection(1,"","",e.target.value,"Lecture")
+                }}
                 />
               </TableCell>
             </TableRow>
@@ -221,18 +164,24 @@ useEffect (()=>{
               </TableCell>
               <TableCell align="right">
                 <TextField
-                  inputProps={{ style: { textAlign: "center" } }}
+                  inputProps={{ style: { textAlign: "center" } }} onChange={(e)=>{
+                    editSection(2,e.target.value,"","","Tutorial")
+                }}
                 />
               </TableCell>
               <TableCell align="right">
                 <TextField
-                  inputProps={{ style: { textAlign: "center" } }}
+                  inputProps={{ style: { textAlign: "center" } }} onChange={(e)=>{
+                    editSection(2,"",e.target.value,"","Tutorial")
+                }}
                 />
               </TableCell>
               <TableCell component="th" scope="row">
                 <TextField
                   id="standard-basic"
-                  inputProps={{ style: { textAlign: "center" } }}
+                  inputProps={{ style: { textAlign: "center" } }}  onChange={(e)=>{
+                    editSection(2,"","",e.target.value,"Tutorial")
+                }}
                 />
               </TableCell>
             </TableRow>
@@ -242,25 +191,31 @@ useEffect (()=>{
               <TableCell component="th" scope="row">
                 <TextField
                   id="standard-basic"
-                  inputProps={{ style: { textAlign: "center" } }}
+                  inputProps={{ style: { textAlign: "center" } }} 
                   value={"Lab"}
                   readOnly={true}
                 />
               </TableCell>
               <TableCell align="right">
                 <TextField
-                  inputProps={{ style: { textAlign: "center" } }}
+                  inputProps={{ style: { textAlign: "center" } }} onChange={(e)=>{
+                    editSection(3,e.target.value,"","","Lab")
+                }}
                 />
               </TableCell>
               <TableCell align="right">
                 <TextField
-                  inputProps={{ style: { textAlign: "center" } }}
+                  inputProps={{ style: { textAlign: "center" } }} onChange={(e)=>{
+                    editSection(3,"",e.target.value,"","Lab")
+                }}
                 />
               </TableCell>
               <TableCell component="th" scope="row">
                 <TextField
                   id="standard-basic"
-                  inputProps={{ style: { textAlign: "center" } }}
+                  inputProps={{ style: { textAlign: "center" } }} onChange={(e)=>{
+                    editSection(3,"","",e.target.value,"Lab")
+                }}
                 />
               </TableCell>
             </TableRow>

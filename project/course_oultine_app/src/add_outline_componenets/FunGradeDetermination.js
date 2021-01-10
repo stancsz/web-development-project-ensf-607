@@ -76,7 +76,7 @@ const[total,setTotal]=useState(0.0)
    
     let indx = grade.findIndex((row) => row.id === id)
     let temp=grade[indx].Weight
-    console.log(temp)
+    
     if(temp!=="")
     setTotal(total-parseFloat(temp))
     setGrade(newRows)
@@ -109,7 +109,7 @@ useEffect(()=>{
 
 if(save && parseInt(total)!==100)
 {
-   alert("Cant save total must be 100") 
+   alert("Cant save, total grades distribution must be 100") 
    setSave(false)
 }
 },[save])

@@ -89,6 +89,7 @@ const[outcomeJSON,setOutcomeJSON]=useState([{}])
     setOutcomes(newRows);
     // console.log(rows)
   };
+  
 
  const save=()=>{
    let tempOutcome=outcomes
@@ -96,7 +97,7 @@ const[outcomeJSON,setOutcomeJSON]=useState([{}])
    let newJSON=[{}]
    for (let i = 0; i < tempOutcome.length; i++){
     
-newJSON[i]={OutcomeNum:tempOutcome[i].id,Description:tempOutcome[i].outcome, GraduateAttribute:tempAttributes[i].attribute,InstructionLvl:tempAttributes[i].instructionLevel,CourseID:props.courseID}
+newJSON[i]={OutcomeNum:tempOutcome[i].id,Description:tempOutcome[i].outcome, GraduateAttribute:tempAttributes[i].attribute,InstructionLvl:tempAttributes[i].instructionLevel,CourseID:""}
    }
    props.setOutcome(newJSON)
  }
