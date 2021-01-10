@@ -193,6 +193,10 @@ const fillFields = () => {
       axios.get("http://127.0.0.1:8000/tutorial/")
       .then(res => setAssistantsData(res.data))
       .catch((error) => {console.log(error)})
+
+      axios.get("http://127.0.0.1:8000/textbook/")
+      .then(res => setTextbookData(res.data))
+      .catch((error) => {console.log(error)})
   
       axios.get("http://127.0.0.1:8000/course/")
       .then(res => setInfoData(res.data))
@@ -229,7 +233,7 @@ const fillFields = () => {
 
       if(pageToggle === 1 && InfoData !== 0 && outcomeData !== 0 && timetableData !== 0 
         && instructorsData !== 0 && coordinatorsData !== 0 && assistantsData !== 0 && gradeDeterminationData !== 0 
-        && noteExaminationDescriptionCalcData !== 0 && letterData !== 0){         
+        && noteExaminationDescriptionCalcData !== 0 && letterData !== 0 && textbookData !== 0){         
          
           setCoordinators(coordinatorsData.filter(res => res.CourseID === course.CourseID)); 
           setGradeDetermination(gradeDeterminationData.filter(res => res.CourseID === course.CourseID));
@@ -242,6 +246,7 @@ const fillFields = () => {
           setLetter(letterData.filter(res => res.CourseID === course.CourseID));
           setInstructors(instructorsData.filter(res => res.CourseID === course.CourseID));
           setAssistants(assistantsData.filter(res => res.CourseID === course.CourseID));
+          setTextbook(textbookData.filter(res => res.CourseID === course.CourseID));
           setInfo(InfoData.filter(res => res.CourseID === course.CourseID));
 
           setPageToggle(2)
@@ -250,7 +255,7 @@ const fillFields = () => {
 
       if(pageToggle === 2 && course !== 0 && info !== 0 && outcome !== 0 && timetable !== 0 && instructors !== 0 && coordinators !== 0
         && assistants !== 0 && examinations !== 0 && calculator !== 0 && gradeDetermination !== 0
-        && note !== 0 && letter !==0 && description !== 0){
+        && note !== 0 && letter !==0 && description !== 0 && textbook !== 0){
 
       setFrame(
         <Container maxWidth="md">
@@ -267,6 +272,7 @@ const fillFields = () => {
                         </Paper>
                     </div>
                 </AccordionDetails>
+              </Accordion>
                 <Accordion defaultExpanded = {true} elevation = {5} >
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
               <Typography>
@@ -370,7 +376,7 @@ const fillFields = () => {
             <AccordionDetails>
             <div style={{ width: '100%' }}>
             <Paper className={classes.paper} elevation={3}>
-            <Textbook />
+            <Textbook textbook={textbook}/>
           </Paper>
             </div>
             </AccordionDetails>
@@ -389,7 +395,6 @@ const fillFields = () => {
             </div>
             </AccordionDetails>
           </Accordion>
-            </Accordion>
         </Container>
     )
         setPageToggle(3)

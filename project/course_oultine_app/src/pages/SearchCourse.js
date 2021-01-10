@@ -173,6 +173,10 @@ const SearchCourse = () => {
     .then(res => setAssistantsData(res.data))
     .catch((error) => {console.log(error)})
 
+    axios.get("http://127.0.0.1:8000/textbook/")
+    .then(res => setTextbookData(res.data))
+    .catch((error) => {console.log(error)})
+
     axios.get("http://127.0.0.1:8000/course/")
     .then(res => setInfoData(res.data))
     .catch((error) => {console.log(error)})
@@ -196,6 +200,7 @@ const SearchCourse = () => {
     setLetter(letterData.filter(res => res.CourseID === course));
     setInstructors(instructorsData.filter(res => res.CourseID === course));
     setAssistants(assistantsData.filter(res => res.CourseID === course));
+    setTextbook(textbookData.filter(res => res.CourseID === course));
     setInfo(InfoData.filter(res => res.CourseID === course));
   };
 
@@ -342,7 +347,7 @@ const SearchCourse = () => {
             <AccordionDetails>
             <div style={{ width: '100%' }}>
             <Paper className={classes.paper} elevation={3}>
-            <Textbook />
+            <Textbook textbook = {textbook}/>
           </Paper>
             </div>
             </AccordionDetails>
@@ -414,10 +419,10 @@ const SearchCourse = () => {
           <PageviewIcon fontSize="large"/>
         </Button>
 
-        <Button onClick={() => {}}>
+       {/* <Button onClick={() => {}}>
           EDIT&nbsp;
           <EditIcon fontSize="large"/>
-        </Button>
+        </Button> */}
 
         <Button onClick={() => {
 
