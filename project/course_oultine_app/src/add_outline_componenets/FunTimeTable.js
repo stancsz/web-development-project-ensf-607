@@ -59,13 +59,13 @@ export default function BasicTable(props) {
 
 const save=()=>{
   
-  let temp=section
+  let newJSON=[]
   for (let i=0;i<section.length;i++)
   {
 
-    delete temp[i].id
+    newJSON.push({CourseID:section[i].CourseID,SectionNum:section[i].SectionNum,Days:section[i].Days,Time:section[i].Time,Location:section[i].Location})
   }
-  props.setTimeTable(temp)
+  props.setTimeTable(newJSON)
  
   
 }

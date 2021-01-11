@@ -88,6 +88,7 @@ const AddCourse = () => {
        lab.CourseID=info.CourseID
       //creating TimeTable
       for(let i=0;i<timeTable.length;i++){
+       
         timeTable[i].CourseID=info.CourseID
       }
     }
