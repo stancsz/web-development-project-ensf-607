@@ -317,6 +317,7 @@ const MyDoc = (props) => (
       </Text>
 
       <View><Text style = {{fontSize: 8 }}>&nbsp;</Text></View>
+      <View><Text style = {{fontSize: 8 }}>&nbsp;</Text></View>
       <View>
       <Text style = {{fontSize: 12, marginHorizontal: 20}}>
       Letter Grade Total Mark Distribution:
