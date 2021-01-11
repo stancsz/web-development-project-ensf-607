@@ -20,6 +20,7 @@ import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import Box from "@material-ui/core/Box";
 
 
 //Dummy data
@@ -148,7 +149,7 @@ const LastAdded = () => {
 
 
 const fillFields = () => {
-    axios.get("http://127.0.0.1:8000/course/")
+    axios.get("http://34.220.149.181:8000/course/")
     .then(res => {
       let num = 0;
       let latest = "";
@@ -162,43 +163,43 @@ const fillFields = () => {
       setCourse(latest)
     })
 
-      axios.get("http://127.0.0.1:8000/coordinator/")
+      axios.get("http://34.220.149.181:8000/coordinator/")
       .then(res => setCoordinatorsData(res.data))
       .catch((error) => {console.log(error)})
   
-      axios.get("http://127.0.0.1:8000/gradedetermination/")
+      axios.get("http://34.220.149.181:8000/gradedetermination/")
       .then(res => setGradeDeterminationData(res.data))
       .catch((error) => {console.log(error)})
   
-      axios.get("http://127.0.0.1:8000/info/")
+      axios.get("http://34.220.149.181:8000/info/")
       .then(res => setnoteExaminationDescriptionCalcData(res.data))
       .catch((error) => {console.log(error)})
   
-      axios.get("http://127.0.0.1:8000/outcome/")
+      axios.get("http://34.220.149.181:8000/outcome/")
       .then(res => setOutcomeData(res.data))
       .catch((error) => {console.log(error)})
   
-      axios.get("http://127.0.0.1:8000/timetable/")
+      axios.get("http://34.220.149.181:8000/timetable/")
       .then(res => setTimetableData(res.data))
       .catch((error) => {console.log(error)})
   
-      axios.get("http://127.0.0.1:8000/gradedistribution/")
+      axios.get("http://34.220.149.181:8000/gradedistribution/")
       .then(res => setLetterData(res.data))
       .catch((error) => {console.log(error)})
   
-      axios.get("http://127.0.0.1:8000/lecture/")
+      axios.get("http://34.220.149.181:8000/lecture/")
       .then(res => setInstructorsData(res.data))
       .catch((error) => {console.log(error)})
   
-      axios.get("http://127.0.0.1:8000/tutorial/")
+      axios.get("http://34.220.149.181:8000/tutorial/")
       .then(res => setAssistantsData(res.data))
       .catch((error) => {console.log(error)})
 
-      axios.get("http://127.0.0.1:8000/textbook/")
+      axios.get("http://34.220.149.181:8000/textbook/")
       .then(res => setTextbookData(res.data))
       .catch((error) => {console.log(error)})
   
-      axios.get("http://127.0.0.1:8000/course/")
+      axios.get("http://34.220.149.181:8000/course/")
       .then(res => setInfoData(res.data))
       .catch((error) => {console.log(error)})
 
@@ -207,7 +208,7 @@ const fillFields = () => {
     useEffect(() => {
 
       if(pageToggle === 0){
-        axios.get("http://127.0.0.1:8000/course/")
+        axios.get("http://34.220.149.181:8000/course/")
         .then(res => {
           let num = 0;
           let latest = "";
@@ -325,8 +326,10 @@ const fillFields = () => {
             </AccordionSummary>
             <AccordionDetails>
             <div style={{ width: '100%' }}>
-            <Paper className={classes.paper} elevation={3}>
+              <Paper className={classes.paper} elevation={3}>
+              <Box m={2}>
             <Examinations examinations = {examinations}/>
+            </Box>
             </Paper>
             </div>
             </AccordionDetails>
