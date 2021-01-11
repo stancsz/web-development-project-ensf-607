@@ -51,7 +51,7 @@ const AddCourse = () => {
   const [count, setCount] = useState(1);
   const[notes,setNotes]=useState({CourseID:"",GradeNotes:"",Examination:"",CourseDescription:"",UseCalc:""})
   const [save,setSave]=useState(false)
-  const [info,setInfo]=useState({CourseID:""})
+  const [info,setInfo]=useState({CourseID:""})//Blank CourseID used for checking
    const[contentCategory,setContentCategory]=useState("")
   const[section,setSection]=useState("")
   const[lab,setLab]=useState({})
@@ -107,6 +107,11 @@ const AddCourse = () => {
        
         ta[i].CourseID=info.CourseID
       }
+      //creating Grade Determination
+      for(let i=0;i<gradeDetermination.length;i++){
+       
+        gradeDetermination[i].CourseID=info.CourseID
+      }
     }
   }
 useEffect(()=>{
@@ -139,24 +144,13 @@ console.log(coordinator)
 
 console.log("ta table ")
 console.log(ta)
+
+console.log("Grade Determination")
+console.log(gradeDetermination)
 setSave(false)
 }
 },[save])
-const editNotes=(courseID,gradeNotes,description,examination,calculator)=>{
-  let temp=notes
-  if(courseID!=="")
-  temp.CourseID=courseID
-  if (gradeNotes!=="")
-  temp.GradeNotes=gradeNotes
-  if(examination.toString("html")!=="")
-  temp.Examination=examination
-  if (description!=="")
-  temp.CourseDescription=description
-    if(calculator!=="")
-  temp.UseCalc=calculator
 
-  setNotes(temp)
-}
 
   return (
     <React.Fragment>
@@ -211,7 +205,7 @@ const editNotes=(courseID,gradeNotes,description,examination,calculator)=>{
           <AccordionDetails>
             <div style={{ width: "100%" }}>
               <Paper className={classes.paper} elevation={3}>
-               <h1> {info.CourseID}</h1>
+               
                 <FunOutcome  setOutcome={setOutcome}  />
                 <ContentCategory setContent={setContentCategory} setAu={setAuWeight}/>
                 <Section setSection={setSection}/>
@@ -301,12 +295,12 @@ const editNotes=(courseID,gradeNotes,description,examination,calculator)=>{
           <AccordionDetails>
             <div style={{ width: "100%" }}>
               <Paper className={classes.paper} elevation={3}>
-                <GradeDetermination/>
+                <GradeDetermination setGradeDetermination={setGradeDetermination}/>
                 <br/>
                 
                 <GradeNotes notes={notes}/>
                 <br/>
-                <GradeDistribution/>
+                <GradeDistribution setGradeDistribution={setGradeDistribution}/>
               </Paper>
             </div>
           </AccordionDetails>

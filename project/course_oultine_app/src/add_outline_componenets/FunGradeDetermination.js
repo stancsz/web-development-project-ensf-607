@@ -30,7 +30,7 @@ export default function BasicTable(props) {
 
   const [count, setCount] = useState(2);
   const classes = useStyles();
-  const[save,setSave]=useState(false)
+
   const [grade,setGrade]=useState([{id:1,Component:"",LearningOutcome:"",Weight:""}])
 
 const[total,setTotal]=useState(0.0)
@@ -98,23 +98,23 @@ const[total,setTotal]=useState(0.0)
     setGrade(newRows)
    // console.log(rows)
   }
-const updateTotal=(value)=>{
-    setCount(count+value)
-    
-    setTotal(total+2)
-    console.log(count)
-    
-}
-useEffect(()=>{
 
-if(save && parseInt(total)!==100)
-{
-   alert("Cant save, total grades distribution must be 100") 
-   setSave(false)
-}
-},[save])
   
+const save=()=>{
+  if(save && parseInt(total)!==100)
+  {
+     alert("Cant save, total grades distribution must be 100") 
+     
+  }
+  else{
+    let newGradeJSON=[]
+    for (let i=0;i<grade.length;i++){
+      newGradeJSON.push({CourseID:"",Componenet:grade[i].Component,OutcomeEvaluated:grade[i].LearningOutcome,Weight:grade[i].Weight})
+    }
+    props.setGradeDetermination(newGradeJSON)
+  }
 
+}
 
 
 
@@ -123,7 +123,7 @@ if(save && parseInt(total)!==100)
     <>
     <div className="pt-2 pb-2" align="right">
             <Button variant="outlined" color="secondary" onClick={()=>{
-                setSave(true)
+                save()
             }}>
               <SaveIcon />
             </Button>
@@ -164,7 +164,7 @@ if(save && parseInt(total)!==100)
         }
                 } /></TableCell>
                 <TableCell align="right"><TextField  id="standard-basic" fullWidth={true} onChange={(e)=>{
-                    if(e.target.value>0 && e.target.value<100)
+                    if(e.target.value>=0 && e.target.value<=100)
                      {editGrade(row.id,"","",e.target.value)
                      
                     
