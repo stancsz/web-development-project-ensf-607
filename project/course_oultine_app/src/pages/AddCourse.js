@@ -80,10 +80,13 @@ const AddCourse = () => {
       for(let i=0;i<AuWeight.length;i++){
         AuWeight[i].CourseID=info.CourseID
       }
-      //creating Lab
+      //creating section
       for(let i=0;i<section.length;i++){
         section[i].CourseID=info.CourseID
       }
+       //creating lab
+       lab.CourseID=info.CourseID
+      
     }
   }
 useEffect(()=>{
@@ -103,6 +106,9 @@ useEffect(()=>{
   console.log(AuWeight)
   console.log("Section")
   console.log(section)
+
+  console.log("Lab")
+  console.log(lab)
   /*console.log("Instructor table: ")
   console.log(instructor)
 console.log("coordinator tabke: ")
@@ -185,7 +191,7 @@ const editNotes=(courseID,gradeNotes,description,examination,calculator)=>{
                 <FunOutcome  setOutcome={setOutcome}  />
                 <ContentCategory setContent={setContentCategory} setAu={setAuWeight}/>
                 <Section setSection={setSection}/>
-                <Lab/>
+                <Lab setLab={setLab}/>
                 
               </Paper>
             </div>
