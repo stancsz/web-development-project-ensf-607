@@ -5,9 +5,13 @@ import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import SaveIcon from "@material-ui/icons/Save";
 
-function FunExam() {
+function FunExam(props) {
 
     const [examInfo, setExamInfo] = useState( RichTextEditor.createEmptyValue());
+    const save=()=>{
+      props.notes.Examination=examInfo
+
+    }
     const toolbarConfig = {
         display: ["INLINE_STYLE_BUTTONS", "BLOCK_TYPE_BUTTONS", "HISTORY_BUTTONS"],
         INLINE_STYLE_BUTTONS: [
@@ -29,7 +33,7 @@ function FunExam() {
     return(
         <>
         <div className="pt-2 pb-2" align="right">
-            <Button variant="outlined" color="secondary">
+            <Button variant="outlined" color="secondary" onClick={()=> save()}>
               <SaveIcon />
             </Button>
           </div>
@@ -38,7 +42,7 @@ function FunExam() {
                   <RichTextEditor
                     value={examInfo}
                     onChange={(value) => {setExamInfo(value)
-                   console.log(examInfo)
+                   
                   }}
                     
                     toolbarConfig={toolbarConfig}

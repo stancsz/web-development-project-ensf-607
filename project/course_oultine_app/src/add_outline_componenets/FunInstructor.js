@@ -97,7 +97,8 @@ const editTa=(id,Section,FName,LName,Phone,Office,Email)=>{
     temp[indx].Email=Email
     
     setTa(temp)
-    console.log(ta)
+    
+    
     
 }
   const removeInstructor = (id) => {

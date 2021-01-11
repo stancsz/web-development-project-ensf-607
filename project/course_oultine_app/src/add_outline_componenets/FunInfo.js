@@ -43,7 +43,7 @@ const save=()=>{
         let id=courseNumberInput+"-"+term+"-"+year
         temp.CourseID=id
          setInfo(temp)
-         props.setNotes({CourseID:temp.CourseID,GradeNotes:"",Examination:"",CourseDescription:courseInfo,UseCalc:""})
+         props.notes.CourseDescription=courseInfo
          var today = new Date();
          var dd = String(today.getDate()).padStart(2, '0');
          var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!

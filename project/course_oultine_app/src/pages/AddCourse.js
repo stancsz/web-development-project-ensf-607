@@ -49,7 +49,7 @@ const AddCourse = () => {
  
   //JSON tables and use states
   const [count, setCount] = useState(1);
-  const[notes,setNotes]=useState({CourseID:"",})
+  const[notes,setNotes]=useState({CourseID:"",GradeNotes:"",Examination:"",CourseDescription:"",UseCalc:""})
   const [save,setSave]=useState(false)
   const [info,setInfo]=useState({CourseID:""})
    const[contentCategory,setContentCategory]=useState("")
@@ -68,8 +68,10 @@ const AddCourse = () => {
 
   
   const createJSON=()=>{
-    
+     
     if(info.CourseID!==""){
+      //creat notes
+      notes.CourseID=info.CourseID
       //creating outcome
       for(let i=0;i<outcome.length;i++){
         outcome[i].CourseID=info.CourseID
@@ -191,7 +193,7 @@ const editNotes=(courseID,gradeNotes,description,examination,calculator)=>{
           <AccordionDetails>
             <div style={{ width: "100%" }}>
               <Paper className={classes.paper} elevation={3}>
-                <FunInfo  setInfo={setInfo} setNotes={setNotes} />
+                <FunInfo  setInfo={setInfo} notes={notes} />
                 
               </Paper>
             </div>
@@ -262,7 +264,7 @@ const editNotes=(courseID,gradeNotes,description,examination,calculator)=>{
           </AccordionSummary>
           <AccordionDetails>
             <div style={{ width: "100%" }}>
-              <Exam/>
+              <Exam notes={notes}/>
               <Paper className={classes.paper} elevation={3}>
                 
               </Paper>
@@ -282,7 +284,7 @@ const editNotes=(courseID,gradeNotes,description,examination,calculator)=>{
             <div style={{ width: "100%" }}>
               
               <Paper className={classes.paper} elevation={3}>
-                <FunCalculator/>
+                <FunCalculator notes={notes}/>
                            </Paper>
             </div>
           </AccordionDetails>
@@ -302,7 +304,7 @@ const editNotes=(courseID,gradeNotes,description,examination,calculator)=>{
                 <GradeDetermination/>
                 <br/>
                 
-                <GradeNotes/>
+                <GradeNotes notes={notes}/>
                 <br/>
                 <GradeDistribution/>
               </Paper>

@@ -5,14 +5,16 @@ import SaveIcon from "@material-ui/icons/Save";
 
 
 
-function FunCalculator() {
+function FunCalculator(props) {
 
     const [calculatorInfo, setCalculatorInfo] = useState();
-    
+    const save=()=>{
+     props.notes.UseCalc=calculatorInfo
+    }
     return(
         <>
         <div className="pt-2 pb-2" align="right">
-            <Button variant="outlined" color="secondary">
+            <Button variant="outlined" color="secondary" onClick={()=>save()}>
               <SaveIcon />
             </Button>
           </div>
