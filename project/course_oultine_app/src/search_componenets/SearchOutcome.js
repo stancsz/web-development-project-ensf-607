@@ -17,13 +17,16 @@ const useStyles = makeStyles({
 
 
 export default function SearchOutcome(props) {
-  const keys=Object.keys(props.outcome)
+
+  let keys = []
+  props.outcome === undefined ? keys = undefined : keys=Object.keys(props.outcome)
   
   const classes = useStyles();
 
   return (
     <>
-     <label className="label is-size-3 has-text-left pl-1">2. Learning Outcome</label>
+    <p align = "center">At the end of this course, you will be able to:</p>
+    <br/>
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
@@ -34,12 +37,12 @@ export default function SearchOutcome(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {keys.map((key) => (
+          {keys === undefined ? "Data Missing" : keys.map((key) => (
             <TableRow key={key}>
               <TableCell component="th" scope="row">
-                {key}
+                {props.outcome[key].OutcomeNum}
               </TableCell>
-              <TableCell align="right">{props.outcome[key]}</TableCell>
+              <TableCell align="right">{props.outcome[key].Description}</TableCell>
               
             </TableRow>
           ))}

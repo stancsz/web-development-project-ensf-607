@@ -1,11 +1,16 @@
-import React from 'react';
-const Home =()=>{
-    return(
-        <React.Fragment>
-            <p>Welcome to Course outline app<br/>Select an option from menu icon</p>
-        </React.Fragment>
+import React from "react";
 
-    )
+const Home = () => {
 
-}
+  return (
+    <React.Fragment>
+      <br/>
+      <div style={{fontSize: 20}}>
+        Welcome to Course Outline App
+        <br />
+        Select an Option from Menu Icon
+      </div>
+    </React.Fragment>
+  );
+};
 export default Home;

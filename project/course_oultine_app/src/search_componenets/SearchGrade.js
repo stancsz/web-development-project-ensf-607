@@ -7,6 +7,7 @@ import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 import {makeStyles} from "@material-ui/core/styles";
+import { Container } from '@material-ui/core';
 
 const useStyles = makeStyles({
     table: {
@@ -15,18 +16,14 @@ const useStyles = makeStyles({
 });
 
 export default function SearchGrade(props) {
-    // console.log(props.grade)
-    const keys=Object.keys(props.grade)
-    console.log(keys)
+
+    let keys = []
+    props.gradeDetermination === undefined ? keys = undefined : keys=Object.keys(props.gradeDetermination)
 
     const classes = useStyles();
 
-    // return(<>
-    //     </>);
-
     return (
         <>
-            <label className="label is-size-3 has-text-left pl-1">7. Final Grade Determination</label>
             <p>The final grade in this course will be based on the following components:</p>
 
             <TableContainer component={Paper}>
@@ -40,16 +37,16 @@ export default function SearchGrade(props) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {keys.map((key) => (
+                        {keys === undefined ? "Data Missing" : keys.map((key) => (
                             <TableRow key={key}>
                                 <TableCell component="th" scope="row">
-                                    {props.grade[key].Component}
+                                    {props.gradeDetermination[key].Component}
                                 </TableCell>
                                 <TableCell align="right">
-                                    {props.grade[key]["Learning Outcome(s) Evaluated"]}
+                                    {props.gradeDetermination[key].OutcomeEvaluated}
                                 </TableCell>
                                 <TableCell align="right">
-                                    {props.grade[key].Weight}
+                                    {props.gradeDetermination[key].Weight}
                                 </TableCell>
 
                             </TableRow>
@@ -57,6 +54,11 @@ export default function SearchGrade(props) {
                     </TableBody>
                 </Table>
             </TableContainer>
+            <Container maxWidth="md">
+            <div align="right">
+                <b>Total:</b> {Object.values(props.gradeDetermination).reduce((a,b) => a + b.Weight, 0)}%
+            </div>
+            </Container>
         </>
     );
 }
