@@ -57,14 +57,16 @@ const AddCourse = () => {
   const[lab,setLab]=useState({})
   const[AuWeight,setAuWeight]=useState("")
   const [outcome,setOutcome]=useState([])
-  const[timeTable,setTimeTable]=useState()
-  const [coordinator,setcoordinator]=useState({CourseID:""})
-  const[instructor,setInstructor]=useState({CourseID:""})
+  const[timeTable,setTimeTable]=useState("")
+  const [coordinator,setcoordinator]=useState({})
+  const[instructor,setInstructor]=useState([])
+  const[ta,setTa]=useState([])
+  const[labInstructor,setLabInstructor]=useState()
   const[gradeDetermination,setGradeDetermination]=useState("")
   const[gradeDistribution,setGradeDistribution]=useState("")
   const[testbook,setTextbook]=useState("")
 
-  const[ta,setTa]=useState("")
+  
   const createJSON=()=>{
     
     if(info.CourseID!==""){
@@ -91,6 +93,18 @@ const AddCourse = () => {
        
         timeTable[i].CourseID=info.CourseID
       }
+      //creating Coordinator
+      coordinator.CourseID=info.CourseID
+      //creating instructor
+      for(let i=0;i<instructor.length;i++){
+       
+        instructor[i].CourseID=info.CourseID
+      }
+      //creating ta
+      for(let i=0;i<ta.length;i++){
+       
+        ta[i].CourseID=info.CourseID
+      }
     }
   }
 useEffect(()=>{
@@ -116,12 +130,13 @@ useEffect(()=>{
 
   console.log("TimeTable")
   console.log(timeTable)
-  /*console.log("Instructor table: ")
-  console.log(instructor)
-console.log("coordinator tabke: ")
+  console.log("coordinator tabke: ")
 console.log(coordinator)
+  console.log("Instructor table: ")
+  console.log(instructor)
+
 console.log("ta table ")
-console.log(ta)*/
+console.log(ta)
 setSave(false)
 }
 },[save])
@@ -231,7 +246,7 @@ const editNotes=(courseID,gradeNotes,description,examination,calculator)=>{
           </AccordionSummary>
           <AccordionDetails>
             <div style={{ width: "100%" }}>
-              <Instructor save={save} setSave={setSave} setCoordinator={setcoordinator} setInstructor={setInstructor} setTa={setTa} courseID={info.CourseID}/>
+              <Instructor  setCoordinator={setcoordinator} setInstructor={setInstructor} setTa={setTa} setLabInstruvtor={setLabInstructor}/>
               <Paper className={classes.paper} elevation={3}></Paper>
             </div>
           </AccordionDetails>

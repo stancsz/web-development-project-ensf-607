@@ -32,38 +32,13 @@ export default function BasicTable(props) {
   const classes = useStyles();
   
  
-  const [coordinator,setCoordinator]=useState({FName:"",LName:"",Phone:"",Office:"",Email:""})
-  const [instructor,setInstructor]=useState([{id:1,SectionNum:"",FName:"",LName:"",Phone:"",Office:"",Email:""}])
-  const [ta,setTa]=useState([{id:1,SectionNum:"",FName:"",LName:"",Phone:"",Office:"",Email:""}])
+  const [coordinator,setCoordinator]=useState({CourseID:"",FName:"",LName:"",Phone:"",Office:"",Email:""})
+  const [instructor,setInstructor]=useState([{id:1,CourseID:"",SectionNum:"",FName:"",LName:"",Phone:"",Office:"",Email:""}])
+  const [ta,setTa]=useState([{id:1,CourseID:"",SectionNum:"",FName:"",LName:"",Phone:"",Office:"",Email:""}])
 
  
 
 
-
-  
-useEffect (()=>{
-  if(props.save){
-  
-    let instructorList=[]
-    let taList=[]
-    for (let i=0;i<instructor.length;i++){
-      instructorList.push({CourseID:props.courseID,LectureNum:instructor[i].SectionNum,Fname:instructor[i].FName,LName:instructor[i].LName,Phone:instructor[i].Phone,Office:instructor[i].Office,Email:instructor[i].Email})
-    
-  }
-  for (let i=0;i<ta.length;i++){
-    taList.push({CourseID:props.courseID,LabNum:ta[i].SectionNum,NumberofLabs:0,LabType:"",SafetyTaught:"",Fname:ta[i].FName,LName:ta[i].LName,Phone:ta[i].Phone,Office:ta[i].Office,Email:ta[i].Email})
-  
-}
-let temp={CourseID:props.courseID, FName:coordinator.FName, LName:coordinator.LName, Phone:coordinator.Phone, Office:coordinator.Office, Email:coordinator.Email}
- props.setCoordinator(temp)
- props.setInstructor(instructorList)
- props.setTa(taList)
- 
-  props.setSave(false)
- 
-  
-}
-},[coordinator,instructor,ta])
 
 
 
@@ -81,7 +56,7 @@ if(Email!=="")
 temp.Email=Email
 
 setCoordinator(temp)
-console.log(coordinator)
+
 
 }
 const editInstructor=(id,Section,FName,LName,Phone,Office,Email)=>{
@@ -148,7 +123,7 @@ const editTa=(id,Section,FName,LName,Phone,Office,Email)=>{
    
 
 
-    newRows.push({ id: count,SectionNum:"",FName:"",LName:"",Phone:"",Office:"",Email:""})
+    newRows.push({ id: count,CourseID:"",SectionNum:"",FName:"",LName:"",Phone:"",Office:"",Email:""})
     setInstructor(newRows)
    // console.log(rows)
   }
@@ -161,14 +136,27 @@ const editTa=(id,Section,FName,LName,Phone,Office,Email)=>{
    
 
 
-    newRows.push({ id: count,SectionNum:"",FName:"",LName:"",Phone:"",Office:"",Email:""})
+    newRows.push({ id: count,CourseID:"",SectionNum:"",FName:"",LName:"",Phone:"",Office:"",Email:""})
     setTa(newRows)
    // console.log(rows)
   }
 
 
   
-
+const save=()=>{
+  
+  props.setCoordinator(coordinator)
+  let newTaJSON=[]
+  let newInstructorJSON=[]
+  for(let i=0;i<ta.length;i++){
+    newTaJSON.push({CourseID:ta[i].CourseID,TutorialNum:ta[i].SectionNum,FName:ta[i].FName,LName:ta[i].LName,Phone:ta[i].Phone,Office:ta[i].Office,Email:ta[i].Email})
+  }
+  props.setTa(newTaJSON)
+  for(let i=0;i<instructor.length;i++){
+    newInstructorJSON.push({CourseID:instructor[i].CourseID,LectureNum:instructor[i].SectionNum,FName:instructor[i].FName,LName:instructor[i].LName,Phone:instructor[i].Phone,Office:instructor[i].Office,Email:instructor[i].Email})
+  }
+  props.setInstructor(newInstructorJSON)
+}
 
 
 
@@ -176,7 +164,7 @@ const editTa=(id,Section,FName,LName,Phone,Office,Email)=>{
   return (
     <>
     <div className="pt-2 pb-2" align="right">
-            <Button variant="outlined" color="secondary">
+            <Button variant="outlined" color="secondary" onClick={()=>save()}>
               <SaveIcon />
             </Button>
           </div>
