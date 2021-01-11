@@ -1,0 +1,1 @@
+Need to add more tables to add panel and search panels to match requirements. Issues updated and assigned. Front end and back end communication with JSON to be implemented in next sprint (1 week time approximately).

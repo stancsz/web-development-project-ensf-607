@@ -1,0 +1,1 @@
+Dealing with the asynchronous behavior of React leading to many errors was a big difficulty.

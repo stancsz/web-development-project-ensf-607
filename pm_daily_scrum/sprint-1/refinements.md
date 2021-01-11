@@ -1,0 +1,1 @@
+Django and back end design should be tackled first as they will inform the rest of the project. Time estimates as on project board. Pages should be redesigned to more closely resemble real world examples. Strive to ensure resizability. Search and add pages are two main components of front end. Project board will be updated as such.
