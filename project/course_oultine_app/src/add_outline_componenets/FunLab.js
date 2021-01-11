@@ -40,7 +40,7 @@ export default function BasicTable(props) {
     if(SafetyTaught!=="")
     temp.SafetyTaught=SafetyTaught
     setLab(temp)
-    console.log(lab)
+    
   }
 const save=()=>{
   props.setLab(lab)

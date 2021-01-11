@@ -54,10 +54,10 @@ const AddCourse = () => {
   const [info,setInfo]=useState({CourseID:""})
    const[contentCategory,setContentCategory]=useState("")
   const[section,setSection]=useState("")
-  const[lab,setLab]=useState("")
+  const[lab,setLab]=useState({})
   const[AuWeight,setAuWeight]=useState("")
   const [outcome,setOutcome]=useState([])
-  const[timeTable,setTimeTable]=useState({CourseID:""})
+  const[timeTable,setTimeTable]=useState()
   const [coordinator,setcoordinator]=useState({CourseID:""})
   const[instructor,setInstructor]=useState({CourseID:""})
   const[gradeDetermination,setGradeDetermination]=useState("")
@@ -86,7 +86,10 @@ const AddCourse = () => {
       }
        //creating lab
        lab.CourseID=info.CourseID
-      
+      //creating TimeTable
+      for(let i=0;i<timeTable.length;i++){
+        timeTable[i].CourseID=info.CourseID
+      }
     }
   }
 useEffect(()=>{
@@ -109,6 +112,9 @@ useEffect(()=>{
 
   console.log("Lab")
   console.log(lab)
+
+  console.log("TimeTable")
+  console.log(timeTable)
   /*console.log("Instructor table: ")
   console.log(instructor)
 console.log("coordinator tabke: ")
@@ -208,7 +214,7 @@ const editNotes=(courseID,gradeNotes,description,examination,calculator)=>{
           </AccordionSummary>
           <AccordionDetails>
             <div style={{ width: "100%" }}>
-              <TimeTable save={save} setSave={setSave} setTimeTable={setTimeTable} courseID={info.CourseID}/>
+              <TimeTable setTimeTable={setTimeTable} />
               <Paper className={classes.paper} elevation={3}></Paper>
             </div>
           </AccordionDetails>

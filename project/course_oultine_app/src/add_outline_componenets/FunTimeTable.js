@@ -31,7 +31,7 @@ export default function BasicTable(props) {
   const [count, setCount] = useState(2);
   const classes = useStyles();
   
-  const [section,setSection]=useState([{id:1,SectionNum:"",Days:"",Time:"",Location:""}])
+  const [section,setSection]=useState([{id:1,CourseID:"",SectionNum:"",Days:"",Time:"",Location:""}])
 
 
  
@@ -41,36 +41,34 @@ export default function BasicTable(props) {
     let indx = section.findIndex((row) => row.id === id)
     let newSection=section
     
-    if(SectionNum!=="")
+    
     newSection[indx].SectionNum=SectionNum
-    if(Days!=="")
+    
     newSection[indx].Days=Days
-    if(Time!=="")
+    
     newSection[indx].Time=Time
-    if(Location!=="")
+    
     newSection[indx].Location=Location
     
   
     setSection(newSection)
-    //setRows(newRows)
-   
+    
+    console.log(section)
   }
   
-useEffect (()=>{
-  if(props.save){
-    let temp=[]
-    for (let i=0;i<section.length;i++){
-      temp.push({courseID:props.courseID,SectionNum:section[i].SectionNum,Days:section[i].Days,Time:section[i].Time,Location:section[i].Location})
-    
-  }
- 
-  props.setTimeTable(temp)
 
-  props.setSave(false)
+const save=()=>{
+  
+  let temp=section
+  for (let i=0;i<section.length;i++)
+  {
+
+    delete temp[i].id
+  }
+  props.setTimeTable(temp)
+ 
   
 }
-})
-
   
 
 
@@ -91,7 +89,7 @@ useEffect (()=>{
    
 
 
-    newRows.push({ id: count,SectionNum:"",Days:"",Time:"",Location:"" })
+    newRows.push({ id: count,CourseID:"",SectionNum:"",Days:"",Time:"",Location:"" })
     setSection(newRows)
    // console.log(rows)
   }
@@ -105,8 +103,12 @@ useEffect (()=>{
 
   return (
     <>
-
-    <div>
+<div className="pt-2 pb-2" align="right">
+            <Button variant="outlined" color="secondary" onClick={()=>save()}>
+              <SaveIcon />
+            </Button>
+          
+    <div></div>
     Update the timetable information below. In the "Day(s) of the Week" column, 
     use M,T,W,R,F,S,U as the codes for Monday - Sunday (e.g., MWF). In the 
     "Time" column, specify the time range in 24 hour MDT (Calgary time) format (e.g., 13:00-13:50).
@@ -138,20 +140,17 @@ useEffect (()=>{
             
             {section.map((row) => (
               <TableRow key={row.id}>
-                <TableCell component="th" scope="row">
+               
 
-                <TextField id="standard-basic"  
-                inputProps={{style: { textAlign: 'center' }}}
-                 onChange ={(e)=>{ editSection(row.id,e.target.value,"","","")}}
-                 />
-
-                </TableCell>
+              
+                <TableCell align="right"><TextField id="standard-basic" fullWidth={true} onChange={(e)=>{ editSection(row.id,e.target.value,"","","")}} placeholder={row.SectionNum}
+                 /></TableCell>
                 <TableCell align="right"><TextField id="standard-basic" fullWidth={true} onChange={(e)=>{ editSection(row.id,"",e.target.value,"","")}
-                } /></TableCell>
+                } placeholder={row.Days}/></TableCell>
                 <TableCell align="right"><TextField id="standard-basic" fullWidth={true} onChange={(e)=>{ editSection(row.id,"","",e.target.value,"")}
-                } /></TableCell>
+                } placeholder={row.Time}/></TableCell>
                 <TableCell align="right"><TextField id="standard-basic" fullWidth={true} onChange={(e)=>{ editSection(row.id,"","","",e.target.value)}
-                } /></TableCell>
+                } placeholder={row.Location}/></TableCell>
 
                 <div className={classes.root}>
                     <br/>
