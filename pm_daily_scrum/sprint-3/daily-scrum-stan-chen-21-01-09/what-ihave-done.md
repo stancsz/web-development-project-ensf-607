@@ -1,0 +1,1 @@
+re-configured the mysql server and did a fresh migarte

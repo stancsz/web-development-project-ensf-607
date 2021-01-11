@@ -1,0 +1,1 @@
+research on how to deploy django server and mysql server on the same server.

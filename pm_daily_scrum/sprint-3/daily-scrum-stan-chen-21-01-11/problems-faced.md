@@ -1,0 +1,1 @@
+having some issues integrating the frontend react server into our current aws server. 

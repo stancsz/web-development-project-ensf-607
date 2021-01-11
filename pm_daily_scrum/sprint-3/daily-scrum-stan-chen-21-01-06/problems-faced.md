@@ -1,0 +1,1 @@
+django models and serializers sometime use different fields and cause issues

@@ -1,0 +1,1 @@
+fixed some serializer fields and make most of the models work

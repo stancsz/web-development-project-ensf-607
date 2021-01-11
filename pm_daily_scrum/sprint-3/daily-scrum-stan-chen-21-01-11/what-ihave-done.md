@@ -1,0 +1,1 @@
+configuring jobs in the jenkins server, installing required packages and debug issues with the frontend server
