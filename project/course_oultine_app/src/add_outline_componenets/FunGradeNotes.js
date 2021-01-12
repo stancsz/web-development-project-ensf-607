@@ -1,13 +1,16 @@
-import TextField from '@material-ui/core/TextField';
+
 import { useState } from 'react';
 import RichTextEditor from "react-rte";
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import SaveIcon from "@material-ui/icons/Save";
 
-function FunGradeNotes() {
+function FunGradeNotes(props) {
 
     const [gradeInfo, setGradeInfo] = useState( RichTextEditor.createEmptyValue());
+    const save=()=>{
+      props.notes.GradeNotes=gradeInfo
+    }
     const toolbarConfig = {
         display: ["INLINE_STYLE_BUTTONS", "BLOCK_TYPE_BUTTONS", "HISTORY_BUTTONS"],
         INLINE_STYLE_BUTTONS: [
@@ -29,7 +32,7 @@ function FunGradeNotes() {
     return(
         <>
         <div className="pt-2 pb-2" align="right">
-            <Button variant="outlined" color="secondary">
+            <Button variant="outlined" color="secondary" onClick={()=>save()}>
               <SaveIcon />
             </Button>
           </div>

@@ -10,8 +10,6 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import Grid from "@material-ui/core/Grid";
-import DeleteIcon from "@material-ui/icons/Delete";
 import SaveIcon from "@material-ui/icons/Save";
 import Select from "@material-ui/core/Select";
 import Typography from "@material-ui/core/Typography";
@@ -23,109 +21,87 @@ const useStyles = makeStyles({
 });
 
 export default function BasicTable(props) {
-  const [count, setCount] = useState(2);
   const classes = useStyles();
 
-  
-const [category,setCategory]=useState([])
- const [au,setAu]=useState([])
- const [total,setTotal]=useState("")
- 
- const editAu =(id,type,weight)=>{
+  const [category, setCategory] = useState([]);
+  const [au, setAu] = useState([]);
+  const [total, setTotal] = useState("");
+
+  const editAu = (id, type, weight) => {
     let indx = au.findIndex((row) => row.id === id);
-    
-    let newAu=au
-    if(indx>=0)
-   {
-    
-     
-     
-    newAu[indx].CourseID=""
-    newAu[indx].Category=type
-    newAu[indx].Au=weight
-     
-     setAu(newAu)
 
- }
- else{
+    let newAu = au;
+    if (indx >= 0) {
+      newAu[indx].CourseID = "";
+      newAu[indx].Category = type;
+      newAu[indx].Au = weight;
 
-    let temp={}
-    temp.id=id
-    temp.CourseID=""
-    temp.Category=type
-    temp.Au=weight
-    newAu.push(temp)
-    setAu(newAu)
+      setAu(newAu);
+    } else {
+      let temp = {};
+      temp.id = id;
+      temp.CourseID = "";
+      temp.Category = type;
+      temp.Au = weight;
+      newAu.push(temp);
+      setAu(newAu);
+    }
 
- }
- 
- let temp=0
- for (let i=0;i<au.length;i++){
-     if(au[i].Au!=="")
-     temp+=parseFloat(au[i].Au)
-    
- }
+    let temp = 0;
+    for (let i = 0; i < au.length; i++) {
+      if (au[i].Au !== "") temp += parseFloat(au[i].Au);
+    }
 
- setTotal(temp)
- console.log(au)
- }
- 
+    setTotal(temp);
+    console.log(au);
+  };
 
-  
- 
-const editCategory = (id,type,element)=>{
+  const editCategory = (id, type, element) => {
     let indx = category.findIndex((row) => row.id === id);
-    
-    let newCategory=category
-    if(indx>=0)
-   {
-    
-     
-     
-    newCategory[indx].CourseID=""
-    newCategory[indx].CategoryType=type
-    newCategory[indx].Element=element
-     
-     setCategory(newCategory)
-     
-}
-else{
-    let temp={}
-    temp.id=id
-    temp.CourseID=""
-    temp.CategoryType=type
-    temp.Element=element
-    newCategory.push(temp)
-    setCategory(newCategory)
-}
-//console.log(category)
-}
-const save=()=>{
-    if(total!==100 )
-    alert("Cant save make sure Au total is 100"+ total)
-    else{
-    let tempContent=category
-    for( let i=0;i<category.length;i++){
 
-        delete tempContent[i].id
-        
+    let newCategory = category;
+    if (indx >= 0) {
+      newCategory[indx].CourseID = "";
+      newCategory[indx].CategoryType = type;
+      newCategory[indx].Element = element;
+
+      setCategory(newCategory);
+    } else {
+      let temp = {};
+      temp.id = id;
+      temp.CourseID = "";
+      temp.CategoryType = type;
+      temp.Element = element;
+      newCategory.push(temp);
+      setCategory(newCategory);
     }
-    let tempAu=au
-    for( let i=0;i<au.length;i++){
-        delete tempAu[i].id
-        
+    //console.log(category)
+  };
+  const save = () => {
+    if (total !== 100) alert("Cant save make sure Au total is 100" + total);
+    else {
+      let tempContent = category;
+      for (let i = 0; i < category.length; i++) {
+        delete tempContent[i].id;
+      }
+      let tempAu = au;
+      for (let i = 0; i < au.length; i++) {
+        delete tempAu[i].id;
+      }
+
+      props.setContent(tempContent);
+      props.setAu(tempAu);
     }
-
-    
-    props.setContent(tempContent)
-    props.setAu(tempAu)
-}}
-
-  
+  };
 
   function mathContentElementOptions(id) {
     return (
-      <Select native onChange={(e) => {editCategory(id,"Math",e.target.value)}}>
+      <Select
+        native
+        onChange={(e) => {
+          editCategory(id, "Math", e.target.value);
+        }}
+      >
         <option aria-label="None" value={""} />
         <option value="DiffCalc">DiffCalc</option>
         <option value="DiffEq">DiffEq</option>
@@ -141,7 +117,12 @@ const save=()=>{
 
   function naturalScienceElementOptions(id) {
     return (
-      <Select native onChange={(e) => {editCategory(id,"Natural Science",e.target.value)}}>
+      <Select
+        native
+        onChange={(e) => {
+          editCategory(id, "Natural Science", e.target.value);
+        }}
+      >
         <option aria-label="None" value={""} />
         <option value="Chem">Chem</option>
         <option value="Earth">Earth</option>
@@ -150,10 +131,15 @@ const save=()=>{
       </Select>
     );
   }
- 
+
   function complementaryOptions(id) {
     return (
-      <Select native onChange={(e) => {editCategory(id,"Complementary Studies",e.target.value)}}>
+      <Select
+        native
+        onChange={(e) => {
+          editCategory(id, "Complementary Studies", e.target.value);
+        }}
+      >
         <option aria-label="None" value={""} />
         <option value="EngEcon">EngEcon</option>
         <option value="H&S">H&S</option>
@@ -167,12 +153,12 @@ const save=()=>{
 
   return (
     <>
-    <div className="pt-2 pb-2" align="right">
-            <Button variant="outlined" color="secondary" onClick={()=>save()}>
-              <SaveIcon />
-            </Button>
-          </div>
-     
+      <div className="pt-2 pb-2" align="right">
+        <Button variant="outlined" color="secondary" onClick={() => save()}>
+          <SaveIcon />
+        </Button>
+      </div>
+
       <br />
       <Typography variant="h5">Course Content Categories</Typography>
 
@@ -209,23 +195,22 @@ const save=()=>{
                   readOnly={true}
                 />
               </TableCell>
-              <TableCell align="right">{mathContentElementOptions(1)}</TableCell>
-              <TableCell align="right">{mathContentElementOptions(2)}</TableCell>
+              <TableCell align="right">
+                {mathContentElementOptions(1)}
+              </TableCell>
+              <TableCell align="right">
+                {mathContentElementOptions(2)}
+              </TableCell>
               <TableCell component="th" scope="row">
                 <TextField
                   id="standard-basic"
                   onChange={(e) => {
-                    if( e.target.value >=0 && e.target.value<=100){
-                  
-                 editAu(1,"Math",e.target.value)
-                 }
-                 else {e.target.value=""
-                }
-                
-                }
-                
-                
-                }
+                    if (e.target.value >= 0 && e.target.value <= 100) {
+                      editAu(1, "Math", e.target.value);
+                    } else {
+                      e.target.value = "";
+                    }
+                  }}
                   inputProps={{ style: { textAlign: "center" } }}
                 />
               </TableCell>
@@ -250,12 +235,12 @@ const save=()=>{
                 <TextField
                   id="standard-basic"
                   onChange={(e) => {
-                    if( e.target.value >=0 && e.target.value<=100){
-                  
-                 editAu(2,"Natural Science",e.target.value)
-                 }
-                 else {e.target.value=""
-                 }}}
+                    if (e.target.value >= 0 && e.target.value <= 100) {
+                      editAu(2, "Natural Science", e.target.value);
+                    } else {
+                      e.target.value = "";
+                    }
+                  }}
                   inputProps={{ style: { textAlign: "center" } }}
                 />
               </TableCell>
@@ -276,12 +261,12 @@ const save=()=>{
                 <TextField
                   id="standard-basic"
                   onChange={(e) => {
-                    if( e.target.value >=0 && e.target.value<=100){
-                    
-                   editAu(3,"Complementary Studies",e.target.value)
-                   }
-                   else {e.target.value=""
-                   }}}
+                    if (e.target.value >= 0 && e.target.value <= 100) {
+                      editAu(3, "Complementary Studies", e.target.value);
+                    } else {
+                      e.target.value = "";
+                    }
+                  }}
                   inputProps={{ style: { textAlign: "center" } }}
                 />
               </TableCell>
@@ -314,13 +299,12 @@ const save=()=>{
                 <TextField
                   id="standard-basic"
                   onChange={(e) => {
-                    if( e.target.value >=0 && e.target.value<=100){
-                  
-                 editAu(4,"Engineering Science",e.target.value)
-                 }
-                 else {e.target.value=""
-                 }
-                }}
+                    if (e.target.value >= 0 && e.target.value <= 100) {
+                      editAu(4, "Engineering Science", e.target.value);
+                    } else {
+                      e.target.value = "";
+                    }
+                  }}
                   inputProps={{ style: { textAlign: "center" } }}
                 />
               </TableCell>
@@ -353,35 +337,30 @@ const save=()=>{
                 <TextField
                   id="standard-basic"
                   onChange={(e) => {
-                    if( e.target.value >=0 && e.target.value<=100){
-                  
-                 editAu(5,"Engineering Design",e.target.value)
-                 }
-              else {e.target.value=""
-            }
-            }
-                }
+                    if (e.target.value >= 0 && e.target.value <= 100) {
+                      editAu(5, "Engineering Design", e.target.value);
+                    } else {
+                      e.target.value = "";
+                    }
+                  }}
                   inputProps={{ style: { textAlign: "center" } }}
                 />
               </TableCell>
             </TableRow>
-            <TableRow >
-        <TableCell></TableCell>
-        <TableCell></TableCell>
-        <TableCell>Total:</TableCell>
-        <TableCell>{total}%</TableCell>
-        </TableRow>
+            <TableRow>
+              <TableCell></TableCell>
+              <TableCell></TableCell>
+              <TableCell>Total:</TableCell>
+              <TableCell>{total}%</TableCell>
+            </TableRow>
           </TableBody>
         </Table>
         <br />
-        
       </TableContainer>
 
       <div style={{ color: "red" }}>
         *At least one element must be selected for categories that identify AUs
       </div>
-
-     
     </>
   );
 }

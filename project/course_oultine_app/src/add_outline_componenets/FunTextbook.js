@@ -1,19 +1,19 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
+
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
+
 import DeleteIcon from '@material-ui/icons/Delete';
 import SaveIcon from '@material-ui/icons/Save';
-import Select from '@material-ui/core/Select';
+
 
 
 const useStyles = makeStyles({
@@ -28,10 +28,10 @@ const useStyles = makeStyles({
 
 export default function BasicTable(props) {
 
-  const [count, setCount] = useState(2);
+  const [count, setCount] = useState(3);
   const classes = useStyles();
   
-  const [textbook,setTextbook]=useState([{id:1,Title:"",Author:"",Edition:"",Publisher:"",Type:"Required"}])
+  const [textbook,setTextbook]=useState([{id:1,Title:"",Author:"",Edition:"",Publisher:"",Type:"Required"},{id:2,Title:"",Author:"",Edition:"",Publisher:"",Type:"Recommended"}])
 
 
  
@@ -56,7 +56,13 @@ export default function BasicTable(props) {
     //setRows(newRows)
    
   }
-  
+  const save=()=>{
+    let newJSON=[]
+    for(let i=0;i<textbook.length;i++){
+      newJSON.push({CourseID:"",TITLE:textbook[i].Title,Publisher:textbook[i].Publisher,Author:textbook[i].Author,Edition:textbook[i].Edition,type:textbook[i].Type})
+    }
+    props.setTextbook(newJSON)
+  }
 
   
 
@@ -105,7 +111,7 @@ export default function BasicTable(props) {
   return (
     <>
     <div className="pt-2 pb-2" align="right">
-            <Button variant="outlined" color="secondary">
+            <Button variant="outlined" color="secondary" onClick={()=>save()}>
               <SaveIcon />
             </Button>
           </div>
@@ -133,7 +139,7 @@ export default function BasicTable(props) {
                 
                 <br/>
                 
-              <TableRow key={row.id}>
+              <TableRow >
                 
                 <TableCell align="right"><TextField id="standard-basic" fullWidth={true} value="TextBook" readOnly={true}
                  /></TableCell>
@@ -142,7 +148,7 @@ export default function BasicTable(props) {
                 
                 </TableRow>
                 
-                <TableRow key={row.id}>
+                <TableRow >
                 
                 <TableCell align="right"><TextField id="standard-basic" fullWidth={true} value="Author" readOnly={true}
                  /></TableCell>
@@ -151,7 +157,7 @@ export default function BasicTable(props) {
                 
                 </TableRow>
 
-                <TableRow key={row.id}>
+                <TableRow >
                 
                 <TableCell align="right"><TextField id="standard-basic" fullWidth={true} value="Edition" readOnly={true}
                  /></TableCell>
@@ -160,7 +166,7 @@ export default function BasicTable(props) {
                 
                 </TableRow>
                 
-                <TableRow key={row.id}>
+                <TableRow >
                 
                 <TableCell align="right"><TextField id="standard-basic" fullWidth={true} value="Publisher" readOnly={true}
                  /></TableCell>
@@ -176,7 +182,8 @@ export default function BasicTable(props) {
                 </div>
                 </>
               
-            );})}
+            );}
+            )}
           </TableBody>
         </Table>
         <br />
@@ -206,7 +213,7 @@ export default function BasicTable(props) {
                 <>
                 <br/>
                 
-              <TableRow key={row.id}>
+              <TableRow >
                 
                 <TableCell align="right"><TextField id="standard-basic" fullWidth={true} value="TextBook" readOnly={true}
                  /></TableCell>
@@ -215,7 +222,7 @@ export default function BasicTable(props) {
                 
                 </TableRow>
                 
-                <TableRow key={row.id}>
+                <TableRow >
                 
                 <TableCell align="right"><TextField id="standard-basic" fullWidth={true} value="Author" readOnly={true}
                  /></TableCell>
@@ -224,7 +231,7 @@ export default function BasicTable(props) {
                 
                 </TableRow>
 
-                <TableRow key={row.id}>
+                <TableRow>
                 
                 <TableCell align="right"><TextField id="standard-basic" fullWidth={true} value="Edition" readOnly={true}
                  /></TableCell>
@@ -233,7 +240,7 @@ export default function BasicTable(props) {
                 
                 </TableRow>
                 
-                <TableRow key={row.id}>
+                <TableRow >
                 
                 <TableCell align="right"><TextField id="standard-basic" fullWidth={true} value="Publisher" readOnly={true}
                  /></TableCell>

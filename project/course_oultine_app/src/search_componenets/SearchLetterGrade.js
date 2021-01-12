@@ -39,7 +39,7 @@ export default function SearchLetter(props) {
                         <TableRow>
                             <TableCell>Letter Grade</TableCell>
                             <TableCell>Lower Boundary</TableCell>
-                            <TableCell>T</TableCell>
+                            <TableCell> ≤ T &lt; </TableCell>
                             <TableCell>Upper Boundary</TableCell>
 
                         </TableRow>

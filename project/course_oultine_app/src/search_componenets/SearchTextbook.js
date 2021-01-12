@@ -19,8 +19,20 @@ const useStyles = makeStyles({
 
 
 export default function SearchTextbook(props) {
- 
-  
+
+  let keys = []
+  let requiredKeys = []
+  let recommendedKeys = []
+
+  if(props.textbook === undefined){
+    keys = undefined;
+  }
+  else{
+    keys = Object.keys(props.textbook);
+    requiredKeys = keys.filter(key => props.textbook[key].type === "Required");
+    recommendedKeys = keys.filter(key => props.textbook[key].type === "Recommended");
+  }
+
   const classes = useStyles();
 
   return (
@@ -34,10 +46,25 @@ export default function SearchTextbook(props) {
             <TableCell align="right">Author(s)</TableCell>
             <TableCell align="right">Edition, Year</TableCell>
             <TableCell align="right">Publisher</TableCell>
-
           </TableRow>
         </TableHead>
         <TableBody>
+        {keys === undefined ? <TableRow></TableRow> : requiredKeys.map((key) => (
+                            <TableRow key={key}>
+                                <TableCell component="th" scope="row">
+                                    {props.textbook[key].TITLE}
+                                </TableCell>
+                                <TableCell align="right">
+                                    {props.textbook[key].Author}
+                                </TableCell>
+                                <TableCell align="right">
+                                   {props.textbook[key].Edition}
+                                </TableCell>
+                                <TableCell align="right">
+                                    {props.textbook[key].Publisher}
+                                </TableCell>
+                            </TableRow>
+                        ))}
         </TableBody>
       </Table>
     </TableContainer>
@@ -52,10 +79,25 @@ export default function SearchTextbook(props) {
             <TableCell align="right">Author(s)</TableCell>
             <TableCell align="right">Edition, Year</TableCell>
             <TableCell align="right">Publisher</TableCell>
-
           </TableRow>
         </TableHead>
         <TableBody>
+        {keys === undefined ? <TableRow></TableRow> : recommendedKeys.map((key) => (
+                            <TableRow key={key}>
+                                <TableCell component="th" scope="row">
+                                    {props.textbook[key].TITLE}
+                                </TableCell>
+                                <TableCell align="right">
+                                    {props.textbook[key].Author}
+                                </TableCell>
+                                <TableCell align="right">
+                                   {props.textbook[key].Edition}
+                                </TableCell>
+                                <TableCell align="right">
+                                    {props.textbook[key].Publisher}
+                                </TableCell>
+                            </TableRow>
+                        ))}
         </TableBody>
       </Table>
     </TableContainer>
