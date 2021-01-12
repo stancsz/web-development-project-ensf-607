@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import FunInfo from "../add_outline_componenets/FunInfo.js";
-import FunGrade from "../add_outline_componenets/FunGrade";
+
 import FunOutcome from "../add_outline_componenets/FunOutcome.js";
 import FunCalculator from "../add_outline_componenets/FunCalculator.js"
 import SearchPolicies from "../search_componenets/SearchPolicies"
-import TextField from '@material-ui/core/TextField';
+
 import Container from "@material-ui/core/Container";
 import Accordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
@@ -16,10 +16,7 @@ import Typography from "@material-ui/core/Typography";
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
 import SaveIcon from "@material-ui/icons/Save";
-import ReactQuill from "react-quill";
-import MUIRichTextEditor from "mui-rte";
-import { Editor, EditorState } from "draft-js";
-import RichTextEditor from "react-rte";
+
 import TimeTable from "../add_outline_componenets/FunTimeTable"
 import Instructor from "../add_outline_componenets/FunInstructor"
 import Exam from "../add_outline_componenets/FunExam"
@@ -48,7 +45,7 @@ const AddCourse = () => {
 
  
   //JSON tables and use states
-  const [count, setCount] = useState(1);
+ 
   const[notes,setNotes]=useState({CourseID:"",GradeNotes:"",Examination:"",CourseDescription:"",UseCalc:""})
   const [save,setSave]=useState(false)
   const [info,setInfo]=useState({CourseID:""})//Blank CourseID used for checking
@@ -61,10 +58,10 @@ const AddCourse = () => {
   const [coordinator,setcoordinator]=useState({})
   const[instructor,setInstructor]=useState([])
   const[ta,setTa]=useState([])
-  const[labInstructor,setLabInstructor]=useState()
+ 
   const[gradeDetermination,setGradeDetermination]=useState("")
   const[gradeDistribution,setGradeDistribution]=useState("")
-  const[testbook,setTextbook]=useState("")
+  const[textbook,setTextbook]=useState("")
 
   
   const createJSON=()=>{
@@ -112,6 +109,16 @@ const AddCourse = () => {
        
         gradeDetermination[i].CourseID=info.CourseID
       }
+      //creating Grade Distribution
+      for(let i=0;i<gradeDistribution.length;i++){
+       
+        gradeDistribution[i].CourseID=info.CourseID
+      }
+       //creating textbook
+       for(let i=0;i<textbook.length;i++){
+       
+        textbook[i].CourseID=info.CourseID
+      }
     }
   }
 useEffect(()=>{
@@ -147,6 +154,10 @@ console.log(ta)
 
 console.log("Grade Determination")
 console.log(gradeDetermination)
+console.log("Grade Distribution")
+console.log(gradeDistribution)
+console.log("Textbook")
+console.log(textbook)
 setSave(false)
 }
 },[save])
@@ -242,7 +253,7 @@ setSave(false)
           </AccordionSummary>
           <AccordionDetails>
             <div style={{ width: "100%" }}>
-              <Instructor  setCoordinator={setcoordinator} setInstructor={setInstructor} setTa={setTa} setLabInstruvtor={setLabInstructor}/>
+              <Instructor  setCoordinator={setcoordinator} setInstructor={setInstructor} setTa={setTa} />
               <Paper className={classes.paper} elevation={3}></Paper>
             </div>
           </AccordionDetails>
@@ -318,7 +329,7 @@ setSave(false)
             <div style={{ width: "100%" }}>
               <Paper className={classes.paper} elevation={3}>
 
-                <TextBook/>
+                <TextBook setTextbook={setTextbook}/>
               </Paper>
             </div>
           </AccordionDetails>

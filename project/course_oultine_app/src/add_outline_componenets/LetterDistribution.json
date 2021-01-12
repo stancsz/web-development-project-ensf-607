@@ -5,7 +5,7 @@
         "id":1,
         "Letter":"A+",
         "LowerLimit":"",
-        "HigherLimit":"100"
+        "HigherLimit":""
     },
     {
         "id":2,
@@ -14,7 +14,7 @@
         "HigherLimit":""
     },
     {
-        "id":2,
+        "id":2.5,
         "Letter":"A-",
         "LowerLimit":"",
         "HigherLimit":""
@@ -70,7 +70,7 @@
     {
         "id":11,
         "Letter":"F",
-        "LowerLimit":"0",
+        "LowerLimit":"",
         "HigherLimit":""
     }
 ]

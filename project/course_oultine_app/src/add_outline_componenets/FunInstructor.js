@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState} from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -10,10 +10,10 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
+
 import DeleteIcon from '@material-ui/icons/Delete';
 import SaveIcon from '@material-ui/icons/Save';
-import Select from '@material-ui/core/Select';
+
 
 
 const useStyles = makeStyles({
@@ -98,7 +98,7 @@ const editTa=(id,Section,FName,LName,Phone,Office,Email)=>{
     
     setTa(temp)
     
-    
+
     
 }
   const removeInstructor = (id) => {
@@ -248,7 +248,7 @@ const save=()=>{
           <TableBody>
             
             {instructor.map((row) => (
-              <TableRow key={row.id}>
+              <TableRow key={row.id+"INSTRUCTOR"}>
                    <TableCell align="right"><TextField id="standard-basic" fullWidth={true} onChange={(e)=>{ editInstructor(row.id,e.target.value,"","","","","")}
                 } /></TableCell>
                    <TableCell align="right"><TextField id="standard-basic" fullWidth={true} onChange={(e)=>{ editInstructor(row.id,"",e.target.value,"","","","")}
@@ -309,7 +309,7 @@ const save=()=>{
           <TableBody>
             
             {ta.map((row) => (
-              <TableRow key={row.id}>
+              <TableRow key={row.id+"TA"}>
                    <TableCell align="right"><TextField id="standard-basic" fullWidth={true} onChange={(e)=>{ editTa(row.id,e.target.value,"","","","","")}
                 } /></TableCell>
                    <TableCell align="right"><TextField id="standard-basic" fullWidth={true} onChange={(e)=>{ editTa(row.id,"",e.target.value,"","","","")}

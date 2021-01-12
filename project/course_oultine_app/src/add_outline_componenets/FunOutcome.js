@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -10,11 +10,11 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import Grid from "@material-ui/core/Grid";
+
 import DeleteIcon from "@material-ui/icons/Delete";
 import SaveIcon from "@material-ui/icons/Save";
 import Select from "@material-ui/core/Select";
-import Typography from "@material-ui/core/Typography";
+
 
 const useStyles = makeStyles({
   table: {
@@ -25,7 +25,7 @@ const useStyles = makeStyles({
 export default function BasicTable(props) {
   const [count, setCount] = useState(2);
   const classes = useStyles();
-const[outcomeJSON,setOutcomeJSON]=useState([{}])
+
   const [outcomes, setOutcomes] = useState([{ id: 1, outcome: "" }]);
 
   const [attributeRows, setAttributeRows] = useState([
@@ -124,7 +124,7 @@ newJSON[i]={OutcomeNum:tempOutcome[i].id,Description:tempOutcome[i].outcome, Gra
           </TableHead>
           <TableBody>
             {outcomes.map((row) => (
-              <TableRow key={row.id}>
+              <TableRow key={row.id+"OUTCOME"}>
                 <TableCell component="th" scope="row">
                   <TextField
                     id="standard-basic"
@@ -189,7 +189,7 @@ newJSON[i]={OutcomeNum:tempOutcome[i].id,Description:tempOutcome[i].outcome, Gra
           </TableHead>
           <TableBody>
             {attributeRows.map((attributeRow) => (
-              <TableRow key={attributeRow.id}>
+              <TableRow key={attributeRow.id+"ATTRIBUTE"}>
                 <TableCell component="th" scope="row">
                   <TextField
                     id="standard-basic"
