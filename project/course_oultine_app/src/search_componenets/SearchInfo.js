@@ -48,7 +48,7 @@ function SearchInfo(props) {
         <div align = "left">Calendar Reference:</div>
         <div align="left">
         <Typography variant="h6">
-        <a href = {props.info[0] === undefined ? "javascript:void(0)" : props.info[0].CalenderRefrence}>{props.info[0] === undefined ? "Data Missing" : props.info[0].CalenderRefrence}</a>
+        <a href = {props.info[0] === undefined ? "#" : props.info[0].CalenderRefrence}>{props.info[0] === undefined ? "Data Missing" : props.info[0].CalenderRefrence}</a>
         </Typography>
         </div> 
     </div>
