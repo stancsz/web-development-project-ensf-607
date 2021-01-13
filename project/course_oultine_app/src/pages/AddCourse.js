@@ -15,8 +15,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
-import SaveIcon from "@material-ui/icons/Save";
 
+
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 import TimeTable from "../add_outline_componenets/FunTimeTable"
 import Instructor from "../add_outline_componenets/FunInstructor"
 import Exam from "../add_outline_componenets/FunExam"
@@ -41,9 +44,10 @@ const AddCourse = () => {
   const classes = useStyles();
 
   
-
+//db data
 const[db,setDB]=useState()
- 
+//popup on upload
+const [snackbarOpen, setSnackbarOpen] = useState(false);
   //JSON tables and use states
  
   const[notes,setNotes]=useState({CourseID:"",GradeNotes:"",Examination:"",CourseDescription:"",UseCalc:""})
@@ -233,7 +237,7 @@ console.log("Grade Distribution")
 console.log(gradeDistribution)
 console.log("Textbook")
 console.log(textbook)
-
+setSnackbarOpen(true)
 }
 else
     alert("Course already exists")}
@@ -430,7 +434,21 @@ else
           </AccordionDetails>
         </Accordion>
       </Container>
-      
+      <Snackbar
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+        open={snackbarOpen}
+        autoHideDuration={8000}
+       
+        message="Course uploaded"
+        action={
+          <>
+            <IconButton size="small" aria-label="close" color="inherit" onClick={()=>setSnackbarOpen(false)} >
+              <CloseIcon fontSize="small" />
+            </IconButton>
+          </>}/>
     </React.Fragment>
   );
 };
