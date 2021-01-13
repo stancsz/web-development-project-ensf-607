@@ -188,6 +188,19 @@ section.map(row=>{
       
   }).then(res=>{console.log(res)})
 })
+//posting content cartegory
+if(contentCategory.length>0)
+contentCategory.map(row=>{
+  axios.post("http://34.220.149.181:8000/contentcategory/",{
+    
+    "CourseID":info.CourseID,
+    "CategoryType":row.CategoryType,
+    "Element":row.Element
+        
+      
+      
+  }).then(res=>{console.log(res)})
+})
 
 
   console.log("Notes")
