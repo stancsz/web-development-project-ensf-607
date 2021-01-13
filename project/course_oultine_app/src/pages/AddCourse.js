@@ -41,9 +41,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const AddCourse = () => {
-  const classes = useStyles();
+const classes = useStyles();
+const [status,setStatus]=useState(true)
 
-  
 //db data
 const[db,setDB]=useState()
 //popup on upload
@@ -76,6 +76,15 @@ useEffect(()=>{
   setSave(false)
   
  },[save]);
+ //TODO: for popup notification
+ /*
+ useEffect(()=>{
+if(status && save){
+setSnackbarOpen(true)
+setStatus(true)
+
+}
+ },[status,save])*/
   const createJSON=()=>{
     
     if(info.CourseID!==""){
@@ -139,7 +148,7 @@ useEffect(()=>{
    
   
 const upload=()=>{
-
+  
   let check=true
   if(info.CourseID!=="")
 {
@@ -164,7 +173,7 @@ const upload=()=>{
     "CalenderRefrence": info.CalenderRefrence,
     "AcademicCredit": info.AcademicCredit,
     "DateCreated": info.DateCreated
-}).then(res=>{console.log(res)})
+}).then(res=>{console.log(res)}).catch((error)=> {console.log(error)})
 //posting Outcome
 
 if(outcome.length>0)
@@ -205,6 +214,43 @@ contentCategory.map(row=>{
       
   }).then(res=>{console.log(res)})
 })
+//posting au
+if(AuWeight.length>0)
+AuWeight.map(row=>{
+  axios.post("http://34.220.149.181:8000/auweight/",{
+    
+    "CourseID":info.CourseID,
+    "Category":row.Category,
+    "AU":row.Au
+        
+      
+      
+  }).then(res=>{console.log(res)})
+})
+//posting LAB
+
+if(Object.keys(lab).length !== 0)
+
+  axios.post("http://34.220.149.181:8000/lab/",{
+    "CourseID":info.CourseID,
+    "LabNum":"NA",
+    "LabType":lab.LabType,
+    "NumberOfLabs":lab.NumberOfLabs,
+    "SafetyExamined":lab.SafetyExamined,
+    "SafetyTaught":lab.SafetyTaught,
+    "FName":"NA",
+    "LName":"NA",
+    "Phone":"NA",
+    "Office":"NA",
+    "Email":"NA"
+   
+        
+      
+      
+  }).then(res=>{console.log(res)})
+
+else
+console.log("EMPTY")
 
 
   console.log("Notes")
@@ -237,7 +283,8 @@ console.log("Grade Distribution")
 console.log(gradeDistribution)
 console.log("Textbook")
 console.log(textbook)
-setSnackbarOpen(true)
+
+
 }
 else
     alert("Course already exists")}

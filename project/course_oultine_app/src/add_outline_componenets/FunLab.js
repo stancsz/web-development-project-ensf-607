@@ -25,11 +25,11 @@ export default function BasicTable(props) {
  
   const classes = useStyles();
 
- const [lab,setLab]=useState({})
+ const [lab,setLab]=useState({NumberOfLabs:"",LabType:"",SafetyExamined:"",SafetyTaught:""})
 
   const editLab=(NumberOfLabs,LabType,SafetyExamined,SafetyTaught)=>{
     let temp=lab
-    temp.CourseID=""
+    
     if(NumberOfLabs!=="")
     temp.NumberOfLabs=NumberOfLabs
     if(LabType!=="")
@@ -42,7 +42,12 @@ export default function BasicTable(props) {
     
   }
 const save=()=>{
+  let check=true
+  if(lab.NumberOfLabs===""|| lab.LabType==="",lab.SafetyExamined===""|| lab.SafetyTaught==="")
+  check=false
+  if (check)
   props.setLab(lab)
+  else alert("Fill in lab cells")
 }
      
 
