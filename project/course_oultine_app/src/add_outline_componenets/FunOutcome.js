@@ -92,6 +92,14 @@ export default function BasicTable(props) {
   
 
  const save=()=>{
+   let check=true
+   if(outcomes.length>0){
+  for (let i=0;i<outcomes.length;i++){
+    if(outcomes[i].outcome===""|| attributeRows[i].attribute===""|| attributeRows[i].instructionLevel===""){
+    check=false
+    break}
+  }
+  if(check){
    let tempOutcome=outcomes
    let tempAttributes=attributeRows
    let newJSON=[{}]
@@ -101,6 +109,10 @@ newJSON[i]={OutcomeNum:tempOutcome[i].id,Description:tempOutcome[i].outcome, Gra
    }
    props.setOutcome(newJSON)
  }
+ else
+ alert("Please fill all of outcome/attributes before saving")
+}}
+
 
   return (
     <>

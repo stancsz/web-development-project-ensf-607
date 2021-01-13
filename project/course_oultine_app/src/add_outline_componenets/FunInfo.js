@@ -11,7 +11,7 @@ function FunInfo(props) {
     
     const [courseInfo, setCourseInfo] = useState("");
  
-    const [info,setInfo]=useState({ModelID:"",CourseID : "",CourseName : "",CourseHours : "",AcademicCredit:"",CalenderReference :"",DateCreated : ""});
+    const [info,setInfo]=useState({ModelID:"",CourseID : "",CourseHours : "",CourseName : "",CalenderRefrence :"",AcademicCredit:"",DateCreated : ""});
     
     const editInfo=(id,name,description,hours,credit,calender,term,year)=>{
         let temp=info
@@ -26,7 +26,7 @@ function FunInfo(props) {
         if(credit!=="")
         temp.AcademicCredit=credit
         if(calender!=="")
-        temp.CalenderReference=calender
+        temp.CalenderRefrence=calender
 
         
         setInfo(temp)

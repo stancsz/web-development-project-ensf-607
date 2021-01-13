@@ -4,7 +4,7 @@ import axios from 'axios'
 import FunOutcome from "../add_outline_componenets/FunOutcome.js";
 import FunCalculator from "../add_outline_componenets/FunCalculator.js"
 import SearchPolicies from "../search_componenets/SearchPolicies"
-
+import PublishIcon from '@material-ui/icons/Publish';
 import Container from "@material-ui/core/Container";
 import Accordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
@@ -42,7 +42,7 @@ const AddCourse = () => {
 
   
 
-
+const[db,setDB]=useState()
  
   //JSON tables and use states
  
@@ -62,27 +62,23 @@ const AddCourse = () => {
   const[gradeDetermination,setGradeDetermination]=useState("")
   const[gradeDistribution,setGradeDistribution]=useState("")
   const[textbook,setTextbook]=useState("")
+//fetches data from db
+useEffect(()=>{
 
+  axios.get("http://34.220.149.181:8000/course/")
+  .then(res => setDB(res.data))
+  .catch((error) => {console.log(error)})
   
+  setSave(false)
+  
+ },[save]);
   const createJSON=()=>{
-     
+    
     if(info.CourseID!==""){
       //creat notes
-      console.log(info.CourseID)
-      console.log(info.CourseHours)
-      console.log(info.CourseName)
-      console.log(info.CalenderReference)
-      console.log(info.AcademicCredit)
+   
       
-      axios.post("http://34.220.149.181:8000/course/",   {
-        "ModelID": "",
-        "CourseID": info.CourseID,
-        "CourseHours": info.CourseHours,
-        "CourseName": info.CourseName,
-        "CalenderRefrence": info.CalenderReference,
-        "AcademicCredit": info.AcademicCredit,
-        "DateCreated": info.DateCreated
-    }).then(res=>{console.log(res)})
+     
       notes.CourseID=info.CourseID
       //creating outcome
       for(let i=0;i<outcome.length;i++){
@@ -134,11 +130,50 @@ const AddCourse = () => {
        
         textbook[i].CourseID=info.CourseID
       }
+    } 
+  }
+   
+  
+const upload=()=>{
+
+  let check=true
+  if(info.CourseID!=="")
+{
+ 
+  for(let i=0;i<db.length;i++){
+        
+    if(db[i].CourseID==info.CourseID)
+    {
+      
+      check=false
+      
     }
   }
-useEffect(()=>{
-  if(save)
-{
+  if(check){
+  
+  //posting COURSE
+  axios.post("http://34.220.149.181:8000/course/",   {
+    
+    "CourseID": info.CourseID,
+    "CourseHours": info.CourseHours,
+    "CourseName": info.CourseName,
+    "CalenderRefrence": info.CalenderRefrence,
+    "AcademicCredit": info.AcademicCredit,
+    "DateCreated": info.DateCreated
+}).then(res=>{console.log(res)})
+//posting Outcome
+
+if(outcome.length>0)
+outcome.map(row=>{
+  axios.post("http://34.220.149.181:8000/outcome/",{
+    "CourseID":row.CourseID,
+    "OutcomeNum":row.OutcomeNum,
+    "Description":row.Description,
+    "GraduateAttribute":row.GraduateAttribute,
+    "InstructionLvl":row.InstructionLvl
+  }).then(res=>{console.log(res)})
+})
+
   console.log("calenderInfo")
   console.log(info)
   console.log("Notes")
@@ -173,9 +208,13 @@ console.log("Grade Distribution")
 console.log(gradeDistribution)
 console.log("Textbook")
 console.log(textbook)
-setSave(false)
+
 }
-},[save])
+else
+    alert("Course already exists")}
+    else alert("Fill in calender info")
+    
+}
 
 
   return (
@@ -184,8 +223,9 @@ setSave(false)
         <Container maxWidth="md">
           <div className="pt-2 pb-2" align="right">
             <Button variant="outlined" color="secondary" onClick={()=>{
-              createJSON()
               setSave(true)
+              createJSON()
+              upload()
               
               if(info.CourseID==="")
              { alert("Please fill in course number,term, and year")
@@ -193,7 +233,8 @@ setSave(false)
             }   
                           
                }}>
-              <SaveIcon />
+                 upload
+              <PublishIcon />
             </Button>
           </div>
         </Container>
