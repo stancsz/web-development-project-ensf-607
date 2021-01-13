@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import FunInfo from "../add_outline_componenets/FunInfo.js";
-
+import axios from 'axios'
 import FunOutcome from "../add_outline_componenets/FunOutcome.js";
 import FunCalculator from "../add_outline_componenets/FunCalculator.js"
 import SearchPolicies from "../search_componenets/SearchPolicies"
@@ -68,6 +68,21 @@ const AddCourse = () => {
      
     if(info.CourseID!==""){
       //creat notes
+      console.log(info.CourseID)
+      console.log(info.CourseHours)
+      console.log(info.CourseName)
+      console.log(info.CalenderReference)
+      console.log(info.AcademicCredit)
+      
+      axios.post("http://34.220.149.181:8000/course/",   {
+        "ModelID": "",
+        "CourseID": info.CourseID,
+        "CourseHours": info.CourseHours,
+        "CourseName": info.CourseName,
+        "CalenderRefrence": info.CalenderReference,
+        "AcademicCredit": info.AcademicCredit,
+        "DateCreated": info.DateCreated
+    }).then(res=>{console.log(res)})
       notes.CourseID=info.CourseID
       //creating outcome
       for(let i=0;i<outcome.length;i++){
