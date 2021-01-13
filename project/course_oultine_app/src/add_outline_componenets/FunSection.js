@@ -36,7 +36,7 @@ const [section,setSection]=useState([])
     
      
      
-    newSection[indx].CourseID=""
+    
     if(SectionNum!=="")
     newSection[indx].SectionNum=SectionNum
     if(Student!=="")
@@ -64,11 +64,23 @@ else{
 
   
  const save=()=>{
-     let temp=section
-     for (let i=0;i<temp.length;i++)
-     delete temp[i].id
-     props.setSection(temp)
- }
+   let check=true
+  if(section.length>0)
+  {
+    for (let i=0;i<section.length;i++){
+      if(section[i].SectionNum===""||section[i].Student==="" || section[i].hours===""||section[i].type==="")
+      check=false
+      break
+    }
+    if(check){
+     let newJSON=[]
+     for (let i=0;i<section.length;i++)
+     newJSON.push({SectionNum:section[i].SectionNum,Student:section[i].Student,Hours:section[i].hours,type:section[i].type})
+     props.setSection(newJSON)}
+     else 
+     alert("Fill all of Section table before you save")
+ } else 
+ alert("Fill all of Section table before you save")}
   
 
      

@@ -166,21 +166,33 @@ const upload=()=>{
 if(outcome.length>0)
 outcome.map(row=>{
   axios.post("http://34.220.149.181:8000/outcome/",{
-    "CourseID":row.CourseID,
+    "CourseID":info.CourseID,
     "OutcomeNum":row.OutcomeNum,
     "Description":row.Description,
     "GraduateAttribute":row.GraduateAttribute,
     "InstructionLvl":row.InstructionLvl
   }).then(res=>{console.log(res)})
 })
+//posting section
+if(section.length>0)
+section.map(row=>{
+  axios.post("http://34.220.149.181:8000/section/",{
+    
+      "CourseID":info.CourseID,
+      "SectionNumber":row.SectionNum,
+      "Students":row.Student,
+      "Hours":row.Hours,
+      "type":row.type
+        
+      
+      
+  }).then(res=>{console.log(res)})
+})
 
-  console.log("calenderInfo")
-  console.log(info)
+
   console.log("Notes")
   console.log(notes)
   
-  console.log("Outcome")
-  console.log(outcome)
 
   console.log("Content Category")
   console.log(contentCategory)
@@ -224,13 +236,10 @@ else
           <div className="pt-2 pb-2" align="right">
             <Button variant="outlined" color="secondary" onClick={()=>{
               setSave(true)
-              createJSON()
+              //createJSON()
               upload()
               
-              if(info.CourseID==="")
-             { alert("Please fill in course number,term, and year")
-              
-            }   
+             
                           
                }}>
                  upload

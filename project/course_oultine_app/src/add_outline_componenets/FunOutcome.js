@@ -155,10 +155,10 @@ newJSON[i]={OutcomeNum:tempOutcome[i].id,Description:tempOutcome[i].outcome, Gra
                   />
                 </TableCell>
 
-                <div className={classes.root}>
-                  <br />
+                
+                  
                   <DeleteIcon onClick={() => removeRow(row.id)} />
-                </div>
+               
               </TableRow>
             ))}
           </TableBody>
