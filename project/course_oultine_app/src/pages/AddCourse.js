@@ -85,66 +85,7 @@ setStatus(true)
 
 }
  },[status,save])*/
-  const createJSON=()=>{
-    
-    if(info.CourseID!==""){
-      //creat notes
-   
-      
-     
-      notes.CourseID=info.CourseID
-      //creating outcome
-      for(let i=0;i<outcome.length;i++){
-        outcome[i].CourseID=info.CourseID
-      }
-      //creating content category
-      for(let i=0;i<contentCategory.length;i++){
-        contentCategory[i].CourseID=info.CourseID
-      }
-      //creating au
-      for(let i=0;i<AuWeight.length;i++){
-        AuWeight[i].CourseID=info.CourseID
-      }
-      //creating section
-      for(let i=0;i<section.length;i++){
-        section[i].CourseID=info.CourseID
-      }
-       //creating lab
-       lab.CourseID=info.CourseID
-      //creating TimeTable
-      for(let i=0;i<timeTable.length;i++){
-       
-        timeTable[i].CourseID=info.CourseID
-      }
-      //creating Coordinator
-      coordinator.CourseID=info.CourseID
-      //creating instructor
-      for(let i=0;i<instructor.length;i++){
-       
-        instructor[i].CourseID=info.CourseID
-      }
-      //creating ta
-      for(let i=0;i<ta.length;i++){
-       
-        ta[i].CourseID=info.CourseID
-      }
-      //creating Grade Determination
-      for(let i=0;i<gradeDetermination.length;i++){
-       
-        gradeDetermination[i].CourseID=info.CourseID
-      }
-      //creating Grade Distribution
-      for(let i=0;i<gradeDistribution.length;i++){
-       
-        gradeDistribution[i].CourseID=info.CourseID
-      }
-       //creating textbook
-       for(let i=0;i<textbook.length;i++){
-       
-        textbook[i].CourseID=info.CourseID
-      }
-    } 
-  }
+
    
   
 const upload=()=>{
@@ -249,7 +190,7 @@ if(Object.keys(lab).length !== 0)
   }).then(res=>{console.log(res)})
 
 //posting timetable
-console.log(timeTable)
+
 if(timeTable.length>0)
 timeTable.map(row=>{
   axios.post("http://34.220.149.181:8000/timetable/",{
@@ -265,9 +206,54 @@ timeTable.map(row=>{
       
   }).then(res=>{console.log(res)})
 })
+//posting Coordinator
+if(Object.keys(coordinator).length !== 0)
+  axios.post("http://34.220.149.181:8000/coordinator/",{
+    "CourseID": info.CourseID,
+    "FName": coordinator.FName,
+    "LName": coordinator.LName,
+    "Phone": coordinator.Phone,
+    "Office":coordinator.Office,
+    "Email": coordinator.Email     
+  }).then(res=>{console.log(res)})
 
+//posting Instructor
+if(instructor.length>0)
+instructor.map(row=>{
+  axios.post("http://34.220.149.181:8000/lecture/",{
+    
+    "CourseID":info.CourseID,
+  "LectureNum":row.LectureNum,
+  "FName":row.FName,
+  "LName":row.LName,
+  "Phone":row.Phone,
+  "Office":row.Office,
+  "Email":row.Email
+        
+      
+      
+  }).then(res=>{console.log(res)})
+})
+//posting Ta
+if(ta.length>0)
+ta.map(row=>{
+  axios.post("http://34.220.149.181:8000/tutorial/",{
+    
+    "CourseID":info.CourseID,
+  "TutorialNum":row.TutorialNum,
+  "FName":row.FName,
+  "LName":row.LName,
+  "Phone":row.Phone,
+  "Office":row.Office,
+  "Email":row.Email
+        
+      
+      
+  }).then(res=>{console.log(res)})
+})
 
-
+  
+  
 
 
 

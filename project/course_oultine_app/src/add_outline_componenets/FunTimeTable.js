@@ -58,7 +58,13 @@ export default function BasicTable(props) {
   
 
 const save=()=>{
-  
+  let check=true
+  for (let i=0;i<section.length;i++)
+  {
+    if(section[i].SectionNum===""|| section[i].Days==="" || section[i].Time===""||section[i].Location==="")
+    check=false
+  }
+  if(check){
   let newJSON=[]
   for (let i=0;i<section.length;i++)
   {
@@ -66,7 +72,9 @@ const save=()=>{
     newJSON.push({SectionNum:section[i].SectionNum,Days:section[i].Days,Time:section[i].Time,Location:section[i].Location})
   }
   props.setTimeTable(newJSON)
- 
+}
+else
+alert ("Fill in all of the time table fields before saving")
   
 }
   
