@@ -230,7 +230,6 @@ AuWeight.map(row=>{
 //posting LAB
 
 if(Object.keys(lab).length !== 0)
-
   axios.post("http://34.220.149.181:8000/lab/",{
     "CourseID":info.CourseID,
     "LabNum":"NA",
@@ -249,40 +248,27 @@ if(Object.keys(lab).length !== 0)
       
   }).then(res=>{console.log(res)})
 
-else
-console.log("EMPTY")
+//posting timetable
+console.log(timeTable)
+if(timeTable.length>0)
+timeTable.map(row=>{
+  axios.post("http://34.220.149.181:8000/timetable/",{
+    
+    
+    "CourseID": info.CourseID,
+    "SectionNum": row.SectionNum,
+    "Days": row.Days,
+    "Time": row.Time,
+    "Location": row.Location
+        
+      
+      
+  }).then(res=>{console.log(res)})
+})
 
 
-  console.log("Notes")
-  console.log(notes)
-  
 
-  console.log("Content Category")
-  console.log(contentCategory)
-  console.log("Au weight")
-  console.log(AuWeight)
-  console.log("Section")
-  console.log(section)
 
-  console.log("Lab")
-  console.log(lab)
-
-  console.log("TimeTable")
-  console.log(timeTable)
-  console.log("coordinator tabke: ")
-console.log(coordinator)
-  console.log("Instructor table: ")
-  console.log(instructor)
-
-console.log("ta table ")
-console.log(ta)
-
-console.log("Grade Determination")
-console.log(gradeDetermination)
-console.log("Grade Distribution")
-console.log(gradeDistribution)
-console.log("Textbook")
-console.log(textbook)
 
 
 }

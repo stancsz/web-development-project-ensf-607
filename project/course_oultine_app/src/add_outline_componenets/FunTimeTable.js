@@ -41,19 +41,19 @@ export default function BasicTable(props) {
     let indx = section.findIndex((row) => row.id === id)
     let newSection=section
     
-    
+    if(SectionNum!=="")
     newSection[indx].SectionNum=SectionNum
-    
+    if(Days!=="")
     newSection[indx].Days=Days
-    
+    if(Time!=="")
     newSection[indx].Time=Time
-    
+    if(Location!=="")
     newSection[indx].Location=Location
     
   
     setSection(newSection)
     
-    console.log(section)
+    
   }
   
 
@@ -63,7 +63,7 @@ const save=()=>{
   for (let i=0;i<section.length;i++)
   {
 
-    newJSON.push({CourseID:section[i].CourseID,SectionNum:section[i].SectionNum,Days:section[i].Days,Time:section[i].Time,Location:section[i].Location})
+    newJSON.push({SectionNum:section[i].SectionNum,Days:section[i].Days,Time:section[i].Time,Location:section[i].Location})
   }
   props.setTimeTable(newJSON)
  
@@ -143,7 +143,7 @@ const save=()=>{
                
 
               
-                <TableCell align="right"><TextField id="standard-basic" fullWidth={true} onChange={(e)=>{ editSection(row.id,e.target.value,"","","")}} placeholder={row.SectionNum}
+                <TableCell align="right"><TextField id="standard-basic" fullWidth={true} onChange={(e)=>{ editSection(row.id,e.target.value,"","","")}}
                  /></TableCell>
                 <TableCell align="right"><TextField id="standard-basic" fullWidth={true} onChange={(e)=>{ editSection(row.id,"",e.target.value,"","")}
                 } placeholder={row.Days}/></TableCell>
