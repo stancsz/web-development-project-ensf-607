@@ -8,7 +8,8 @@ function FunExam(props) {
 
   const [examInfo, setExamInfo] = useState(RichTextEditor.createEmptyValue());
   const save = () => {
-    props.notes.Examination = examInfo
+    
+    props.notes.Examination = examInfo.toString("html")
 
   }
   const toolbarConfig = {

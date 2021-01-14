@@ -9,7 +9,7 @@ function FunGradeNotes(props) {
 
     const [gradeInfo, setGradeInfo] = useState( RichTextEditor.createEmptyValue());
     const save=()=>{
-      props.notes.GradeNotes=gradeInfo
+      props.notes.GradeNotes=gradeInfo.toString("html")
     }
     const toolbarConfig = {
         display: ["INLINE_STYLE_BUTTONS", "BLOCK_TYPE_BUTTONS", "HISTORY_BUTTONS"],

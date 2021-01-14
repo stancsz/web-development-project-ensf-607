@@ -30,6 +30,7 @@ import TextBook from"../add_outline_componenets/FunTextbook"
 import ContentCategory from"../add_outline_componenets/FunContentCategory"
 import Section from "../add_outline_componenets/FunSection"
 import Lab from "../add_outline_componenets/FunLab"
+import { EmojiObjects } from "@material-ui/icons";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -50,7 +51,7 @@ const[db,setDB]=useState()
 const [snackbarOpen, setSnackbarOpen] = useState(false);
   //JSON tables and use states
  
-  const[notes,setNotes]=useState({CourseID:"",GradeNotes:"",Examination:"",CourseDescription:"",UseCalc:""})
+  const[notes,setNotes]=useState({GradeNotes:"",Examination:"",CourseDescription:"",UseCalc:""})
   const [save,setSave]=useState(false)
   const [info,setInfo]=useState({CourseID:""})//Blank CourseID used for checking
    const[contentCategory,setContentCategory]=useState("")
@@ -89,7 +90,7 @@ setStatus(true)
    
   
 const upload=()=>{
-  
+  console.log(notes)
   let check=true
   if(info.CourseID!=="")
 {
@@ -253,10 +254,19 @@ ta.map(row=>{
 })
 
   
+  //posting notes
   
+  if(notes.GradeNotes!==""|| notes.Examination!==""|| notes.UseCalc!==""||notes.CourseDescription!=="")
+  axios.post("http://34.220.149.181:8000/info/",{
 
-
-
+  
+  "CourseID": info.CourseID,
+  "GradeNotes": notes.GradeNotes,
+  "Examination": notes.Examination,
+  "CourseDescription": notes.CourseDescription,
+  "UseCalc": notes.UseCalc
+  }).then(res=>{console.log(res)})
+  
 }
 else
     alert("Course already exists")}
