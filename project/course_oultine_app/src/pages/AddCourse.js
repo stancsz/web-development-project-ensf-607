@@ -284,8 +284,20 @@ ta.map(row=>{
     }).then(res=>{console.log(res)})
   })
   
-
-  
+//post grade distribution
+if(gradeDistribution.length>0)
+gradeDistribution.map(row=>{
+  axios.post("http://34.220.149.181:8000/gradedistribution/",{
+    
+    "CourseID":info.CourseID,
+    "LowerLimit":row.LowerLimit,
+    "UpperLimit":row.UpperLimit,
+    "LetterGrade":row.LetterGrade
+        
+      
+      
+  }).then(res=>{console.log(res)})
+})
 }
 else
     alert("Course already exists")}
