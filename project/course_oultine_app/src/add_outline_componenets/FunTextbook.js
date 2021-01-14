@@ -57,12 +57,22 @@ export default function BasicTable(props) {
    
   }
   const save=()=>{
+    let check =true
+    for(let i=0;i<textbook.length;i++){
+      if(textbook[i].Title===""||textbook[i].Publisher===""||textbook[i].Author===""||textbook[i].Edition==="" || textbook[i].Type==="")
+      check=false
+    }
+    if(check){
     let newJSON=[]
     for(let i=0;i<textbook.length;i++){
-      newJSON.push({CourseID:"",TITLE:textbook[i].Title,Publisher:textbook[i].Publisher,Author:textbook[i].Author,Edition:textbook[i].Edition,type:textbook[i].Type})
+      newJSON.push({TITLE:textbook[i].Title,Publisher:textbook[i].Publisher,Author:textbook[i].Author,Edition:textbook[i].Edition,type:textbook[i].Type})
     }
     props.setTextbook(newJSON)
   }
+  else
+  alert("Fill in all of the textbook fields")
+
+}
 
   
 

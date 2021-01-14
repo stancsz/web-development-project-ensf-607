@@ -23,11 +23,11 @@ import CloseIcon from '@material-ui/icons/Close';
 import TimeTable from "../add_outline_componenets/FunTimeTable"
 import Instructor from "../add_outline_componenets/FunInstructor"
 import Exam from "../add_outline_componenets/FunExam"
-import GradeDetermination from"../add_outline_componenets/FunGradeDetermination"
+import GradeDetermination from "../add_outline_componenets/FunGradeDetermination"
 import GradeNotes from "../add_outline_componenets/FunGradeNotes"
 import GradeDistribution from "../add_outline_componenets/FunGradeDistribution"
-import TextBook from"../add_outline_componenets/FunTextbook"
-import ContentCategory from"../add_outline_componenets/FunContentCategory"
+import TextBook from "../add_outline_componenets/FunTextbook"
+import ContentCategory from "../add_outline_componenets/FunContentCategory"
 import Section from "../add_outline_componenets/FunSection"
 import Lab from "../add_outline_componenets/FunLab"
 import { EmojiObjects } from "@material-ui/icons";
@@ -42,268 +42,286 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const AddCourse = () => {
-const classes = useStyles();
-const [status,setStatus]=useState(true)
+  const classes = useStyles();
+  const [status, setStatus] = useState(true)
 
-//db data
-const[db,setDB]=useState()
-//popup on upload
-const [snackbarOpen, setSnackbarOpen] = useState(false);
+  //db data
+  const [db, setDB] = useState()
+  //popup on upload
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
   //JSON tables and use states
- 
-  const[notes,setNotes]=useState({GradeNotes:"",Examination:"",CourseDescription:"",UseCalc:""})
-  const [save,setSave]=useState(false)
-  const [info,setInfo]=useState({CourseID:""})//Blank CourseID used for checking
-   const[contentCategory,setContentCategory]=useState("")
-  const[section,setSection]=useState("")
-  const[lab,setLab]=useState({})
-  const[AuWeight,setAuWeight]=useState("")
-  const [outcome,setOutcome]=useState([])
-  const[timeTable,setTimeTable]=useState("")
-  const [coordinator,setcoordinator]=useState({})
-  const[instructor,setInstructor]=useState([])
-  const[ta,setTa]=useState([])
- 
-  const[gradeDetermination,setGradeDetermination]=useState("")
-  const[gradeDistribution,setGradeDistribution]=useState("")
-  const[textbook,setTextbook]=useState("")
-//fetches data from db
-useEffect(()=>{
 
-  axios.get("http://34.220.149.181:8000/course/")
-  .then(res => setDB(res.data))
-  .catch((error) => {console.log(error)})
-  
-  setSave(false)
-  
- },[save]);
- //TODO: for popup notification
- /*
- useEffect(()=>{
-if(status && save){
-setSnackbarOpen(true)
-setStatus(true)
+  const [notes, setNotes] = useState({ GradeNotes: "", Examination: "", CourseDescription: "", UseCalc: "" })
+  const [save, setSave] = useState(false)
+  const [info, setInfo] = useState({ CourseID: "" })//Blank CourseID used for checking
+  const [contentCategory, setContentCategory] = useState("")
+  const [section, setSection] = useState("")
+  const [lab, setLab] = useState({})
+  const [AuWeight, setAuWeight] = useState("")
+  const [outcome, setOutcome] = useState([])
+  const [timeTable, setTimeTable] = useState("")
+  const [coordinator, setcoordinator] = useState({})
+  const [instructor, setInstructor] = useState([])
+  const [ta, setTa] = useState([])
 
-}
- },[status,save])*/
+  const [gradeDetermination, setGradeDetermination] = useState("")
+  const [gradeDistribution, setGradeDistribution] = useState("")
+  const [textbook, setTextbook] = useState("")
+  //fetches data from db
+  useEffect(() => {
 
-   
-  
-const upload=()=>{
-  console.log(notes)
-  let check=true
-  if(info.CourseID!=="")
-{
+    axios.get("http://34.220.149.181:8000/course/")
+      .then(res => setDB(res.data))
+      .catch((error) => { console.log(error) })
+
+    setSave(false)
+
+  }, [save]);
+  //TODO: for popup notification
+  /*
+  useEffect(()=>{
+ if(status && save){
+ setSnackbarOpen(true)
+ setStatus(true)
  
-  for(let i=0;i<db.length;i++){
-        
-    if(db[i].CourseID==info.CourseID)
-    {
-      
-      check=false
-      
+ }
+  },[status,save])*/
+
+
+
+  const upload = () => {
+    console.log(notes)
+    let check = true
+    if (info.CourseID !== "") {
+
+      for (let i = 0; i < db.length; i++) {
+
+        if (db[i].CourseID == info.CourseID) {
+
+          check = false
+
+        }
+      }
+      if (check) {
+
+        //posting COURSE
+        axios.post("http://34.220.149.181:8000/course/", {
+
+          "CourseID": info.CourseID,
+          "CourseHours": info.CourseHours,
+          "CourseName": info.CourseName,
+          "CalenderRefrence": info.CalenderRefrence,
+          "AcademicCredit": info.AcademicCredit,
+          "DateCreated": info.DateCreated
+        }).then(res => { console.log(res) }).catch((error) => { console.log(error) })
+        //posting Outcome
+
+        if (outcome.length > 0)
+          outcome.map(row => {
+            axios.post("http://34.220.149.181:8000/outcome/", {
+              "CourseID": info.CourseID,
+              "OutcomeNum": row.OutcomeNum,
+              "Description": row.Description,
+              "GraduateAttribute": row.GraduateAttribute,
+              "InstructionLvl": row.InstructionLvl
+            }).then(res => { console.log(res) })
+          })
+        //posting section
+        if (section.length > 0)
+          section.map(row => {
+            axios.post("http://34.220.149.181:8000/section/", {
+
+              "CourseID": info.CourseID,
+              "SectionNumber": row.SectionNum,
+              "Students": row.Student,
+              "Hours": row.Hours,
+              "type": row.type
+
+
+
+            }).then(res => { console.log(res) })
+          })
+        //posting content cartegory
+        if (contentCategory.length > 0)
+          contentCategory.map(row => {
+            axios.post("http://34.220.149.181:8000/contentcategory/", {
+
+              "CourseID": info.CourseID,
+              "CategoryType": row.CategoryType,
+              "Element": row.Element
+
+
+
+            }).then(res => { console.log(res) })
+          })
+        //posting au
+        if (AuWeight.length > 0)
+          AuWeight.map(row => {
+            axios.post("http://34.220.149.181:8000/auweight/", {
+
+              "CourseID": info.CourseID,
+              "Category": row.Category,
+              "AU": row.Au
+
+
+
+            }).then(res => { console.log(res) })
+          })
+        //posting LAB
+
+        if (Object.keys(lab).length !== 0)
+          axios.post("http://34.220.149.181:8000/lab/", {
+            "CourseID": info.CourseID,
+            "LabNum": "NA",
+            "LabType": lab.LabType,
+            "NumberOfLabs": lab.NumberOfLabs,
+            "SafetyExamined": lab.SafetyExamined,
+            "SafetyTaught": lab.SafetyTaught,
+            "FName": "NA",
+            "LName": "NA",
+            "Phone": "NA",
+            "Office": "NA",
+            "Email": "NA"
+
+
+
+
+          }).then(res => { console.log(res) })
+
+        //posting timetable
+
+        if (timeTable.length > 0)
+          timeTable.map(row => {
+            axios.post("http://34.220.149.181:8000/timetable/", {
+
+
+              "CourseID": info.CourseID,
+              "SectionNum": row.SectionNum,
+              "Days": row.Days,
+              "Time": row.Time,
+              "Location": row.Location
+
+
+
+            }).then(res => { console.log(res) })
+          })
+        //posting Coordinator
+        if (Object.keys(coordinator).length !== 0)
+          axios.post("http://34.220.149.181:8000/coordinator/", {
+            "CourseID": info.CourseID,
+            "FName": coordinator.FName,
+            "LName": coordinator.LName,
+            "Phone": coordinator.Phone,
+            "Office": coordinator.Office,
+            "Email": coordinator.Email
+          }).then(res => { console.log(res) })
+
+        //posting Instructor
+        if (instructor.length > 0)
+          instructor.map(row => {
+            axios.post("http://34.220.149.181:8000/lecture/", {
+
+              "CourseID": info.CourseID,
+              "LectureNum": row.LectureNum,
+              "FName": row.FName,
+              "LName": row.LName,
+              "Phone": row.Phone,
+              "Office": row.Office,
+              "Email": row.Email
+
+
+
+            }).then(res => { console.log(res) })
+          })
+        //posting Ta
+        if (ta.length > 0)
+          ta.map(row => {
+            axios.post("http://34.220.149.181:8000/tutorial/", {
+
+              "CourseID": info.CourseID,
+              "TutorialNum": row.TutorialNum,
+              "FName": row.FName,
+              "LName": row.LName,
+              "Phone": row.Phone,
+              "Office": row.Office,
+              "Email": row.Email
+
+
+
+            }).then(res => { console.log(res) })
+          })
+
+
+        //posting notes
+
+        if (notes.GradeNotes !== "" && notes.Examination !== "" && notes.UseCalc !== "" && notes.CourseDescription !== "")
+          axios.post("http://34.220.149.181:8000/info/", {
+
+
+            "CourseID": info.CourseID,
+            "GradeNotes": notes.GradeNotes,
+            "Examination": notes.Examination,
+            "CourseDescription": notes.CourseDescription,
+            "UseCalc": notes.UseCalc
+          }).then(res => { console.log(res) })
+        //posting grade determination
+
+        if (gradeDetermination.length > 0)
+          gradeDetermination.map(row => {
+            axios.post("http://34.220.149.181:8000/gradedetermination/", {
+
+
+
+              "CourseID": info.CourseID,
+              "Component": row.Componenet,
+              "OutcomeEvaluated": row.OutcomeEvaluated,
+              "Weight": row.Weight
+
+
+
+            }).then(res => { console.log(res) })
+          })
+
+        //post grade distribution
+        if (gradeDistribution.length > 0)
+          gradeDistribution.map(row => {
+            axios.post("http://34.220.149.181:8000/gradedistribution/", {
+
+              "CourseID": info.CourseID,
+              "LowerLimit": row.LowerLimit,
+              "UpperLimit": row.UpperLimit,
+              "LetterGrade": row.LetterGrade
+
+
+
+            }).then(res => { console.log(res) })
+          })
+
+        //post textbook
+        if (textbook.length > 0)
+          textbook.map(row => {
+            axios.post("http://34.220.149.181:8000/textbook/", {
+              "CourseID": info.CourseID,
+              "TITLE": row.TITLE,
+              "Publisher": row.Publisher,
+              "Author": row.Author,
+              "Edition": row.Edition,
+              "type": row.type
+
+
+
+            }).then(res => { console.log(res) })
+
+          })
+
+
+      }
+      else
+        alert("Course already exists")
     }
-  }
-  if(check){
-  
-  //posting COURSE
-  axios.post("http://34.220.149.181:8000/course/",   {
-    
-    "CourseID": info.CourseID,
-    "CourseHours": info.CourseHours,
-    "CourseName": info.CourseName,
-    "CalenderRefrence": info.CalenderRefrence,
-    "AcademicCredit": info.AcademicCredit,
-    "DateCreated": info.DateCreated
-}).then(res=>{console.log(res)}).catch((error)=> {console.log(error)})
-//posting Outcome
-
-if(outcome.length>0)
-outcome.map(row=>{
-  axios.post("http://34.220.149.181:8000/outcome/",{
-    "CourseID":info.CourseID,
-    "OutcomeNum":row.OutcomeNum,
-    "Description":row.Description,
-    "GraduateAttribute":row.GraduateAttribute,
-    "InstructionLvl":row.InstructionLvl
-  }).then(res=>{console.log(res)})
-})
-//posting section
-if(section.length>0)
-section.map(row=>{
-  axios.post("http://34.220.149.181:8000/section/",{
-    
-      "CourseID":info.CourseID,
-      "SectionNumber":row.SectionNum,
-      "Students":row.Student,
-      "Hours":row.Hours,
-      "type":row.type
-        
-      
-      
-  }).then(res=>{console.log(res)})
-})
-//posting content cartegory
-if(contentCategory.length>0)
-contentCategory.map(row=>{
-  axios.post("http://34.220.149.181:8000/contentcategory/",{
-    
-    "CourseID":info.CourseID,
-    "CategoryType":row.CategoryType,
-    "Element":row.Element
-        
-      
-      
-  }).then(res=>{console.log(res)})
-})
-//posting au
-if(AuWeight.length>0)
-AuWeight.map(row=>{
-  axios.post("http://34.220.149.181:8000/auweight/",{
-    
-    "CourseID":info.CourseID,
-    "Category":row.Category,
-    "AU":row.Au
-        
-      
-      
-  }).then(res=>{console.log(res)})
-})
-//posting LAB
-
-if(Object.keys(lab).length !== 0)
-  axios.post("http://34.220.149.181:8000/lab/",{
-    "CourseID":info.CourseID,
-    "LabNum":"NA",
-    "LabType":lab.LabType,
-    "NumberOfLabs":lab.NumberOfLabs,
-    "SafetyExamined":lab.SafetyExamined,
-    "SafetyTaught":lab.SafetyTaught,
-    "FName":"NA",
-    "LName":"NA",
-    "Phone":"NA",
-    "Office":"NA",
-    "Email":"NA"
-   
-        
-      
-      
-  }).then(res=>{console.log(res)})
-
-//posting timetable
-
-if(timeTable.length>0)
-timeTable.map(row=>{
-  axios.post("http://34.220.149.181:8000/timetable/",{
-    
-    
-    "CourseID": info.CourseID,
-    "SectionNum": row.SectionNum,
-    "Days": row.Days,
-    "Time": row.Time,
-    "Location": row.Location
-        
-      
-      
-  }).then(res=>{console.log(res)})
-})
-//posting Coordinator
-if(Object.keys(coordinator).length !== 0)
-  axios.post("http://34.220.149.181:8000/coordinator/",{
-    "CourseID": info.CourseID,
-    "FName": coordinator.FName,
-    "LName": coordinator.LName,
-    "Phone": coordinator.Phone,
-    "Office":coordinator.Office,
-    "Email": coordinator.Email     
-  }).then(res=>{console.log(res)})
-
-//posting Instructor
-if(instructor.length>0)
-instructor.map(row=>{
-  axios.post("http://34.220.149.181:8000/lecture/",{
-    
-    "CourseID":info.CourseID,
-  "LectureNum":row.LectureNum,
-  "FName":row.FName,
-  "LName":row.LName,
-  "Phone":row.Phone,
-  "Office":row.Office,
-  "Email":row.Email
-        
-      
-      
-  }).then(res=>{console.log(res)})
-})
-//posting Ta
-if(ta.length>0)
-ta.map(row=>{
-  axios.post("http://34.220.149.181:8000/tutorial/",{
-    
-    "CourseID":info.CourseID,
-  "TutorialNum":row.TutorialNum,
-  "FName":row.FName,
-  "LName":row.LName,
-  "Phone":row.Phone,
-  "Office":row.Office,
-  "Email":row.Email
-        
-      
-      
-  }).then(res=>{console.log(res)})
-})
-
-  
-  //posting notes
-  
-  if(notes.GradeNotes!==""&& notes.Examination!==""&& notes.UseCalc!==""&& notes.CourseDescription!=="")
-  axios.post("http://34.220.149.181:8000/info/",{
-
-  
-  "CourseID": info.CourseID,
-  "GradeNotes": notes.GradeNotes,
-  "Examination": notes.Examination,
-  "CourseDescription": notes.CourseDescription,
-  "UseCalc": notes.UseCalc
-  }).then(res=>{console.log(res)})
-  //posting grade determination
-
-  if(gradeDetermination.length>0)
-  gradeDetermination.map(row=>{
-    axios.post("http://34.220.149.181:8000/gradedetermination/",{
-      
-     
-  
-  "CourseID": info.CourseID,
-  "Component": row.Componenet,
-  "OutcomeEvaluated": row.OutcomeEvaluated,
-  "Weight": row.Weight
-          
-        
-        
-    }).then(res=>{console.log(res)})
-  })
-  
-//post grade distribution
-if(gradeDistribution.length>0)
-gradeDistribution.map(row=>{
-  axios.post("http://34.220.149.181:8000/gradedistribution/",{
-    
-    "CourseID":info.CourseID,
-    "LowerLimit":row.LowerLimit,
-    "UpperLimit":row.UpperLimit,
-    "LetterGrade":row.LetterGrade
-        
-      
-      
-  }).then(res=>{console.log(res)})
-})
-}
-else
-    alert("Course already exists")}
     else alert("Fill in calender info")
-    
-}
+
+  }
 
 
   return (
@@ -311,15 +329,15 @@ else
       <AppBar position="sticky" color="default">
         <Container maxWidth="md">
           <div className="pt-2 pb-2" align="right">
-            <Button variant="outlined" color="secondary" onClick={()=>{
+            <Button variant="outlined" color="secondary" onClick={() => {
               setSave(true)
               //createJSON()
               upload()
-              
-             
-                          
-               }}>
-                 upload
+
+
+
+            }}>
+              upload
               <PublishIcon />
             </Button>
           </div>
@@ -340,8 +358,8 @@ else
           <AccordionDetails>
             <div style={{ width: "100%" }}>
               <Paper className={classes.paper} elevation={3}>
-                <FunInfo  setInfo={setInfo} notes={notes} />
-                
+                <FunInfo setInfo={setInfo} notes={notes} />
+
               </Paper>
             </div>
           </AccordionDetails>
@@ -358,12 +376,12 @@ else
           <AccordionDetails>
             <div style={{ width: "100%" }}>
               <Paper className={classes.paper} elevation={3}>
-               
-                <FunOutcome  setOutcome={setOutcome}  />
-                <ContentCategory setContent={setContentCategory} setAu={setAuWeight}/>
-                <Section setSection={setSection}/>
-                <Lab setLab={setLab}/>
-                
+
+                <FunOutcome setOutcome={setOutcome} />
+                <ContentCategory setContent={setContentCategory} setAu={setAuWeight} />
+                <Section setSection={setSection} />
+                <Lab setLab={setLab} />
+
               </Paper>
             </div>
           </AccordionDetails>
@@ -395,7 +413,7 @@ else
           </AccordionSummary>
           <AccordionDetails>
             <div style={{ width: "100%" }}>
-              <Instructor  setCoordinator={setcoordinator} setInstructor={setInstructor} setTa={setTa} />
+              <Instructor setCoordinator={setcoordinator} setInstructor={setInstructor} setTa={setTa} />
               <Paper className={classes.paper} elevation={3}></Paper>
             </div>
           </AccordionDetails>
@@ -411,9 +429,9 @@ else
           </AccordionSummary>
           <AccordionDetails>
             <div style={{ width: "100%" }}>
-              <Exam notes={notes}/>
+              <Exam notes={notes} />
               <Paper className={classes.paper} elevation={3}>
-                
+
               </Paper>
             </div>
           </AccordionDetails>
@@ -429,10 +447,10 @@ else
           </AccordionSummary>
           <AccordionDetails>
             <div style={{ width: "100%" }}>
-              
+
               <Paper className={classes.paper} elevation={3}>
-                <FunCalculator notes={notes}/>
-                           </Paper>
+                <FunCalculator notes={notes} />
+              </Paper>
             </div>
           </AccordionDetails>
         </Accordion>
@@ -448,12 +466,12 @@ else
           <AccordionDetails>
             <div style={{ width: "100%" }}>
               <Paper className={classes.paper} elevation={3}>
-                <GradeDetermination setGradeDetermination={setGradeDetermination}/>
-                <br/>
-                
-                <GradeNotes notes={notes}/>
-                <br/>
-                <GradeDistribution setGradeDistribution={setGradeDistribution}/>
+                <GradeDetermination setGradeDetermination={setGradeDetermination} />
+                <br />
+
+                <GradeNotes notes={notes} />
+                <br />
+                <GradeDistribution setGradeDistribution={setGradeDistribution} />
               </Paper>
             </div>
           </AccordionDetails>
@@ -471,7 +489,7 @@ else
             <div style={{ width: "100%" }}>
               <Paper className={classes.paper} elevation={3}>
 
-                <TextBook setTextbook={setTextbook}/>
+                <TextBook setTextbook={setTextbook} />
               </Paper>
             </div>
           </AccordionDetails>
@@ -501,14 +519,14 @@ else
         }}
         open={snackbarOpen}
         autoHideDuration={8000}
-       
+
         message="Course uploaded"
         action={
           <>
-            <IconButton size="small" aria-label="close" color="inherit" onClick={()=>setSnackbarOpen(false)} >
+            <IconButton size="small" aria-label="close" color="inherit" onClick={() => setSnackbarOpen(false)} >
               <CloseIcon fontSize="small" />
             </IconButton>
-          </>}/>
+          </>} />
     </React.Fragment>
   );
 };
