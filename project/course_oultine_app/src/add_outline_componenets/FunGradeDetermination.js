@@ -101,18 +101,29 @@ const[total,setTotal]=useState(0.0)
 
   
 const save=()=>{
-  if(save && parseInt(total)!==100)
+  if( parseInt(total)!==100)
   {
      alert("Cant save, total grades distribution must be 100") 
      
   }
   else{
+    let check=true
+    for (let i=0;i<grade.length;i++){
+      if(grade[i].Component==="" || grade[i].LearningOutcome==="")
+      check=false
+    }
+    if(check){
     let newGradeJSON=[]
     for (let i=0;i<grade.length;i++){
       newGradeJSON.push({CourseID:"",Componenet:grade[i].Component,OutcomeEvaluated:grade[i].LearningOutcome,Weight:grade[i].Weight})
     }
     props.setGradeDetermination(newGradeJSON)
   }
+  else
+  alert("Fill in all of the grade determination fields")
+
+
+}
 
 }
 

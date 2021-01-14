@@ -256,7 +256,7 @@ ta.map(row=>{
   
   //posting notes
   
-  if(notes.GradeNotes!==""|| notes.Examination!==""|| notes.UseCalc!==""||notes.CourseDescription!=="")
+  if(notes.GradeNotes!==""&& notes.Examination!==""&& notes.UseCalc!==""&& notes.CourseDescription!=="")
   axios.post("http://34.220.149.181:8000/info/",{
 
   
@@ -266,6 +266,25 @@ ta.map(row=>{
   "CourseDescription": notes.CourseDescription,
   "UseCalc": notes.UseCalc
   }).then(res=>{console.log(res)})
+  //posting grade determination
+
+  if(gradeDetermination.length>0)
+  gradeDetermination.map(row=>{
+    axios.post("http://34.220.149.181:8000/gradedetermination/",{
+      
+     
+  
+  "CourseID": info.CourseID,
+  "Component": row.Componenet,
+  "OutcomeEvaluated": row.OutcomeEvaluated,
+  "Weight": row.Weight
+          
+        
+        
+    }).then(res=>{console.log(res)})
+  })
+  
+
   
 }
 else
