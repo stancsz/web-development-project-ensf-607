@@ -51,7 +51,7 @@ const AddCourse = () => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   //JSON tables and use states
 
-  const [notes, setNotes] = useState({ GradeNotes: "", Examination: "", CourseDescription: "", UseCalc: "" })
+  const [notes, setNotes] = useState({ GradeNotes: "NA", Examination: "NA", CourseDescription: "NA", UseCalc: "NA" })
   const [save, setSave] = useState(false)
   const [info, setInfo] = useState({ CourseID: "" })//Blank CourseID used for checking
   const [contentCategory, setContentCategory] = useState("")
