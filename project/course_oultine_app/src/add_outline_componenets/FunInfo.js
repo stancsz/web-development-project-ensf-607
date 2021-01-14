@@ -11,22 +11,22 @@ function FunInfo(props) {
     
     const [courseInfo, setCourseInfo] = useState("");
  
-    const [info,setInfo]=useState({CourseID : "",courseName : "",courseHours : "",academicCredit:"",calendarReference :"",DateCreated : ""});
+    const [info,setInfo]=useState({ModelID:"",CourseID : "",CourseHours : "",CourseName : "",CalenderRefrence :"",AcademicCredit:"",DateCreated : ""});
     
     const editInfo=(id,name,description,hours,credit,calender,term,year)=>{
         let temp=info
        
        
         if(name!=="")
-        temp.courseName=name
+        temp.CourseName=name
         
         
         if(hours!=="")
-        temp.courseHours=hours
+        temp.CourseHours=hours
         if(credit!=="")
-        temp.academicCredit=credit
+        temp.AcademicCredit=credit
         if(calender!=="")
-        temp.calendarReference=calender
+        temp.CalenderRefrence=calender
 
         
         setInfo(temp)
@@ -34,8 +34,8 @@ function FunInfo(props) {
 
     }
 const save=()=>{
-    if(courseNumberInput==="" || term ==="" ){
-    alert("Fill in Course Id,term and year")
+    if(courseNumberInput==="" || term ==="" ||info.AcademicCredit==="" || info.CourseHours==="" || info.CourseName==="" || info.CalenderReference==="" || courseInfo===""){
+    alert("Fill in all of Calender info section")
 
 }
     else

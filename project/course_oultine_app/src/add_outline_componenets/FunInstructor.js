@@ -145,18 +145,42 @@ const editTa=(id,Section,FName,LName,Phone,Office,Email)=>{
 
   
 const save=()=>{
-  
+  //check coordinator fields if null
+  if(coordinator.Email===""|| coordinator.FName===""|| coordinator.LName===""|| coordinator.Phone===""|| coordinator.Office==="" )
+  alert("Fill in class coordinator section")
+  else
   props.setCoordinator(coordinator)
-  let newTaJSON=[]
-  let newInstructorJSON=[]
+  // check ta fields if null
+  let checkTa=true
   for(let i=0;i<ta.length;i++){
-    newTaJSON.push({CourseID:ta[i].CourseID,TutorialNum:ta[i].SectionNum,FName:ta[i].FName,LName:ta[i].LName,Phone:ta[i].Phone,Office:ta[i].Office,Email:ta[i].Email})
+    if(ta[i].Email===""||ta[i].FName==="" || ta[i].LName===""|| ta[i].Office===""|| ta[i].SectionNum===""|| ta[i].Phone==="")
+    checkTa=false
   }
-  props.setTa(newTaJSON)
+  if(checkTa){
+  let newTaJSON=[]
+  
+  for(let i=0;i<ta.length;i++){
+    newTaJSON.push({TutorialNum:ta[i].SectionNum,FName:ta[i].FName,LName:ta[i].LName,Phone:ta[i].Phone,Office:ta[i].Office,Email:ta[i].Email})
+  }
+  props.setTa(newTaJSON)}
+  else 
+  alert("Fill in Ta field")
+  //check instructor fields are null
+  let checkInstructor=true
   for(let i=0;i<instructor.length;i++){
-    newInstructorJSON.push({CourseID:instructor[i].CourseID,LectureNum:instructor[i].SectionNum,FName:instructor[i].FName,LName:instructor[i].LName,Phone:instructor[i].Phone,Office:instructor[i].Office,Email:instructor[i].Email})
+    if(instructor[i].Email===""||instructor[i].FName==="" || instructor[i].LName===""|| instructor[i].Office===""|| instructor[i].SectionNum===""|| instructor[i].Phone==="")
+    checkInstructor=false
+  }
+  if(checkInstructor){
+  let newInstructorJSON=[]
+  for(let i=0;i<instructor.length;i++){
+    newInstructorJSON.push({LectureNum:instructor[i].SectionNum,FName:instructor[i].FName,LName:instructor[i].LName,Phone:instructor[i].Phone,Office:instructor[i].Office,Email:instructor[i].Email})
   }
   props.setInstructor(newInstructorJSON)
+}else
+alert("Fill in instructor fields")
+
+
 }
 
 

@@ -44,7 +44,7 @@ export default function BasicTable(props) {
     
     if(Lower!=="")
     newGrade[indx].LowerLimit=Lower
-    else
+    
     if(Higher!=="")
     newGrade[indx].HigherLimit=Higher
    
@@ -73,7 +73,7 @@ let check =true
     }
     else
     alert("Please fill in all of the limits before saving")
-    console.log(grade)
+    
    }
    
   

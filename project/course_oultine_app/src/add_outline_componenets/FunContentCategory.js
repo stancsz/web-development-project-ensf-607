@@ -13,6 +13,7 @@ import Button from "@material-ui/core/Button";
 import SaveIcon from "@material-ui/icons/Save";
 import Select from "@material-ui/core/Select";
 import Typography from "@material-ui/core/Typography";
+import { Category } from "@material-ui/icons";
 
 const useStyles = makeStyles({
   table: {
@@ -53,7 +54,7 @@ export default function BasicTable(props) {
     }
 
     setTotal(temp);
-    console.log(au);
+    
   };
 
   const editCategory = (id, type, element) => {
@@ -78,19 +79,24 @@ export default function BasicTable(props) {
     //console.log(category)
   };
   const save = () => {
-    if (total !== 100) alert("Cant save make sure Au total is 100" + total);
+    
+    if (total !== 100 || category.length<au.length) alert("Cant save make sure Au total is 100  " );
+    
     else {
-      let tempContent = category;
+      
+     
+      
+      let categoryJSON = [];
       for (let i = 0; i < category.length; i++) {
-        delete tempContent[i].id;
+        categoryJSON.push({CategoryType:category[i].CategoryType,Element:category[i].Element})
       }
-      let tempAu = au;
+      let auJSON = [];
       for (let i = 0; i < au.length; i++) {
-        delete tempAu[i].id;
+        auJSON.push({Category:au[i].Category,Au:au[i].Au})
       }
 
-      props.setContent(tempContent);
-      props.setAu(tempAu);
+      props.setContent(categoryJSON);
+      props.setAu(auJSON);
     }
   };
 
