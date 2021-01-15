@@ -33,3 +33,9 @@ python manage.py createsuperuser
 sudo apt-get install mysql-server
 sudo apt-get install libmysqlclient-dev
 ```
+
+
+# Jenkins build script
+```
+python CourseOutlineBackend/manage.py runserver 0:8000
+```

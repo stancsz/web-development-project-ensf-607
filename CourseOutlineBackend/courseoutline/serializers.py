@@ -52,9 +52,9 @@ class CoordinatorSerializer(serializers.ModelSerializer):
 class InfoSerializer(serializers.ModelSerializer):
     # ModelID = serializers.CharField(max_length=100, required=True)
     CourseID = serializers.CharField(max_length=100, required=True)
-    GradeNotes = serializers.CharField(max_length=500, required=False)
+    GradeNotes = serializers.CharField(max_length=5000, required=False)
     Examination = serializers.CharField(max_length=5000, required=False)
-    CourseDescription = serializers.CharField(max_length=500, required=False)
+    CourseDescription = serializers.CharField(max_length=5000, required=False)
     UseCalc = serializers.CharField(max_length=100, required=False)
 
     def create(self, validated_data):

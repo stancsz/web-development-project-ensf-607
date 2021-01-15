@@ -225,7 +225,7 @@ class Info(models.Model):
     )
 
     GradeNotes = models.TextField(
-        max_length=500,
+        max_length=5000,
         null=False,
         blank=False
     )
@@ -237,7 +237,7 @@ class Info(models.Model):
     )
 
     CourseDescription = models.TextField(
-        max_length=500,
+        max_length=5000,
         null=False,
         blank=False
     )
