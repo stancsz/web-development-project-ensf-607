@@ -98,7 +98,7 @@ const MyDoc = (props) => (
       </Text>
       </View>
       <View style = {{marginHorizontal: 20}}>
-        <Table data = {props.outcome} >
+        <Table data = {props.outcome.sort((a, b) => a.OutcomeNum - b.OutcomeNum)} >
         <TableHeader>
             <TableCell style = {{textAlign : "center"}}>
                 Number
@@ -333,9 +333,9 @@ const MyDoc = (props) => (
         </TableHeader>
         <TableBody>
             <DataTableCell style = {{textAlign : "center"}} getContent={(r) => r.LetterGrade}/>
-            <DataTableCell style = {{textAlign : "center"}} getContent={(r) => r.LowerBoundary}/>
+            <DataTableCell style = {{textAlign : "center"}} getContent={(r) => r.LowerLimit}/>
             <DataTableCell style = {{textAlign : "center"}} getContent={(r) => "<= T <"}/>
-            <DataTableCell style = {{textAlign : "center"}} getContent={(r) => r.UpperBoundary}/>
+            <DataTableCell style = {{textAlign : "center"}} getContent={(r) => r.UpperLimit}/>
         </TableBody>
         </Table>
       </View>

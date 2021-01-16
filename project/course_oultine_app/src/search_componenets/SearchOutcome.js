@@ -37,7 +37,7 @@ export default function SearchOutcome(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {keys === undefined ? "Data Missing" : keys.map((key) => (
+          {keys === undefined ? "Data Missing" : keys.sort((a, b) => props.outcome[a].OutcomeNum - props.outcome[b].OutcomeNum).map((key) => (
             <TableRow key={key}>
               <TableCell component="th" scope="row">
                 {props.outcome[key].OutcomeNum}
