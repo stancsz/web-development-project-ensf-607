@@ -24,3 +24,22 @@
 ![image-20210201022731282](README.assets/image-20210201022731282.png)
 
 ![image-20210201022830133](README.assets/image-20210201022830133.png)
+
+
+# Backend
+## Installation
+
+$ pip install -r requirements.txt
+
+## Start Server
+
+Run the following command inside the directory: todoapi/
+
+python manage.py runserver
+
+## migrate models
+```
+python manage.py makemigrations courseoutline
+python manage.py migrate
+```
+
