@@ -1,7 +1,8 @@
 # Students:
+
 - Ziad Chemali
 - Lotfi Hasni
-- Stanley Chen
+- Stan Chen
 
 
 
@@ -17,6 +18,8 @@
 
 ![course-outline-demo-4](README.assets/course-outline-demo-4.gif)
 
+![course-outline-demo-5](README.assets/course-outline-demo-5.gif)
+
 # Screenshots
 
 ![image-20210201022715285](README.assets/image-20210201022715285.png)
@@ -29,7 +32,9 @@
 # Backend
 ## Installation
 
+```
 $ pip install -r requirements.txt
+```
 
 ## Start Server
 
@@ -38,8 +43,18 @@ Run the following command inside the directory: todoapi/
 python manage.py runserver
 
 ## migrate models
+
 ```
 python manage.py makemigrations courseoutline
 python manage.py migrate
+```
+
+## Jenkins build command
+
+```
+echo rebuilding ...
+echo redeploying...
+python CourseOutlineBackend/manage.py runserver 0:8000
+echo execute shell reached...
 ```
 
